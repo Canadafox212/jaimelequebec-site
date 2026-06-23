@@ -1,0 +1,14 @@
+.next/
+node_modules/
+out/
+.env
+.env.local
+.DS_Store
+Thumbs.db
+*.log
+
+# Rapports de téléchargement (usage local seulement)
+fetch-images-report.json
+fetch-services-report.json
+public/fetch-images-report.html
+public/fetch-services-report.html
