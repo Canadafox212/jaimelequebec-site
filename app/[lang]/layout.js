@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Mascot from '@/components/Mascot'
 import fr from '@/dictionaries/fr'
 import en from '@/dictionaries/en'
 
@@ -20,6 +21,7 @@ export default async function LangLayout({ children, params }) {
       <Header lang={lang} t={t} />
       <main className="flex-1">{children}</main>
       <Footer t={t} />
+      <Mascot lang={lang} />
     </>
   )
 }
