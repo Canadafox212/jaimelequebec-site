@@ -17,8 +17,8 @@ export async function generateMetadata({ params }) {
       ? "J'aime le Québec — Guide touristique"
       : "J'aime le Québec — Travel Guide",
     description: lang === 'fr'
-      ? "200 attractions touristiques incontournables au Québec"
-      : "200 must-see tourist attractions in Québec",
+      ? "200 sites touristiques incontournables au Québec"
+      : "200 must-see tourist sites in Québec",
   }
 }
 
@@ -109,7 +109,7 @@ export default async function HomePage({ params }) {
             href={`/${lang}/attractions`}
             className="inline-flex items-center gap-2 bg-quebec-blue hover:bg-blue-800 text-white font-bold px-8 py-3.5 rounded-full transition-colors shadow-lg"
           >
-            {lang === 'fr' ? 'Explorer les 200 attractions' : 'Explore all 200 attractions'}
+            {lang === 'fr' ? 'Explorer les 200 sites' : 'Explore all 200 sites'}
             <span>→</span>
           </Link>
         </div>

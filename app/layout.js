@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 
 export const metadata = {
   title: "J'aime le Québec",
-  description: "Votre guide touristique du Québec — 200 attractions incontournables",
+  description: "Votre guide touristique du Québec — 200 sites incontournables",
 }
 
 export default function RootLayout({ children }) {

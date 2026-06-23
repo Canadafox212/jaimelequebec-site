@@ -12,3 +12,5 @@ fetch-images-report.json
 fetch-services-report.json
 public/fetch-images-report.html
 public/fetch-services-report.html
+
+.vercel

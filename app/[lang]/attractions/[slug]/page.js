@@ -248,28 +248,40 @@ function SectionTitle({ emoji, label }) {
   )
 }
 
+function getHotelFallback(type) {
+  const t = (type ?? '').toLowerCase()
+  if (t.includes('camping') || t.includes('camp')) return '/images/fallbacks/camping.webp'
+  if (t.includes('auberge')) return '/images/fallbacks/auberge.webp'
+  if (t.includes('motel')) return '/images/fallbacks/motel.webp'
+  if (t.includes('gîte') || t.includes('gite') || t.includes('chambre') || t.includes('chalet') || t.includes('bed')) return '/images/fallbacks/gite.webp'
+  return '/images/fallbacks/hotel.svg'
+}
+
+function getRestaurantFallback(type) {
+  const t = (type ?? '').toLowerCase()
+  if (t.includes('bar') || t.includes('pub') || t.includes('brasserie') || t.includes('taverne')) return '/images/fallbacks/bar.webp'
+  if (t.includes('café') || t.includes('cafe') || t.includes('bistro')) return '/images/fallbacks/cafe.webp'
+  return '/images/fallbacks/restaurant.webp'
+}
+
 function HotelCard({ place, bg, border, badge, badgeLabel, lang }) {
   const href = place.web
     ? (place.web.startsWith('http') ? place.web : `https://${place.web}`)
     : null
-  const imageSrc = getServiceImageSrc(place.nom)
+  const imageSrc = getServiceImageSrc(place.nom) ?? getHotelFallback(place.type)
 
   return (
     <div className={`rounded-xl border ${border} overflow-hidden flex flex-col shadow-sm hover:shadow-card transition-all duration-200`}>
 
-      {/* Zone photo / placeholder */}
-      <div className={`relative h-36 ${imageSrc ? 'bg-gray-100' : bg}`}>
-        {imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={place.nom}
-            fill
-            className="object-cover"
-            sizes="(max-width: 640px) 100vw, 50vw"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-5xl opacity-20">🏨</div>
-        )}
+      {/* Zone photo */}
+      <div className="relative h-36 bg-gray-100">
+        <Image
+          src={imageSrc}
+          alt={place.nom}
+          fill
+          className="object-cover"
+          sizes="(max-width: 640px) 100vw, 50vw"
+        />
         <div className="absolute top-2 left-2">
           <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm ${badge}`}>{badgeLabel}</span>
         </div>
@@ -321,24 +333,20 @@ function RestaurantCard({ place, lang }) {
   const href = place.web
     ? (place.web.startsWith('http') ? place.web : `https://${place.web}`)
     : null
-  const imageSrc = getServiceImageSrc(place.nom)
+  const imageSrc = getServiceImageSrc(place.nom) ?? getRestaurantFallback(place.type)
 
   return (
     <div className="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:border-orange-100 hover:shadow-card transition-all duration-200 flex flex-col">
 
-      {/* Zone photo / placeholder */}
-      <div className="relative h-36 bg-orange-50">
-        {imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={place.nom}
-            fill
-            className="object-cover"
-            sizes="(max-width: 640px) 100vw, 50vw"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-5xl opacity-20">🍽️</div>
-        )}
+      {/* Zone photo */}
+      <div className="relative h-36">
+        <Image
+          src={imageSrc}
+          alt={place.nom}
+          fill
+          className="object-cover"
+          sizes="(max-width: 640px) 100vw, 50vw"
+        />
         {(place.cuisine || place.type) && (
           <div className="absolute top-2 left-2">
             <span className="text-xs bg-orange-500/90 backdrop-blur-sm text-white font-semibold px-2.5 py-0.5 rounded-full shadow-sm">
@@ -383,29 +391,65 @@ function RestaurantCard({ place, lang }) {
   )
 }
 
+function getActivityFallback(type) {
+  const t = (type ?? '').toLowerCase()
+  if (t.includes('bar') || t.includes('boîte') || t.includes('nuit') || t.includes('cabaret')) return '/images/fallbacks/bar.webp'
+  if (t.includes('casino') || t.includes('hippodrome')) return '/images/fallbacks/casino.webp'
+  if (t.includes('spa') || t.includes('santé')) return '/images/fallbacks/spa.webp'
+  if (t.includes('ski alpin') || t.includes('planche')) return '/images/fallbacks/ski-alpin.webp'
+  if (t.includes('ski de fond') || t.includes('raquette') || t.includes('glissoire')) return '/images/fallbacks/ski-fond.webp'
+  if (t.includes('patinoire')) return '/images/fallbacks/patinoire.webp'
+  if (t.includes('golf')) return '/images/fallbacks/golf.webp'
+  if (t.includes('vélo') || t.includes('velo') || t.includes('fatbike')) return '/images/fallbacks/velo.webp'
+  if (t.includes('jardin') || t.includes('zoologique')) return '/images/fallbacks/jardin.webp'
+  if (t.includes('marina') || t.includes('plaisance')) return '/images/fallbacks/marina.webp'
+  if (t.includes('plage')) return '/images/fallbacks/plage.webp'
+  if (t.includes('pêche') || t.includes('peche') || t.includes('faunique') || t.includes('zec')) return '/images/fallbacks/peche.webp'
+  if (t.includes('équestre') || t.includes('cheval')) return '/images/fallbacks/equestre.webp'
+  if (t.includes('karting') || t.includes('motorisé') || t.includes('autodrome')) return '/images/fallbacks/karting.webp'
+  if (t.includes('parc') || t.includes('réserve') || t.includes('site naturel') || t.includes('belvédère') || t.includes('caverne') || t.includes('piste') || t.includes('sentier')) return '/images/fallbacks/parc.webp'
+  return '/images/fallbacks/sport.webp'
+}
+
 function ActivityCard({ activity, season, lang }) {
   const acts = activity.activites
     ? activity.activites.split('|').map(s => s.trim()).filter(s => s && s !== 'nan')
     : []
 
   const { emoji, gradient, tagBg } = getActivityStyle(activity.type, season)
+  const fallbackImg = getActivityFallback(activity.type)
+  const typeLabel = activity.type ?? (season === 'ete' ? (lang === 'fr' ? 'Activité été' : 'Summer activity') : (lang === 'fr' ? 'Activité hiver' : 'Winter activity'))
 
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200 flex flex-col">
 
-      {/* Header coloré par type */}
-      <div className={`${gradient} px-4 py-3 flex items-center justify-between gap-2`}>
-        <div className="flex items-center gap-2 min-w-0">
-          <span className="text-xl shrink-0">{emoji}</span>
-          <span className="text-white text-xs font-bold uppercase tracking-wide truncate opacity-90">
-            {activity.type ?? (season === 'ete' ? (lang === 'fr' ? 'Activité été' : 'Summer activity') : (lang === 'fr' ? 'Activité hiver' : 'Winter activity'))}
-          </span>
-        </div>
-        {activity.dist_km != null && (
-          <span className="bg-black/25 text-white text-xs font-bold px-2 py-0.5 rounded-full shrink-0 whitespace-nowrap">
-            📍 {activity.dist_km} km
-          </span>
+      {/* Photo avec gradient overlay */}
+      <div className="relative h-36 overflow-hidden">
+        {fallbackImg.endsWith('.svg') ? (
+          <img src={fallbackImg} alt={typeLabel} className="absolute inset-0 w-full h-full object-cover" />
+        ) : (
+          <Image
+            src={fallbackImg}
+            alt={typeLabel}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, 50vw"
+          />
         )}
+        <div className={`absolute inset-0 ${gradient} opacity-80`} />
+        <div className="absolute inset-0 px-4 py-3 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="text-xl shrink-0">{emoji}</span>
+            <span className="text-white text-xs font-bold uppercase tracking-wide truncate drop-shadow">
+              {typeLabel}
+            </span>
+          </div>
+          {activity.dist_km != null && (
+            <span className="bg-black/30 text-white text-xs font-bold px-2 py-0.5 rounded-full shrink-0 whitespace-nowrap backdrop-blur-sm">
+              📍 {activity.dist_km} km
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Corps */}

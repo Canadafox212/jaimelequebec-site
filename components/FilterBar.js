@@ -1,7 +1,7 @@
 'use client'
 import { useRouter, usePathname } from 'next/navigation'
 
-export default function FilterBar({ lang, t, filtres, currentRegion, currentCategorie }) {
+export default function FilterBar({ lang, t, filtres, currentRegion, currentCategorie, currentQuery }) {
   const router = useRouter()
   const pathname = usePathname()
 
@@ -9,6 +9,7 @@ export default function FilterBar({ lang, t, filtres, currentRegion, currentCate
     const params = new URLSearchParams()
     if (key !== 'region' && currentRegion) params.set('region', currentRegion)
     if (key !== 'categorie' && currentCategorie) params.set('categorie', currentCategorie)
+    if (currentQuery) params.set('q', currentQuery)
     if (value) params.set(key, value)
     router.push(`${pathname}?${params.toString()}`)
   }
