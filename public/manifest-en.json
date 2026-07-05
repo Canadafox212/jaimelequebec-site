@@ -1,0 +1,19 @@
+{
+  "name": "J'aime le Québec — Road Companion",
+  "short_name": "J'aime le Québec",
+  "description": "Your road companion in Québec — 200 geolocated tourist sites",
+  "start_url": "/en?utm_source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FDF6EC",
+  "theme_color": "#003087",
+  "categories": ["travel", "navigation", "lifestyle"],
+  "lang": "en-CA",
+  "icons": [
+    { "src": "/icons/icon-192.png",          "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png",          "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

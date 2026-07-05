@@ -18,5 +18,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/((?!_next|api|favicon.ico|images|maps|admin).*)'],
+  matcher: ['/((?!_next|api|favicon\\.ico|favicon\\.png|icons|images|maps|admin|qr|sw\\.js|manifest.*\\.json|apple-touch-icon).*)'],
 }

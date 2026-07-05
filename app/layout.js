@@ -1,6 +1,7 @@
 import './globals.css'
 import 'flag-icons/css/flag-icons.min.css'
 import { Inter, Playfair_Display } from 'next/font/google'
+import PWARegister from '@/components/PWARegister'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -30,8 +31,23 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        {/* PWA — meta-tags installation */}
+        <meta name="theme-color" content="#003087" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="J'aime le Québec" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        {/* Capture beforeinstallprompt before React hydrates */}
+        <script dangerouslySetInnerHTML={{ __html:
+          'window.__bip=null;window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.__bip=e;});'
+        }} />
+      </head>
       <body className="bg-slate-50 min-h-screen flex flex-col font-sans">
         {children}
+        <PWARegister />
       </body>
     </html>
   )
