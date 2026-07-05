@@ -5,8 +5,10 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
 
 const ALL_LANGS = ['fr', 'en', 'es', 'de', 'pt', 'ru', 'zh', 'hi']
-const LANG_FLAGS = { fr: 'fr', en: 'us', es: 'es', de: 'de', pt: 'pt', ru: 'ru', zh: 'cn', hi: 'in' }
-const LANG_LABELS = { fr: 'FR', en: 'EN', es: 'ES', de: 'DE', pt: 'PT', ru: 'RU', zh: '中文', hi: 'हिं' }
+const VISIBLE_LANGS = ['fr', 'en'] // Langues affichées dans le sélecteur
+const LANG_FLAGS  = { fr: 'fr', en: 'us', es: 'es', de: 'de', pt: 'pt', ru: 'ru', zh: 'cn', hi: 'in' }
+const LANG_SHORT  = { fr: 'FR', en: 'EN', es: 'ES', de: 'DE', pt: 'PT', ru: 'RU', zh: '中文', hi: 'हिं' }
+const LANG_LABELS = { fr: 'Français', en: 'English', es: 'Español', de: 'Deutsch', pt: 'Português', ru: 'Русский', zh: '中文', hi: 'हिन्दी' }
 
 export default function Header({ lang, t }) {
   const pathname  = usePathname()
@@ -151,21 +153,21 @@ export default function Header({ lang, t }) {
               className="border border-quebec-navy/30 text-quebec-navy rounded-lg px-2.5 py-1.5 hover:bg-quebec-navy hover:text-white transition-colors flex items-center gap-1.5"
             >
               <span className={`fi fi-${LANG_FLAGS[lang]} rounded-sm`} style={{width:'18px',height:'13px',display:'inline-block'}} />
-              <span className="text-xs font-bold">{LANG_LABELS[lang]}</span>
+              <span className="text-xs font-bold">{LANG_SHORT[lang]}</span>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
             {langMenuOpen && (
               <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50 min-w-[90px]">
-                {ALL_LANGS.map((l) => (
+                {VISIBLE_LANGS.map((l) => (
                   <Link
                     key={l}
                     href={pathname.replace(`/${lang}`, `/${l}`)}
                     onClick={() => setLangMenuOpen(false)}
-                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-bold hover:bg-slate-50 transition-colors ${l === lang ? 'text-quebec-blue' : 'text-quebec-navy'}`}
+                    className={`flex items-center gap-2 px-4 py-2.5 text-sm font-semibold hover:bg-slate-50 transition-colors ${l === lang ? 'text-quebec-blue bg-blue-50' : 'text-quebec-navy'}`}
                   >
-                    <span className={`fi fi-${LANG_FLAGS[l]} rounded-sm`} style={{width:'18px',height:'13px',display:'inline-block'}} />
+                    <span className={`fi fi-${LANG_FLAGS[l]} rounded-sm`} style={{width:'20px',height:'15px',display:'inline-block'}} />
                     {LANG_LABELS[l]}
                   </Link>
                 ))}
