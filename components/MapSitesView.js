@@ -191,17 +191,19 @@ export default function MapSitesView({ attractions, lang, t, userPos }) {
         }
       })
 
-      map.on('click', 'sites-pins', e => {
-        e.preventDefault()
-        const id = e.features?.[0]?.properties?.id
-        const attraction = attractionsRef.current.find(a => a.id === id)
-        if (!attraction) return
-        openPopup(map, attraction, e.lngLat)
-      })
-
-      // Clic sur fond de carte → ferme popup
+      // Clic / tap — rayon agrandi (20px) pour mobile
       map.on('click', e => {
-        if (e.defaultPrevented) return
+        const R = 20
+        const features = map.queryRenderedFeatures(
+          [[e.point.x - R, e.point.y - R], [e.point.x + R, e.point.y + R]],
+          { layers: ['sites-pins'] }
+        )
+        if (features.length > 0) {
+          const id = features[0].properties?.id
+          // == intentionnel : MapLibre peut retourner string ou number selon le contexte
+          const attraction = attractionsRef.current.find(a => a.id == id)
+          if (attraction) { openPopup(map, attraction, e.lngLat); return }
+        }
         closePopup()
       })
 

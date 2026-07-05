@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 // Coordonnées SVG en % de l'image complète 1448×1086
@@ -49,12 +49,34 @@ const REGION_IMAGES = {
 }
 
 export default function QuebecMapClickable({ lang, regionsData }) {
-  const [hovered, setHovered] = useState(null)
+  const [hovered,  setHovered]  = useState(null)
+  const [pending,  setPending]  = useState(null) // confirmation mobile avant modal
   const [selected, setSelected] = useState(null)
+  const [isTouch,  setIsTouch]  = useState(false)
   const isFr = lang === 'fr'
 
-  const hoveredRegion = regionsData.find(r => r.num === hovered)
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
+
+  const hoveredRegion  = regionsData.find(r => r.num === hovered)
+  const pendingRegion  = regionsData.find(r => r.num === pending)
   const selectedRegion = regionsData.find(r => r.num === selected)
+
+  function handleClick(num) {
+    if (!isTouch) {
+      // Desktop : ouverture directe
+      openModal(num)
+      return
+    }
+    // Mobile : premier toucher = confirmation, second = modal
+    if (pending === num) {
+      setPending(null)
+      openModal(num)
+    } else {
+      setPending(num)
+    }
+  }
 
   function openModal(num) {
     setSelected(num)
@@ -86,14 +108,17 @@ export default function QuebecMapClickable({ lang, regionsData }) {
             const isHov = hovered === r.num
             const pts = r.coords.split(',')
 
+            const isPending = pending === r.num
             const common = {
-              fill: isHov ? 'rgba(59,130,246,0.35)' : 'transparent',
-              stroke: isHov ? 'rgba(255,255,255,0.9)' : 'transparent',
+              fill: isPending
+                ? 'rgba(234,179,8,0.4)'
+                : isHov ? 'rgba(59,130,246,0.35)' : 'transparent',
+              stroke: (isPending || isHov) ? 'rgba(255,255,255,0.9)' : 'transparent',
               strokeWidth: '0.4',
               className: 'cursor-pointer transition-all duration-100',
               onMouseEnter: () => setHovered(r.num),
               onMouseLeave: () => setHovered(null),
-              onClick: () => openModal(r.num),
+              onClick: () => handleClick(r.num),
             }
 
             if (r.shape === 'rect') {
@@ -119,6 +144,28 @@ export default function QuebecMapClickable({ lang, regionsData }) {
           {isFr ? 'Cliquez sur une région' : 'Click a region'}
         </div>
       </div>
+
+      {/* Barre de confirmation mobile */}
+      {pending && pendingRegion && !selected && (
+        <div className="mt-3 flex items-center justify-between gap-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
+          <span className="font-semibold text-gray-900 text-sm leading-snug">
+            {isFr ? pendingRegion.nom_fr : pendingRegion.nom_en}
+          </span>
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => { setPending(null); openModal(pending) }}
+              className="bg-quebec-blue text-white text-sm font-bold px-4 py-1.5 rounded-full hover:bg-quebec-navy transition-colors"
+            >
+              {isFr ? 'Voir →' : 'View →'}
+            </button>
+            <button
+              onClick={() => setPending(null)}
+              aria-label={isFr ? 'Annuler' : 'Cancel'}
+              className="text-gray-400 hover:text-gray-700 text-lg leading-none px-1"
+            >✕</button>
+          </div>
+        </div>
+      )}
 
       {/* Modal */}
       {selected && selectedRegion && (
