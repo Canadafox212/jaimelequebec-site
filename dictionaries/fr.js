@@ -82,6 +82,15 @@ const fr = {
     see_venue: "Détails",
     view_page: "Voir la fiche ↗",
     visit_site: "Voir le site ↗",
+    share: {
+      button: "Partager ce lieu",
+      button_short: "Partager",
+      native_title: "À voir au Québec",
+      message: "Regarde ce lieu au Québec — ",
+      fallback_title: "Copier le lien",
+      fallback_copy: "Copier",
+      fallback_copied: "Copié !",
+    },
   },
   search: {
     title: 'Résultats pour',

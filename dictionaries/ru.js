@@ -82,6 +82,15 @@ const ru = {
     see_venue: "Подробнее",
     view_page: "Открыть страницу ↗",
     visit_site: "Посетить сайт ↗",
+    share: {
+      button: "Поделиться местом",
+      button_short: "Поделиться",
+      native_title: "Посмотреть в Квебеке",
+      message: "Посмотри это место в Квебеке — ",
+      fallback_title: "Копировать ссылку",
+      fallback_copy: "Копировать",
+      fallback_copied: "Скопировано!",
+    },
   },
   search: {
     title: 'Результаты для',

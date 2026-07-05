@@ -82,6 +82,15 @@ const en = {
     see_venue: "Details",
     view_page: "View page ↗",
     visit_site: "Visit site ↗",
+    share: {
+      button: "Share this place",
+      button_short: "Share",
+      native_title: "See in Québec",
+      message: "Check out this place in Québec — ",
+      fallback_title: "Copy link",
+      fallback_copy: "Copy",
+      fallback_copied: "Copied!",
+    },
   },
   search: {
     title: 'Results for',

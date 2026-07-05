@@ -82,6 +82,15 @@ const pt = {
     see_venue: "Detalhes",
     view_page: "Ver ficha ↗",
     visit_site: "Visitar site ↗",
+    share: {
+      button: "Compartilhar este lugar",
+      button_short: "Compartilhar",
+      native_title: "Ver em Québec",
+      message: "Confira este lugar em Québec — ",
+      fallback_title: "Copiar link",
+      fallback_copy: "Copiar",
+      fallback_copied: "Copiado!",
+    },
   },
   search: {
     title: 'Resultados para',

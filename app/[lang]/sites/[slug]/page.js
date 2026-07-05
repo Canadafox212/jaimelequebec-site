@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { getAllAttractions, getAttractionBySlug, getNearbyAttractions, getActivitesForPage, getAttractionImageSrc, getActivityPhotoSrc } from '@/lib/attractions'
 import AttractionCard from '@/components/AttractionCard'
 import MapModal from '@/components/MapModal'
+import ShareLieuButton from '@/components/ShareLieuButton'
 import { dicts, LANGS } from '@/lib/i18n'
 import labelI18n from '@/data/activity-labels-i18n.json'
 
@@ -26,16 +27,26 @@ function resolveContent(attraction, lang) {
   }
 }
 
+const BASE = 'https://jaimelequebec.com'
+
 export async function generateMetadata({ params }) {
   const { lang, slug } = await params
   const attraction = getAttractionBySlug(slug)
   if (!attraction) return {}
   const { title, summary: desc } = resolveContent(attraction, lang)
   const imageSrc = getAttractionImageSrc(slug)
+  const ogUrl = `${BASE}/api/og/site/${slug}?lang=${lang}${imageSrc ? `&photo=${encodeURIComponent(imageSrc)}` : ''}`
   return {
     title: `${title} — J'aime le Québec`,
     description: desc,
-    openGraph: imageSrc ? { images: [{ url: imageSrc }] } : undefined,
+    openGraph: {
+      title: `${title} — J'aime le Québec`,
+      description: desc,
+      siteName: "J'aime le Québec",
+      type: 'website',
+      images: [{ url: ogUrl, width: 1200, height: 630, alt: title }],
+    },
+    twitter: { card: 'summary_large_image' },
   }
 }
 
@@ -53,7 +64,6 @@ export default async function AttractionPage({ params }) {
   const isFr = lang === 'fr'
   const { ete: activitesEte, hiver: activitesHiver } = getActivitesForPage(attraction)
   const imageSrc = getAttractionImageSrc(slug)
-  const BASE = 'https://jaimelequebec.com'
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -294,6 +304,11 @@ export default async function AttractionPage({ params }) {
             </div>
           </section>
         )}
+
+        {/* Bouton partage */}
+        <div className="mb-10">
+          <ShareLieuButton slug={slug} title={title} lang={lang} t={t} />
+        </div>
 
         {/* Attractions à proximité */}
         {nearby.length > 0 && (

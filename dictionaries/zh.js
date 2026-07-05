@@ -82,6 +82,15 @@ const zh = {
     see_venue: "详情",
     view_page: "查看页面 ↗",
     visit_site: "访问网站 ↗",
+    share: {
+      button: "分享此地",
+      button_short: "分享",
+      native_title: "在魁北克查看",
+      message: "看看魁北克这个地方 — ",
+      fallback_title: "复制链接",
+      fallback_copy: "复制",
+      fallback_copied: "已复制！",
+    },
   },
   search: {
     title: '搜索结果',

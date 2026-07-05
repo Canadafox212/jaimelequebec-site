@@ -82,6 +82,15 @@ const hi = {
     see_venue: "विवरण",
     view_page: "पृष्ठ देखें ↗",
     visit_site: "साइट देखें ↗",
+    share: {
+      button: "यह स्थान साझा करें",
+      button_short: "साझा करें",
+      native_title: "क्यूबेक में देखें",
+      message: "क्यूबेक में यह स्थान देखो — ",
+      fallback_title: "लिंक कॉपी करें",
+      fallback_copy: "कॉपी करें",
+      fallback_copied: "कॉपी हो गया!",
+    },
   },
   search: {
     title: 'खोज परिणाम',
