@@ -14,3 +14,10 @@ public/fetch-images-report.html
 public/fetch-services-report.html
 
 .vercel
+.env*
+
+# Fichiers personnels et données brutes (ne pas versionner)
+FICHIERS FOX/
+data/Images du referentiel placé dans import/
+desktop.ini
+scratchpad/

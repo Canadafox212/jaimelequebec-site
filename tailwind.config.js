@@ -23,6 +23,15 @@ module.exports = {
         card: '0 2px 12px rgba(0,0,0,0.08)',
         'card-hover': '0 8px 30px rgba(0,0,0,0.14)',
       },
+      keyframes: {
+        'slide-up': {
+          '0%':   { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'slide-up': 'slide-up 0.35s cubic-bezier(0.32,0.72,0,1)',
+      },
     },
   },
   plugins: [],

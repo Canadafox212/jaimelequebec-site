@@ -1,0 +1,23 @@
+# Fichiers de travail (import / images brutes) — inutiles pour le site en ligne
+data/import
+data/import/**
+data/Images*
+data/Images*/**
+
+# Interface admin — dev uniquement, inutile en production
+app/admin
+
+# API admin — dev uniquement (réduction du nombre de fonctions serverless)
+app/api/admin-activites
+app/api/admin-activites-photos
+app/api/admin-activites-saisons
+app/api/admin-article
+app/api/admin-fallbacks
+app/api/admin-featured
+app/api/admin-list
+app/api/admin-og
+app/api/admin-save-image
+app/api/admin-services
+
+# Articles — pas encore publiés pour le lancement v1 (réduction du nombre de fonctions)
+app/\[lang\]/articles

@@ -1,0 +1,83 @@
+{
+  "_commentaire": "Mise en avant des attractions. Clé = slug. priorite (desc = en tête de « Nos sélections »), coup_de_coeur (true = sur la page d'accueil). Éditable.",
+  "parc-de-la-chute-montmorency": {
+    "priorite": 20,
+    "coup_de_coeur": true
+  },
+  "oratoire-saint-joseph-du-mont-royal": {
+    "priorite": 19,
+    "coup_de_coeur": true
+  },
+  "pointe-a-calliere-cite-darcheologie-et-dhistoire-de-montreal": {
+    "priorite": 18,
+    "coup_de_coeur": true
+  },
+  "parc-du-mont-royal": {
+    "priorite": 17,
+    "coup_de_coeur": true
+  },
+  "chateau-frontenac-et-terrasse-dufferin": {
+    "priorite": 16,
+    "coup_de_coeur": true
+  },
+  "quartier-petit-champlain": {
+    "priorite": 15,
+    "coup_de_coeur": true
+  },
+  "musee-de-la-civilisation": {
+    "priorite": 22,
+    "coup_de_coeur": true
+  },
+  "ile-aux-coudres": {
+    "priorite": 13,
+    "coup_de_coeur": true
+  },
+  "baie-saint-paul-et-la-rue-saint-jean-baptiste": {
+    "priorite": 12,
+    "coup_de_coeur": true
+  },
+  "parc-des-champs-de-bataille-plaines-dabraham": {
+    "priorite": 11,
+    "coup_de_coeur": true
+  },
+  "vieux-quebec-arrondissement-historique-unesco": {
+    "priorite": 10,
+    "coup_de_coeur": true
+  },
+  "rocher-perce": {
+    "priorite": 9,
+    "coup_de_coeur": true
+  },
+  "reserve-faunique-de-matane-et-observation-du-saumon": {
+    "priorite": 8,
+    "coup_de_coeur": true
+  },
+  "tadoussac-et-le-parc-marin-du-saguenaysaint-laurent": {
+    "priorite": 22,
+    "coup_de_coeur": true
+  },
+  "sainte-rose-du-nord": {
+    "priorite": 6,
+    "coup_de_coeur": true
+  },
+  "casino-de-charlevoix": {
+    "priorite": 5,
+    "coup_de_coeur": true
+  },
+  "parc-national-de-la-mauricie": {
+    "priorite": 4,
+    "coup_de_coeur": true
+  },
+  "parc-omega": {
+    "priorite": 3,
+    "coup_de_coeur": true
+  },
+  "biodome-de-montreal": {
+    "priorite": 2,
+    "coup_de_coeur": true
+  },
+  "la-cite-de-lenergie": {
+    "priorite": 9,
+    "coup_de_coeur": true
+  }
+}

@@ -89,14 +89,14 @@ case correspondante et la section "État d'avancement" en fin de session.
 - [x] **Session 4 — Bascule de langue FR/EN**
       Système multilingue (ex: next-intl).
       Point d'arrêt : le site fonctionne correctement dans les deux langues.
-- [ ] **Session 5 — Récupération des images**
-      Script og:image + fallback + rapport de vérification manuelle,
-      par lots de 20-30 attractions.
-      Point d'arrêt : les 200 attractions ont une image locale validée.
+- [x] **Session 5 — Récupération des images**
+      Interface admin /admin/images construite (upload fichier + URL + drag-drop).
+      198/198 attractions ont une image locale. Photos fallbacks et activités complètes.
+      Point d'arrêt : les 198 attractions ont une image locale validée.
 - [ ] **Session 6 — Finitions visuelles**
       Design responsive, page d'accueil soignée, cohérence visuelle.
       Point d'arrêt : le site est présentable de bout en bout.
-- [ ] **Session 7 — Déploiement**
+- [x] **Session 7 — Déploiement**
       Mise en ligne Vercel (URL de test), validation, puis bascule DNS
       Hostinger vers Vercel.
       Point d'arrêt : jaimelequebec.org est en ligne.
@@ -112,11 +112,11 @@ atteint à 100% — reprendre au point exact dans une nouvelle session.
 - [x] Intégration des données JSON (200 attractions) dans des pages — terminé
 - [x] Recherche / filtres fonctionnels — terminé
 - [x] Bascule de langue FR/EN — terminé (routing `[lang]`, dictionnaires)
-- [ ] Récupération automatique d'images représentatives par attraction
-      (via balise og:image du site source en priorité, fallback sur
-      plus grande image hors logo/pub ; vérification manuelle ensuite)
-- [ ] Déploiement Vercel (URL de test)
-- [ ] Bascule DNS Hostinger → Vercel (site public)
+- [x] Récupération automatique d'images représentatives par attraction —
+      198/198 avec photo locale. Fallbacks et photos d'activités complètes.
+- [x] Déploiement Vercel — jaimelequebec.com en ligne (2026-07-01)
+- [x] Finitions visuelles session 8 — déployé 2026-07-02
+- [ ] Bascule DNS Hostinger → Vercel pour jaimelequebec.org (site public)
 
 ## Décisions techniques prises
 - Images toujours stockées localement dans le projet, jamais en lien
@@ -136,6 +136,16 @@ atteint à 100% — reprendre au point exact dans une nouvelle session.
 
 ## Notes de session
 
+### Session 5 — Gestion des images (admin)
+- Interface admin `/admin/images` construite (deux onglets : fallbacks + 200 sites)
+- Upload par clic, drag-drop, ou collage d'URL — sauvegarde locale immédiate
+- Middleware corrigé : `/admin` exclu du redirect de langue (sinon 404)
+- 2 doublons de slugs supprimés de `data/attractions.json` (IDs 28 et 194)
+- BOM PowerShell : toujours écrire avec `[System.IO.File]::WriteAllText($path, $content, (New-Object System.Text.UTF8Encoding $false))` — `Set-Content -Encoding UTF8` ajoute un BOM qui casse `JSON.parse`
+- jaimelequebec.com est le domaine aliasé sur Vercel (projet `jaimelequebec-site`)
+- Déploiement : `vercel deploy --prod` depuis le dossier du projet
+- État à la fin : 195/198 attractions avec photo locale
+
 ### Session — Recherche globale + corrections visuelles
 - Loupe dans le header (icône + libellé « Rechercher », champ pleine largeur)
 - Page `/[lang]/recherche?q=...` : résultats groupés par sections (Sites,
@@ -147,3 +157,18 @@ atteint à 100% — reprendre au point exact dans une nouvelle session.
   des photos (le composant maison ne chargeait pas les images)
 - Problème connu : ERR_MEMORY_ALLOCATION_FAILED sur webpack cache (Windows) —
   nécessite parfois un redémarrage du serveur de dev
+
+### Session 8 — Finitions UX / enrichissement données
+- Mascotte (Foxy) : lien direct vers `/[lang]/decouvrir` (plus de panneau slide-up)
+- Page `/decouvrir` : carte des régions (carte-regions-quebec.png), 19 régions en
+  ordre alphabétique de la légende officielle, 3 raccourcis rapides
+- EtabCard : vignette entièrement cliquable (stretched link z-10), bouton
+  "Information détaillée ↗" uniquement si `etab.page` existe (z-20)
+- Google Maps : tous les liens ouvrent en vue satellite (`?t=h`)
+- Hébergements à proximité sur les fiches `/sites/[slug]` : données réelles
+  (économique / confort / haut de gamme) issues de `attractions.json`
+- Bandeaux photos par région sur `/activites/[region]` : 19 images dans
+  `public/images/REGIONS/`, cliquables en lightbox (composant RegionImageBanner)
+- Régions triées alphabétiquement dans `/activites`
+- Pages nouvelles créées : `/nouvelles`, `/toutes-les-activites`, `/decouvrir`
+- Déploiement : `vercel deploy --prod` — 1847 pages statiques générées

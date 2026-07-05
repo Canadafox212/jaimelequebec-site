@@ -2,19 +2,27 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getAttractionImageSrc } from '@/lib/attractions'
 
+function resolveAttractionContent(attraction, lang) {
+  if (lang === 'fr') return { title: attraction.fr?.titre, summary: attraction.fr?.resume, category: attraction.fr?.categorie_thematique }
+  if (lang === 'en') return { title: attraction.en?.title, summary: attraction.en?.summary, category: attraction.en?.theme_category }
+  const tr = attraction[lang]
+  return {
+    title:    tr?.titre ?? tr?.title    ?? attraction.en?.title    ?? attraction.fr?.titre,
+    summary:  tr?.resume ?? tr?.summary ?? attraction.en?.summary  ?? attraction.fr?.resume,
+    category: attraction.en?.theme_category ?? attraction.fr?.categorie_thematique,
+  }
+}
+
 export default function AttractionCard({ attraction, lang, t }) {
-  const content  = lang === 'fr' ? attraction.fr : attraction.en
-  const title    = lang === 'fr' ? content.titre : content.title
-  const summary  = lang === 'fr' ? content.resume : content.summary
-  const category = lang === 'fr' ? content.categorie_thematique : content.theme_category
-  const region   = attraction.localisation.region_touristique
+  const { title, summary, category } = resolveAttractionContent(attraction, lang)
+  const region = attraction.localisation.region_touristique
 
   const imageSrc = getAttractionImageSrc(attraction.slug)
   const hasImage = imageSrc !== null
 
   return (
     <Link
-      href={`/${lang}/attractions/${attraction.slug}`}
+      href={`/${lang}/sites/${attraction.slug}`}
       className="group bg-white rounded-2xl shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
     >
       {/* Zone image */}
@@ -61,7 +69,7 @@ export default function AttractionCard({ attraction, lang, t }) {
           {summary}
         </p>
         <div className="mt-4 flex items-center gap-1 text-quebec-blue text-sm font-semibold">
-          {lang === 'fr' ? 'Découvrir' : 'Explore'}
+          {t?.detail?.read ?? (lang === 'fr' ? 'Découvrir' : 'Explore')}
           <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
         </div>
       </div>

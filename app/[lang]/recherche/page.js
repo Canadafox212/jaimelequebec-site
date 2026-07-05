@@ -2,13 +2,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import AttractionCard from '@/components/AttractionCard'
 import { getAllAttractions, getFiltres, getAttractionImageSrc } from '@/lib/attractions'
-import fr from '@/dictionaries/fr'
-import en from '@/dictionaries/en'
-
-const dicts = { fr, en }
+import { getEtablissementsIndex, getTaxonomie } from '@/lib/activites'
+import EtabExplorer from '@/components/EtabExplorer'
+import { dicts, LANGS } from '@/lib/i18n'
 
 export async function generateStaticParams() {
-  return [{ lang: 'fr' }, { lang: 'en' }]
+  return LANGS.map((lang) => ({ lang }))
 }
 
 export async function generateMetadata({ params, searchParams }) {
@@ -75,7 +74,7 @@ export default async function RecherchePage({ params, searchParams }) {
 
   // Régions
   const regionMatches = filtres.regions.filter(r => {
-    const nom = lang === 'fr' ? norm(r.nom_fr) : norm(r.nom_en)
+    const nom = norm(r[`nom_${lang}`] ?? r.nom_en ?? r.nom_fr)
     return nom.includes(q)
   })
 
@@ -85,7 +84,23 @@ export default async function RecherchePage({ params, searchParams }) {
     : filtres.categories_thematiques.en
   const categoryMatches = categories.filter(c => norm(c).includes(q))
 
-  const total = siteMatches.length + descMatches.length + regionMatches.length + categoryMatches.length
+  // Activités / lieux (établissements) : match nom, type ou mots-clés
+  const etabMatches = getEtablissementsIndex().filter(e => {
+    if (norm(e.nom).includes(q)) return true
+    if (norm(e.type).includes(q)) return true
+    return e.labels.some(l => norm(l).includes(q))
+  }).sort((a, b) => {
+    // priorité aux fiches pilotées (page perso), puis nom
+    if (!!b.page - !!a.page) return !!b.page - !!a.page
+    return a.nom.localeCompare(b.nom, 'fr')
+  }).slice(0, 120)
+
+  // Thèmes : match nom du thème
+  const themeMatches = getTaxonomie().themes.filter(th =>
+    norm(th[`nom_${lang}`] ?? th.nom_en ?? th.nom_fr).includes(q)
+  )
+
+  const total = siteMatches.length + etabMatches.length + descMatches.length + themeMatches.length + regionMatches.length + categoryMatches.length
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -104,6 +119,44 @@ export default async function RecherchePage({ params, searchParams }) {
         <p className="text-gray-500 py-12 text-center text-lg">
           {t.search.no_results} «&nbsp;{query}&nbsp;»
         </p>
+      )}
+
+      {/* Section : Activités et lieux */}
+      {etabMatches.length > 0 && (
+        <section className="mb-12">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span className="w-1 h-6 bg-purple-500 rounded-full inline-block" />
+            {t.search.section_activites}
+            <span className="text-sm font-normal text-gray-400 ml-1">({etabMatches.length})</span>
+          </h2>
+          <EtabExplorer items={etabMatches} lang={lang} t={t} />
+        </section>
+      )}
+
+      {/* Section : Thèmes */}
+      {themeMatches.length > 0 && (
+        <section className="mb-12">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span className="w-1 h-6 bg-teal-500 rounded-full inline-block" />
+            {t.search.section_themes}
+            <span className="text-sm font-normal text-gray-400 ml-1">({themeMatches.length})</span>
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {themeMatches.map(th => (
+              <Link
+                key={th.id}
+                href={`/${lang}/activites`}
+                className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-3 hover:border-teal-500 hover:shadow-md transition-all"
+              >
+                <span className="text-2xl">{th.emoji}</span>
+                <div>
+                  <p className="font-semibold text-gray-900">{th[`nom_${lang}`] ?? th.nom_en ?? th.nom_fr}</p>
+                  <p className="text-xs text-teal-600">{t.search.see_theme} →</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
       )}
 
       {/* Section : Sites touristiques */}
@@ -150,12 +203,12 @@ export default async function RecherchePage({ params, searchParams }) {
             {regionMatches.map(r => (
               <Link
                 key={r.num}
-                href={`/${lang}/attractions?region=${r.num}`}
+                href={`/${lang}/sites?region=${r.num}`}
                 className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-3 hover:border-quebec-blue hover:shadow-md transition-all"
               >
                 <span className="text-2xl">🗺️</span>
                 <div>
-                  <p className="font-semibold text-gray-900">{lang === 'fr' ? r.nom_fr : r.nom_en}</p>
+                  <p className="font-semibold text-gray-900">{r[`nom_${lang}`] ?? r.nom_en ?? r.nom_fr}</p>
                   <p className="text-xs text-quebec-blue">{t.search.see_region} →</p>
                 </div>
               </Link>
@@ -176,7 +229,7 @@ export default async function RecherchePage({ params, searchParams }) {
             {categoryMatches.map(c => (
               <Link
                 key={c}
-                href={`/${lang}/attractions?categorie=${encodeURIComponent(c)}`}
+                href={`/${lang}/sites?categorie=${encodeURIComponent(c)}`}
                 className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-3 hover:border-emerald-500 hover:shadow-md transition-all"
               >
                 <span className="text-2xl">🏷️</span>
@@ -202,7 +255,7 @@ function DescriptionRow({ attraction, lang, t }) {
 
   return (
     <Link
-      href={`/${lang}/attractions/${attraction.slug}`}
+      href={`/${lang}/sites/${attraction.slug}`}
       className="group bg-white border border-gray-100 rounded-xl p-4 hover:border-quebec-gold hover:shadow-md transition-all flex gap-4 items-start"
     >
       {/* Photo */}

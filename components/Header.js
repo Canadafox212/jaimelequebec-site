@@ -4,21 +4,31 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
 
+const ALL_LANGS = ['fr', 'en', 'es', 'de', 'pt', 'ru', 'zh', 'hi']
+const LANG_FLAGS = { fr: 'fr', en: 'us', es: 'es', de: 'de', pt: 'pt', ru: 'ru', zh: 'cn', hi: 'in' }
+const LANG_LABELS = { fr: 'FR', en: 'EN', es: 'ES', de: 'DE', pt: 'PT', ru: 'RU', zh: '中文', hi: 'हिं' }
+
 export default function Header({ lang, t }) {
   const pathname  = usePathname()
   const router    = useRouter()
-  const otherLang = lang === 'fr' ? 'en' : 'fr'
-  const otherPath = pathname.replace(`/${lang}`, `/${otherLang}`)
+  const [langMenuOpen, setLangMenuOpen] = useState(false)
 
   const [searchOpen, setSearchOpen]   = useState(false)
   const [searchValue, setSearchValue] = useState('')
+  const [menuOpen, setMenuOpen]       = useState(false)
   const inputRef = useRef(null)
 
   useEffect(() => {
     if (searchOpen) inputRef.current?.focus()
   }, [searchOpen])
 
+  useEffect(() => {
+    if (menuOpen || searchOpen) setMenuOpen(false)
+    setLangMenuOpen(false)
+  }, [pathname])
+
   function openSearch() {
+    setMenuOpen(false)
     setSearchOpen(true)
   }
 
@@ -38,6 +48,18 @@ export default function Header({ lang, t }) {
   function handleKeyDown(e) {
     if (e.key === 'Escape') closeSearch()
   }
+
+  const isHome    = pathname === `/${lang}` || pathname === `/${lang}/`
+  const isSites   = pathname.startsWith(`/${lang}/sites`) || pathname.startsWith(`/${lang}/attractions`)
+  const isActiv   = pathname.startsWith(`/${lang}/activites`)
+  const isArticles = pathname.startsWith(`/${lang}/articles`)
+
+  const navLinkClass = (active) =>
+    `px-4 py-2 rounded-lg transition-colors text-sm font-medium ${
+      active
+        ? 'bg-quebec-blue/10 text-quebec-blue font-semibold'
+        : 'text-quebec-navy hover:bg-slate-100'
+    }`
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -88,25 +110,25 @@ export default function Header({ lang, t }) {
             </button>
           </form>
         ) : (
-          /* Nav principale */
-          <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
-            <Link
-              href={`/${lang}`}
-              className="px-4 py-2 rounded-lg text-quebec-navy hover:bg-slate-100 transition-colors"
-            >
+          /* Nav principale — desktop */
+          <nav className="hidden md:flex items-center gap-1">
+            <Link href={`/${lang}`} className={navLinkClass(isHome)}>
               {t.nav.home}
             </Link>
-            <Link
-              href={`/${lang}/attractions`}
-              className="px-4 py-2 rounded-lg text-quebec-navy hover:bg-slate-100 transition-colors"
-            >
+            <Link href={`/${lang}/sites`} className={navLinkClass(isSites)}>
               {t.nav.attractions}
+            </Link>
+            <Link href={`/${lang}/activites`} className={navLinkClass(isActiv)}>
+              {t.nav.activities}
+            </Link>
+            <Link href={`/${lang}/articles`} className={navLinkClass(isArticles)}>
+              {t.nav.articles}
             </Link>
           </nav>
         )}
 
-        {/* Droite : loupe + langue + CTA */}
-        <div className="flex items-center gap-3 shrink-0">
+        {/* Droite : loupe + langue + CTA + hamburger */}
+        <div className="flex items-center gap-2 shrink-0">
 
           {/* Loupe */}
           {!searchOpen && (
@@ -122,21 +144,98 @@ export default function Header({ lang, t }) {
             </button>
           )}
 
+          {/* Sélecteur de langue */}
+          <div className="relative">
+            <button
+              onClick={() => setLangMenuOpen(!langMenuOpen)}
+              className="border border-quebec-navy/30 text-quebec-navy rounded-lg px-2.5 py-1.5 hover:bg-quebec-navy hover:text-white transition-colors flex items-center gap-1.5"
+            >
+              <span className={`fi fi-${LANG_FLAGS[lang]} rounded-sm`} style={{width:'18px',height:'13px',display:'inline-block'}} />
+              <span className="text-xs font-bold">{LANG_LABELS[lang]}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {langMenuOpen && (
+              <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50 min-w-[90px]">
+                {ALL_LANGS.map((l) => (
+                  <Link
+                    key={l}
+                    href={pathname.replace(`/${lang}`, `/${l}`)}
+                    onClick={() => setLangMenuOpen(false)}
+                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-bold hover:bg-slate-50 transition-colors ${l === lang ? 'text-quebec-blue' : 'text-quebec-navy'}`}
+                  >
+                    <span className={`fi fi-${LANG_FLAGS[l]} rounded-sm`} style={{width:'18px',height:'13px',display:'inline-block'}} />
+                    {LANG_LABELS[l]}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           <Link
-            href={otherPath}
-            className="text-xs font-bold border border-quebec-navy/30 text-quebec-navy rounded-lg px-3 py-1.5 hover:bg-quebec-navy hover:text-white transition-colors"
-          >
-            {otherLang.toUpperCase()}
-          </Link>
-          <Link
-            href={`/${lang}/attractions`}
+            href={`/${lang}/sites`}
             className="hidden sm:inline-flex items-center gap-1.5 bg-quebec-red hover:bg-red-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors"
           >
             {lang === 'fr' ? '200 sites' : '200 sites'}
           </Link>
-        </div>
 
+          {/* Hamburger — mobile uniquement */}
+          {!searchOpen && (
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Menu"
+              className="md:hidden p-2 text-quebec-navy hover:bg-slate-100 rounded-lg transition-colors"
+            >
+              {menuOpen ? (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+          )}
+        </div>
       </div>
+
+      {/* Menu mobile déroulant */}
+      {menuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
+          <nav className="max-w-6xl mx-auto px-4 py-2 flex flex-col">
+            <Link
+              href={`/${lang}`}
+              onClick={() => setMenuOpen(false)}
+              className={`py-3 px-2 border-b border-gray-100 text-base font-medium ${isHome ? 'text-quebec-blue' : 'text-quebec-navy'}`}
+            >
+              {t.nav.home}
+            </Link>
+            <Link
+              href={`/${lang}/sites`}
+              onClick={() => setMenuOpen(false)}
+              className={`py-3 px-2 border-b border-gray-100 text-base font-medium ${isSites ? 'text-quebec-blue' : 'text-quebec-navy'}`}
+            >
+              {t.nav.attractions}
+            </Link>
+            <Link
+              href={`/${lang}/activites`}
+              onClick={() => setMenuOpen(false)}
+              className={`py-3 px-2 border-b border-gray-100 text-base font-medium ${isActiv ? 'text-quebec-blue' : 'text-quebec-navy'}`}
+            >
+              {t.nav.activities}
+            </Link>
+            <Link
+              href={`/${lang}/articles`}
+              onClick={() => setMenuOpen(false)}
+              className={`py-3 px-2 text-base font-medium ${isArticles ? 'text-quebec-blue' : 'text-quebec-navy'}`}
+            >
+              {t.nav.articles}
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   )
 }

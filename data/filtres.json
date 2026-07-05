@@ -1,105 +1,25 @@
 {
   "regions": [
-    {
-      "num": 1,
-      "nom_fr": "Montréal",
-      "nom_en": "Montréal"
-    },
-    {
-      "num": 2,
-      "nom_fr": "Québec (Capitale-Nationale)",
-      "nom_en": "Québec City (Capitale-Nationale)"
-    },
-    {
-      "num": 3,
-      "nom_fr": "Charlevoix",
-      "nom_en": "Charlevoix"
-    },
-    {
-      "num": 4,
-      "nom_fr": "Gaspésie",
-      "nom_en": "Gaspésie"
-    },
-    {
-      "num": 5,
-      "nom_fr": "Bas-Saint-Laurent",
-      "nom_en": "Lower St. Lawrence (Bas-Saint-Laurent)"
-    },
-    {
-      "num": 6,
-      "nom_fr": "Saguenay–Lac-Saint-Jean",
-      "nom_en": "Saguenay–Lac-Saint-Jean"
-    },
-    {
-      "num": 7,
-      "nom_fr": "Côte-Nord",
-      "nom_en": "North Shore (Côte-Nord)"
-    },
-    {
-      "num": 8,
-      "nom_fr": "Cantons-de-l'Est (Estrie)",
-      "nom_en": "Eastern Townships (Estrie)"
-    },
-    {
-      "num": 9,
-      "nom_fr": "Outaouais",
-      "nom_en": "Outaouais"
-    },
-    {
-      "num": 10,
-      "nom_fr": "Mauricie",
-      "nom_en": "Mauricie"
-    },
-    {
-      "num": 11,
-      "nom_fr": "Lanaudière",
-      "nom_en": "Lanaudière"
-    },
-    {
-      "num": 12,
-      "nom_fr": "Laurentides",
-      "nom_en": "Laurentians (Laurentides)"
-    },
-    {
-      "num": 13,
-      "nom_fr": "Montérégie",
-      "nom_en": "Montérégie"
-    },
-    {
-      "num": 14,
-      "nom_fr": "Chaudière-Appalaches",
-      "nom_en": "Chaudière-Appalaches"
-    },
-    {
-      "num": 15,
-      "nom_fr": "Centre-du-Québec",
-      "nom_en": "Centre-du-Québec"
-    },
-    {
-      "num": 16,
-      "nom_fr": "Îles-de-la-Madeleine",
-      "nom_en": "Magdalen Islands (Îles-de-la-Madeleine)"
-    },
-    {
-      "num": 17,
-      "nom_fr": "Abitibi-Témiscamingue",
-      "nom_en": "Abitibi-Témiscamingue"
-    },
-    {
-      "num": 18,
-      "nom_fr": "Nord-du-Québec (Eeyou Istchee Baie-James et Nunavik)",
-      "nom_en": "Northern Québec (Eeyou Istchee Baie-James and Nunavik)"
-    },
-    {
-      "num": 19,
-      "nom_fr": "Laval",
-      "nom_en": "Laval"
-    },
-    {
-      "num": 20,
-      "nom_fr": "Incontournables transversaux",
-      "nom_en": "Cross-Regional Highlights"
-    }
+    { "num": 1,  "nom_fr": "Montréal",                                             "nom_en": "Montréal",                                                 "nom_es": "Montréal",                              "nom_de": "Montréal",                          "nom_pt": "Montréal",                              "nom_ru": "Монреаль",                              "nom_zh": "蒙特利尔",          "nom_hi": "मॉन्ट्रियल",              "lat": 45.508,  "lng": -73.587,  "zoom": 11 },
+    { "num": 2,  "nom_fr": "Québec (Capitale-Nationale)",                           "nom_en": "Québec City (Capitale-Nationale)",                          "nom_es": "Ciudad de Québec",                      "nom_de": "Québec-Stadt",                      "nom_pt": "Cidade de Québec",                      "nom_ru": "Квебек-Сити",                           "nom_zh": "魁北克市",           "nom_hi": "क्यूबेक सिटी",            "lat": 46.813,  "lng": -71.208,  "zoom": 11 },
+    { "num": 3,  "nom_fr": "Charlevoix",                                            "nom_en": "Charlevoix",                                               "nom_es": "Charlevoix",                            "nom_de": "Charlevoix",                        "nom_pt": "Charlevoix",                            "nom_ru": "Шарлевуа",                              "nom_zh": "夏勒瓦",            "nom_hi": "शार्लवॉ",              "lat": 47.467,  "lng": -70.550,  "zoom": 8  },
+    { "num": 4,  "nom_fr": "Gaspésie",                                              "nom_en": "Gaspésie",                                                 "nom_es": "Gaspésie",                              "nom_de": "Gaspésie",                          "nom_pt": "Gaspésie",                              "nom_ru": "Гаспези",                               "nom_zh": "加斯佩半岛",         "nom_hi": "गैस्पेज़ी",            "lat": 48.500,  "lng": -65.500,  "zoom": 7  },
+    { "num": 5,  "nom_fr": "Bas-Saint-Laurent",                                     "nom_en": "Lower St. Lawrence (Bas-Saint-Laurent)",                    "nom_es": "Bajo San Lorenzo",                      "nom_de": "Unterer Sankt-Lorenz",              "nom_pt": "Baixo São Lourenço",                    "nom_ru": "Нижний Сен-Лоран",                      "nom_zh": "下圣劳伦斯",         "nom_hi": "लोअर सेंट लॉरेंस",        "lat": 47.800,  "lng": -68.800,  "zoom": 7.5},
+    { "num": 6,  "nom_fr": "Saguenay–Lac-Saint-Jean",                              "nom_en": "Saguenay–Lac-Saint-Jean",                                  "nom_es": "Saguenay–Lac-Saint-Jean",               "nom_de": "Saguenay–Lac-Saint-Jean",           "nom_pt": "Saguenay–Lac-Saint-Jean",               "nom_ru": "Сагеней–Лак-Сен-Жан",                   "nom_zh": "萨格奈–圣让湖",      "nom_hi": "सागेने–लैक-सेंट-जीन",     "lat": 48.500,  "lng": -71.500,  "zoom": 7  },
+    { "num": 7,  "nom_fr": "Côte-Nord",                                             "nom_en": "North Shore (Côte-Nord)",                                  "nom_es": "Costa Norte",                           "nom_de": "Nordküste",                         "nom_pt": "Costa Norte",                           "nom_ru": "Северный берег",                        "nom_zh": "北岸",              "nom_hi": "नॉर्थ शोर",             "lat": 50.200,  "lng": -66.500,  "zoom": 6  },
+    { "num": 8,  "nom_fr": "Cantons-de-l'Est (Estrie)",                            "nom_en": "Eastern Townships (Estrie)",                               "nom_es": "Cantones del Este",                     "nom_de": "Eastern Townships",                 "nom_pt": "Cantons do Leste",                      "nom_ru": "Восточные кантоны",                     "nom_zh": "东部乡镇",           "nom_hi": "ईस्टर्न टाउनशिप",         "lat": 45.400,  "lng": -72.000,  "zoom": 8.5},
+    { "num": 9,  "nom_fr": "Outaouais",                                             "nom_en": "Outaouais",                                                "nom_es": "Outaouais",                             "nom_de": "Outaouais",                         "nom_pt": "Outaouais",                             "nom_ru": "Утауэ",                                 "nom_zh": "乌塔韦",            "nom_hi": "ऑटावे",               "lat": 45.800,  "lng": -76.200,  "zoom": 8  },
+    { "num": 10, "nom_fr": "Mauricie",                                              "nom_en": "Mauricie",                                                 "nom_es": "Mauricie",                              "nom_de": "Mauricie",                          "nom_pt": "Mauricie",                              "nom_ru": "Морисе",                                "nom_zh": "莫里西",            "nom_hi": "मौरिसी",               "lat": 46.600,  "lng": -72.750,  "zoom": 8  },
+    { "num": 11, "nom_fr": "Lanaudière",                                            "nom_en": "Lanaudière",                                               "nom_es": "Lanaudière",                            "nom_de": "Lanaudière",                        "nom_pt": "Lanaudière",                            "nom_ru": "Ланодьер",                              "nom_zh": "拉诺迪埃尔",         "nom_hi": "लेनोडियर",             "lat": 46.100,  "lng": -73.450,  "zoom": 8.5},
+    { "num": 12, "nom_fr": "Laurentides",                                           "nom_en": "Laurentians (Laurentides)",                                "nom_es": "Las Laurentidas",                        "nom_de": "Laurentiden",                       "nom_pt": "Laurentinas",                           "nom_ru": "Лоранские горы",                        "nom_zh": "洛朗蒂德",           "nom_hi": "लॉरेंटियन्स",            "lat": 46.200,  "lng": -74.600,  "zoom": 8  },
+    { "num": 13, "nom_fr": "Montérégie",                                            "nom_en": "Montérégie",                                               "nom_es": "Montérégie",                            "nom_de": "Montérégie",                        "nom_pt": "Montérégie",                            "nom_ru": "Монтережи",                             "nom_zh": "蒙特雷吉",           "nom_hi": "मॉन्टेरेजी",             "lat": 45.350,  "lng": -73.100,  "zoom": 9  },
+    { "num": 14, "nom_fr": "Chaudière-Appalaches",                                 "nom_en": "Chaudière-Appalaches",                                     "nom_es": "Chaudière-Appalaches",                  "nom_de": "Chaudière-Appalaches",              "nom_pt": "Chaudière-Appalaches",                  "nom_ru": "Шодьер-Аппалаши",                       "nom_zh": "肖迪埃尔-阿巴拉契",   "nom_hi": "शोडियर-अपलाशेज़",         "lat": 46.250,  "lng": -70.800,  "zoom": 8  },
+    { "num": 15, "nom_fr": "Centre-du-Québec",                                      "nom_en": "Centre-du-Québec",                                         "nom_es": "Centro de Québec",                      "nom_de": "Zentral-Québec",                    "nom_pt": "Centro do Québec",                      "nom_ru": "Центральный Квебек",                    "nom_zh": "魁北克中部",         "nom_hi": "सेंट्रल क्यूबेक",          "lat": 46.000,  "lng": -72.400,  "zoom": 9  },
+    { "num": 16, "nom_fr": "Îles-de-la-Madeleine",                                 "nom_en": "Magdalen Islands (Îles-de-la-Madeleine)",                  "nom_es": "Islas Magdalena",                       "nom_de": "Magdaleneninseln",                  "nom_pt": "Ilhas Magdalen",                        "nom_ru": "Магдаленовы острова",                   "nom_zh": "马德莱娜群岛",        "nom_hi": "मैगडलेन द्वीप",            "lat": 47.380,  "lng": -61.850,  "zoom": 9  },
+    { "num": 17, "nom_fr": "Abitibi-Témiscamingue",                                "nom_en": "Abitibi-Témiscamingue",                                    "nom_es": "Abitibi-Témiscamingue",                 "nom_de": "Abitibi-Témiscamingue",             "nom_pt": "Abitibi-Témiscamingue",                 "nom_ru": "Абитиби-Темискаминг",                   "nom_zh": "阿比蒂比-泰米斯坎",   "nom_hi": "अबितिबी-तेमिस्कामिंग",    "lat": 48.500,  "lng": -79.000,  "zoom": 7  },
+    { "num": 18, "nom_fr": "Nord-du-Québec (Eeyou Istchee Baie-James et Nunavik)", "nom_en": "Northern Québec (Eeyou Istchee Baie-James and Nunavik)",   "nom_es": "Norte de Québec",                       "nom_de": "Nord-Québec",                       "nom_pt": "Norte do Québec",                       "nom_ru": "Северный Квебек",                       "nom_zh": "魁北克北部",         "nom_hi": "उत्तरी क्यूबेक",           "lat": 55.000,  "lng": -75.000,  "zoom": 5  },
+    { "num": 19, "nom_fr": "Laval",                                                 "nom_en": "Laval",                                                    "nom_es": "Laval",                                 "nom_de": "Laval",                             "nom_pt": "Laval",                                 "nom_ru": "Лаваль",                                "nom_zh": "拉瓦勒",            "nom_hi": "लावाल",               "lat": 45.609,  "lng": -73.718,  "zoom": 12 },
+    { "num": 20, "nom_fr": "Incontournables transversaux",                          "nom_en": "Cross-Regional Highlights",                                "nom_es": "Destacados Regionales",                 "nom_de": "Regionsübergreifende Highlights",   "nom_pt": "Destaques Regionais",                   "nom_ru": "Межрегиональные достопримечательности", "nom_zh": "跨地区亮点",         "nom_hi": "क्षेत्रीय मुख्य आकर्षण",    "lat": 46.500,  "lng": -72.000,  "zoom": 6  }
   ],
   "categories_thematiques": {
     "fr": [
@@ -128,25 +48,11 @@
     ]
   },
   "potentiel_affiliation": {
-    "fr": [
-      "Hébergement + Billetterie/Excursion",
-      "Hébergement seulement"
-    ],
-    "en": [
-      "Accommodation + Tickets/Tours",
-      "Accommodation only"
-    ]
+    "fr": ["Hébergement + Billetterie/Excursion", "Hébergement seulement"],
+    "en": ["Accommodation + Tickets/Tours", "Accommodation only"]
   },
   "saisons": {
-    "fr": [
-      "Été",
-      "Hiver",
-      "Toute l'année"
-    ],
-    "en": [
-      "Summer",
-      "Winter",
-      "Year-round"
-    ]
+    "fr": ["Été", "Hiver", "Toute l'année"],
+    "en": ["Summer", "Winter", "Year-round"]
   }
 }

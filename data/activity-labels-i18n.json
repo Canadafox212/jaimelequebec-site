@@ -1,0 +1,1498 @@
+{
+  "4x4": {
+    "es": "4x4",
+    "de": "4x4",
+    "pt": "4x4",
+    "ru": "4x4",
+    "zh": "四驱车",
+    "hi": "4x4"
+  },
+  "Animation pour enfants": {
+    "es": "Animación infantil",
+    "de": "Kinderanimation",
+    "pt": "Animação infantil",
+    "ru": "Детские развлечения",
+    "zh": "儿童活动",
+    "hi": "बाल मनोरंजन"
+  },
+  "Atelier": {
+    "es": "Taller",
+    "de": "Werkstatt",
+    "pt": "Oficina",
+    "ru": "Мастерская",
+    "zh": "工坊",
+    "hi": "कार्यशाला"
+  },
+  "Autocueillette": {
+    "es": "Recolección de frutas",
+    "de": "Selbstpflückanlage",
+    "pt": "Colheita própria",
+    "ru": "Сбор урожая самостоятельно",
+    "zh": "自采果园",
+    "hi": "स्वयं संग्रहण"
+  },
+  "Autodrome, centre de karting / de sports motorisés": {
+    "es": "Autódromo, karting",
+    "de": "Autodrom, Kartbahn",
+    "pt": "Autódromo, kartódromo",
+    "ru": "Автодром, картинг",
+    "zh": "赛车场、卡丁车",
+    "hi": "ऑटोड्रोम, कार्टिंग"
+  },
+  "BMX": {
+    "es": "BMX",
+    "de": "BMX",
+    "pt": "BMX",
+    "ru": "BMX",
+    "zh": "BMX",
+    "hi": "BMX"
+  },
+  "Baignade": {
+    "es": "Baño",
+    "de": "Baden",
+    "pt": "Banho",
+    "ru": "Купание",
+    "zh": "游泳",
+    "hi": "तैराकी"
+  },
+  "Balade en traîneau en cheval": {
+    "es": "Paseo en trineo a caballo",
+    "de": "Schlittenfahrt zu Pferd",
+    "pt": "Passeio de trenó a cavalo",
+    "ru": "Катание на санях с лошадью",
+    "zh": "马拉雪橇",
+    "hi": "घोड़े की स्लेज सवारी"
+  },
+  "Balade motorisée": {
+    "es": "Paseo motorizado",
+    "de": "Motorisierte Fahrt",
+    "pt": "Passeio motorizado",
+    "ru": "Моторизованная прогулка",
+    "zh": "机动游览",
+    "hi": "मोटराइज्ड सवारी"
+  },
+  "Bar, boîte de nuit": {
+    "es": "Bar, discoteca",
+    "de": "Bar, Nachtclub",
+    "pt": "Bar, boate noturna",
+    "ru": "Бар, ночной клуб",
+    "zh": "酒吧、夜店",
+    "hi": "बार, नाइटक्लब"
+  },
+  "Belvédère, tour d'observation": {
+    "es": "Mirador, torre de observación",
+    "de": "Aussichtspunkt, Beobachtungsturm",
+    "pt": "Mirante, torre de observação",
+    "ru": "Смотровая площадка, башня",
+    "zh": "观景台、瞭望塔",
+    "hi": "दृश्य बिंदु, अवलोकन टॉवर"
+  },
+  "Billard": {
+    "es": "Billar",
+    "de": "Billard",
+    "pt": "Bilhar",
+    "ru": "Бильярд",
+    "zh": "台球",
+    "hi": "बिलियर्ड्स"
+  },
+  "Canicross": {
+    "es": "Canicross",
+    "de": "Canicross",
+    "pt": "Canicross",
+    "ru": "Каникросс",
+    "zh": "狗拉越野跑",
+    "hi": "कैनिक्रॉस"
+  },
+  "Canikart": {
+    "es": "Canikart",
+    "de": "Canikart",
+    "pt": "Canikart",
+    "ru": "Кани-карт",
+    "zh": "狗拉卡丁车",
+    "hi": "कैनिकार्ट"
+  },
+  "Canot d'eau vive": {
+    "es": "Piragüismo en aguas bravas",
+    "de": "Wildwasser-Kanufahrt",
+    "pt": "Canoagem em água viva",
+    "ru": "Рафтинг по бурной воде",
+    "zh": "漂流独木舟",
+    "hi": "तेज पानी में नौकायन"
+  },
+  "Canot gonflable": {
+    "es": "Canoa inflable",
+    "de": "Schlauchkanu",
+    "pt": "Canoa inflável",
+    "ru": "Надувной каноэ",
+    "zh": "充气独木舟",
+    "hi": "हवा भरी नाव"
+  },
+  "Canot récréatif": {
+    "es": "Canoa recreativa",
+    "de": "Freizeit-Kanu",
+    "pt": "Canoa recreativa",
+    "ru": "Рекреационное каноэ",
+    "zh": "娱乐独木舟",
+    "hi": "मनोरंजन नौकायन"
+  },
+  "Canot à glace": {
+    "es": "Canoa en hielo",
+    "de": "Eiskanu",
+    "pt": "Canoa em gelo",
+    "ru": "Каноэ на льду",
+    "zh": "冰上独木舟",
+    "hi": "बर्फ पर नौकायन"
+  },
+  "Canot-camping": {
+    "es": "Canotaje con acampada",
+    "de": "Kanucamping",
+    "pt": "Canoagem com acampamento",
+    "ru": "Каноэ-кемпинг",
+    "zh": "独木舟露营",
+    "hi": "नौकायन शिविर"
+  },
+  "Canyoning": {
+    "es": "Canyonismo",
+    "de": "Canyoning",
+    "pt": "Canyoning",
+    "ru": "Каньонинг",
+    "zh": "峡谷探险",
+    "hi": "कैन्यनिंग"
+  },
+  "Canyoning de glace": {
+    "es": "Canyonismo en hielo",
+    "de": "Eiscanyoning",
+    "pt": "Canyoning em gelo",
+    "ru": "Ледяной каньонинг",
+    "zh": "冰峡谷探险",
+    "hi": "बर्फ कैन्यनिंग"
+  },
+  "Casino / hippodrome": {
+    "es": "Casino / hipódromo",
+    "de": "Kasino / Pferderennbahn",
+    "pt": "Cassino / hipódromo",
+    "ru": "Казино / ипподром",
+    "zh": "赌场/赛马场",
+    "hi": "कैसिनो/रेसकोर्स"
+  },
+  "Caverne / grotte": {
+    "es": "Cueva / gruta",
+    "de": "Höhle / Grotte",
+    "pt": "Caverna / gruta",
+    "ru": "Пещера",
+    "zh": "洞穴",
+    "hi": "गुफा"
+  },
+  "Centre de pêche blanche": {
+    "es": "Centro de pesca en hielo",
+    "de": "Eisfischerei-Zentrum",
+    "pt": "Centro de pesca no gelo",
+    "ru": "Центр зимней рыбалки",
+    "zh": "冬季钓鱼中心",
+    "hi": "सर्दियों की मछली पकड़ने का केंद्र"
+  },
+  "Centre de santé, spa": {
+    "es": "Centro de salud, spa",
+    "de": "Gesundheitszentrum, Spa",
+    "pt": "Centro de saúde, spa",
+    "ru": "Оздоровительный центр, спа",
+    "zh": "健康中心、水疗中心",
+    "hi": "स्वास्थ्य केंद्र, स्पा"
+  },
+  "Centre de ski alpin / planche à neige": {
+    "es": "Centro de esquí alpino",
+    "de": "Alpinski-/Snowboard-Zentrum",
+    "pt": "Centro de esqui alpino",
+    "ru": "Центр горнолыжного спорта",
+    "zh": "高山滑雪中心",
+    "hi": "अल्पाइन स्की केंद्र"
+  },
+  "Centre de ski de fond / raquette": {
+    "es": "Centro de esquí de fondo",
+    "de": "Langlauf-/Schneeschuh-Zentrum",
+    "pt": "Centro de esqui de fundo",
+    "ru": "Центр беговых лыж",
+    "zh": "越野滑雪中心",
+    "hi": "क्रॉस-कंट्री स्की केंद्र"
+  },
+  "Centre de vélo de montagne / fatbike": {
+    "es": "Centro de MTB / fatbike",
+    "de": "Mountainbike-/Fatbike-Zentrum",
+    "pt": "Centro de mountain bike",
+    "ru": "Центр горного велосипеда",
+    "zh": "山地自行车中心",
+    "hi": "पर्वत बाइक केंद्र"
+  },
+  "Centre récréatif / sportif": {
+    "es": "Centro recreativo / deportivo",
+    "de": "Freizeit-/Sportzentrum",
+    "pt": "Centro recreativo / esportivo",
+    "ru": "Спортивно-оздоровительный центр",
+    "zh": "娱乐/运动中心",
+    "hi": "मनोरंजन/क्रीड़া केंद्र"
+  },
+  "Centre équestre": {
+    "es": "Centro ecuestre",
+    "de": "Reiterstall",
+    "pt": "Centro equestre",
+    "ru": "Конноспортивный центр",
+    "zh": "马术中心",
+    "hi": "घुड़सवारी केंद्र"
+  },
+  "Chaloupe à moteur": {
+    "es": "Lancha a motor",
+    "de": "Motorboot",
+    "pt": "Lancha a motor",
+    "ru": "Моторная лодка",
+    "zh": "机动船",
+    "hi": "मोटर नाव"
+  },
+  "Chaloupe à rames": {
+    "es": "Lancha a remos",
+    "de": "Ruderboot",
+    "pt": "Lancha a remo",
+    "ru": "Гребная лодка",
+    "zh": "划船",
+    "hi": "रोइंग नाव"
+  },
+  "Chasse": {
+    "es": "Caza",
+    "de": "Jagd",
+    "pt": "Caça",
+    "ru": "Охота",
+    "zh": "狩猎",
+    "hi": "शिकार"
+  },
+  "Concert, specta": {
+    "es": "Concierto, espectáculo",
+    "de": "Konzert, Show",
+    "pt": "Concerto, espetáculo",
+    "ru": "Концерт, шоу",
+    "zh": "音乐会、演出",
+    "hi": "कंसर्ट, शो"
+  },
+  "Concert, spectacle": {
+    "es": "Concierto, espectáculo",
+    "de": "Konzert, Show",
+    "pt": "Concerto, espetáculo",
+    "ru": "Концерт, шоу",
+    "zh": "音乐会、演出",
+    "hi": "कंसर्ट, शो"
+  },
+  "Concou": {
+    "es": "Concurso",
+    "de": "Wettbewerb",
+    "pt": "Concurso",
+    "ru": "Конкурс",
+    "zh": "比赛",
+    "hi": "प्रतियोगिता"
+  },
+  "Concours / tournoi": {
+    "es": "Concurso / torneo",
+    "de": "Wettbewerb / Turnier",
+    "pt": "Concurso / torneio",
+    "ru": "Конкурс / турнир",
+    "zh": "比赛 / 锦标赛",
+    "hi": "प्रतियोगिता / टूर्नामेंट"
+  },
+  "Conférence": {
+    "es": "Conferencia",
+    "de": "Konferenz",
+    "pt": "Conferência",
+    "ru": "Конференция",
+    "zh": "会议",
+    "hi": "सम्मेलन"
+  },
+  "Contes et légendes": {
+    "es": "Cuentos y leyendas",
+    "de": "Geschichten und Legenden",
+    "pt": "Contos e lendas",
+    "ru": "Сказки и легенды",
+    "zh": "故事和传说",
+    "hi": "कहानियां और किंवदंतियां"
+  },
+  "Course / démonstration hippique": {
+    "es": "Carrera / demostración ecuestre",
+    "de": "Rennen / Pferdeshow",
+    "pt": "Corrida / demonstração equestre",
+    "ru": "Скачки / конная демонстрация",
+    "zh": "赛马 / 骑术表演",
+    "hi": "दौड़ / घुड़सवारी प्रदर्शन"
+  },
+  "Course de véhicules motorisés": {
+    "es": "Carrera de vehículos motorizados",
+    "de": "Motorrennen",
+    "pt": "Corrida de veículos motorizados",
+    "ru": "Автомобильные гонки",
+    "zh": "机动车赛车",
+    "hi": "मोटर वाहन दौड़"
+  },
+  "Course à pied": {
+    "es": "Carrera a pie",
+    "de": "Lauf",
+    "pt": "Corrida a pé",
+    "ru": "Беговые соревнования",
+    "zh": "跑步比赛",
+    "hi": "दौड़ प्रतियोगिता"
+  },
+  "Croisière / excursion en": {
+    "es": "Crucero / excursión",
+    "de": "Kreuzfahrt / Ausflug",
+    "pt": "Cruzeiro / excursão",
+    "ru": "Круиз / экскурсия",
+    "zh": "巡游 / 短途旅行",
+    "hi": "क्रूज / भ्रमण"
+  },
+  "Croisière / excursion en bateau": {
+    "es": "Crucero / excursión en barco",
+    "de": "Bootskreuzfahrt / Bootsausflug",
+    "pt": "Cruzeiro / excursão em barco",
+    "ru": "Речной круиз / экскурсия",
+    "zh": "船上巡游 / 游船之旅",
+    "hi": "नाव क्रूज / नाव भ्रमण"
+  },
+  "Cérémonie commémorative": {
+    "es": "Ceremonia conmemorativa",
+    "de": "Gedenkzeremonie",
+    "pt": "Cerimônia comemorativa",
+    "ru": "Мемориальная церемония",
+    "zh": "纪念仪式",
+    "hi": "स्मारक समारोह"
+  },
+  "Danse": {
+    "es": "Danza",
+    "de": "Tanz",
+    "pt": "Dança",
+    "ru": "Танец",
+    "zh": "舞蹈",
+    "hi": "नृत्य"
+  },
+  "Descente en rappel": {
+    "es": "Rapel",
+    "de": "Abseilen",
+    "pt": "Rapel",
+    "ru": "Спуск на веревке",
+    "zh": "绳降",
+    "hi": "रैपलिंग"
+  },
+  "Disque-golf": {
+    "es": "Disco golf",
+    "de": "Disc Golf",
+    "pt": "Disc golf",
+    "ru": "Фрисби-гольф",
+    "zh": "飞盘高尔夫",
+    "hi": "डिस्क गोल्फ"
+  },
+  "Dégustation": {
+    "es": "Degustación",
+    "de": "Verkostung",
+    "pt": "Degustação",
+    "ru": "Дегустация",
+    "zh": "品酒",
+    "hi": "चखना"
+  },
+  "Entreprise industrielle": {
+    "es": "Empresa industrial",
+    "de": "Industriebetrieb",
+    "pt": "Empresa industrial",
+    "ru": "Промышленное предприятие",
+    "zh": "工业企业",
+    "hi": "औद्योगिक उद्यम"
+  },
+  "Escalade de gla": {
+    "es": "Escalada en hielo",
+    "de": "Eisklettern",
+    "pt": "Escalada em gelo",
+    "ru": "Ледолазание",
+    "zh": "冰攀",
+    "hi": "बर्फ चढ़ाई"
+  },
+  "Escalade de glace": {
+    "es": "Escalada en hielo",
+    "de": "Eisklettern",
+    "pt": "Escalada em gelo",
+    "ru": "Ледолазание",
+    "zh": "冰攀",
+    "hi": "बर्फ चढ़ाई"
+  },
+  "Escalade de roch": {
+    "es": "Escalada en roca",
+    "de": "Felsklettern",
+    "pt": "Escalada em rocha",
+    "ru": "Скалолазание",
+    "zh": "岩石攀登",
+    "hi": "चट्टान चढ़ाई"
+  },
+  "Escalade de rocher": {
+    "es": "Escalada en roca",
+    "de": "Felsklettern",
+    "pt": "Escalada em rocha",
+    "ru": "Скалолазание",
+    "zh": "岩石攀登",
+    "hi": "चट्टान चढ़ाई"
+  },
+  "Escalade sur paroi artificielle": {
+    "es": "Escalada en pared artificial",
+    "de": "Klettern an künstlicher Wand",
+    "pt": "Escalada em parede artificial",
+    "ru": "Лазание по искусственной стене",
+    "zh": "人工墙攀登",
+    "hi": "कृत्रिम दीवार पर चढ़ाई"
+  },
+  "Expositi": {
+    "es": "Exposición",
+    "de": "Ausstellung",
+    "pt": "Exposição",
+    "ru": "Выставка",
+    "zh": "展览",
+    "hi": "प्रदर्शनी"
+  },
+  "Exposition": {
+    "es": "Exposición",
+    "de": "Ausstellung",
+    "pt": "Exposição",
+    "ru": "Выставка",
+    "zh": "展览",
+    "hi": "प्रदर्शनी"
+  },
+  "Expérience en réalité virtuelle": {
+    "es": "Experiencia en realidad virtual",
+    "de": "Virtual-Reality-Erlebnis",
+    "pt": "Experiência em realidade virtual",
+    "ru": "Опыт виртуальной реальности",
+    "zh": "虚拟现实体验",
+    "hi": "वर्चुअल रियलिटी अनुभव"
+  },
+  "Fatbike": {
+    "es": "Fatbike",
+    "de": "Fatbike",
+    "pt": "Fatbike",
+    "ru": "Фэтбайк",
+    "zh": "肥胖自行车",
+    "hi": "फैटबाइक"
+  },
+  "Feux d'artifice": {
+    "es": "Fuegos artificiales",
+    "de": "Feuerwerk",
+    "pt": "Fogos de artifício",
+    "ru": "Фейерверк",
+    "zh": "烟火",
+    "hi": "पटाखे"
+  },
+  "Films, projection": {
+    "es": "Películas, proyección",
+    "de": "Filme, Projektion",
+    "pt": "Filmes, projeção",
+    "ru": "Фильмы, проекция",
+    "zh": "电影，放映",
+    "hi": "फिल्में, प्रक्षेपण"
+  },
+  "Glissade d'eau": {
+    "es": "Tobogán de agua",
+    "de": "Wasserrutsche",
+    "pt": "Escorregador de água",
+    "ru": "Водная горка",
+    "zh": "水滑梯",
+    "hi": "पानी की स्लाइड"
+  },
+  "Glissade s": {
+    "es": "Tobogán",
+    "de": "Rutsche",
+    "pt": "Escorregador",
+    "ru": "Горка",
+    "zh": "滑梯",
+    "hi": "स्लाइड"
+  },
+  "Glissade sur neige": {
+    "es": "Deslizamiento en nieve",
+    "de": "Schneerutsche",
+    "pt": "Escorregador de neve",
+    "ru": "Снежная горка",
+    "zh": "雪滑梯",
+    "hi": "बर्फ की स्लाइड"
+  },
+  "Golf": {
+    "es": "Golf",
+    "de": "Golf",
+    "pt": "Golfe",
+    "ru": "Гольф",
+    "zh": "高尔夫",
+    "hi": "गोल्फ"
+  },
+  "Golf miniature": {
+    "es": "Minigolf",
+    "de": "Minigolf",
+    "pt": "Minigolfe",
+    "ru": "Мини-гольф",
+    "zh": "迷你高尔夫",
+    "hi": "मिनी गोल्फ"
+  },
+  "Géocaching": {
+    "es": "Geocaching",
+    "de": "Geocaching",
+    "pt": "Geocaching",
+    "ru": "Геокэшинг",
+    "zh": "地理缓存",
+    "hi": "जियोकैशिंग"
+  },
+  "Hébertisme": {
+    "es": "Parkour natural",
+    "de": "Naturparkour",
+    "pt": "Parkour natural",
+    "ru": "Паркур",
+    "zh": "跑酷",
+    "hi": "पार्कौर"
+  },
+  "Illumination": {
+    "es": "Iluminación",
+    "de": "Beleuchtung",
+    "pt": "Iluminação",
+    "ru": "Освещение",
+    "zh": "照明",
+    "hi": "रोशनी"
+  },
+  "Initiation à la survie en forêt": {
+    "es": "Iniciación a la supervivencia",
+    "de": "Survival-Training",
+    "pt": "Iniciação à sobrevivência",
+    "ru": "Обучение выживанию",
+    "zh": "生存训练",
+    "hi": "जीवित रहने का प्रशिक्षण"
+  },
+  "Inte": {
+    "es": "Inter",
+    "de": "Inter",
+    "pt": "Inter",
+    "ru": "Интер",
+    "zh": "交互",
+    "hi": "अंतर"
+  },
+  "Inter": {
+    "es": "Inter",
+    "de": "Inter",
+    "pt": "Inter",
+    "ru": "Интер",
+    "zh": "交互",
+    "hi": "अंतर"
+  },
+  "Interprétatio": {
+    "es": "Interpretación",
+    "de": "Interpretation",
+    "pt": "Interpretação",
+    "ru": "Интерпретация",
+    "zh": "解释",
+    "hi": "व्याख्या"
+  },
+  "Interprétation / obse": {
+    "es": "Interpretación / observ",
+    "de": "Interpretation / Beob",
+    "pt": "Interpretação / obs",
+    "ru": "Интерпретация / наб",
+    "zh": "解释 / 观察",
+    "hi": "व्याख्या / अवलोकन"
+  },
+  "Interprétation / obser": {
+    "es": "Interpretación / observ",
+    "de": "Interpretation / Beobachtung",
+    "pt": "Interpretação / observação",
+    "ru": "Интерпретация / наблюдение",
+    "zh": "解释 / 观察",
+    "hi": "व्याख्या / अवलोकन"
+  },
+  "Interprétation / observ": {
+    "es": "Interpretación / observación",
+    "de": "Interpretation / Beobachtung",
+    "pt": "Interpretação / observação",
+    "ru": "Интерпретация / наблюдение",
+    "zh": "解释 / 观察",
+    "hi": "व्याख्या / अवलोकन"
+  },
+  "Interprétation / observa": {
+    "es": "Interpretación / observación",
+    "de": "Interpretation / Beobachtung",
+    "pt": "Interpretação / observação",
+    "ru": "Интерпретация / наблюдение",
+    "zh": "解释 / 观察",
+    "hi": "व्याख्या / अवलोकन"
+  },
+  "Interprétation / observati": {
+    "es": "Interpretación / observación",
+    "de": "Interpretation / Beobachtung",
+    "pt": "Interpretação / observação",
+    "ru": "Интерпретация / наблюдение",
+    "zh": "解释 / 观察",
+    "hi": "व्याख्या / अवलोकन"
+  },
+  "Interprétation / observation": {
+    "es": "Interpretación / observación",
+    "de": "Interpretation / Beobachtung",
+    "pt": "Interpretação / observação",
+    "ru": "Интерпретация / наблюдение",
+    "zh": "解释 / 观察",
+    "hi": "व्याख्या / अवलोकन"
+  },
+  "Interprétation / observation de": {
+    "es": "Interpretación / observación de",
+    "de": "Interpretation / Beobachtung von",
+    "pt": "Interpretação / observação de",
+    "ru": "Интерпретация / наблюдение",
+    "zh": "解释 / 观察",
+    "hi": "व्याख्या / अवलोकन"
+  },
+  "Interprétation / observation de la": {
+    "es": "Interpretación / observación de la",
+    "de": "Interpretation / Naturbeobachtung",
+    "pt": "Interpretação / observação de",
+    "ru": "Интерпретация / наблюдение природы",
+    "zh": "解释 / 自然观察",
+    "hi": "व्याख्या / प्रकृति अवलोकन"
+  },
+  "Interprétation / observation de la natur": {
+    "es": "Interpretación / observación natural",
+    "de": "Interpretation / Naturbeobachtung",
+    "pt": "Interpretação / observação natural",
+    "ru": "Интерпретация / наблюдение природы",
+    "zh": "解释 / 自然观察",
+    "hi": "व्याख्या / प्रकृति अवलोकन"
+  },
+  "Interprétation / observation de la nature": {
+    "es": "Interpretación / observación de la naturaleza",
+    "de": "Interpretation / Naturbeobachtung",
+    "pt": "Interpretação / observação da natureza",
+    "ru": "Интерпретация / наблюдение природы",
+    "zh": "解释 / 自然观察",
+    "hi": "व्याख्या / प्रकृति अवलोकन"
+  },
+  "Interprétation de": {
+    "es": "Interpretación de",
+    "de": "Interpretation von",
+    "pt": "Interpretação de",
+    "ru": "Интерпретация",
+    "zh": "解释",
+    "hi": "व्याख्या"
+  },
+  "Interprétation de la culture autochtone": {
+    "es": "Interpretación de la cultura indígena",
+    "de": "Interpretation der Urkultur",
+    "pt": "Interpretação da cultura indígena",
+    "ru": "Интерпретация коренной культуры",
+    "zh": "土著文化解释",
+    "hi": "स्वदेशी संस्कृति व्याख्या"
+  },
+  "Jardin botanique / horticole": {
+    "es": "Jardín botánico / agrícola",
+    "de": "Botanischer Garten / Gartenbau",
+    "pt": "Jardim botânico / hortícola",
+    "ru": "Ботанический сад",
+    "zh": "植物园 / 园艺",
+    "hi": "वनस्पति उद्यान / बागवानी"
+  },
+  "Jardin zoologique": {
+    "es": "Zoológico",
+    "de": "Tierpark",
+    "pt": "Zoológico",
+    "ru": "Зоопарк",
+    "zh": "动物园",
+    "hi": "चिड़ियाघर"
+  },
+  "Jeu d'évasion": {
+    "es": "Sala de escape",
+    "de": "Escape Room",
+    "pt": "Sala de fuga",
+    "ru": "Квест",
+    "zh": "密室逃脱",
+    "hi": "एस्केप रूम"
+  },
+  "Jeu de laser": {
+    "es": "Juego láser",
+    "de": "Laserspiel",
+    "pt": "Jogo de laser",
+    "ru": "Лазертаг",
+    "zh": "激光游戏",
+    "hi": "लेजर खेल"
+  },
+  "Jeu de rôle": {
+    "es": "Juego de rol",
+    "de": "Rollenspiel",
+    "pt": "Jogo de RPG",
+    "ru": "Ролевая игра",
+    "zh": "角色扮演",
+    "hi": "रोल-प्लेइंग गेम"
+  },
+  "Jeux d'arcade": {
+    "es": "Juegos arcade",
+    "de": "Arkadespiele",
+    "pt": "Jogos arcade",
+    "ru": "Аркадные игры",
+    "zh": "街机游戏",
+    "hi": "आर्केड गेम्स"
+  },
+  "Jeux de casino / hasard": {
+    "es": "Juegos de casino",
+    "de": "Casinospiele",
+    "pt": "Jogos de casino",
+    "ru": "Казино игры",
+    "zh": "赌场游戏",
+    "hi": "कैसिनो गेम्स"
+  },
+  "Karaoké": {
+    "es": "Karaoke",
+    "de": "Karaoke",
+    "pt": "Karaokê",
+    "ru": "Караоке",
+    "zh": "卡拉OK",
+    "hi": "कराओके"
+  },
+  "Karting": {
+    "es": "Karting",
+    "de": "Kartfahren",
+    "pt": "Kart",
+    "ru": "Картинг",
+    "zh": "卡丁车",
+    "hi": "कार्टिंग"
+  },
+  "Kayak d'eau vive": {
+    "es": "Kayak en aguas blancas",
+    "de": "Wildwasser-Kajakfahren",
+    "pt": "Caiaque de águas bravas",
+    "ru": "Рафтинг на байдарке",
+    "zh": "漂流皮划艇",
+    "hi": "व्हाइट वाटर कयाकिंग"
+  },
+  "Kayak de mer": {
+    "es": "Kayak de mar",
+    "de": "Seekajakfahren",
+    "pt": "Caiaque de mar",
+    "ru": "Морской каякинг",
+    "zh": "海上皮划艇",
+    "hi": "समुद्र कयाकिंग"
+  },
+  "Kayak de mer hivernal": {
+    "es": "Kayak de mar invernal",
+    "de": "Winterseekajakfahren",
+    "pt": "Caiaque de mar invernal",
+    "ru": "Зимний морской каякинг",
+    "zh": "冬季海上皮划艇",
+    "hi": "सर्दी समुद्र कयाकिंग"
+  },
+  "Kayak récréatif": {
+    "es": "Kayak recreativo",
+    "de": "Freizeitkajakfahren",
+    "pt": "Caiaque recreativo",
+    "ru": "Прогулочный каякинг",
+    "zh": "休闲皮划艇",
+    "hi": "मनोरंजन कयाकिंग"
+  },
+  "Kayak-camping": {
+    "es": "Kayak-camping",
+    "de": "Kajak-Camping",
+    "pt": "Caiaque-camping",
+    "ru": "Каякинг-кемпинг",
+    "zh": "皮划艇露营",
+    "hi": "कयाक-कैंपिंग"
+  },
+  "Kite buggy": {
+    "es": "Buggy de cometa",
+    "de": "Kite-Buggy",
+    "pt": "Buggy de pipa",
+    "ru": "Кайт-багги",
+    "zh": "风筝越野车",
+    "hi": "काइट बग्गी"
+  },
+  "Kitesurf": {
+    "es": "Kitesurf",
+    "de": "Kitesurfen",
+    "pt": "Kitesurf",
+    "ru": "Кайтсёрфинг",
+    "zh": "风筝冲浪",
+    "hi": "काइट सर्फिंग"
+  },
+  "Labyrinthe": {
+    "es": "Laberinto",
+    "de": "Labyrinth",
+    "pt": "Labirinto",
+    "ru": "Лабиринт",
+    "zh": "迷宫",
+    "hi": "भूलभुलैया"
+  },
+  "Luge d'eau": {
+    "es": "Luge acuático",
+    "de": "Wasserluge",
+    "pt": "Trenó aquático",
+    "ru": "Водные санки",
+    "zh": "水上雪橇",
+    "hi": "जल स्लेज"
+  },
+  "Luge d'hiver": {
+    "es": "Luge de invierno",
+    "de": "Winterluge",
+    "pt": "Trenó de inverno",
+    "ru": "Зимние санки",
+    "zh": "冬季雪橇",
+    "hi": "सर्दी स्लेज"
+  },
+  "Luge d'été": {
+    "es": "Luge de verano",
+    "de": "Sommerluge",
+    "pt": "Trenó de verão",
+    "ru": "Летние санки",
+    "zh": "夏季雪橇",
+    "hi": "गर्मी स्लेज"
+  },
+  "Manèges": {
+    "es": "Atracciones",
+    "de": "Fahrgeschäfte",
+    "pt": "Atrações",
+    "ru": "Аттракционы",
+    "zh": "游乐设施",
+    "hi": "राइड्स"
+  },
+  "Marina": {
+    "es": "Marina",
+    "de": "Marina",
+    "pt": "Marina",
+    "ru": "Марина",
+    "zh": "船坞",
+    "hi": "मरीना"
+  },
+  "Mini-ferme": {
+    "es": "Granja pequeña",
+    "de": "Miniatur-Farm",
+    "pt": "Mini-fazenda",
+    "ru": "Мини-ферма",
+    "zh": "迷你农场",
+    "hi": "मिनी फार्म"
+  },
+  "Motocyclette": {
+    "es": "Motocicleta",
+    "de": "Motorrad",
+    "pt": "Motocicleta",
+    "ru": "Мотоциклет",
+    "zh": "摩托车",
+    "hi": "मोटरसाइकिल"
+  },
+  "Motomarine": {
+    "es": "Motonáutica",
+    "de": "Motorboot",
+    "pt": "Moto de água",
+    "ru": "Водный мотоцикл",
+    "zh": "摩托艇",
+    "hi": "जेट स्की"
+  },
+  "Motonei": {
+    "es": "Moto de nieve",
+    "de": "Schneemobil",
+    "pt": "Moto de neve",
+    "ru": "Снегоход",
+    "zh": "雪地摩托",
+    "hi": "स्नोमोबाइल"
+  },
+  "Motoneige": {
+    "es": "Moto de nieve",
+    "de": "Schneemobil",
+    "pt": "Moto de neve",
+    "ru": "Снегоход",
+    "zh": "雪地摩托",
+    "hi": "स्नोमोबाइल"
+  },
+  "Mycologie": {
+    "es": "Micología",
+    "de": "Mykologie",
+    "pt": "Micologia",
+    "ru": "Микология",
+    "zh": "菌类学",
+    "hi": "कवक विज्ञान"
+  },
+  "Natation": {
+    "es": "Natación",
+    "de": "Schwimmen",
+    "pt": "Natação",
+    "ru": "Плавание",
+    "zh": "游泳",
+    "hi": "तैराकी"
+  },
+  "Observation astr": {
+    "es": "Observación astronómica",
+    "de": "Astronomische Beobachtung",
+    "pt": "Observação astronômica",
+    "ru": "Астрономическое наблюдение",
+    "zh": "天文观测",
+    "hi": "खगोल अवलोकन"
+  },
+  "Observation astronomi": {
+    "es": "Observación astronómica",
+    "de": "Astronomische Beobachtung",
+    "pt": "Observação astronômica",
+    "ru": "Астрономическое наблюдение",
+    "zh": "天文观测",
+    "hi": "खगोल अवलोकन"
+  },
+  "Parachutisme": {
+    "es": "Paracaidismo",
+    "de": "Fallschirmspringen",
+    "pt": "Paraquedismo",
+    "ru": "Парашютизм",
+    "zh": "跳伞",
+    "hi": "पैराशूटिंग"
+  },
+  "Parc aquatique": {
+    "es": "Parque acuático",
+    "de": "Wasserpark",
+    "pt": "Parque aquático",
+    "ru": "Водный парк",
+    "zh": "水上乐园",
+    "hi": "जल पार्क"
+  },
+  "Parc d'attractions": {
+    "es": "Parque de atracciones",
+    "de": "Freizeitpark",
+    "pt": "Parque de diversões",
+    "ru": "Парк развлечений",
+    "zh": "游乐园",
+    "hi": "मनोरंजन पार्क"
+  },
+  "Parc municipal": {
+    "es": "Parque municipal",
+    "de": "Stadtpark",
+    "pt": "Parque municipal",
+    "ru": "Муниципальный парк",
+    "zh": "市立公园",
+    "hi": "नगरपालिका पार्क"
+  },
+  "Parc national du Canada": {
+    "es": "Parque Nacional de Canadá",
+    "de": "Nationalpark Kanada",
+    "pt": "Parque Nacional do Canadá",
+    "ru": "Национальный парк Канады",
+    "zh": "加拿大国家公园",
+    "hi": "कनाडा राष्ट्रीय पार्क"
+  },
+  "Parc national du Québec": {
+    "es": "Parque Nacional de Quebec",
+    "de": "Nationalpark Quebec",
+    "pt": "Parque Nacional de Quebec",
+    "ru": "Национальный парк Квебека",
+    "zh": "魁北克国家公园",
+    "hi": "क्यूबेक राष्ट्रीय पार्क"
+  },
+  "Parc régional": {
+    "es": "Parque regional",
+    "de": "Regionalpark",
+    "pt": "Parque regional",
+    "ru": "Региональный парк",
+    "zh": "地区公园",
+    "hi": "क्षेत्रीय पार्क"
+  },
+  "Parcours aérien": {
+    "es": "Recorrido aéreo",
+    "de": "Aerial Trail",
+    "pt": "Percurso aéreo",
+    "ru": "Воздушная трасса",
+    "zh": "空中路线",
+    "hi": "हवाई मार्ग"
+  },
+  "Patinage sur glace": {
+    "es": "Patinaje sobre hielo",
+    "de": "Eislaufen",
+    "pt": "Patinação no gelo",
+    "ru": "Катание на коньках",
+    "zh": "冰滑冰",
+    "hi": "बर्फ स्केटिंग"
+  },
+  "Patinage à roues alignées": {
+    "es": "Patinaje en línea",
+    "de": "Inline-Skating",
+    "pt": "Patinação em linha",
+    "ru": "Катание на роликах",
+    "zh": "轮滑",
+    "hi": "इनलाइन स्केटिंग"
+  },
+  "Patinoire": {
+    "es": "Pista de patinaje",
+    "de": "Eisbahn",
+    "pt": "Pista de patinação",
+    "ru": "Ледовый каток",
+    "zh": "溜冰场",
+    "hi": "स्केटिंग रिंक"
+  },
+  "Piste / sentier": {
+    "es": "Pista / sendero",
+    "de": "Piste / Pfad",
+    "pt": "Pista / trilha",
+    "ru": "Трасса / тропа",
+    "zh": "雪道/小径",
+    "hi": "ट्रैक / पथ"
+  },
+  "Plage": {
+    "es": "Playa",
+    "de": "Strand",
+    "pt": "Praia",
+    "ru": "Пляж",
+    "zh": "海滩",
+    "hi": "समुद्र तट"
+  },
+  "Planche à pagaie (SUP)": {
+    "es": "Paddleboard (SUP)",
+    "de": "Stand-Up Paddle",
+    "pt": "Paddleboard (SUP)",
+    "ru": "SUP доска",
+    "zh": "桨板冲浪",
+    "hi": "पैडलबोर्ड (SUP)"
+  },
+  "Planche à roulettes": {
+    "es": "Patineta",
+    "de": "Skateboard",
+    "pt": "Skate",
+    "ru": "Скейтборд",
+    "zh": "滑板",
+    "hi": "स्केटबोर्ड"
+  },
+  "Planche à voile": {
+    "es": "Windsurf",
+    "de": "Windsurfing",
+    "pt": "Windsurf",
+    "ru": "Виндсерфинг",
+    "zh": "帆板冲浪",
+    "hi": "विंडसर्फिंग"
+  },
+  "Plongée en apnée": {
+    "es": "Buceo con tubo",
+    "de": "Schnorcheln",
+    "pt": "Mergulho com tubo",
+    "ru": "Снорклинг",
+    "zh": "浮潜",
+    "hi": "स्नॉर्कलिंग"
+  },
+  "Plongée sous-marine": {
+    "es": "Buceo",
+    "de": "Scuba-Tauchen",
+    "pt": "Mergulho",
+    "ru": "Подводное плавание",
+    "zh": "潜水",
+    "hi": "स्कूबा डाइविंग"
+  },
+  "Ponton": {
+    "es": "Muelle",
+    "de": "Steg",
+    "pt": "Cais",
+    "ru": "Понтон",
+    "zh": "浮码头",
+    "hi": "गलियारा"
+  },
+  "Pédalo": {
+    "es": "Pedaló",
+    "de": "Tretboot",
+    "pt": "Pedalinho",
+    "ru": "Педальный катер",
+    "zh": "脚踏船",
+    "hi": "पेडल बोट"
+  },
+  "Pêche": {
+    "es": "Pesca",
+    "de": "Angeln",
+    "pt": "Pesca",
+    "ru": "Рыбалка",
+    "zh": "钓鱼",
+    "hi": "मछली पकड़ना"
+  },
+  "Pêche sur la glace": {
+    "es": "Pesca en hielo",
+    "de": "Eisfischen",
+    "pt": "Pesca no gelo",
+    "ru": "Подледная рыбалка",
+    "zh": "冰钓",
+    "hi": "बर्फ मछली पकड़ना"
+  },
+  "Quad / VTT": {
+    "es": "Quad / MTB",
+    "de": "Quad / MTB",
+    "pt": "Quad / MTB",
+    "ru": "Квадроцикл / МТБ",
+    "zh": "四轮车/山地车",
+    "hi": "क्वाड / एमटीबी"
+  },
+  "Quilles": {
+    "es": "Boliche",
+    "de": "Bowling",
+    "pt": "Boliche",
+    "ru": "Боулинг",
+    "zh": "保龄球",
+    "hi": "बोलिंग"
+  },
+  "Rabaska": {
+    "es": "Rabaska",
+    "de": "Rabaska",
+    "pt": "Rabaska",
+    "ru": "Рабаска",
+    "zh": "拉巴斯卡独木舟",
+    "hi": "राबास्का"
+  },
+  "Rafting": {
+    "es": "Rafting",
+    "de": "Rafting",
+    "pt": "Rafting",
+    "ru": "Рафтинг",
+    "zh": "漂流",
+    "hi": "राफ्टिंग"
+  },
+  "Rallye": {
+    "es": "Rally",
+    "de": "Rallye",
+    "pt": "Rally",
+    "ru": "Ралли",
+    "zh": "拉力赛",
+    "hi": "रैली"
+  },
+  "Randonnée pé": {
+    "es": "Senderismo",
+    "de": "Wanderung",
+    "pt": "Trilha",
+    "ru": "Пешие прогулки",
+    "zh": "登山",
+    "hi": "ट्रेकिंग"
+  },
+  "Randonnée pédestr": {
+    "es": "Senderismo",
+    "de": "Wanderung",
+    "pt": "Caminhada",
+    "ru": "Пешие прогулки",
+    "zh": "徒步旅行",
+    "hi": "पैदल यात्रा"
+  },
+  "Randonnée pédestre": {
+    "es": "Senderismo",
+    "de": "Wanderung",
+    "pt": "Caminhada",
+    "ru": "Пешие прогулки",
+    "zh": "徒步旅行",
+    "hi": "पैदल यात्रा"
+  },
+  "Raquette": {
+    "es": "Raquetas de nieve",
+    "de": "Schneeschuhe",
+    "pt": "Sapatos de neve",
+    "ru": "Снегоступы",
+    "zh": "雪鞋",
+    "hi": "स्नोशू"
+  },
+  "Réserve faunique": {
+    "es": "Reserva de fauna",
+    "de": "Wildschutzgebiet",
+    "pt": "Reserva de fauna",
+    "ru": "Фаунистический заповедник",
+    "zh": "野生动物保护区",
+    "hi": "वन्यजीव संरक्षण"
+  },
+  "Réserve nationale de faune": {
+    "es": "Reserva nacional de fauna",
+    "de": "Nationales Wildschutzgebiet",
+    "pt": "Reserva nacional de fauna",
+    "ru": "Национальный заповедник",
+    "zh": "国家野生动物保护区",
+    "hi": "राष्ट्रीय वन्यजीव संरक्षण"
+  },
+  "Simulateur de vol en chute libre": {
+    "es": "Simulador de caída libre",
+    "de": "Fallschirmsimulator",
+    "pt": "Simulador de queda livre",
+    "ru": "Симулятор свободного падения",
+    "zh": "自由落体模拟器",
+    "hi": "फ्री फॉल सिम्युलेटर"
+  },
+  "Site naturel, panorama": {
+    "es": "Sitio natural, panorama",
+    "de": "Naturstätte, Aussicht",
+    "pt": "Sítio natural, panorama",
+    "ru": "Природный объект, панорама",
+    "zh": "自然景点、全景",
+    "hi": "प्राकृतिक स्थल, दृश्य"
+  },
+  "Ski alpin / planche à neige": {
+    "es": "Esquí alpino / snowboard",
+    "de": "Alpinski / Snowboard",
+    "pt": "Esqui alpino / snowboard",
+    "ru": "Горные лыжи / сноуборд",
+    "zh": "高山滑雪 / 单板滑雪",
+    "hi": "अल्पाइन स्की / स्नोबोर्ड"
+  },
+  "Ski de fond": {
+    "es": "Esquí de fondo",
+    "de": "Langlauf",
+    "pt": "Esqui de fundo",
+    "ru": "Беговые лыжи",
+    "zh": "越野滑雪",
+    "hi": "क्रॉस-कंट्री स्कीइंग"
+  },
+  "Ski de montagne / randonnée alpine": {
+    "es": "Esquí de montaña / alpinismo",
+    "de": "Skitourengehen / Alpinwandern",
+    "pt": "Esqui de montanha / alpinismo",
+    "ru": "Горнолыжный туризм / альпинизм",
+    "zh": "登山滑雪 / 高山徒步",
+    "hi": "स्की माउंटेनियरिंग / अल्पाइन ट्रेकिंग"
+  },
+  "Ski joëring": {
+    "es": "Esquí joëring",
+    "de": "Ski-Jöring",
+    "pt": "Esqui joëring",
+    "ru": "Лыжероллер",
+    "zh": "滑雪乔林",
+    "hi": "स्की जोरिंग"
+  },
+  "Ski nautique / wakeboard": {
+    "es": "Esquí acuático / wakeboard",
+    "de": "Wasserskier / Wakeboard",
+    "pt": "Esqui aquático / wakeboard",
+    "ru": "Водные лыжи / вейкборд",
+    "zh": "滑水 / 尾波滑板",
+    "hi": "जल स्कीइंग / वेकबोर्ड"
+  },
+  "Ski nordique": {
+    "es": "Esquí nórdico",
+    "de": "Nordisches Skifahren",
+    "pt": "Esqui nórdico",
+    "ru": "Северное лыжное катание",
+    "zh": "北欧式滑雪",
+    "hi": "नॉर्डिक स्कीइंग"
+  },
+  "Ski-raquette (ski Hok)": {
+    "es": "Esquí-raqueta (esquí Hok)",
+    "de": "Ski-Schuh (Hok Ski)",
+    "pt": "Esqui-sapato (esqui Hok)",
+    "ru": "Лыжи-снегоступы (Hok ski)",
+    "zh": "滑雪-雪鞋 (Hok滑雪)",
+    "hi": "स्की-स्नोशू (Hok स्की)"
+  },
+  "Snowkite": {
+    "es": "Cometa nieve",
+    "de": "Schneekite",
+    "pt": "Pipa de neve",
+    "ru": "Снежный кайт",
+    "zh": "雪风筝",
+    "hi": "स्नो काइटिंग"
+  },
+  "Soccer": {
+    "es": "Fútbol",
+    "de": "Fußball",
+    "pt": "Futebol",
+    "ru": "Футбол",
+    "zh": "足球",
+    "hi": "फुटबॉल"
+  },
+  "Spectacle immersif": {
+    "es": "Espectáculo inmersivo",
+    "de": "Immersive Show",
+    "pt": "Espetáculo imersivo",
+    "ru": "Иммерсивное шоу",
+    "zh": "沉浸式表演",
+    "hi": "immersive प्रदर्शन"
+  },
+  "Sport d'aventure et de plein-air": {
+    "es": "Deporte de aventura y aire libre",
+    "de": "Abenteuer- und Freiluftsport",
+    "pt": "Esporte de aventura e ar livre",
+    "ru": "Приключенческий спорт на открытом воздухе",
+    "zh": "冒险和户外运动",
+    "hi": "एडवेंचर और आउटडोर स्पोर्ट्स"
+  },
+  "Spéléologie": {
+    "es": "Espeleología",
+    "de": "Höhlenerkundung",
+    "pt": "Espeleologia",
+    "ru": "Спелеология",
+    "zh": "洞穴探险",
+    "hi": "गुफा अन्वेषण"
+  },
+  "Surf": {
+    "es": "Surf",
+    "de": "Surfen",
+    "pt": "Surfe",
+    "ru": "Серфинг",
+    "zh": "冲浪",
+    "hi": "सर्फिंग"
+  },
+  "Ten": {
+    "es": "Tenis",
+    "de": "Tennis",
+    "pt": "Tênis",
+    "ru": "Теннис",
+    "zh": "网球",
+    "hi": "टेनिस"
+  },
+  "Tennis": {
+    "es": "Tenis",
+    "de": "Tennis",
+    "pt": "Tênis",
+    "ru": "Теннис",
+    "zh": "网球",
+    "hi": "टेनिस"
+  },
+  "Trampoline": {
+    "es": "Trampolín",
+    "de": "Trampolin",
+    "pt": "Trampolim",
+    "ru": "Батут",
+    "zh": "蹦床",
+    "hi": "ट्रैम्पोलिन"
+  },
+  "Traîneau à ch": {
+    "es": "Trineo con caballos",
+    "de": "Pferdenschlitten",
+    "pt": "Trenó com cavalos",
+    "ru": "Конные сани",
+    "zh": "马拉雪橇",
+    "hi": "घोड़े की बगड़ी"
+  },
+  "Traîneau à chiens": {
+    "es": "Trineo con perros",
+    "de": "Hundeschlitten",
+    "pt": "Trenó com cães",
+    "ru": "Собачьи упряжки",
+    "zh": "狗拉雪橇",
+    "hi": "डॉग स्लेजिंग"
+  },
+  "Trottinette des": {
+    "es": "Patinete",
+    "de": "Roller",
+    "pt": "Patinete",
+    "ru": "Самокат",
+    "zh": "滑板车",
+    "hi": "स्कूटर"
+  },
+  "Trottinette des neiges": {
+    "es": "Patinete de nieve",
+    "de": "Schneroller",
+    "pt": "Patinete de neve",
+    "ru": "Снежный самокат",
+    "zh": "雪地滑板车",
+    "hi": "बर्फ स्कूटर"
+  },
+  "Tyrolienne": {
+    "es": "Tirolesa",
+    "de": "Seilrutsche",
+    "pt": "Tirolesa",
+    "ru": "Зиплайн",
+    "zh": "滑翔索",
+    "hi": "ज़िपलाइन"
+  },
+  "Via ferrata": {
+    "es": "Vía ferrata",
+    "de": "Klettersteig",
+    "pt": "Via ferrata",
+    "ru": "Виа феррата",
+    "zh": "铁索攀岩",
+    "hi": "विया फेराटा"
+  },
+  "Visite auton": {
+    "es": "Visita autónoma",
+    "de": "Selbstgeführte Tour",
+    "pt": "Visita autônoma",
+    "ru": "Самостоятельный тур",
+    "zh": "自助导览",
+    "hi": "स्व-निर्देशित भ्रमण"
+  },
+  "Visite autonome": {
+    "es": "Visita autónoma",
+    "de": "Selbstgeführte Tour",
+    "pt": "Visita autônoma",
+    "ru": "Самостоятельный тур",
+    "zh": "自助导览",
+    "hi": "स्व-निर्देशित भ्रमण"
+  },
+  "Visite gu": {
+    "es": "Visita guiada",
+    "de": "Geführte Tour",
+    "pt": "Visita guiada",
+    "ru": "Экскурсия",
+    "zh": "导游之旅",
+    "hi": "गाइडेड टूर"
+  },
+  "Visite guidée": {
+    "es": "Visita guiada",
+    "de": "Geführte Tour",
+    "pt": "Visita guiada",
+    "ru": "Экскурсия",
+    "zh": "导游之旅",
+    "hi": "गाइडेड टूर"
+  },
+  "Voile": {
+    "es": "Vela",
+    "de": "Segeln",
+    "pt": "Vela",
+    "ru": "Парусный спорт",
+    "zh": "帆船运动",
+    "hi": "नौकायन"
+  },
+  "Volleyball de plage": {
+    "es": "Voleibol de playa",
+    "de": "Beachvolleyball",
+    "pt": "Voleibol de praia",
+    "ru": "Пляжный волейбол",
+    "zh": "沙滩排球",
+    "hi": "बीच वॉलीबॉल"
+  },
+  "Vél": {
+    "es": "Bicicleta",
+    "de": "Fahrrad",
+    "pt": "Bicicleta",
+    "ru": "Велосипед",
+    "zh": "自行车",
+    "hi": "साइकिल"
+  },
+  "Vélo": {
+    "es": "Ciclismo",
+    "de": "Radfahren",
+    "pt": "Ciclismo",
+    "ru": "Велоспорт",
+    "zh": "骑行",
+    "hi": "साइकिल चलाना"
+  },
+  "Vélo de": {
+    "es": "Ciclismo de",
+    "de": "Radfahren",
+    "pt": "Ciclismo de",
+    "ru": "Велоспорт",
+    "zh": "骑行",
+    "hi": "साइकिल चलाना"
+  },
+  "Vélo de montagn": {
+    "es": "Mountain bike",
+    "de": "Mountainbiken",
+    "pt": "Mountain bike",
+    "ru": "Маунтинбайк",
+    "zh": "山地自行车",
+    "hi": "माउंटेन बाइकिंग"
+  },
+  "Vélo de montagne": {
+    "es": "Mountain bike",
+    "de": "Mountainbiken",
+    "pt": "Mountain bike",
+    "ru": "Маунтинбайк",
+    "zh": "山地自行车",
+    "hi": "माउंटेन बाइकिंग"
+  },
+  "Yoga": {
+    "es": "Yoga",
+    "de": "Yoga",
+    "pt": "Yoga",
+    "ru": "Йога",
+    "zh": "瑜伽",
+    "hi": "योग"
+  },
+  "Zone d'exploitation contrôlée (ZEC)": {
+    "es": "Zona de explotación controlada",
+    "de": "Kontrollierte Nutzungszone",
+    "pt": "Zona de exploração controlada",
+    "ru": "Контролируемая зона использования",
+    "zh": "受控开采区",
+    "hi": "नियंत्रित दोहन क्षेत्र"
+  },
+  "Équitation": {
+    "es": "Equitación",
+    "de": "Reiten",
+    "pt": "Equitação",
+    "ru": "Верховая езда",
+    "zh": "骑马",
+    "hi": "घुड़सवारी"
+  }
+}
