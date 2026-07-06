@@ -145,6 +145,19 @@ export default function QuebecMapClickable({ lang, regionsData }) {
         </div>
       </div>
 
+      {/* Grille de boutons régions — sélection fiable sur mobile */}
+      <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
+        {[...regionsData].sort((a, b) => (isFr ? a.nom_fr : a.nom_en).localeCompare(isFr ? b.nom_fr : b.nom_en)).map(r => (
+          <button
+            key={r.num}
+            onClick={() => openModal(r.num)}
+            className="text-left text-sm font-medium text-gray-700 bg-gray-50 hover:bg-blue-50 hover:text-quebec-navy border border-gray-200 hover:border-blue-300 rounded-xl px-3 py-2.5 transition-all leading-snug min-h-[44px] flex items-center"
+          >
+            {isFr ? r.nom_fr : r.nom_en}
+          </button>
+        ))}
+      </div>
+
       {/* Barre de confirmation mobile */}
       {pending && pendingRegion && !selected && (
         <div className="mt-3 flex items-center justify-between gap-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
