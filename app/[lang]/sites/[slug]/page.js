@@ -175,6 +175,11 @@ export default async function AttractionPage({ params }) {
           {summary}
         </p>
 
+        {/* Bouton partage */}
+        <div className="mb-8">
+          <ShareLieuButton slug={slug} title={title} lang={lang} t={t} />
+        </div>
+
         {/* Bouton carte — toujours visible si coords disponibles */}
         {loc.latitude && loc.longitude && (
           <div className="mb-10">
@@ -303,11 +308,6 @@ export default async function AttractionPage({ params }) {
             </div>
           </section>
         )}
-
-        {/* Bouton partage */}
-        <div className="mb-10">
-          <ShareLieuButton slug={slug} title={title} lang={lang} t={t} />
-        </div>
 
         {/* Attractions à proximité */}
         {nearby.length > 0 && (
