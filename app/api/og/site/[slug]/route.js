@@ -1,6 +1,8 @@
 import { ImageResponse } from 'next/og'
 import attractionsData from '@/data/attractions.json'
 
+export const runtime = 'nodejs'
+
 const W = 1200
 const H = 630
 const PHOTO_H = 410
@@ -23,6 +25,19 @@ function resolveOgContent(attraction, lang) {
   }
 }
 
+async function toJpegDataUrl(url) {
+  try {
+    const res = await fetch(url)
+    if (!res.ok) return null
+    const buf = Buffer.from(await res.arrayBuffer())
+    const sharp = (await import('sharp')).default
+    const jpeg = await sharp(buf).resize(W, PHOTO_H, { fit: 'cover' }).jpeg({ quality: 85 }).toBuffer()
+    return `data:image/jpeg;base64,${jpeg.toString('base64')}`
+  } catch {
+    return null
+  }
+}
+
 export async function GET(request, { params }) {
   try {
     const { slug } = await params
@@ -37,7 +52,8 @@ export async function GET(request, { params }) {
 
     const origin = new URL(request.url).origin
     const logoUrl = `${origin}/images/logo.png`
-    const photoUrl = photoPath ? `${origin}${photoPath}` : null
+
+    const photoDataUrl = photoPath ? await toJpegDataUrl(`${origin}${photoPath}`) : null
 
     const titleSize = title.length > 55 ? 26 : title.length > 40 ? 32 : title.length > 28 ? 38 : 44
 
@@ -65,9 +81,9 @@ export async function GET(request, { params }) {
               background: '#002070',
             }}
           >
-            {photoUrl && (
+            {photoDataUrl && (
               <img
-                src={photoUrl}
+                src={photoDataUrl}
                 style={{
                   position: 'absolute',
                   top: 0,
