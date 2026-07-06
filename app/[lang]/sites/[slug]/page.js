@@ -34,8 +34,7 @@ export async function generateMetadata({ params }) {
   const attraction = getAttractionBySlug(slug)
   if (!attraction) return {}
   const { title, summary: desc } = resolveContent(attraction, lang)
-  const imageSrc = getAttractionImageSrc(slug)
-  const ogUrl = `${BASE}/api/og/site/${slug}?lang=${lang}${imageSrc ? `&photo=${encodeURIComponent(imageSrc)}` : ''}`
+  const ogUrl = `${BASE}/api/og/site/${slug}?lang=${lang}`
   return {
     title: `${title} — J'aime le Québec`,
     description: desc,
