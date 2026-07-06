@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getDictionary } from '@/lib/i18n'
 import { getActivityPhotoSrc } from '@/lib/attractions'
+import servicesData from '@/data/services.json'
 
 export async function generateMetadata({ params, searchParams }) {
   const { lang } = await params
@@ -23,6 +24,13 @@ export default async function EtabPage({ params, searchParams }) {
   const place = sp.place ?? 'Québec'
   const labels = sp.labels ? sp.labels.split('|').filter(Boolean) : []
   const site = sp.site ?? ''
+
+  // Infos de contact depuis services.json (lookup par nom exact)
+  const svc = servicesData[nom] ?? null
+  const vis = svc?.visibilite ?? {}
+  const adresse = (vis.adresse !== false && svc?.adresse) ? svc.adresse : null
+  const telephone = (vis.telephone !== false && svc?.telephone) ? svc.telephone : null
+  const siteWeb = svc?.site_web ?? site ?? null
 
   // Cherche la photo de chaque label (server-side — existsSync autorisé ici)
   const withPhoto = []
@@ -48,7 +56,34 @@ export default async function EtabPage({ params, searchParams }) {
           </Link>
 
           <h1 className="font-display text-3xl md:text-4xl font-bold leading-tight">{nom}</h1>
-          {place && <p className="text-blue-200 mt-2 text-sm">📍 {place}</p>}
+
+          {/* Infos de contact directement visibles */}
+          <div className="mt-3 flex flex-col gap-1.5 text-sm">
+            {adresse && (
+              <p className="text-blue-100 flex items-start gap-2">
+                <span className="mt-0.5" aria-hidden>📍</span>
+                <span>{adresse}</span>
+              </p>
+            )}
+            {!adresse && place && (
+              <p className="text-blue-200 flex items-center gap-2">
+                <span aria-hidden>📍</span>
+                <span>{place}</span>
+              </p>
+            )}
+            {telephone && (
+              <a href={`tel:${telephone.replace(/\s/g, '')}`} className="text-blue-100 hover:text-white flex items-center gap-2 transition-colors">
+                <span aria-hidden>📞</span>
+                <span>{telephone}</span>
+              </a>
+            )}
+            {siteWeb && (
+              <a href={siteWeb} target="_blank" rel="noopener noreferrer" className="text-blue-100 hover:text-white flex items-center gap-2 transition-colors truncate">
+                <span aria-hidden>🌐</span>
+                <span className="truncate">{siteWeb.replace(/^https?:\/\//, '').replace(/\/$/, '')}</span>
+              </a>
+            )}
+          </div>
         </div>
       </div>
 
@@ -107,9 +142,9 @@ export default async function EtabPage({ params, searchParams }) {
 
         {/* Boutons répétés en bas pour mobile */}
         <div className="flex flex-wrap gap-3 mt-10 pt-8 border-t border-gray-100">
-          {site && (
+          {siteWeb && (
             <a
-              href={site}
+              href={siteWeb}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-quebec-blue text-white font-bold px-5 py-2.5 rounded-full text-sm hover:bg-blue-800 transition-colors"
@@ -123,7 +158,7 @@ export default async function EtabPage({ params, searchParams }) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 border border-gray-300 text-gray-700 font-bold px-5 py-2.5 rounded-full text-sm hover:border-quebec-blue hover:text-quebec-blue transition-colors"
           >
-            📍 {t.etab.maps}
+            🗺️ Google Maps
           </a>
         </div>
       </div>
