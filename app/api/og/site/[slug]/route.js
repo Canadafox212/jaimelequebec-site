@@ -37,7 +37,6 @@ export async function GET(request, { params }) {
 
     const origin = new URL(request.url).origin
     const logoUrl = `${origin}/images/logo.png`
-    const foxyUrl = `${origin}/images/Raton-laveur%20avec%20sac%20%C3%A0%20dos%20transparent.png`
     const photoUrl = photoPath ? `${origin}${photoPath}` : null
 
     const titleSize = title.length > 55 ? 26 : title.length > 40 ? 32 : title.length > 28 ? 38 : 44
@@ -154,18 +153,6 @@ export async function GET(request, { params }) {
               </span>
             </div>
 
-            {/* Foxy */}
-            <img
-              src={foxyUrl}
-              style={{
-                width: 60,
-                height: 60,
-                objectFit: 'contain',
-                flexShrink: 0,
-                alignSelf: 'flex-end',
-                marginBottom: 18,
-              }}
-            />
           </div>
         </div>
       ),
