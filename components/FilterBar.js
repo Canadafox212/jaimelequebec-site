@@ -13,7 +13,7 @@ function saisonCompat(theme, saison) {
   return true
 }
 
-export default function FilterBar({ lang, t, filtres, themes, currentRegion, currentTheme, currentSaison, currentQuery }) {
+export default function FilterBar({ lang, t, filtres, themes, currentRegion, currentTheme, currentSaison, currentQuery, hideTheme, hideSaison }) {
   const router = useRouter()
   const pathname = usePathname()
 
@@ -58,7 +58,7 @@ export default function FilterBar({ lang, t, filtres, themes, currentRegion, cur
           onChange={(e) => update('region', e.target.value)}
           className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-quebec-blue"
         >
-          <option value="">{t.list.filter_all}</option>
+          <option value="">{lang === 'fr' ? 'Toutes' : t.list.filter_all}</option>
           {[...filtres.regions]
             .sort((a, b) => (a[`nom_${lang}`] ?? a.nom_fr).localeCompare(b[`nom_${lang}`] ?? b.nom_fr, lang))
             .map((r) => (
@@ -70,26 +70,28 @@ export default function FilterBar({ lang, t, filtres, themes, currentRegion, cur
       </div>
 
       {/* Filtre saison */}
-      <div className="flex flex-col gap-1">
-        <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-          {lang === 'fr' ? 'Saison' : 'Season'}
-        </label>
-        <select
-          value={currentSaison ?? ''}
-          onChange={(e) => update('saison', e.target.value)}
-          className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-quebec-blue"
-        >
-          <option value="">{t.list.filter_all}</option>
-          {availableSaisons.map((s) => (
-            <option key={s.id} value={s.id}>
-              {lang === 'fr' ? s.fr : s.en}
-            </option>
-          ))}
-        </select>
-      </div>
+      {!hideSaison && (
+        <div className="flex flex-col gap-1">
+          <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+            {lang === 'fr' ? 'Saison' : 'Season'}
+          </label>
+          <select
+            value={currentSaison ?? ''}
+            onChange={(e) => update('saison', e.target.value)}
+            className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-quebec-blue"
+          >
+            <option value="">{t.list.filter_all}</option>
+            {availableSaisons.map((s) => (
+              <option key={s.id} value={s.id}>
+                {lang === 'fr' ? s.fr : s.en}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       {/* Filtre activité / thème */}
-      {availableThemes.length > 0 && (
+      {!hideTheme && availableThemes.length > 0 && (
         <div className="flex flex-col gap-1">
           <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
             {lang === 'fr' ? 'Activité' : 'Activity'}

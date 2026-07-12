@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getAllArticles } from '@/lib/articles'
-import { dicts, LANGS } from '@/lib/i18n'
+import { dicts, LANGS, getAlternates } from '@/lib/i18n'
 
 export async function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }))
@@ -12,6 +12,7 @@ export async function generateMetadata({ params }) {
   const t = dicts[lang]
   return {
     title: `${t.nav.articles} — J'aime le Québec`,
+    alternates: getAlternates('/articles'),
   }
 }
 

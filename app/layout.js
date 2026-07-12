@@ -18,7 +18,7 @@ const playfair = Playfair_Display({
 export const metadata = {
   title: { default: "J'aime le Québec", template: "%s — J'aime le Québec" },
   description: "Votre guide touristique du Québec — 200 sites incontournables, parcs nationaux, villes historiques et nature sauvage.",
-  metadataBase: new URL('https://jaimelequebec.com'),
+  metadataBase: new URL('https://jaimelequebec.org'),
   openGraph: {
     siteName: "J'aime le Québec",
     type: 'website',
@@ -30,8 +30,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="fr" className={`${inter.variable} ${playfair.variable}`}>
       <head>
+        {/* Empêche Chrome d'auto-traduire — le site gère lui-même FR/EN */}
+        <meta name="google" content="notranslate" />
         {/* PWA — meta-tags installation */}
         <meta name="theme-color" content="#003087" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

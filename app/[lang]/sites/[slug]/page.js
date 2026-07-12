@@ -5,8 +5,10 @@ import { getAllAttractions, getAttractionBySlug, getNearbyAttractions, getActivi
 import AttractionCard from '@/components/AttractionCard'
 import MapModal from '@/components/MapModal'
 import ShareLieuButton from '@/components/ShareLieuButton'
-import { dicts, LANGS } from '@/lib/i18n'
+import AddToRoadTripButton from '@/components/AddToRoadTripButton'
+import { dicts, LANGS, getAlternates } from '@/lib/i18n'
 import labelI18n from '@/data/activity-labels-i18n.json'
+import servicesData from '@/data/services.json'
 
 export async function generateStaticParams() {
   const attractions = getAllAttractions()
@@ -27,7 +29,7 @@ function resolveContent(attraction, lang) {
   }
 }
 
-const BASE = 'https://jaimelequebec.com'
+const BASE = 'https://jaimelequebec.org'
 
 export async function generateMetadata({ params }) {
   const { lang, slug } = await params
@@ -46,6 +48,7 @@ export async function generateMetadata({ params }) {
       images: [{ url: ogUrl, width: 1200, height: 630, alt: title }],
     },
     twitter: { card: 'summary_large_image' },
+    alternates: getAlternates(`/sites/${slug}`),
   }
 }
 
@@ -175,9 +178,20 @@ export default async function AttractionPage({ params }) {
           {summary}
         </p>
 
-        {/* Bouton partage */}
-        <div className="mb-8">
+        {/* Boutons d'action : partage + road trip */}
+        <div className="mb-8 flex flex-wrap gap-3 items-center">
           <ShareLieuButton slug={slug} title={title} lang={lang} t={t} />
+          {loc.latitude && loc.longitude && (
+            <AddToRoadTripButton
+              slug={slug}
+              title={title}
+              lat={loc.latitude}
+              lng={loc.longitude}
+              image={imageSrc}
+              lang={lang}
+              t={t.planifier}
+            />
+          )}
         </div>
 
         {/* Bouton carte — toujours visible si coords disponibles */}
@@ -289,7 +303,7 @@ export default async function AttractionPage({ params }) {
               <span className="text-xs text-gray-400">{activitesEte.length} {t.detail.nearby_options} · {t.detail.distance_from_site}</span>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
-              {activitesEte.map((a, i) => <ActivityCard key={i} activity={a} season="ete" lang={lang} ville={ville} t={t} />)}
+              {activitesEte.map((a, i) => <ActivityCard key={i} activity={a} season="ete" lang={lang} ville={ville} t={t} siteWeb={servicesData[a.nom]?.site_web ?? null} />)}
             </div>
           </section>
         )}
@@ -304,7 +318,7 @@ export default async function AttractionPage({ params }) {
               <span className="text-xs text-gray-400">{activitesHiver.length} {t.detail.nearby_options} · {t.detail.distance_from_site}</span>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
-              {activitesHiver.map((a, i) => <ActivityCard key={i} activity={a} season="hiver" lang={lang} ville={ville} t={t} />)}
+              {activitesHiver.map((a, i) => <ActivityCard key={i} activity={a} season="hiver" lang={lang} ville={ville} t={t} siteWeb={servicesData[a.nom]?.site_web ?? null} />)}
             </div>
           </section>
         )}
@@ -411,7 +425,7 @@ function buildActivityEtabUrl(lang, activity, ville, acts) {
   return `/${lang}/etab?${p.toString()}`
 }
 
-function ActivityCard({ activity, season, lang, ville, t }) {
+function ActivityCard({ activity, season, lang, ville, t, siteWeb }) {
   const fromActivites = activity.activites
     ? activity.activites.split('|').map(s => s.trim()).filter(s => s.length > 2 && s !== 'nan')
     : []
@@ -432,10 +446,7 @@ function ActivityCard({ activity, season, lang, ville, t }) {
   const etabUrl = buildActivityEtabUrl(lang, activity, lieu, acts)
 
   return (
-    <Link
-      href={etabUrl}
-      className="group bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200 flex flex-col cursor-pointer"
-    >
+    <div className="group relative bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200 flex flex-col">
       {/* Photo de fond bien visible, titre superposé en bas */}
       <div className="relative h-44 overflow-hidden">
         {displayImg.endsWith('.svg') ? (
@@ -451,34 +462,49 @@ function ActivityCard({ activity, season, lang, ville, t }) {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
 
-        <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
+        <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm z-10">
           <span>{emoji}</span>
           <span className="truncate max-w-[10rem]">{typeLabel}</span>
         </span>
 
         {activity.dist_km != null && (
-          <span className="absolute top-3 right-3 bg-black/40 backdrop-blur-sm text-white text-xs font-bold px-2 py-0.5 rounded-full whitespace-nowrap">
+          <span className="absolute top-3 right-3 bg-black/40 backdrop-blur-sm text-white text-xs font-bold px-2 py-0.5 rounded-full whitespace-nowrap z-10">
             📍 {activity.dist_km} km
           </span>
         )}
 
-        <h3 className="absolute bottom-3 left-3 right-3 text-white font-bold text-base leading-snug drop-shadow-lg">
+        <h3 className="absolute bottom-3 left-3 right-3 text-white font-bold text-base leading-snug drop-shadow-lg z-10">
           {activity.nom}
         </h3>
       </div>
 
       {/* Corps */}
-      <div className="p-4 flex flex-col gap-3 flex-1">
+      <div className="p-4 flex flex-col gap-2 flex-1">
         {acts.length > 0 && (
-          <p className="text-xs text-slate-500 uppercase tracking-wide">
+          <p className="text-xs text-slate-500 uppercase tracking-wide leading-relaxed">
             {acts.map(tr).join(' · ')}
           </p>
         )}
-        <div className="mt-auto pt-1 flex items-center gap-1 text-xs font-bold text-quebec-blue group-hover:text-blue-800 transition-colors">
-          Voir les activités →
+        <div className="mt-auto pt-1 flex flex-wrap items-center gap-3 relative z-10">
+          {siteWeb && (
+            <a
+              href={siteWeb.startsWith('http') ? siteWeb : `https://${siteWeb}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs font-bold text-white bg-quebec-blue hover:bg-quebec-navy px-3 py-1.5 rounded-full transition-colors"
+            >
+              🌐 {lang === 'fr' ? 'Site web' : 'Website'}
+            </a>
+          )}
+          <span className="flex items-center gap-1 text-xs font-bold text-quebec-blue group-hover:text-blue-800 transition-colors">
+            {lang === 'fr' ? 'Voir les activités →' : 'View activities →'}
+          </span>
         </div>
       </div>
-    </Link>
+
+      {/* Lien couvrant toute la carte (z-0, sous les boutons) */}
+      <Link href={etabUrl} className="absolute inset-0 z-0" aria-label={activity.nom} />
+    </div>
   )
 }
 

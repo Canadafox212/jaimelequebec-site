@@ -4,7 +4,7 @@ import { getRegion, getRegionThemeList, getRegionsWithCounts } from '@/lib/activ
 import ThemeCard from '@/components/ThemeCard'
 import QuebecRegionMap from '@/components/QuebecRegionMap'
 import RegionImageBanner from '@/components/RegionImageBanner'
-import { dicts, LANGS } from '@/lib/i18n'
+import { dicts, LANGS, getAlternates } from '@/lib/i18n'
 
 const REGION_IMAGES = {
   1:  '/images/REGIONS/montréal_.png',
@@ -39,7 +39,10 @@ export async function generateMetadata({ params }) {
   const r = getRegion(region)
   if (!r) return {}
   const nom = r[`nom_${lang}`] ?? r.nom_en ?? r.nom_fr
-  return { title: `${t.activites.in_region} ${nom} — J'aime le Québec` }
+  return {
+    title: `${t.activites.in_region} ${nom} — J'aime le Québec`,
+    alternates: getAlternates(`/activites/${region}`),
+  }
 }
 
 export default async function RegionThemes({ params }) {

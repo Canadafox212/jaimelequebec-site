@@ -18,6 +18,7 @@ app/api/admin-list
 app/api/admin-og
 app/api/admin-save-image
 app/api/admin-services
+app/api/admin-translate
 
 # Articles — pas encore publiés pour le lancement v1 (réduction du nombre de fonctions)
 app/\[lang\]/articles

@@ -1,6 +1,7 @@
 import { readdirSync } from 'fs'
 import { join } from 'path'
 import Link from 'next/link'
+import { getAlternates } from '@/lib/i18n'
 
 export async function generateMetadata({ params }) {
   const { lang } = await params
@@ -12,6 +13,7 @@ export async function generateMetadata({ params }) {
     description: isFr
       ? 'Découvrez les 130+ activités touristiques disponibles au Québec : sports nautiques, ski, randonnée, culture, gastronomie, nature et bien plus.'
       : 'Discover 130+ tourist activities available in Québec: water sports, skiing, hiking, culture, gastronomy, nature and much more.',
+    alternates: getAlternates('/toutes-les-activites'),
   }
 }
 

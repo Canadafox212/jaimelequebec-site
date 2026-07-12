@@ -1,10 +1,14 @@
 import Link from 'next/link'
 import FilterBar from '@/components/FilterBar'
 import RegionAvisBanner from '@/components/RegionAvisBanner'
+import RegionDescription from '@/components/RegionDescription'
 import SitesViewContainer from '@/components/SitesViewContainer'
+import ViatorWidget from '@/components/ViatorWidget'
 import { getAllAttractions, getFiltres, getAttractionImageSrc } from '@/lib/attractions'
-import { getTaxonomie, getRegionThemes } from '@/lib/activites'
-import { dicts, LANGS } from '@/lib/i18n'
+import { getTaxonomie, getRegionThemes, getRegionThemeList } from '@/lib/activites'
+import { dicts, LANGS, getAlternates } from '@/lib/i18n'
+import { viatorUrl } from '@/lib/affiliates'
+import regionsDesc from '@/data/regions-descriptions.json'
 
 export async function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }))
@@ -14,6 +18,8 @@ export async function generateMetadata({ params }) {
   const { lang } = await params
   return {
     title: `${dicts[lang].list.title} — J'aime le Québec`,
+    description: dicts[lang].list.grand_guide_sub,
+    alternates: getAlternates('/sites'),
   }
 }
 
@@ -33,6 +39,11 @@ export default async function AttractionsPage({ params, searchParams }) {
   const initialView = sp?.view === 'map' ? 'map' : null
 
   const tax = getTaxonomie()
+  const themesRegion = regionNum ? getRegionThemeList(regionNum) : []
+  const regionDescText = regionNum
+    ? (regionsDesc[String(regionNum)]?.[lang] ?? regionsDesc[String(regionNum)]?.fr ?? null)
+    : null
+  const regionGeo = regionNum ? filtres.regions.find((r) => r.num === regionNum) : null
 
   function norm(str) {
     return (str ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -78,35 +89,54 @@ export default async function AttractionsPage({ params, searchParams }) {
   const themeIdsPresents = new Set(all.map((a) => getTheme(a)?.id).filter(Boolean))
   const themesDisponibles = tax.themes.filter((th) => themeIdsPresents.has(th.id))
 
-  // ── PONT vers les Activités : la catégorie choisie correspond à un thème riche ──
-  let bridge = null
-  if (categorie) {
-    const cats = filtres.categories_thematiques
-    let themeId = tax.categories[categorie]
-    if (!themeId) {
-      const i = cats.en.indexOf(categorie); if (i >= 0) themeId = tax.categories[cats.fr[i]]
-    }
-    if (!themeId) {
-      const j = cats.fr.indexOf(categorie); if (j >= 0) themeId = tax.categories[cats.fr[j]]
-    }
-    const theme = themeId ? tax.themes.find((th) => th.id === themeId) : null
-    const region = regionNum ? filtres.regions.find((r) => r.num === regionNum) : null
-    const regionNom = region ? (region[`nom_${lang}`] ?? region.nom_en ?? region.nom_fr) : null
+  // Bulles thèmes quand aucune région sélectionnée — liens vers ?theme=X dans l'annuaire
+  const themesAll = !regionNum
+    ? tax.themes
+        .map((th) => ({ theme: th, count: all.filter((a) => getTheme(a)?.id === th.id).length }))
+        .filter((x) => x.count > 0)
+        .sort((a, b) => b.count - a.count)
+    : []
 
-    // Le thème mappé a-t-il du contenu dans cette région ? (sinon → liste des thèmes de la région)
-    let precise = false
-    if (theme && region) {
-      const { ete, hiver } = getRegionThemes(region.num)
-      precise = [...ete, ...hiver].some((x) => x.theme.id === themeId)
+  // Bulles à afficher : région sélectionnée → /activites, sinon → ?theme=
+  const displayThemes = regionNum ? themesRegion : themesAll
+
+  // ── PONT vers les Activités : la catégorie ou le thème choisi a du contenu riche ──
+  let bridge = null
+  {
+    const cats = filtres.categories_thematiques
+    let resolvedThemeId = themeId  // déjà défini si ?theme= dans l'URL
+
+    // Résoudre depuis ?categorie= si themeId pas encore connu
+    if (!resolvedThemeId && categorie) {
+      resolvedThemeId = tax.categories[categorie]
+      if (!resolvedThemeId) {
+        const i = cats.en.indexOf(categorie); if (i >= 0) resolvedThemeId = tax.categories[cats.fr[i]]
+      }
+      if (!resolvedThemeId) {
+        const j = cats.fr.indexOf(categorie); if (j >= 0) resolvedThemeId = tax.categories[cats.fr[j]]
+      }
     }
-    bridge = {
-      emoji: theme?.emoji ?? '🧭',
-      themeNom: theme ? (theme[`nom_${lang}`] ?? theme.nom_en ?? theme.nom_fr) : null,
-      regionNom,
-      precise,
-      href: precise
-        ? `/${lang}/activites/${region.num}/${themeId}`
-        : region ? `/${lang}/activites/${region.num}` : `/${lang}/activites`,
+
+    if (resolvedThemeId || regionNum) {
+      const theme = resolvedThemeId ? tax.themes.find((th) => th.id === resolvedThemeId) : null
+      const region = regionNum ? filtres.regions.find((r) => r.num === regionNum) : null
+      const regionNom = region ? (region[`nom_${lang}`] ?? region.nom_en ?? region.nom_fr) : null
+
+      let precise = false
+      if (theme && region) {
+        const { ete, hiver } = getRegionThemes(region.num)
+        precise = [...ete, ...hiver].some((x) => x.theme.id === resolvedThemeId)
+      }
+      bridge = {
+        emoji: theme?.emoji ?? '🧭',
+        themeNom: theme ? (theme[`nom_${lang}`] ?? theme.nom_en ?? theme.nom_fr) : null,
+        regionNom,
+        precise,
+        resolvedThemeId,
+        href: precise
+          ? `/${lang}/activites/${region.num}/${resolvedThemeId}`
+          : region ? `/${lang}/activites/${region.num}` : `/${lang}/activites`,
+      }
     }
   }
 
@@ -126,7 +156,65 @@ export default async function AttractionsPage({ params, searchParams }) {
       </div>
 
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <FilterBar lang={lang} t={t} filtres={filtres} themes={themesDisponibles} currentRegion={sp?.region} currentTheme={themeId} currentSaison={saison} currentQuery={query} />
+
+      {/* Résumé + carte de la région sélectionnée — EN TÊTE avant tout filtre */}
+      {regionNum && (regionDescText || regionGeo) && (
+        <div className="mb-6">
+          {regionDescText && <RegionDescription text={regionDescText} lang={lang} />}
+          {regionGeo?.lat && regionGeo?.lng && (() => {
+            const z = Math.round(regionGeo.zoom ?? 8)
+            const d = Math.min(6, Math.max(0.2, 1.5 / Math.pow(2, z - 9)))
+            const dLat = d * 0.6
+            const bbox = `${(regionGeo.lng - d).toFixed(3)}%2C${(regionGeo.lat - dLat).toFixed(3)}%2C${(regionGeo.lng + d).toFixed(3)}%2C${(regionGeo.lat + dLat).toFixed(3)}`
+            const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${regionGeo.lat}%2C${regionGeo.lng}`
+            const regionNom = regionGeo[`nom_${lang}`] ?? regionGeo.nom_fr
+            return (
+              <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm h-44 w-full">
+                <iframe
+                  src={mapSrc}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 'none' }}
+                  title={`Carte — ${regionNom}`}
+                  loading="lazy"
+                />
+              </div>
+            )
+          })()}
+        </div>
+      )}
+
+      <FilterBar lang={lang} t={t} filtres={filtres} themes={themesDisponibles} currentRegion={sp?.region} currentTheme={themeId} currentSaison={saison} currentQuery={query} hideTheme hideSaison />
+
+      {/* Thèmes d'activités — liens rapides vers /activites/[region]/[theme] ou ?theme= */}
+      {displayThemes.length > 0 && (
+        <div className="mb-6">
+          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
+            {regionNum
+              ? (lang === 'fr' ? 'Activités dans cette région' : 'Activities in this region')
+              : (lang === 'fr' ? 'Explorer par activité' : 'Browse by activity')}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {displayThemes.map(({ theme, count }) => {
+              const nom = theme[`nom_${lang}`] ?? theme.nom_en ?? theme.nom_fr
+              const href = regionNum
+                ? `/${lang}/activites/${regionNum}/${theme.id}`
+                : `/${lang}/sites?theme=${theme.id}`
+              return (
+                <Link
+                  key={theme.id}
+                  href={href}
+                  className="inline-flex items-center gap-1.5 bg-white border border-gray-200 hover:border-quebec-blue hover:text-quebec-blue text-gray-700 text-sm font-medium px-3 py-1.5 rounded-full transition-colors shadow-sm"
+                >
+                  <span>{theme.emoji}</span>
+                  <span>{nom}</span>
+                  <span className="text-xs text-gray-400">{count}</span>
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      )}
 
       {query && (
         <p className="text-sm text-gray-600 mb-2">
@@ -147,26 +235,17 @@ export default async function AttractionsPage({ params, searchParams }) {
         ) : null
       })()}
 
-      {/* Pont vers les Activités (la catégorie a beaucoup plus de contenu en activités) */}
-      {bridge && (
-        <Link
-          href={bridge.href}
-          className="group flex items-center gap-3 bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-xl px-5 py-4 mb-6 hover:shadow-md transition-all"
-        >
-          <span className="text-2xl shrink-0">{bridge.emoji}</span>
-          <div className="flex-1 min-w-0">
-            <p className="font-semibold text-gray-900">
-              {bridge.precise
-                ? `${t.list.bridge_all_activities} « ${bridge.themeNom} »`
-                : t.list.bridge_all_activities}
-              {bridge.regionNom ? ` · ${bridge.regionNom}` : ''}
-            </p>
-            <p className="text-xs text-purple-700">
-              {t.list.bridge_more} →
-            </p>
-          </div>
-          <span className="text-purple-500 text-lg shrink-0 group-hover:translate-x-1 transition-transform">→</span>
-        </Link>
+      {/* Avertissement résultats trop réduits + lien vers activités */}
+      {filtered.length < 4 && (regionNum || themeId) && bridge && (
+        <div className="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 mb-6 text-sm text-amber-800">
+          {lang === 'fr'
+            ? `Peu de sites principaux correspondent à ce filtre. Consultez `
+            : `Few main sites match this filter. Check `}
+          <Link href={bridge.href} className="font-bold underline hover:text-amber-900">
+            {lang === 'fr' ? 'les activités et expériences' : 'activities and experiences'}
+          </Link>
+          {lang === 'fr' ? ' pour plus de résultats.' : ' for more results.'}
+        </div>
       )}
 
       <SitesViewContainer
@@ -186,6 +265,32 @@ export default async function AttractionsPage({ params, searchParams }) {
         t={t}
         initialView={initialView}
       />
+    </div>
+
+    {/* ── Widget Viator ciblé région+thème (ou générique si pas de filtre) ── */}
+    <div className="max-w-6xl mx-auto px-4 pb-12">
+      {regionNum
+        ? <ViatorWidget regionNum={regionNum} themeId={bridge?.resolvedThemeId ?? themeId} lang={lang} />
+        : (
+          <div className="bg-gradient-to-r from-emerald-700 to-teal-700 text-white py-12 px-4 rounded-2xl text-center">
+            <p className="text-xs font-bold text-emerald-200 uppercase tracking-widest mb-2">
+              {lang === 'fr' ? 'Envie d\'une visite guidée ?' : 'Looking for a guided tour?'}
+            </p>
+            <h2 className="text-2xl font-bold mb-3">
+              {lang === 'fr' ? 'Explorez le Québec avec un guide local' : 'Explore Québec with a local guide'}
+            </h2>
+            <p className="text-emerald-100 mb-6">
+              {lang === 'fr'
+                ? 'Visites guidées, excursions et expériences inoubliables — réservez facilement via Viator.'
+                : 'Guided tours, excursions and unforgettable experiences — book easily via Viator.'}
+            </p>
+            <a href={viatorUrl(lang)} target="_blank" rel="noopener noreferrer sponsored"
+              className="inline-block bg-white text-emerald-700 font-bold px-8 py-3 rounded-full hover:bg-emerald-50 transition-colors shadow-lg text-sm">
+              {lang === 'fr' ? 'Voir les visites guidées →' : 'Browse guided tours →'}
+            </a>
+          </div>
+        )
+      }
     </div>
     </>
   )

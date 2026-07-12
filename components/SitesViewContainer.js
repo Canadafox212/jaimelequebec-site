@@ -39,7 +39,7 @@ export default function SitesViewContainer({ attractions, lang, t, initialView }
     if (v === 'list') params.delete('view')
     else params.set('view', v)
     const qs = params.toString()
-    router.push(qs ? `?${qs}` : window.location.pathname, { scroll: false })
+    router.replace(qs ? `?${qs}` : window.location.pathname, { scroll: false })
   }
 
   // ── État géolocalisation (Autour de moi) ──────────────────────────────

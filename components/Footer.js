@@ -3,6 +3,7 @@ import Link from 'next/link'
 const FB_GROUP = 'https://www.facebook.com/groups/jaimelequebec'
 
 export default function Footer({ t, lang }) {
+
   return (
     <footer className="bg-quebec-navy text-slate-300 mt-auto">
       <div className="max-w-6xl mx-auto px-4 py-12">
@@ -19,7 +20,7 @@ export default function Footer({ t, lang }) {
           </svg>
           <div className="flex-1 min-w-0">
             <p className="font-bold text-white text-sm leading-snug">
-              {t.footer.facebook_title ?? 'Groupe Facebook — J\'aime le Québec'}
+              {t.footer.facebook_title ?? "Groupe Facebook — J'aime le Québec"}
             </p>
             <p className="text-xs text-blue-200 mt-0.5">
               {t.footer.facebook_sub ?? '57 000 passionnés du Québec · Rejoignez-nous'}
@@ -82,22 +83,28 @@ export default function Footer({ t, lang }) {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Légal & contact */}
           <div>
             <p className="font-semibold text-white mb-3 text-sm uppercase tracking-wider">
-              {t.footer.contact_label ?? 'Contact'}
+              {t.footer.legal_label ?? 'Informations'}
             </p>
-            <p className="text-sm text-slate-400 break-all">
-              philippegoupil@jaimelequebec.com
-            </p>
-            <div className="mt-4 flex gap-3">
-              <Link
-                href={`/${lang === 'fr' ? 'en' : 'fr'}`}
-                className="text-xs font-bold border border-white/20 text-slate-300 rounded-lg px-3 py-1.5 hover:bg-white/10 transition-colors"
-              >
-                {lang === 'fr' ? 'English' : 'Français'}
-              </Link>
-            </div>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href={`/${lang}/contact`} className="text-slate-400 hover:text-white transition-colors">
+                  {t.footer.contact_label ?? 'Contact'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/a-propos`} className="text-slate-400 hover:text-white transition-colors">
+                  {t.footer.about_label ?? 'À propos'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/mentions-legales`} className="text-slate-400 hover:text-white transition-colors">
+                  {t.footer.legal_notice_label ?? 'Mentions légales'}
+                </Link>
+              </li>
+            </ul>
           </div>
 
         </div>

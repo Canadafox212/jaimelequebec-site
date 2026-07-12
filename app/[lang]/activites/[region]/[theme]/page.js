@@ -4,8 +4,9 @@ import { notFound } from 'next/navigation'
 import AttractionCard from '@/components/AttractionCard'
 import EtabExplorer from '@/components/EtabExplorer'
 import AvisSection from '@/components/AvisSection'
+import ViatorWidget from '@/components/ViatorWidget'
 import { getRegion, getTheme, getRegionThemeResults } from '@/lib/activites'
-import { dicts, LANGS } from '@/lib/i18n'
+import { dicts, LANGS, getAlternates } from '@/lib/i18n'
 
 function mapsSearch(query) {
   return `https://www.google.com/maps?q=${encodeURIComponent(query)}&t=h`
@@ -64,7 +65,10 @@ export async function generateMetadata({ params }) {
   if (!r || !th) return {}
   const nom = r[`nom_${lang}`] ?? r.nom_en ?? r.nom_fr
   const thNom = th[`nom_${lang}`] ?? th.nom_en ?? th.nom_fr
-  return { title: `${thNom} · ${nom} — J'aime le Québec` }
+  return {
+    title: `${thNom} · ${nom} — J'aime le Québec`,
+    alternates: getAlternates(`/activites/${region}/${theme}`),
+  }
 }
 
 export default async function ThemeResults({ params, searchParams }) {
@@ -165,26 +169,6 @@ export default async function ThemeResults({ params, searchParams }) {
         {/* ── BLOC 1 — SUR GOOGLE (organique, neutre) ───────────────────── */}
         {etablissements.length > 0 && (
           <section>
-            <div className="mb-6 flex items-end justify-between gap-4 flex-wrap">
-              <div>
-                <h2 className="font-display text-2xl font-bold text-gray-900 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607z" />
-                  </svg>
-                  {t.activites.on_google}
-                </h2>
-                <p className="text-sm text-gray-500 mt-1">{t.activites.on_google_sub}</p>
-              </div>
-              <a
-                href={googleAllUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-semibold text-quebec-blue hover:text-blue-800 transition-colors whitespace-nowrap"
-              >
-                {t.activites.see_all_google} →
-              </a>
-            </div>
-
             <EtabExplorer items={etablissements} lang={lang} t={t} showRegion={false} />
           </section>
         )}
@@ -192,6 +176,8 @@ export default async function ThemeResults({ params, searchParams }) {
         {!hasSelection && etablissements.length === 0 && (
           <p className="text-gray-500 py-12 text-center">{t.activites.nothing}</p>
         )}
+
+        <ViatorWidget regionNum={Number(region)} themeId={theme} lang={lang} />
 
         <AvisSection type="activite" cible={theme} lang={lang} />
       </div>

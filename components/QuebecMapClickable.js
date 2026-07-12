@@ -1,30 +1,6 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-
-// Coordonnées SVG en % de l'image complète 1448×1086
-// (carte = ~67% largeur, légende = tiers droit)
-const REGIONS_SVG = [
-  { num: 18, shape: 'poly', coords: '0,0,38,0,38,4,46,0,46,44,38,44,32,52,22,52,15,47,9,44,0,44' },
-  { num: 7,  shape: 'poly', coords: '38,0,67,0,67,55,55,55,48,60,42,58,37,47,38,44,46,44,46,0' },
-  { num: 17, shape: 'poly', coords: '0,44,9,44,15,47,15,80,9,82,0,80' },
-  { num: 6,  shape: 'poly', coords: '15,47,32,52,38,44,37,47,42,58,35,62,27,58,22,62,19,60,16,55,15,47' },
-  { num: 9,  shape: 'poly', coords: '0,80,9,82,11,88,10,96,6,100,0,100' },
-  { num: 12, shape: 'poly', coords: '9,82,15,80,19,78,20,85,17,90,12,92,11,88' },
-  { num: 11, shape: 'poly', coords: '19,78,24,76,26,83,23,88,19,88,17,84,19,78' },
-  { num: 10, shape: 'poly', coords: '19,60,27,58,35,62,36,70,31,74,26,74,24,76,19,78,16,72,16,65,19,60' },
-  { num: 3,  shape: 'poly', coords: '35,62,42,58,46,62,42,68,38,70,35,68,35,62' },
-  { num: 2,  shape: 'poly', coords: '27,58,35,62,35,68,34,74,31,78,27,78,26,74,31,74,36,70,35,62' },
-  { num: 14, shape: 'poly', coords: '31,78,34,74,38,76,39,82,35,86,31,84,30,80' },
-  { num: 15, shape: 'poly', coords: '23,80,27,78,30,80,28,88,26,90,22,88,22,84' },
-  { num: 5,  shape: 'poly', coords: '38,70,46,62,48,60,50,68,47,76,42,78,38,76,38,70' },
-  { num: 4,  shape: 'poly', coords: '48,60,55,55,67,55,67,78,59,80,51,80,46,76,46,66,48,60' },
-  { num: 16, shape: 'poly', coords: '56,70,62,66,64,70,62,78,56,78,54,74' },
-  { num: 13, shape: 'poly', coords: '12,92,20,88,23,90,22,100,11,100,10,96' },
-  { num: 8,  shape: 'poly', coords: '23,90,28,88,32,90,31,100,23,100' },
-  { num: 1,  shape: 'rect', coords: '1,93,8,100' },
-  { num: 19, shape: 'rect', coords: '3,89,7,93' },
-]
 
 const REGION_IMAGES = {
   1:  '/images/REGIONS/montréal_.png',
@@ -48,35 +24,12 @@ const REGION_IMAGES = {
   19: '/images/REGIONS/laval.png',
 }
 
-export default function QuebecMapClickable({ lang, regionsData }) {
-  const [hovered,  setHovered]  = useState(null)
-  const [pending,  setPending]  = useState(null) // confirmation mobile avant modal
+export default function QuebecMapClickable({ lang, regionsData, sectionTitle, sectionSub }) {
   const [selected, setSelected] = useState(null)
-  const [isTouch,  setIsTouch]  = useState(false)
   const isFr = lang === 'fr'
 
-  useEffect(() => {
-    setIsTouch(window.matchMedia('(pointer: coarse)').matches)
-  }, [])
-
-  const hoveredRegion  = regionsData.find(r => r.num === hovered)
-  const pendingRegion  = regionsData.find(r => r.num === pending)
   const selectedRegion = regionsData.find(r => r.num === selected)
-
-  function handleClick(num) {
-    if (!isTouch) {
-      // Desktop : ouverture directe
-      openModal(num)
-      return
-    }
-    // Mobile : premier toucher = confirmation, second = modal
-    if (pending === num) {
-      setPending(null)
-      openModal(num)
-    } else {
-      setPending(num)
-    }
-  }
+  const sorted = [...regionsData].sort((a, b) => (a.label ?? '').localeCompare(b.label ?? ''))
 
   function openModal(num) {
     setSelected(num)
@@ -89,96 +42,46 @@ export default function QuebecMapClickable({ lang, regionsData }) {
 
   return (
     <>
-      {/* Carte avec zones cliquables */}
-      <div className="relative w-full select-none rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+      {/* Carte décorative */}
+      <div className="relative w-full select-none rounded-2xl overflow-hidden shadow-lg border border-gray-100 mb-10">
         <img
           src="/images/carte-regions-quebec.png"
           alt={isFr ? 'Carte des régions touristiques du Québec' : 'Map of Québec tourist regions'}
           className="w-full h-auto block"
           draggable={false}
         />
-
-        {/* SVG overlay */}
-        <svg
-          className="absolute inset-0 w-full h-full"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          {REGIONS_SVG.map((r) => {
-            const isHov = hovered === r.num
-            const pts = r.coords.split(',')
-
-            const isPending = pending === r.num
-            const common = {
-              fill: isPending
-                ? 'rgba(234,179,8,0.4)'
-                : isHov ? 'rgba(59,130,246,0.35)' : 'transparent',
-              stroke: (isPending || isHov) ? 'rgba(255,255,255,0.9)' : 'transparent',
-              strokeWidth: '0.4',
-              className: 'cursor-pointer transition-all duration-100',
-              onMouseEnter: () => setHovered(r.num),
-              onMouseLeave: () => setHovered(null),
-              onClick: () => handleClick(r.num),
-            }
-
-            if (r.shape === 'rect') {
-              const [x1, y1, x2, y2] = pts.map(Number)
-              return <rect key={r.num} x={x1} y={y1} width={x2 - x1} height={y2 - y1} {...common} />
-            }
-
-            const points = []
-            for (let i = 0; i < pts.length; i += 2) points.push(`${pts[i]},${pts[i+1]}`)
-            return <polygon key={r.num} points={points.join(' ')} {...common} />
-          })}
-        </svg>
-
-        {/* Tooltip survol */}
-        {hoveredRegion && (
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-black/80 text-white text-xs font-bold px-3 py-1.5 rounded-full pointer-events-none whitespace-nowrap z-10">
-            {isFr ? hoveredRegion.nom_fr : hoveredRegion.nom_en}
-          </div>
-        )}
-
-        {/* Hint clic */}
-        <div className="absolute bottom-3 right-3 bg-black/50 text-white text-[10px] px-2 py-1 rounded-full pointer-events-none">
-          {isFr ? 'Cliquez sur une région' : 'Click a region'}
-        </div>
       </div>
 
-      {/* Grille de boutons régions — sélection fiable sur mobile */}
-      <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
-        {[...regionsData].sort((a, b) => (isFr ? a.nom_fr : a.nom_en).localeCompare(isFr ? b.nom_fr : b.nom_en)).map(r => (
+      {/* Liste des régions — clic ouvre le modal */}
+      {sectionTitle && (
+        <h2 className="font-display text-2xl font-bold text-gray-900 mb-2">{sectionTitle}</h2>
+      )}
+      {sectionSub && (
+        <p className="text-gray-500 text-sm mb-6">{sectionSub}</p>
+      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {sorted.map((r) => (
           <button
             key={r.num}
             onClick={() => openModal(r.num)}
-            className="text-left text-sm font-medium text-gray-700 bg-gray-50 hover:bg-blue-50 hover:text-quebec-navy border border-gray-200 hover:border-blue-300 rounded-xl px-3 py-2.5 transition-all leading-snug min-h-[44px] flex items-center"
+            className="group flex gap-4 rounded-xl border border-gray-100 bg-gray-50 hover:bg-blue-50 hover:border-quebec-blue p-4 transition-all text-left w-full"
           >
-            {isFr ? r.nom_fr : r.nom_en}
+            <div className="flex-shrink-0 text-center">
+              <span className="flex w-8 h-8 rounded-full bg-quebec-navy text-white text-sm font-bold items-center justify-center group-hover:bg-quebec-blue transition-colors">
+                {r.label}
+              </span>
+            </div>
+            <div>
+              <p className="font-bold text-gray-900 text-sm group-hover:text-quebec-navy transition-colors">
+                {isFr ? r.nom_fr : r.nom_en}
+              </p>
+              <p className="text-xs text-gray-500 mt-0.5 leading-snug">
+                {isFr ? r.desc_fr : r.desc_en}
+              </p>
+            </div>
           </button>
         ))}
       </div>
-
-      {/* Barre de confirmation mobile */}
-      {pending && pendingRegion && !selected && (
-        <div className="mt-3 flex items-center justify-between gap-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
-          <span className="font-semibold text-gray-900 text-sm leading-snug">
-            {isFr ? pendingRegion.nom_fr : pendingRegion.nom_en}
-          </span>
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={() => { setPending(null); openModal(pending) }}
-              className="bg-quebec-blue text-white text-sm font-bold px-4 py-1.5 rounded-full hover:bg-quebec-navy transition-colors"
-            >
-              {isFr ? 'Voir →' : 'View →'}
-            </button>
-            <button
-              onClick={() => setPending(null)}
-              aria-label={isFr ? 'Annuler' : 'Cancel'}
-              className="text-gray-400 hover:text-gray-700 text-lg leading-none px-1"
-            >✕</button>
-          </div>
-        </div>
-      )}
 
       {/* Modal */}
       {selected && selectedRegion && (
@@ -205,37 +108,47 @@ export default function QuebecMapClickable({ lang, regionsData }) {
                   aria-label="Fermer"
                 >✕</button>
                 <div className="absolute bottom-0 left-0 px-5 pb-4">
-                  <p className="text-xs font-bold text-blue-300 uppercase tracking-widest mb-0.5">
-                    {isFr ? 'Région' : 'Region'} {String(selectedRegion.num).padStart(2, '0')}
-                  </p>
                   <h2 className="font-display text-2xl font-bold text-white drop-shadow">
                     {isFr ? selectedRegion.nom_fr : selectedRegion.nom_en}
                   </h2>
+                  {(isFr ? selectedRegion.desc_fr : selectedRegion.desc_en) && (
+                    <p className="text-sm text-white/80 mt-1">
+                      {isFr ? selectedRegion.desc_fr : selectedRegion.desc_en}
+                    </p>
+                  )}
                 </div>
               </div>
 
               {/* Liste des thèmes */}
               <div className="overflow-y-auto flex-1 p-5">
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
-                  {isFr ? 'Activités disponibles dans cette région' : 'Activities available in this region'}
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {selectedRegion.themes.map(({ theme, count }) => (
-                    <Link
-                      key={theme.id}
-                      href={`/${lang}/activites/${selectedRegion.num}/${theme.id}`}
-                      onClick={closeModal}
-                      className="flex items-center justify-between gap-2 rounded-xl border border-gray-100 bg-gray-50 hover:bg-blue-50 hover:border-blue-200 px-4 py-3 transition-all group"
-                    >
-                      <span className="text-sm font-medium text-gray-800 group-hover:text-quebec-navy leading-tight">
-                        {isFr ? theme.nom_fr : (theme.nom_en ?? theme.nom_fr)}
-                      </span>
-                      <span className="shrink-0 text-xs font-bold text-quebec-blue bg-blue-50 group-hover:bg-white rounded-full px-2.5 py-0.5">
-                        {count}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
+                {selectedRegion.themes?.length > 0 ? (
+                  <>
+                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
+                      {isFr ? 'Activités disponibles dans cette région' : 'Activities available in this region'}
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {selectedRegion.themes.map(({ theme, count }) => (
+                        <Link
+                          key={theme.id}
+                          href={`/${lang}/activites/${selectedRegion.num}/${theme.id}`}
+                          onClick={closeModal}
+                          className="flex items-center justify-between gap-2 rounded-xl border border-gray-100 bg-gray-50 hover:bg-blue-50 hover:border-blue-200 px-4 py-3 transition-all group"
+                        >
+                          <span className="text-sm font-medium text-gray-800 group-hover:text-quebec-navy leading-tight">
+                            {isFr ? theme.nom_fr : (theme.nom_en ?? theme.nom_fr)}
+                          </span>
+                          <span className="shrink-0 text-xs font-bold text-quebec-blue bg-blue-50 group-hover:bg-white rounded-full px-2.5 py-0.5">
+                            {count}
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <p className="text-gray-400 text-sm text-center py-4">
+                    {isFr ? 'Aucune activité répertoriée pour cette région.' : 'No activities listed for this region.'}
+                  </p>
+                )}
               </div>
 
               {/* Pied : lien page complète */}

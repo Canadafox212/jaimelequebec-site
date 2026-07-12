@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { getAllArticles, getArticleBySlug } from '@/lib/articles'
-import { dicts, LANGS } from '@/lib/i18n'
+import { dicts, LANGS, getAlternates } from '@/lib/i18n'
 
 export async function generateStaticParams() {
   const articles = getAllArticles()
@@ -22,6 +22,7 @@ export async function generateMetadata({ params }) {
     title: `${content.titre} — J'aime le Québec`,
     description: content.resume,
     openGraph: article.photo ? { images: [{ url: article.photo }] } : undefined,
+    alternates: getAlternates(`/articles/${slug}`),
   }
 }
 

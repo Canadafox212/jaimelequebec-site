@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { getRegionsWithCounts } from '@/lib/activites'
-import { dicts, LANGS } from '@/lib/i18n'
-import RegionMap from '@/components/RegionMap'
+import { dicts, LANGS, getAlternates } from '@/lib/i18n'
+import { gygUrl } from '@/lib/affiliates'
 
 export async function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }))
@@ -10,7 +10,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { lang } = await params
   const t = dicts[lang]
-  return { title: `${t.activites.nav_title} — J'aime le Québec` }
+  return {
+    title: `${t.activites.nav_title} — J'aime le Québec`,
+    description: t.activites.pick_region_sub,
+    alternates: getAlternates('/activites'),
+  }
 }
 
 export default async function ActivitesIndex({ params }) {
@@ -26,17 +30,18 @@ export default async function ActivitesIndex({ params }) {
 
   return (
     <>
-      {/* Carte satellite du Québec en entier */}
-      <div className="relative">
-        <RegionMap lat={52.5} lng={-72.0} zoom={5} height="300px" />
-        <div className="absolute bottom-0 left-0 right-0 px-4 pb-6 max-w-6xl mx-auto">
-          <p className="text-xs font-bold text-blue-200 uppercase tracking-widest mb-1">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-quebec-navy to-quebec-blue text-white py-10 px-4">
+        <div className="max-w-6xl mx-auto">
+          <p className="text-xs font-bold text-blue-300 uppercase tracking-widest mb-2">
             {t.activites.nav_title}
           </p>
-          <h1 className="font-display text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
+          <h1 className="font-display text-4xl md:text-5xl font-bold mb-3">
             {t.activites.pick_region}
           </h1>
-          <p className="text-blue-100 text-lg drop-shadow">{t.activites.pick_region_sub}</p>
+          <p className="text-blue-100 text-base md:text-lg max-w-2xl">
+            {t.activites.intro_text}
+          </p>
         </div>
       </div>
 
@@ -46,7 +51,9 @@ export default async function ActivitesIndex({ params }) {
           href={`/${lang}/activites/tout`}
           className="group flex items-center gap-4 bg-gradient-to-r from-purple-600 to-quebec-blue text-white rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 p-5 mb-8"
         >
-          <span className="text-3xl shrink-0">🔍</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-7 h-7 shrink-0" aria-hidden="true">
+            <circle cx="11" cy="11" r="8" /><path strokeLinecap="round" d="m21 21-4.35-4.35" />
+          </svg>
           <div className="flex-1">
             <p className="font-display text-xl font-bold">
               {t.activites.explore_all_qc}
@@ -76,6 +83,27 @@ export default async function ActivitesIndex({ params }) {
               </span>
             </Link>
           ))}
+        </div>
+      </div>
+
+      {/* ── Bandeau GetYourGuide ───────────────────────────────────────── */}
+      <div className="bg-gradient-to-r from-orange-500 to-amber-600 text-white py-12 px-4 mt-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-xs font-bold text-orange-200 uppercase tracking-widest mb-2">
+            {lang === 'fr' ? 'Pour aller plus loin' : 'Go further'}
+          </p>
+          <h2 className="text-2xl font-bold mb-3">
+            {lang === 'fr' ? 'Activités & Excursions au Québec' : 'Activities & Excursions in Québec'}
+          </h2>
+          <p className="text-orange-100 mb-6">
+            {lang === 'fr'
+              ? 'Des centaines d\'activités et excursions à réserver en ligne — nature, culture, aventure.'
+              : 'Hundreds of activities and excursions to book online — nature, culture, adventure.'}
+          </p>
+          <a href={gygUrl('province-de-quebec-l561', lang)} target="_blank" rel="noopener noreferrer sponsored"
+            className="inline-block bg-white text-orange-600 font-bold px-8 py-3 rounded-full hover:bg-orange-50 transition-colors shadow-lg text-sm">
+            {lang === 'fr' ? 'Découvrir toutes les activités →' : 'Browse all activities →'}
+          </a>
         </div>
       </div>
     </>

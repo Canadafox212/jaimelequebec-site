@@ -1,5 +1,38 @@
 # J'aime le Québec — Contexte du projet
 
+## Règles de comportement (à appliquer à chaque session)
+
+### Avant toute modification
+Ralentis. Analyse le code actuel, rédige un plan étape par étape, auto-vérifie
+la logique avant d'écrire la moindre ligne. Ne pas modifier un fichier sans
+avoir compris son rôle dans l'architecture existante.
+
+### Mémoire persistante
+Agir comme une mémoire de projet persistante : se rappeler de l'architecture,
+des règles de style et de l'historique des décisions techniques d'une session
+à l'autre.
+
+### Standards de design
+Interdiction d'interface générique. Toujours utiliser des structures premium,
+espacement rigoureux, transitions fluides, design minimaliste cohérent avec
+le style du site existant.
+
+### Validation du code
+Forcer la validation du code avant exécution. Imposer des standards visuels
+premium. Maintenir l'architecture d'une session à l'autre.
+
+### Auto-calibration
+Analyser les corrections fréquentes de Philippe pour identifier ses préférences
+et les appliquer silencieusement aux sessions suivantes. Sélectionner
+automatiquement les librairies adaptées au projet plutôt que des génériques.
+
+### Ton et style de communication
+Supprimer le jargon IA (explorer, synergie, optimiser). Éliminer les formules
+du type "ce n'est pas X, c'est Y". Varier la longueur des phrases. Ton direct,
+factuel, concis.
+
+---
+
 ## Profil du porteur de projet
 Fox (Philippe Goupil) — non-programmeur, préfère les explications simples,
 étape par étape, en français. Demande confirmation avant les opérations à
@@ -116,7 +149,32 @@ atteint à 100% — reprendre au point exact dans une nouvelle session.
       198/198 avec photo locale. Fallbacks et photos d'activités complètes.
 - [x] Déploiement Vercel — jaimelequebec.com en ligne (2026-07-01)
 - [x] Finitions visuelles session 8 — déployé 2026-07-02
-- [ ] Bascule DNS Hostinger → Vercel pour jaimelequebec.org (site public)
+- [x] Session 9 (2026-07-06) — Bugs CSV, carte régions, contact, liens activités, 8 langues
+- [x] Bascule DNS Hostinger → Vercel pour jaimelequebec.org (site public)
+- [x] Session 10 (2026-07-07) — SEO complet : hreflang 8 langues, sitemap .org, middleware
+      corrigé (sitemap.xml/robots.txt), domaine canonique .org, www→.org redirect 308,
+      formulaire contact (Resend, honeypot, pays 8 langues), Google Search Console :
+      1 824 pages soumises.
+- [x] Session 11 (2026-07-07) — Calculateur road trip : API OpenRouteService (route-leg),
+      RoadTripBuilder (localStorage, étés/hiver ×1.35, arrêts extra, alerte VE >260 km,
+      avertissement >6h), bouton "+ Road trip" sur chaque fiche, badge compteur dans le
+      header, page /[lang]/planifier, 8 langues. 1 908 pages statiques générées.
+- [x] Session 12 (2026-07-08/09) — Road trip : permutation stops (↑↓), étapes nuit (🌙),
+      cache routes (jmlq_routes localStorage), calcul parallèle Promise.all, 40+ villes
+      QUICK_CITIES (Rimouski, Gaspé, Matane…). Carte Leaflet (CDN) avec polylines ORS
+      (géométrie encodée), marqueurs custom. Traversiers Saint-Laurent : détection auto
+      Gaspésie↔rive nord, panel 🚢 Matane↔Baie-Comeau + RDL↔Saint-Siméon, insertion port
+      comme étape. Pages /a-propos + /mentions-legales (RGPD, affiliation, hébergeur Vercel).
+      Liens footer. lib/routeCache.js partagé entre RoadTripBuilder + AddToRoadTripButton.
+- [x] Session 13 (2026-07-09/10) — Road trip bugs : URL traversier corrigée, tronçons bloqués
+      (autoComputeRef reset + null legs non sauvegardés + bouton ↻ Recalculer), km cumulatif
+      depuis départ sur chaque tronçon, lignes droites carte supprimées, seuil détection
+      traversier 200→300 km. Même site ajouté 2× dans le trip (slug unique __timestamp).
+      Panneau hébergements 🏨 (1 option/gamme + Booking.com) quand étape nuit activée.
+      Retours collègue marketing : "Sites" → "Annuaire touristique" partout, bouton rouge
+      doublon nav supprimé, emoji road trip retiré, 2 boutons hero (annuaire + activités),
+      texte bienvenue sous hero, bouton "Consulter tout l'annuaire" sous coups de cœur,
+      bandeau "Planifiez" supprimé, Viator en bas /sites, GetYourGuide en bas /activites.
 
 ## Décisions techniques prises
 - Images toujours stockées localement dans le projet, jamais en lien

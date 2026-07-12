@@ -7,6 +7,6 @@ export default function robots() {
         disallow: ['/admin/', '/api/'],
       },
     ],
-    sitemap: 'https://jaimelequebec.com/sitemap.xml',
+    sitemap: 'https://jaimelequebec.org/sitemap.xml',
   }
 }

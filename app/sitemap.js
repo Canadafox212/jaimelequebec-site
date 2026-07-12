@@ -3,7 +3,7 @@ import { getRegionsWithCounts } from '@/lib/activites'
 import { getAllArticles } from '@/lib/articles'
 import { LANGS } from '@/lib/i18n'
 
-const BASE = 'https://jaimelequebec.com'
+const BASE = 'https://jaimelequebec.org'
 
 function alts(path) {
   const langs = Object.fromEntries(LANGS.map(l => [l, `${BASE}/${l}${path}`]))
@@ -23,6 +23,7 @@ export default function sitemap() {
     { path: '/sites',      priority: 0.9, freq: 'weekly'  },
     { path: '/activites',  priority: 0.8, freq: 'weekly'  },
     { path: '/decouvrir',  priority: 0.8, freq: 'monthly' },
+    { path: '/planifier',  priority: 0.7, freq: 'monthly' },
     { path: '/nouvelles',  priority: 0.7, freq: 'weekly'  },
     { path: '/articles',   priority: 0.7, freq: 'weekly'  },
   ]

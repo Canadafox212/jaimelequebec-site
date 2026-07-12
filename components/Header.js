@@ -4,8 +4,16 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
 
+const LS_KEY = 'jmlq_roadtrip'
+function getTripCount() {
+  try {
+    const trip = JSON.parse(localStorage.getItem(LS_KEY) || 'null')
+    return trip?.stops?.length ?? 0
+  } catch { return 0 }
+}
+
 const ALL_LANGS = ['fr', 'en', 'es', 'de', 'pt', 'ru', 'zh', 'hi']
-const VISIBLE_LANGS = ['fr', 'en'] // Langues affichées dans le sélecteur
+const VISIBLE_LANGS = ['fr', 'en', 'es', 'de', 'pt', 'ru', 'zh', 'hi']
 const LANG_FLAGS  = { fr: 'fr', en: 'us', es: 'es', de: 'de', pt: 'pt', ru: 'ru', zh: 'cn', hi: 'in' }
 const LANG_SHORT  = { fr: 'FR', en: 'EN', es: 'ES', de: 'DE', pt: 'PT', ru: 'RU', zh: '中文', hi: 'हिं' }
 const LANG_LABELS = { fr: 'Français', en: 'English', es: 'Español', de: 'Deutsch', pt: 'Português', ru: 'Русский', zh: '中文', hi: 'हिन्दी' }
@@ -18,7 +26,15 @@ export default function Header({ lang, t }) {
   const [searchOpen, setSearchOpen]   = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const [menuOpen, setMenuOpen]       = useState(false)
+  const [tripCount, setTripCount]     = useState(0)
   const inputRef = useRef(null)
+
+  useEffect(() => {
+    setTripCount(getTripCount())
+    function onUpdate() { setTripCount(getTripCount()) }
+    window.addEventListener('roadtrip-updated', onUpdate)
+    return () => window.removeEventListener('roadtrip-updated', onUpdate)
+  }, [])
 
   useEffect(() => {
     if (searchOpen) inputRef.current?.focus()
@@ -51,10 +67,11 @@ export default function Header({ lang, t }) {
     if (e.key === 'Escape') closeSearch()
   }
 
-  const isHome    = pathname === `/${lang}` || pathname === `/${lang}/`
-  const isSites   = pathname.startsWith(`/${lang}/sites`) || pathname.startsWith(`/${lang}/attractions`)
-  const isActiv   = pathname.startsWith(`/${lang}/activites`)
+  const isHome     = pathname === `/${lang}` || pathname === `/${lang}/`
+  const isSites    = pathname.startsWith(`/${lang}/sites`) || pathname.startsWith(`/${lang}/attractions`)
+  const isActiv    = pathname.startsWith(`/${lang}/activites`)
   const isArticles = pathname.startsWith(`/${lang}/articles`)
+  const isPlan     = pathname.startsWith(`/${lang}/planifier`)
 
   const navLinkClass = (active) =>
     `px-4 py-2 rounded-lg transition-colors text-sm font-medium ${
@@ -126,6 +143,14 @@ export default function Header({ lang, t }) {
             <Link href={`/${lang}/articles`} className={navLinkClass(isArticles)}>
               {t.nav.articles}
             </Link>
+            <Link href={`/${lang}/planifier`} className={`relative ${navLinkClass(isPlan)}`}>
+              {t.planifier?.nav_title ?? 'Road trip'}
+              {tripCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-quebec-blue text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold leading-none">
+                  {tripCount > 9 ? '9+' : tripCount}
+                </span>
+              )}
+            </Link>
           </nav>
         )}
 
@@ -174,13 +199,6 @@ export default function Header({ lang, t }) {
               </div>
             )}
           </div>
-
-          <Link
-            href={`/${lang}/sites`}
-            className="hidden sm:inline-flex items-center gap-1.5 bg-quebec-red hover:bg-red-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors"
-          >
-            {lang === 'fr' ? '200 sites' : '200 sites'}
-          </Link>
 
           {/* Hamburger — mobile uniquement */}
           {!searchOpen && (
@@ -231,9 +249,21 @@ export default function Header({ lang, t }) {
             <Link
               href={`/${lang}/articles`}
               onClick={() => setMenuOpen(false)}
-              className={`py-3 px-2 text-base font-medium ${isArticles ? 'text-quebec-blue' : 'text-quebec-navy'}`}
+              className={`py-3 px-2 border-b border-gray-100 text-base font-medium ${isArticles ? 'text-quebec-blue' : 'text-quebec-navy'}`}
             >
               {t.nav.articles}
+            </Link>
+            <Link
+              href={`/${lang}/planifier`}
+              onClick={() => setMenuOpen(false)}
+              className={`py-3 px-2 text-base font-medium flex items-center justify-between ${isPlan ? 'text-quebec-blue' : 'text-quebec-navy'}`}
+            >
+              <span>{t.planifier?.nav_title ?? 'Road trip'}</span>
+              {tripCount > 0 && (
+                <span className="bg-quebec-blue text-white text-xs px-2 py-0.5 rounded-full font-bold">
+                  {tripCount} étape{tripCount > 1 ? 's' : ''}
+                </span>
+              )}
             </Link>
           </nav>
         </div>

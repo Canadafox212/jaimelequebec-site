@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-const LOCALES = ['fr', 'en']
+const LOCALES = ['fr', 'en', 'es', 'de', 'pt', 'ru', 'zh', 'hi']
 const DEFAULT_LOCALE = 'fr'
 
 export function middleware(request) {
@@ -18,5 +18,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/((?!_next|api|favicon\\.ico|favicon\\.png|icons|images|maps|admin|qr|go|sw\\.js|manifest.*\\.json|apple-touch-icon).*)'],
+  matcher: ['/((?!_next|api|favicon\\.ico|favicon\\.png|icons|images|maps|admin|qr|go|sw\\.js|manifest.*\\.json|apple-touch-icon|sitemap\\.xml|robots\\.txt).*)'],
 }

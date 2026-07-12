@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { getDictionary } from '@/lib/i18n'
+import { getDictionary, getAlternates } from '@/lib/i18n'
 import articles from '@/data/articles.json'
 
 export async function generateMetadata({ params }) {
@@ -12,6 +12,7 @@ export async function generateMetadata({ params }) {
     description: lang === 'fr'
       ? 'Découvrez les dernières nouvelles, conseils et inspirations pour visiter le Québec.'
       : 'Discover the latest news, tips and inspiration for visiting Québec.',
+    alternates: getAlternates('/nouvelles'),
   }
 }
 
