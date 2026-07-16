@@ -46,6 +46,9 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html:
           'window.__bip=null;window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.__bip=e;});'
         }} />
+        <script dangerouslySetInnerHTML={{ __html:
+          `(function(){var s=document.createElement('script');s.async=1;s.src='https://emrldtp.cc/NTUxMDAz.js?t=551003';document.head.appendChild(s);})();`
+        }} />
       </head>
       <body className="bg-slate-50 min-h-screen flex flex-col font-sans">
         {children}

@@ -83,7 +83,31 @@
       "PowerShell(Get-ChildItem \"N:\\\\0000_DOCUMENTS\\\\0000_PROJETS\\\\JMLQ 2026\\\\jaimelequebec-site\\\\public\\\\images\" -Recurse -File | Where-Object { $_.Name -match \"raton|foxy|mascot|raccoon\" } | Select-Object FullName)",
       "Bash(find \"public/images/services\" -size +10M -ls)",
       "Bash(find \"public/maps\" -size +10M -ls)",
-      "Bash(find \"public/images/REGIONS\" -size +10M -ls)"
+      "Bash(find \"public/images/REGIONS\" -size +10M -ls)",
+      "Bash(ls public/images/logo*)",
+      "Bash(find public *)",
+      "Bash(ls \"public/images/Raton-laveur avec sac à dos transparent.png\")",
+      "Bash(python -c \"from PIL import Image; img = Image.open\\('public/images/Raton-laveur avec sac à dos transparent.png'\\); print\\(img.size, img.mode\\)\")",
+      "Bash(powershell -command 'Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\\(Resolve-Path '\\\\''public/images/Raton-laveur avec sac à dos transparent.png'\\\\''\\).Path\\); Write-Host $img.Width $img.Height $img.PixelFormat; $img.Dispose\\(\\)')",
+      "Bash(findstr /i \"deployed production alias error\")",
+      "Bash(ls public/images/*.svg)",
+      "Bash(ls public/*.png)",
+      "Bash(ls app/go)",
+      "Bash(ls node_modules/sharp)",
+      "Bash(ls node_modules/@vercel/og)",
+      "Bash(git checkout *)",
+      "Bash(git merge *)",
+      "Bash(grep -v \"//.*isFr\")",
+      "Bash(grep -v \"className\\\\|import\\\\|//\\\\|console\\\\|href\\\\|src\\\\|alt\\\\|key\\\\|aria\")",
+      "Bash(grep -v \"className\\\\|//\\\\|import\\\\|console\\\\|href\\\\|className\")",
+      "Bash(grep -v \"className\\\\|//\\\\|import\")",
+      "PowerShell(Get-ChildItem -Path \"N:\\\\0000_DOCUMENTS\\\\0000_PROJETS\\\\JMLQ 2026\\\\jaimelequebec-site\\\\app\" -Recurse -Filter \"page.js\" | Where-Object { $_.FullName -notmatch 'node_modules' -and $_.FullName -notmatch '\\\\.next' } | Select-Object FullName)",
+      "PowerShell($r = Invoke-WebRequest -Uri \"https://jaimelequebec.org/sitemap.xml\" -UseBasicParsing -MaximumRedirection 5; Write-Output \"Status: $\\($r.StatusCode\\)\"; Write-Output \"Content-Type: $\\($r.Headers['Content-Type']\\)\"; Write-Output \\($r.Content.Substring\\(0, [Math]::Min\\(300, $r.Content.Length\\)\\)\\))",
+      "PowerShell($r = Invoke-WebRequest -Uri \"https://jaimelequebec.org/sitemap.xml\" -UseBasicParsing -MaximumRedirection 0 -ErrorAction SilentlyContinue; Write-Output \"Status: $\\($r.StatusCode\\)\"; Write-Output \"Location: $\\($r.Headers['Location']\\)\")",
+      "PowerShell($r = Invoke-WebRequest -Uri \"https://www.jaimelequebec.org/sitemap.xml\" -UseBasicParsing -MaximumRedirection 5; Write-Output \"Status: $\\($r.StatusCode\\)\"; Write-Output \\($r.Content.Substring\\(0, 200\\)\\))",
+      "PowerShell($r = Invoke-WebRequest -Uri \"https://jaimelequebec.org/sitemap.xml\" -UseBasicParsing -MaximumRedirection 5; Write-Output \"Status: $\\($r.StatusCode\\)\"; Write-Output \\($r.Content.Substring\\(0, 300\\)\\))",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 *)"
     ]
   }
 }
