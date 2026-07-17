@@ -5,7 +5,7 @@ import { getAllAttractions, getFiltres } from '@/lib/attractions'
 import { getCoupsDeCoeur } from '@/lib/activites'
 import { getAllArticles } from '@/lib/articles'
 import { getDictionary, LANGS, getAlternates } from '@/lib/i18n'
-import { bookingRegionUrl } from '@/lib/affiliates'
+import { bookingRegionUrl, discovercarsUrl } from '@/lib/affiliates'
 import { notFound } from 'next/navigation'
 
 export async function generateStaticParams() {
@@ -250,6 +250,29 @@ export default async function HomePage({ params }) {
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
             </svg>
           </div>
+        </div>
+      </section>
+
+      {/* ── LOCATION DE VOITURES ──────────────────────────────────── */}
+      <section className="bg-amber-50 border-t border-amber-100 py-14 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-xs font-bold text-amber-600 uppercase tracking-widest mb-2">
+            {t.home.voiture_label}
+          </p>
+          <h2 className="font-display text-3xl font-bold text-gray-900 mb-3">
+            {t.home.voiture_title}
+          </h2>
+          <p className="text-gray-600 text-base mb-7 max-w-xl mx-auto">
+            {t.home.voiture_desc}
+          </p>
+          <a
+            href={discovercarsUrl(null, lang)}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="inline-block bg-amber-500 text-white font-bold px-8 py-3.5 rounded-full hover:bg-amber-600 transition-colors shadow-lg text-sm"
+          >
+            {t.home.voiture_cta}
+          </a>
         </div>
       </section>
 

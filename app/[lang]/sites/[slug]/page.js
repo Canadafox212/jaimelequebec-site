@@ -7,6 +7,7 @@ import MapModal from '@/components/MapModal'
 import ShareLieuButton from '@/components/ShareLieuButton'
 import AddToRoadTripButton from '@/components/AddToRoadTripButton'
 import { dicts, LANGS, getAlternates } from '@/lib/i18n'
+import { bookingSearchUrl } from '@/lib/affiliates'
 import labelI18n from '@/data/activity-labels-i18n.json'
 import servicesData from '@/data/services.json'
 
@@ -292,6 +293,29 @@ export default async function AttractionPage({ params }) {
             </div>
           </section>
         )}
+
+        {/* ── BOOKING.COM ────────────────────────────────────────────────── */}
+        <section className="mb-12 bg-[#003580] rounded-2xl px-6 py-7 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+          <div>
+            <p className="text-xs font-bold text-blue-200 uppercase tracking-widest mb-1">
+              {isFr ? 'Hébergement à proximité' : 'Accommodation nearby'}
+            </p>
+            <p className="text-white font-bold text-lg leading-snug">
+              {isFr ? `Trouvez un hôtel à ${ville}` : `Find a hotel in ${ville}`}
+            </p>
+            <p className="text-blue-200 text-sm mt-0.5">
+              {isFr ? 'Comparez et réservez via Booking.com' : 'Compare and book via Booking.com'}
+            </p>
+          </div>
+          <a
+            href={bookingSearchUrl(ville, lang)}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="shrink-0 inline-block bg-white text-[#003580] font-bold px-6 py-3 rounded-full hover:bg-blue-50 transition-colors shadow-md text-sm whitespace-nowrap"
+          >
+            {isFr ? 'Voir les hébergements →' : 'Search accommodation →'}
+          </a>
+        </section>
 
         {/* Activités été */}
         {activitesEte.length > 0 && (

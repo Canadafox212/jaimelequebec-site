@@ -1,5 +1,6 @@
 import { getAllAttractions, getAttractionImageSrc } from '@/lib/attractions'
 import { dicts, LANGS, getAlternates } from '@/lib/i18n'
+import { discovercarsUrl } from '@/lib/affiliates'
 import RoadTripBuilder from '@/components/RoadTripBuilder'
 
 export function generateStaticParams() {
@@ -37,9 +38,34 @@ export default async function PlanifierPage({ params }) {
     } : null,
   })).filter((a) => a.lat && a.lng)
 
+  const th = t.home
+
   return (
     <main>
       <RoadTripBuilder lang={lang} t={t.planifier} attractions={attractions} />
+
+      {/* ── LOCATION DE VOITURES ─────────────────────────────────────── */}
+      <section className="bg-amber-50 border-t border-amber-100 py-14 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-xs font-bold text-amber-600 uppercase tracking-widest mb-2">
+            {th.voiture_label}
+          </p>
+          <h2 className="font-display text-3xl font-bold text-gray-900 mb-3">
+            {th.voiture_title}
+          </h2>
+          <p className="text-gray-600 text-base mb-7 max-w-xl mx-auto">
+            {th.voiture_desc}
+          </p>
+          <a
+            href={discovercarsUrl(null, lang)}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="inline-block bg-amber-500 text-white font-bold px-8 py-3.5 rounded-full hover:bg-amber-600 transition-colors shadow-lg text-sm"
+          >
+            {th.voiture_cta}
+          </a>
+        </div>
+      </section>
     </main>
   )
 }
