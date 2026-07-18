@@ -5,7 +5,7 @@ import RegionDescription from '@/components/RegionDescription'
 import SitesViewContainer from '@/components/SitesViewContainer'
 import ViatorWidget from '@/components/ViatorWidget'
 import { getAllAttractions, getFiltres, getAttractionImageSrc } from '@/lib/attractions'
-import { getTaxonomie, getRegionThemes, getRegionThemeList } from '@/lib/activites'
+import { getTaxonomie, getRegionThemes } from '@/lib/activites'
 import { dicts, LANGS, getAlternates } from '@/lib/i18n'
 import { viatorUrl } from '@/lib/affiliates'
 import regionsDesc from '@/data/regions-descriptions.json'
@@ -39,7 +39,6 @@ export default async function AttractionsPage({ params, searchParams }) {
   const initialView = sp?.view === 'map' ? 'map' : null
 
   const tax = getTaxonomie()
-  const themesRegion = regionNum ? getRegionThemeList(regionNum) : []
   const regionDescText = regionNum
     ? (regionsDesc[String(regionNum)]?.[lang] ?? regionsDesc[String(regionNum)]?.fr ?? null)
     : null
@@ -89,15 +88,13 @@ export default async function AttractionsPage({ params, searchParams }) {
   const themeIdsPresents = new Set(all.map((a) => getTheme(a)?.id).filter(Boolean))
   const themesDisponibles = tax.themes.filter((th) => themeIdsPresents.has(th.id))
 
-  // Bulles thèmes quand aucune région sélectionnée — tous les 17 thèmes, avec ou sans attractions
-  const themesAll = !regionNum
-    ? tax.themes
-        .map((th) => ({ theme: th, count: all.filter((a) => getTheme(a)?.id === th.id).length }))
-        .sort((a, b) => b.count - a.count)
-    : []
-
-  // Bulles à afficher : région sélectionnée → /activites, sinon → ?theme=
-  const displayThemes = regionNum ? themesRegion : themesAll
+  // 17 thèmes affichés partout — comptage dans le contexte courant (global ou région)
+  const baseForCounts = regionNum
+    ? all.filter((a) => a.localisation.region_num === regionNum)
+    : all
+  const displayThemes = tax.themes
+    .map((th) => ({ theme: th, count: baseForCounts.filter((a) => getTheme(a)?.id === th.id).length }))
+    .sort((a, b) => b.count - a.count)
 
   // ── PONT vers les Activités : la catégorie ou le thème choisi a du contenu riche ──
   let bridge = null
@@ -189,19 +186,19 @@ export default async function AttractionsPage({ params, searchParams }) {
       {displayThemes.length > 0 && (
         <div className="mb-6">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
-            {regionNum
-              ? (lang === 'fr' ? 'Activités dans cette région' : 'Activities in this region')
-              : (lang === 'fr' ? 'Explorer par activité' : 'Browse by activity')}
+            {lang === 'fr' ? 'Explorer par activité' : 'Browse by activity'}
           </p>
           <div className="flex flex-wrap gap-2">
             {displayThemes.map(({ theme, count }) => {
               const nom = theme[`nom_${lang}`] ?? theme.nom_en ?? theme.nom_fr
               const inAnnuaire = count > 0
-              const href = regionNum
-                ? `/${lang}/activites/${regionNum}/${theme.id}`
-                : inAnnuaire
-                  ? `/${lang}/sites?theme=${theme.id}`
-                  : `/${lang}/activites`
+              const href = inAnnuaire
+                ? regionNum
+                  ? `/${lang}/sites?region=${regionNum}&theme=${theme.id}`
+                  : `/${lang}/sites?theme=${theme.id}`
+                : regionNum
+                  ? `/${lang}/activites/${regionNum}/${theme.id}`
+                  : `/${lang}/activites/tout`
               return (
                 <Link
                   key={theme.id}
