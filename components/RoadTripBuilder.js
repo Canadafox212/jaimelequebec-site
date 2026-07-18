@@ -79,55 +79,107 @@ function getSuggestedFerries(fromLat, fromLng, toLat, toLng, distanceKm) {
 // ─── Popular cities (instant, no API) ────────────────────────────────────────
 
 const QUICK_CITIES = [
-  // Québec / Canada
-  { label: 'Montréal, Québec',             lat: 45.5088,  lng: -73.5878 },
-  { label: 'Québec (ville)',                lat: 46.8139,  lng: -71.2082 },
-  { label: 'Ottawa, Ontario',               lat: 45.4215,  lng: -75.6972 },
-  { label: 'Toronto, Ontario',              lat: 43.6532,  lng: -79.3832 },
-  { label: 'Gatineau, Québec',              lat: 45.4765,  lng: -75.7013 },
-  { label: 'Lévis, Québec',                 lat: 46.7129,  lng: -71.1740 },
-  { label: 'Laval, Québec',                 lat: 45.5720,  lng: -73.6920 },
-  { label: 'Longueuil, Québec',             lat: 45.5312,  lng: -73.5181 },
-  { label: 'Sherbrooke, Québec',            lat: 45.4042,  lng: -71.8929 },
-  { label: 'Trois-Rivières, Québec',        lat: 46.3432,  lng: -72.5418 },
-  { label: 'Saguenay, Québec',              lat: 48.4284,  lng: -71.0688 },
-  { label: 'Rimouski, Québec',              lat: 48.4486,  lng: -68.5353 },
-  { label: 'Rivière-du-Loup, Québec',       lat: 47.8269,  lng: -69.5345 },
-  { label: 'Matane, Québec',                lat: 48.8467,  lng: -67.5322 },
-  { label: 'Gaspé, Québec',                 lat: 48.8375,  lng: -64.4793 },
-  { label: 'Percé, Québec',                 lat: 48.5225,  lng: -64.2145 },
-  { label: 'Sainte-Anne-des-Monts, Québec', lat: 49.1289,  lng: -66.4959 },
-  { label: 'Baie-Comeau, Québec',           lat: 49.2169,  lng: -68.1506 },
-  { label: 'Sept-Îles, Québec',             lat: 50.2101,  lng: -66.3735 },
-  { label: 'Rouyn-Noranda, Québec',         lat: 48.2369,  lng: -79.0267 },
-  { label: 'Val-d\'Or, Québec',             lat: 48.1009,  lng: -77.7971 },
-  { label: 'Mont-Tremblant, Québec',        lat: 46.1185,  lng: -74.5963 },
-  { label: 'Saint-Jérôme, Québec',          lat: 45.7784,  lng: -74.0007 },
-  { label: 'Drummondville, Québec',         lat: 45.8836,  lng: -72.4833 },
-  { label: 'Granby, Québec',                lat: 45.3987,  lng: -72.7244 },
-  { label: 'Tadoussac, Québec',             lat: 48.1432,  lng: -69.7178 },
-  // France
-  { label: 'Paris, France',                 lat: 48.8566,  lng:   2.3522 },
-  { label: 'Lyon, France',                  lat: 45.7640,  lng:   4.8357 },
-  { label: 'Marseille, France',             lat: 43.2965,  lng:   5.3698 },
-  { label: 'Bordeaux, France',              lat: 44.8378,  lng:  -0.5792 },
-  { label: 'Toulouse, France',              lat: 43.6047,  lng:   1.4442 },
-  { label: 'Nantes, France',                lat: 47.2184,  lng:  -1.5536 },
-  { label: 'Lille, France',                 lat: 50.6292,  lng:   3.0573 },
-  { label: 'Strasbourg, France',            lat: 48.5734,  lng:   7.7521 },
-  { label: 'Rennes, France',                lat: 48.1173,  lng:  -1.6778 },
-  { label: 'Montpellier, France',           lat: 43.6108,  lng:   3.8767 },
-  { label: 'Nice, France',                  lat: 43.7102,  lng:   7.2620 },
-  { label: 'Grenoble, France',              lat: 45.1885,  lng:   5.7245 },
-  { label: 'Rouen, France',                 lat: 49.4432,  lng:   1.0993 },
-  // Belgique / Suisse / Luxembourg
-  { label: 'Bruxelles, Belgique',           lat: 50.8503,  lng:   4.3517 },
-  { label: 'Liège, Belgique',               lat: 50.6292,  lng:   5.5797 },
-  { label: 'Genève, Suisse',                lat: 46.2044,  lng:   6.1432 },
-  { label: 'Lausanne, Suisse',              lat: 46.5196,  lng:   6.6323 },
-  { label: 'Zurich, Suisse',                lat: 47.3769,  lng:   8.5417 },
-  { label: 'Berne, Suisse',                 lat: 46.9481,  lng:   7.4474 },
-  { label: 'Luxembourg, Luxembourg',        lat: 49.6117,  lng:   6.1319 },
+  // ── Montréal ──────────────────────────────────────────────────────
+  { label: 'Montréal, Québec',                    lat: 45.5088, lng: -73.5878 },
+  { label: 'Laval, Québec',                        lat: 45.5720, lng: -73.6920 },
+  { label: 'Longueuil, Québec',                    lat: 45.5312, lng: -73.5181 },
+  // ── Montérégie ────────────────────────────────────────────────────
+  { label: 'Granby, Québec',                       lat: 45.3987, lng: -72.7244 },
+  { label: 'Saint-Hyacinthe, Québec',              lat: 45.6167, lng: -72.9500 },
+  { label: 'Saint-Jean-sur-Richelieu, Québec',     lat: 45.3167, lng: -73.2667 },
+  { label: 'Sorel-Tracy, Québec',                  lat: 46.0414, lng: -73.1063 },
+  // ── Laurentides ───────────────────────────────────────────────────
+  { label: 'Mont-Tremblant, Québec',               lat: 46.1185, lng: -74.5963 },
+  { label: 'Saint-Jérôme, Québec',                 lat: 45.7784, lng: -74.0007 },
+  { label: 'Sainte-Agathe-des-Monts, Québec',      lat: 46.0531, lng: -74.2847 },
+  { label: 'Saint-Sauveur, Québec',                lat: 45.9008, lng: -74.1697 },
+  // ── Lanaudière ────────────────────────────────────────────────────
+  { label: 'Joliette, Québec',                     lat: 46.0202, lng: -73.4466 },
+  { label: 'Rawdon, Québec',                        lat: 46.0567, lng: -73.7179 },
+  { label: 'Saint-Donat, Québec',                  lat: 46.3194, lng: -74.2186 },
+  // ── Outaouais ─────────────────────────────────────────────────────
+  { label: 'Gatineau, Québec',                     lat: 45.4765, lng: -75.7013 },
+  { label: 'Maniwaki, Québec',                     lat: 46.3833, lng: -75.9667 },
+  { label: 'Wakefield, Québec',                    lat: 45.6417, lng: -75.9167 },
+  // ── Capitale-Nationale ────────────────────────────────────────────
+  { label: 'Québec (ville)',                        lat: 46.8139, lng: -71.2082 },
+  { label: 'Lévis, Québec',                         lat: 46.7129, lng: -71.1740 },
+  { label: 'Saint-Raymond, Québec',                lat: 46.8861, lng: -71.8331 },
+  // ── Charlevoix ────────────────────────────────────────────────────
+  { label: 'Baie-Saint-Paul, Québec',              lat: 47.4439, lng: -70.4988 },
+  { label: 'La Malbaie, Québec',                   lat: 47.6517, lng: -70.1523 },
+  { label: 'Tadoussac, Québec',                    lat: 48.1432, lng: -69.7178 },
+  // ── Chaudière-Appalaches ──────────────────────────────────────────
+  { label: 'Saint-Georges, Québec',                lat: 46.1167, lng: -70.6667 },
+  { label: 'Thetford Mines, Québec',               lat: 46.0994, lng: -71.2994 },
+  { label: 'Montmagny, Québec',                    lat: 46.9814, lng: -70.5531 },
+  // ── Mauricie ──────────────────────────────────────────────────────
+  { label: 'Trois-Rivières, Québec',               lat: 46.3432, lng: -72.5418 },
+  { label: 'Shawinigan, Québec',                   lat: 46.5631, lng: -72.7481 },
+  { label: 'La Tuque, Québec',                     lat: 47.4333, lng: -72.7833 },
+  // ── Centre-du-Québec ──────────────────────────────────────────────
+  { label: 'Drummondville, Québec',                lat: 45.8836, lng: -72.4833 },
+  { label: 'Victoriaville, Québec',                lat: 46.0560, lng: -71.9650 },
+  { label: 'Nicolet, Québec',                      lat: 46.2275, lng: -72.6148 },
+  // ── Estrie ────────────────────────────────────────────────────────
+  { label: 'Sherbrooke, Québec',                   lat: 45.4042, lng: -71.8929 },
+  { label: 'Magog, Québec',                         lat: 45.2667, lng: -72.1500 },
+  { label: 'Lac-Mégantic, Québec',                 lat: 45.5775, lng: -70.8836 },
+  // ── Saguenay–Lac-Saint-Jean ───────────────────────────────────────
+  { label: 'Saguenay, Québec',                     lat: 48.4284, lng: -71.0688 },
+  { label: 'Alma, Québec',                          lat: 48.5500, lng: -71.6500 },
+  { label: 'Roberval, Québec',                      lat: 48.5219, lng: -72.2317 },
+  { label: 'Saint-Félicien, Québec',               lat: 48.6500, lng: -72.4500 },
+  // ── Bas-Saint-Laurent ─────────────────────────────────────────────
+  { label: 'Rimouski, Québec',                     lat: 48.4486, lng: -68.5353 },
+  { label: 'Rivière-du-Loup, Québec',              lat: 47.8269, lng: -69.5345 },
+  { label: 'Amqui, Québec',                         lat: 48.4625, lng: -67.4361 },
+  // ── Gaspésie ──────────────────────────────────────────────────────
+  { label: 'Matane, Québec',                        lat: 48.8467, lng: -67.5322 },
+  { label: 'Sainte-Anne-des-Monts, Québec',        lat: 49.1289, lng: -66.4959 },
+  { label: 'Gaspé, Québec',                         lat: 48.8375, lng: -64.4793 },
+  { label: 'Percé, Québec',                         lat: 48.5225, lng: -64.2145 },
+  // ── Îles-de-la-Madeleine ──────────────────────────────────────────
+  { label: 'Cap-aux-Meules, Îles-de-la-Madeleine', lat: 47.3810, lng: -61.8621 },
+  { label: 'Havre-Aubert, Îles-de-la-Madeleine',   lat: 47.2233, lng: -61.8364 },
+  { label: 'Grande-Entrée, Îles-de-la-Madeleine',  lat: 47.5483, lng: -61.5617 },
+  // ── Côte-Nord ─────────────────────────────────────────────────────
+  { label: 'Baie-Comeau, Québec',                  lat: 49.2169, lng: -68.1506 },
+  { label: 'Sept-Îles, Québec',                    lat: 50.2101, lng: -66.3735 },
+  { label: 'Havre-Saint-Pierre, Québec',           lat: 50.2406, lng: -63.6036 },
+  // ── Abitibi-Témiscamingue ──────────────────────────────────────────
+  { label: 'Rouyn-Noranda, Québec',                lat: 48.2369, lng: -79.0267 },
+  { label: "Val-d'Or, Québec",                     lat: 48.1009, lng: -77.7971 },
+  { label: 'Amos, Québec',                          lat: 48.5678, lng: -78.1085 },
+  { label: 'Ville-Marie, Québec',                  lat: 47.3337, lng: -79.4312 },
+  // ── Nord-du-Québec ────────────────────────────────────────────────
+  { label: 'Chibougamau, Québec',                  lat: 49.9167, lng: -74.3667 },
+  { label: 'Matagami, Québec',                      lat: 49.7500, lng: -77.6333 },
+  // ── Reste du Canada ───────────────────────────────────────────────
+  { label: 'Ottawa, Ontario',                      lat: 45.4215, lng: -75.6972 },
+  { label: 'Toronto, Ontario',                     lat: 43.6532, lng: -79.3832 },
+  // ── France ────────────────────────────────────────────────────────
+  { label: 'Paris, France',                        lat: 48.8566, lng:   2.3522 },
+  { label: 'Lyon, France',                         lat: 45.7640, lng:   4.8357 },
+  { label: 'Marseille, France',                    lat: 43.2965, lng:   5.3698 },
+  { label: 'Bordeaux, France',                     lat: 44.8378, lng:  -0.5792 },
+  { label: 'Toulouse, France',                     lat: 43.6047, lng:   1.4442 },
+  { label: 'Nantes, France',                       lat: 47.2184, lng:  -1.5536 },
+  { label: 'Lille, France',                        lat: 50.6292, lng:   3.0573 },
+  { label: 'Strasbourg, France',                   lat: 48.5734, lng:   7.7521 },
+  { label: 'Rennes, France',                       lat: 48.1173, lng:  -1.6778 },
+  { label: 'Montpellier, France',                  lat: 43.6108, lng:   3.8767 },
+  { label: 'Nice, France',                         lat: 43.7102, lng:   7.2620 },
+  { label: 'Grenoble, France',                     lat: 45.1885, lng:   5.7245 },
+  { label: 'Rouen, France',                        lat: 49.4432, lng:   1.0993 },
+  // ── Belgique / Suisse / Luxembourg ───────────────────────────────
+  { label: 'Bruxelles, Belgique',                  lat: 50.8503, lng:   4.3517 },
+  { label: 'Liège, Belgique',                      lat: 50.6292, lng:   5.5797 },
+  { label: 'Genève, Suisse',                       lat: 46.2044, lng:   6.1432 },
+  { label: 'Lausanne, Suisse',                     lat: 46.5196, lng:   6.6323 },
+  { label: 'Zurich, Suisse',                       lat: 47.3769, lng:   8.5417 },
+  { label: 'Berne, Suisse',                        lat: 46.9481, lng:   7.4474 },
+  { label: 'Luxembourg, Luxembourg',               lat: 49.6117, lng:   6.1319 },
 ]
 
 // ─── Departure input ──────────────────────────────────────────────────────────
