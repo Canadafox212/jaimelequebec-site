@@ -89,11 +89,10 @@ export default async function AttractionsPage({ params, searchParams }) {
   const themeIdsPresents = new Set(all.map((a) => getTheme(a)?.id).filter(Boolean))
   const themesDisponibles = tax.themes.filter((th) => themeIdsPresents.has(th.id))
 
-  // Bulles thèmes quand aucune région sélectionnée — liens vers ?theme=X dans l'annuaire
+  // Bulles thèmes quand aucune région sélectionnée — tous les 17 thèmes, avec ou sans attractions
   const themesAll = !regionNum
     ? tax.themes
         .map((th) => ({ theme: th, count: all.filter((a) => getTheme(a)?.id === th.id).length }))
-        .filter((x) => x.count > 0)
         .sort((a, b) => b.count - a.count)
     : []
 
@@ -197,18 +196,28 @@ export default async function AttractionsPage({ params, searchParams }) {
           <div className="flex flex-wrap gap-2">
             {displayThemes.map(({ theme, count }) => {
               const nom = theme[`nom_${lang}`] ?? theme.nom_en ?? theme.nom_fr
+              const inAnnuaire = count > 0
               const href = regionNum
                 ? `/${lang}/activites/${regionNum}/${theme.id}`
-                : `/${lang}/sites?theme=${theme.id}`
+                : inAnnuaire
+                  ? `/${lang}/sites?theme=${theme.id}`
+                  : `/${lang}/activites`
               return (
                 <Link
                   key={theme.id}
                   href={href}
-                  className="inline-flex items-center gap-1.5 bg-white border border-gray-200 hover:border-quebec-blue hover:text-quebec-blue text-gray-700 text-sm font-medium px-3 py-1.5 rounded-full transition-colors shadow-sm"
+                  className={`inline-flex items-center gap-1.5 border text-sm font-medium px-3 py-1.5 rounded-full transition-colors shadow-sm ${
+                    inAnnuaire
+                      ? 'bg-white border-gray-200 hover:border-quebec-blue hover:text-quebec-blue text-gray-700'
+                      : 'bg-gray-50 border-gray-200 hover:border-gray-400 text-gray-400 hover:text-gray-600'
+                  }`}
                 >
                   <span>{theme.emoji}</span>
                   <span>{nom}</span>
-                  <span className="text-xs text-gray-400">{count}</span>
+                  {inAnnuaire
+                    ? <span className="text-xs text-gray-400">{count}</span>
+                    : <span className="text-xs text-gray-300">→</span>
+                  }
                 </Link>
               )
             })}
