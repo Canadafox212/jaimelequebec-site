@@ -198,7 +198,7 @@ export default async function AttractionsPage({ params, searchParams }) {
                   : `/${lang}/sites?theme=${theme.id}`
                 : regionNum
                   ? `/${lang}/activites/${regionNum}/${theme.id}`
-                  : `/${lang}/activites/tout`
+                  : `/${lang}/activites/tout?theme=${theme.id}`
               return (
                 <Link
                   key={theme.id}

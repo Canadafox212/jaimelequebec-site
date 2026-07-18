@@ -4,10 +4,10 @@ import EtabCard from './EtabCard'
 import QuebecRegionMap from './QuebecRegionMap'
 
 // Liste d'établissements filtrable par facettes (région + sous-catégorie).
-export default function EtabExplorer({ items, lang, t, showRegion = true, showTheme = false, cap = 0 }) {
+export default function EtabExplorer({ items, lang, t, showRegion = true, showTheme = false, cap = 0, initialTheme = '' }) {
   const [region, setRegion] = useState('')
   const [sous, setSous] = useState('')
-  const [theme, setTheme] = useState('')
+  const [theme, setTheme] = useState(initialTheme)
 
   const regions = useMemo(() => {
     const m = new Map()

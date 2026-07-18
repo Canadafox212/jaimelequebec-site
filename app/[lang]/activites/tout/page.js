@@ -15,10 +15,12 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function ActivitesTout({ params }) {
+export default async function ActivitesTout({ params, searchParams }) {
   const { lang } = await params
+  const sp = await searchParams
   const t = dicts[lang]
   const items = getEtablissementsIndex()
+  const initialTheme = sp?.theme ?? ''
 
   return (
     <>
@@ -40,7 +42,7 @@ export default async function ActivitesTout({ params }) {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-10">
-        <EtabExplorer items={items} lang={lang} t={t} showRegion showTheme />
+        <EtabExplorer items={items} lang={lang} t={t} showRegion showTheme initialTheme={initialTheme} />
       </div>
     </>
   )
