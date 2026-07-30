@@ -6,6 +6,7 @@ const en = {
     regions: 'Regions',
     articles: 'Learn about Québec',
     roadtrip: 'Plan your road trip',
+    expressions: 'Speak Quebec',
     search_placeholder: 'Search a place…',
     search_label: 'Search',
   },

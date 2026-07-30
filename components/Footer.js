@@ -90,6 +90,11 @@ export default function Footer({ t, lang }) {
                   {t.nav.articles}
                 </Link>
               </li>
+              <li>
+                <Link href={`/${lang}/expressions`} className="text-slate-400 hover:text-white transition-colors">
+                  {t.nav.expressions ?? 'Expressions québécoises'}
+                </Link>
+              </li>
             </ul>
           </div>
 

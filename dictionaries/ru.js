@@ -6,6 +6,7 @@ const ru = {
     regions: 'Регионы',
     articles: 'О Квебеке',
     roadtrip: 'Маршрут',
+    expressions: 'Слова Квебека',
     search_placeholder: 'Поиск места…',
     search_label: 'Поиск',
   },

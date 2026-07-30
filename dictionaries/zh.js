@@ -6,6 +6,7 @@ const zh = {
     regions: '地区',
     articles: '了解魁北克',
     roadtrip: '公路旅行',
+    expressions: '魁北克词汇',
     search_placeholder: '搜索景点…',
     search_label: '搜索',
   },

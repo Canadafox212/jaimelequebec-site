@@ -6,6 +6,7 @@ const fr = {
     regions: 'Régions',
     articles: "S'informer sur le Québec",
     roadtrip: 'Organiser son road trip',
+    expressions: 'Parlez québécois',
     search_placeholder: 'Rechercher un lieu…',
     search_label: 'Rechercher',
   },

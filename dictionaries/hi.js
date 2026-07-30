@@ -6,6 +6,7 @@ const hi = {
     regions: 'क्षेत्र',
     articles: 'क्यूबेक के बारे में',
     roadtrip: 'रोड ट्रिप',
+    expressions: 'क्यूबेक शब्द',
     search_placeholder: 'स्थल खोजें…',
     search_label: 'खोजें',
   },

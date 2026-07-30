@@ -6,6 +6,7 @@ const de = {
     regions: 'Regionen',
     articles: 'Über Québec informieren',
     roadtrip: 'Road trip planen',
+    expressions: 'Québecer Wörter',
     search_placeholder: 'Sehenswürdigkeit suchen…',
     search_label: 'Suchen',
   },
