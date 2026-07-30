@@ -172,7 +172,7 @@ export default async function HomePage({ params }) {
               : "J'aime le Québec, c'est aussi…"}
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-200">
 
             {/* ── Activités ── */}
             <div className="flex flex-col items-center text-center px-8 py-6">
@@ -264,6 +264,45 @@ export default async function HomePage({ params }) {
                 className="inline-block bg-quebec-blue text-white font-bold text-xs px-6 py-2.5 rounded-full hover:bg-blue-800 transition-colors"
               >
                 {t.nav.articles.toUpperCase()}
+              </Link>
+            </div>
+
+            {/* ── Expressions ── */}
+            <div className="flex flex-col items-center text-center px-8 py-6">
+              <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mb-5 shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-quebec-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+              </div>
+              <h3 className="font-display font-bold text-gray-900 uppercase text-sm tracking-wide leading-snug mb-3">
+                {lang === 'fr' ? '1 985 mots et expressions québécoises'
+                  : lang === 'en' ? '1,985 Quebec words and expressions'
+                  : lang === 'es' ? '1 985 palabras y expresiones quebequesas'
+                  : lang === 'de' ? '1 985 québecer Wörter und Ausdrücke'
+                  : lang === 'it' ? '1 985 parole ed espressioni québécoises'
+                  : lang === 'pt' ? '1 985 palavras e expressões québécoises'
+                  : lang === 'ru' ? '1 985 слов и выражений Квебека'
+                  : lang === 'zh' ? '1985个魁北克词汇和表达'
+                  : lang === 'hi' ? '1,985 क्यूबेक शब्द और भाव'
+                  : '1 985 mots et expressions québécoises'}
+              </h3>
+              <p className="text-sm text-gray-500 leading-relaxed mb-6">
+                {lang === 'fr' ? 'Pour comprendre et parler comme un vrai Québécois dès votre arrivée.'
+                  : lang === 'en' ? 'Understand and speak like a true Quebecker from day one.'
+                  : lang === 'es' ? 'Para entender y hablar como un verdadero québécois desde su llegada.'
+                  : lang === 'de' ? 'Verstehen und sprechen wie ein echter Québécois ab Ihrer Ankunft.'
+                  : lang === 'it' ? 'Per capire e parlare come un vero québécois fin dal vostro arrivo.'
+                  : lang === 'pt' ? 'Para compreender e falar como um verdadeiro québécois desde a chegada.'
+                  : lang === 'ru' ? 'Понимайте и говорите как настоящий квебекец с первого дня.'
+                  : lang === 'zh' ? '从抵达第一天起，像真正的魁北克人一样理解和说话。'
+                  : lang === 'hi' ? 'पहुंचने के पहले दिन से एक सच्चे क्यूबेकर की तरह समझें और बोलें।'
+                  : 'Pour comprendre et parler comme un vrai Québécois dès votre arrivée.'}
+              </p>
+              <Link
+                href={`/${lang}/expressions`}
+                className="inline-block bg-quebec-blue text-white font-bold text-xs px-6 py-2.5 rounded-full hover:bg-blue-800 transition-colors"
+              >
+                {(t.nav.expressions ?? 'EXPRESSIONS').toUpperCase()}
               </Link>
             </div>
 
