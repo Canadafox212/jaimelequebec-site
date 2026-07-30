@@ -280,6 +280,9 @@ const ru = {
     nav_waze_hint: '→ конечный пункт',
     departure_change: 'Изменить',
     departure_hint: 'Начните с указания вашего города отправления.',
+    share: 'Поделиться',
+    share_copied: '✓ Ссылка скопирована!',
+    print: 'Печать',
   },
 }
 

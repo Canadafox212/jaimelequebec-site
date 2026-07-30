@@ -290,6 +290,9 @@ const en = {
     nav_waze_hint: '→ final destination',
     departure_change: 'Change',
     departure_hint: 'Start by entering your departure city.',
+    share: 'Share',
+    share_copied: '✓ Link copied!',
+    print: 'Print',
   },
 }
 

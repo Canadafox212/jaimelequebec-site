@@ -280,6 +280,9 @@ const pt = {
     nav_waze_hint: '→ destino final',
     departure_change: 'Alterar',
     departure_hint: 'Comece por indicar a sua cidade de partida.',
+    share: 'Partilhar',
+    share_copied: '✓ Link copiado!',
+    print: 'Imprimir',
   },
 }
 

@@ -293,6 +293,9 @@ const it = {
     nav_waze_hint: '→ destinazione finale',
     departure_change: 'Cambia',
     departure_hint: 'Inizia indicando la tua città di partenza.',
+    share: 'Condividi',
+    share_copied: '✓ Link copiato!',
+    print: 'Stampa',
   },
 }
 

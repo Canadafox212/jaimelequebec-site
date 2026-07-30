@@ -280,6 +280,9 @@ const de = {
     nav_waze_hint: '→ Endziel',
     departure_change: 'Ändern',
     departure_hint: 'Geben Sie zunächst Ihre Abfahrtsstadt ein.',
+    share: 'Teilen',
+    share_copied: '✓ Link kopiert!',
+    print: 'Drucken',
   },
 }
 

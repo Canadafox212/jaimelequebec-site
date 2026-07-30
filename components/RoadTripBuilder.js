@@ -619,13 +619,30 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
   const [openExtraMenu, setExtra] = useState(null)
   const [departure, setDeparture] = useState(null)
   const [showMap, setShowMap]     = useState(true)
+  const [copied, setCopied]       = useState(false)
   const loadedRef      = useRef(false)
   const autoComputeRef = useRef(false)
   const dropRef        = useRef(null)
 
-  // ── Load ────────────────────────────────────────────────────────────────────
+  // ── Load — URL ?trip= prioritaire sur localStorage ──────────────────────────
   useEffect(() => {
-    const trip = loadTrip()
+    let trip = null
+    try {
+      const param = new URLSearchParams(window.location.search).get('trip')
+      if (param) {
+        const data = JSON.parse(atob(param))
+        trip = {
+          departure: data.d ? { label: data.d.l, lat: data.d.la, lng: data.d.ln } : null,
+          stops: (data.s || []).map(s => ({
+            slug: s.sl, title: s.t, lat: s.la, lng: s.ln,
+            overnight: s.on || false, extra: s.ex || [],
+          })),
+          legs: [],
+          season: data.se || 'summer',
+        }
+      }
+    } catch {}
+    if (!trip) trip = loadTrip()
     setStops(trip.stops || [])
     setLegs(trip.legs || [])
     setSeason(trip.season || 'summer')
@@ -969,6 +986,33 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
   const hasMissingLegs = displayStops.length >= 2 &&
     displayStops.some((stop, i) => i < displayStops.length - 1 && !getLeg(stop.slug, displayStops[i + 1].slug))
 
+  // ── Partage URL ─────────────────────────────────────────────────────────────
+  function buildShareUrl() {
+    const data = {
+      d: departure ? { l: departure.label, la: departure.lat, ln: departure.lng } : null,
+      s: stops.map(s => ({ sl: s.slug, t: s.title, la: s.lat, ln: s.lng, on: s.overnight || false, ex: s.extra || [] })),
+      se: season,
+    }
+    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))))
+    return `${window.location.origin}/${lang}/planifier?trip=${encoded}`
+  }
+
+  function handleShare() {
+    const url = buildShareUrl()
+    if (navigator.share) {
+      navigator.share({ title: t.page_title, url })
+    } else {
+      navigator.clipboard.writeText(url).then(() => {
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2500)
+      })
+    }
+  }
+
+  function handlePrint() {
+    window.print()
+  }
+
   // ── Render ──────────────────────────────────────────────────────────────────
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -987,9 +1031,24 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
           {hasMissingLegs && !computing && (
             <button onClick={retryMissingLegs} className="text-sm text-amber-700 bg-amber-50 border border-amber-300 px-3 py-2 rounded-lg hover:bg-amber-100 transition-colors">↻ Recalculer</button>
           )}
-          {(stops.length > 0 || departure) && (
+          {(stops.length > 0 || departure) && (<>
+            {/* Partager */}
+            <button onClick={handleShare} className="flex items-center gap-1.5 text-sm text-quebec-blue border border-quebec-blue/30 px-3 py-2 rounded-lg hover:bg-quebec-blue/5 transition-colors font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+              </svg>
+              {copied ? (t.share_copied ?? '✓ Lien copié !') : (t.share ?? 'Partager')}
+            </button>
+            {/* Imprimer */}
+            <button onClick={handlePrint} className="flex items-center gap-1.5 text-sm text-gray-600 border border-gray-200 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              {t.print ?? 'Imprimer'}
+            </button>
+            {/* Vider */}
             <button onClick={clearAll} className="text-sm text-red-500 hover:text-red-700 border border-red-200 px-3 py-2 rounded-lg hover:bg-red-50 transition-colors">{t.clear_all}</button>
-          )}
+          </>)}
         </div>
       </div>
 
@@ -1179,6 +1238,69 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
             </div>
           </div>
         )}
+      </div>
+
+      {/* ── LAYOUT IMPRESSION — caché à l'écran, visible uniquement à l'impression ── */}
+      <div className="hidden print:block print-layout">
+        <div className="print-header">
+          <div>
+            <div className="print-logo">J'AIME LE QUÉBEC</div>
+            <div className="print-sub">jaimelequebec.com · Votre guide touristique du Québec</div>
+          </div>
+          <div className="print-title-block">
+            <div className="print-title">{t.page_title}</div>
+            <div className="print-meta">
+              {season === 'summer' ? '☀️ Été' : '❄️ Hiver'} ·{' '}
+              {Math.round(totalKm * 10) / 10} km · {fmtTime(totalMin)}
+            </div>
+          </div>
+        </div>
+
+        <table className="print-table">
+          <tbody>
+            {displayStops.map((stop, i) => {
+              const leg = i < displayStops.length - 1
+                ? getLeg(stop.slug, displayStops[i + 1].slug)
+                : null
+              const cumul = legCumul[i]
+              return (
+                <tr key={stop.slug} className={stop.overnight ? 'print-overnight' : ''}>
+                  <td className="print-num">{i + 1}</td>
+                  <td className="print-stop">
+                    <strong>{stop.isCustomDeparture ? `🏁 ${stop.title}` : stop.title}</strong>
+                    {stop.overnight && <span className="print-badge">🌙 Nuit</span>}
+                    {stop.isPort && <span className="print-badge">🚢 Traversier</span>}
+                    {stop.extra?.length > 0 && (
+                      <div className="print-extras">{stop.extra.map(e => e.label).join(' · ')}</div>
+                    )}
+                  </td>
+                  <td className="print-leg">
+                    {leg && leg.distanceKm ? `${leg.distanceKm} km` : ''}
+                  </td>
+                  <td className="print-time">
+                    {leg ? fmtTime(legTotalMin(leg)) : ''}
+                  </td>
+                  <td className="print-cumul">
+                    {cumul ? `${cumul.cumulKm} km` : ''}
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan={2} className="print-total-label">Total</td>
+              <td className="print-leg">{Math.round(totalKm * 10) / 10} km</td>
+              <td className="print-time print-bold">{fmtTime(totalMin)}</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div className="print-footer">
+          Itinéraire généré sur <strong>jaimelequebec.com</strong> —
+          guide touristique indépendant du Québec depuis 2008
+        </div>
       </div>
 
       {/* Map */}

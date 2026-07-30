@@ -280,6 +280,9 @@ const hi = {
     nav_waze_hint: '→ अंतिम गंतव्य',
     departure_change: 'बदलें',
     departure_hint: 'पहले अपना प्रस्थान शहर दर्ज करें।',
+    share: 'साझा करें',
+    share_copied: '✓ लिंक कॉपी!',
+    print: 'प्रिंट',
   },
 }
 

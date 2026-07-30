@@ -280,6 +280,9 @@ const zh = {
     nav_waze_hint: '→ 最终目的地',
     departure_change: '更改',
     departure_hint: '请先输入您的出发城市。',
+    share: '分享',
+    share_copied: '✓ 链接已复制！',
+    print: '打印',
   },
 }
 
