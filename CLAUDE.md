@@ -175,6 +175,13 @@ atteint à 100% — reprendre au point exact dans une nouvelle session.
       doublon nav supprimé, emoji road trip retiré, 2 boutons hero (annuaire + activités),
       texte bienvenue sous hero, bouton "Consulter tout l'annuaire" sous coups de cœur,
       bandeau "Planifiez" supprimé, Viator en bas /sites, GetYourGuide en bas /activites.
+- [x] Session 14 (2026-07-30) — Refonte accueil : nouveau hero (uppercase + 1 CTA), texte
+      bienvenue avec lien Facebook 55k membres, carousel CoupsDeCoeur (3 par page). Footer
+      redesigné (logo image, 4 colonnes). Header : barre recherche intégrée. 9e langue —
+      italien complet (dictionnaire + InstallPrompt + header + middleware). Nouveau composant
+      CoupsDeCoeurCarousel. Page /sources-comprendre-le-quebecois (livre KDP Philippe Goupil)
+      + assets livres/ (couverture + registre PDF). lib/citiesQC.js : 399 villes QC pour
+      l'autocomplétion road trip. Déployé : 2 151 pages statiques (+243 vs session 13).
 
 ## Décisions techniques prises
 - Images toujours stockées localement dans le projet, jamais en lien
