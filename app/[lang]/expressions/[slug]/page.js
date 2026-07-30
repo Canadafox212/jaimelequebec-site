@@ -170,10 +170,7 @@ export default async function ExpressionPage({ params }) {
                   ? '300 Quebec expressions with etymologies, examples and humor — by Philippe Goupil.'
                   : '300 expressions québécoises avec étymologies, exemples et humour — par Philippe Goupil.'}
               </p>
-              <a href="https://www.amazon.fr" target="_blank" rel="noopener noreferrer sponsored"
-                className="inline-block mt-3 bg-white text-quebec-navy text-xs font-bold px-4 py-2 rounded-full hover:bg-blue-100 transition-colors">
-                {isEn ? 'See on Amazon →' : 'Voir sur Amazon →'}
-              </a>
+              {/* Lien Amazon à activer après publication du livre */}
             </div>
           </div>
 
