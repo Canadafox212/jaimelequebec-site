@@ -32,15 +32,20 @@ function buildMap(L, el, legs, displayStops) {
 
   const allPoints = []
 
-  // Polylines from ORS geometry
   legs.forEach(leg => {
-    if (!leg.geometry) return
-    const pts = decodePolyline(leg.geometry)
-    allPoints.push(...pts)
-    L.polyline(pts, { color: '#1a3a5c', weight: 4, opacity: 0.85 }).addTo(map)
+    if (leg.geometry) {
+      // Tracé ORS précis (le long des routes)
+      const pts = decodePolyline(leg.geometry)
+      allPoints.push(...pts)
+      L.polyline(pts, { color: '#1a3a5c', weight: 4, opacity: 0.85 }).addTo(map)
+    } else if (leg.fromLat != null && leg.toLat != null) {
+      // Ligne droite provisoire en pointillés (en attente ORS ou traversier)
+      const pts = [[leg.fromLat, leg.fromLng], [leg.toLat, leg.toLng]]
+      allPoints.push(...pts)
+      L.polyline(pts, { color: '#94a3b8', weight: 2, opacity: 0.6, dashArray: '8 8' }).addTo(map)
+    }
   })
 
-  // Stop markers
   displayStops.forEach((stop, i) => {
     if (!stop.lat || !stop.lng) return
     allPoints.push([stop.lat, stop.lng])
@@ -73,30 +78,18 @@ function buildMap(L, el, legs, displayStops) {
   return map
 }
 
+// Le parent passe une `key` basée sur les géométries : React démonte/remonte
+// automatiquement ce composant quand les tracés changent, garantissant un build propre.
 export default function PlanifierMap({ legs, displayStops }) {
   const divRef = useRef(null)
   const mapRef = useRef(null)
-  const legsRef = useRef(legs)
-  const stopsRef = useRef(displayStops)
-
-  // Stable key: only rebuild when geometry or stop positions actually change
-  const mapKey = JSON.stringify([
-    legs.map(l => l.geometry),
-    displayStops.map(s => [s.slug, s.lat, s.lng, s.overnight, s.isPort, s.isCustomDeparture]),
-  ])
-
-  useEffect(() => {
-    legsRef.current = legs
-    stopsRef.current = displayStops
-  })
 
   useEffect(() => {
     if (!divRef.current) return
-    if (mapRef.current) { mapRef.current.remove(); mapRef.current = null }
 
     function setup() {
       if (!divRef.current || mapRef.current) return
-      mapRef.current = buildMap(window.L, divRef.current, legsRef.current, stopsRef.current)
+      mapRef.current = buildMap(window.L, divRef.current, legs, displayStops)
     }
 
     if (window.L) {
@@ -125,7 +118,7 @@ export default function PlanifierMap({ legs, displayStops }) {
     return () => {
       if (mapRef.current) { mapRef.current.remove(); mapRef.current = null }
     }
-  }, [mapKey]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div

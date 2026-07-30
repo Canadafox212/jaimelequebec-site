@@ -1,11 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import AttractionCard from '@/components/AttractionCard'
-import { getAllAttractions, getFiltres } from '@/lib/attractions'
+import CoupsDeCoeurCarousel from '@/components/CoupsDeCoeurCarousel'
+import { getAllAttractions, getAttractionImageSrc } from '@/lib/attractions'
 import { getCoupsDeCoeur } from '@/lib/activites'
-import { getAllArticles } from '@/lib/articles'
 import { getDictionary, LANGS, getAlternates } from '@/lib/i18n'
-import { bookingRegionUrl, discovercarsUrl } from '@/lib/affiliates'
 import { notFound } from 'next/navigation'
 
 export async function generateStaticParams() {
@@ -28,10 +26,9 @@ export default async function HomePage({ params }) {
   const t = getDictionary(lang)
   if (!t) notFound()
   const attractions = getAllAttractions()
-  const filtres = getFiltres()
   const coups = getCoupsDeCoeur(6)
-  const featured = coups.length ? coups : attractions.slice(0, 6)
-  const recentArticles = getAllArticles().slice(0, 3)
+  const featuredRaw = coups.length ? coups : attractions.slice(0, 6)
+  const featured = featuredRaw.map((a) => ({ ...a, imageSrc: getAttractionImageSrc(a.slug) }))
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -62,240 +59,245 @@ export default async function HomePage({ params }) {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-quebec-navy/50 via-quebec-navy/35 to-quebec-navy/65" />
 
-        <div className="relative max-w-5xl mx-auto px-4 py-16 md:py-24 text-center flex flex-col items-center justify-center min-h-[480px] md:min-h-[560px]">
-          <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight mb-6">
-            {lang === 'fr' ? (
-              <>Découvrez le<br /><span className="text-quebec-red">vrai Québec</span></>
-            ) : lang === 'en' ? (
-              <>Discover the<br /><span className="text-quebec-red">real Québec</span></>
-            ) : (
-              t.home.hero_title
-            )}
+        <div className="relative max-w-4xl mx-auto px-4 py-20 md:py-28 text-center flex flex-col items-center justify-center min-h-[520px] md:min-h-[600px]">
+          <h1 className="font-display text-4xl md:text-6xl font-bold leading-tight mb-5 uppercase tracking-wide drop-shadow-lg">
+            {t.home.hero_title}
           </h1>
 
-          <p className="text-xl md:text-2xl text-blue-100 max-w-2xl mx-auto leading-relaxed mb-8">
+          <p className="text-lg md:text-xl text-blue-100 max-w-xl mx-auto leading-relaxed mb-10 italic">
             {t.home.hero_subtitle}
           </p>
 
-          <div className="flex flex-wrap gap-3 justify-center">
-            <Link
-              href={`/${lang}/sites`}
-              className="inline-block bg-quebec-blue text-white text-sm font-bold px-8 py-3.5 rounded-full hover:bg-blue-800 transition-colors shadow-xl whitespace-nowrap"
-            >
-              {t.home.explore_all}
-            </Link>
-            <Link
-              href={`/${lang}/activites`}
-              className="inline-block bg-white/20 backdrop-blur text-white border border-white/40 text-sm font-bold px-8 py-3.5 rounded-full hover:bg-white/30 transition-colors shadow-xl whitespace-nowrap"
-            >
-              {t.home.explore_activities}
-            </Link>
+          <Link
+            href={`/${lang}/sites`}
+            className="inline-block bg-quebec-blue text-white text-base font-bold px-10 py-4 rounded-full hover:bg-blue-800 transition-colors shadow-xl"
+          >
+            {t.home.hero_cta ?? "J'Y VAIS !"}
+          </Link>
+
+          {/* Chevrons défilement */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5 opacity-70 animate-bounce">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 -mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
         </div>
       </section>
 
 
       {/* ── TEXTE D'ACCUEIL ──────────────────────────────────────────── */}
-      <section className="bg-quebec-cream border-b border-gray-100">
-        <div className="max-w-3xl mx-auto px-4 py-10 text-center">
-          <p className="text-gray-700 text-base md:text-lg leading-relaxed">
-            {t.home.welcome_text}
+      <section className="bg-white border-b border-gray-100">
+        <div className="max-w-3xl mx-auto px-4 py-14 text-center">
+          <h2 className="font-display text-xl md:text-2xl font-bold text-quebec-navy mb-6 uppercase tracking-wide">
+            {t.home.welcome_title}
+          </h2>
+          <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-8">
+            {t.home.welcome_text_pre}
+            <a
+              href="https://www.facebook.com/groups/jaimelequebec"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-quebec-blue hover:underline"
+            >
+              {t.home.welcome_facebook_label}
+            </a>
+            {t.home.welcome_text_mid}
+            <Link href={`/${lang}/sites`} className="font-semibold text-quebec-blue hover:underline">
+              {t.home.welcome_sites_label}
+            </Link>
+            {t.home.welcome_text_post}
           </p>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <Link
+              href={`/${lang}/a-propos`}
+              className="inline-block border-2 border-quebec-navy text-quebec-navy font-bold px-6 py-3 rounded-full hover:bg-quebec-navy hover:text-white transition-colors text-sm"
+            >
+              {t.home.welcome_cta_about}
+            </Link>
+            <Link
+              href={`/${lang}/sites`}
+              className="inline-block bg-quebec-blue text-white font-bold px-6 py-3 rounded-full hover:bg-blue-800 transition-colors text-sm shadow-md"
+            >
+              {t.home.welcome_cta_sites}
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* ── ATTRACTIONS EN VEDETTE ────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-4 py-16">
-        <div className="flex items-end justify-between mb-8 gap-4 flex-wrap">
-          <div>
-            <p className="text-xs font-bold text-quebec-gold uppercase tracking-widest mb-1">
-              {t.home.editors_picks}
-            </p>
-            <h2 className="font-display text-3xl font-bold text-gray-900">{t.home.featured_title}</h2>
+      {/* ── COUPS DE CŒUR ────────────────────────────────────────────── */}
+      <section className="bg-quebec-blue py-14 px-4">
+        {/* En-tête */}
+        <div className="flex flex-col items-center mb-10 text-center">
+          {/* Icône médaillon */}
+          <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center mb-4 shadow-lg">
+            <span className="text-quebec-blue text-2xl leading-none">⚜</span>
           </div>
-          <Link
-            href={`/${lang}/sites`}
-            className="text-sm font-semibold text-quebec-blue hover:text-blue-800 transition-colors whitespace-nowrap"
-          >
-            {t.home.see_all}
-          </Link>
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
+            {lang === 'fr' ? 'Nos coups de cœur à ne pas manquer'
+              : lang === 'en' ? 'Our top picks not to be missed'
+              : t.home.featured_title}
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featured.map((a) => (
-            <AttractionCard key={a.id} attraction={a} lang={lang} t={t} />
-          ))}
+        {/* Carrousel */}
+        <div className="max-w-6xl mx-auto">
+          <CoupsDeCoeurCarousel attractions={featured} lang={lang} t={t} />
         </div>
 
+        {/* Bouton bas */}
         <div className="text-center mt-10">
           <Link
             href={`/${lang}/sites`}
-            className="inline-block bg-quebec-navy text-white font-bold px-8 py-3.5 rounded-full hover:bg-quebec-blue transition-colors shadow-md text-sm"
+            className="inline-block border-2 border-white text-white font-bold px-10 py-3.5 rounded-full hover:bg-white hover:text-quebec-blue transition-colors text-sm"
           >
-            {t.home.see_all_annuaire}
+            {lang === 'fr' ? 'ACCÉDER AUX 200 SITES'
+              : lang === 'en' ? 'ACCESS ALL 200 SITES'
+              : t.home.see_all_annuaire?.toUpperCase() ?? 'ACCÉDER AUX 200 SITES'}
           </Link>
         </div>
-
       </section>
 
-      {/* ── EXPLORER PAR RÉGION ──────────────────────────────────────── */}
-      <section className="bg-white border-t border-gray-100 py-14 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-6">
-            <p className="text-xs font-bold text-quebec-gold uppercase tracking-widest mb-1">
-              {t.home.regions_count}
-            </p>
-            <h2 className="font-display text-3xl font-bold text-gray-900">
-              {t.home.explore_by_region}
-            </h2>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {filtres.regions.map((r) => (
-              <Link
-                key={r.num}
-                href={`/${lang}/sites?region=${r.num}`}
-                className="bg-slate-100 hover:bg-quebec-blue hover:text-white text-gray-700 text-sm font-medium px-4 py-2 rounded-full transition-all hover:shadow-md"
-              >
-                {r[`nom_${lang}`] ?? r.nom_en ?? r.nom_fr}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── J'AIME LE QUÉBEC, C'EST AUSSI… ──────────────────────────── */}
+      <section className="bg-white py-16 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-quebec-blue text-center uppercase tracking-wide mb-12">
+            {lang === 'fr' ? "J'aime le Québec, c'est aussi…"
+              : lang === 'en' ? "J'aime le Québec is also…"
+              : lang === 'es' ? "J'aime le Québec también es…"
+              : lang === 'de' ? "J'aime le Québec ist auch…"
+              : lang === 'pt' ? "J'aime le Québec é também…"
+              : "J'aime le Québec, c'est aussi…"}
+          </h2>
 
-      {/* ── DERNIERS ARTICLES ─────────────────────────────────────── */}
-      {recentArticles.length > 0 && (
-        <section className="bg-quebec-cream border-t border-gray-100 py-14 px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex items-end justify-between mb-8 gap-4 flex-wrap">
-              <div>
-                <p className="text-xs font-bold text-quebec-gold uppercase tracking-widest mb-1">
-                  {t.home.articles_label}
-                </p>
-                <h2 className="font-display text-3xl font-bold text-gray-900">{t.home.articles_title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+
+            {/* ── Activités ── */}
+            <div className="flex flex-col items-center text-center px-8 py-6">
+              <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mb-5 shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-quebec-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
               </div>
+              <h3 className="font-display font-bold text-gray-900 uppercase text-sm tracking-wide leading-snug mb-3">
+                {lang === 'fr' ? '650 activités à faire selon vos envies'
+                  : lang === 'en' ? '650 activities to suit your tastes'
+                  : lang === 'es' ? '650 actividades según sus gustos'
+                  : lang === 'de' ? '650 Aktivitäten nach Ihren Wünschen'
+                  : lang === 'pt' ? '650 atividades ao seu gosto'
+                  : '650 activités à faire selon vos envies'}
+              </h3>
+              <p className="text-sm text-gray-500 leading-relaxed mb-6">
+                {lang === 'fr' ? 'Pour vous faire plaisir tout au long de votre voyage.'
+                  : lang === 'en' ? 'Enjoy them throughout your entire trip.'
+                  : lang === 'es' ? 'Para disfrutar durante todo su viaje.'
+                  : lang === 'de' ? 'Für Ihr Vergnügen auf der ganzen Reise.'
+                  : lang === 'pt' ? 'Para aproveitar durante toda a sua viagem.'
+                  : 'Pour vous faire plaisir tout au long de votre voyage.'}
+              </p>
+              <Link
+                href={`/${lang}/activites`}
+                className="inline-block bg-quebec-blue text-white font-bold text-xs px-6 py-2.5 rounded-full hover:bg-blue-800 transition-colors"
+              >
+                {t.nav.activities.toUpperCase()}
+              </Link>
+            </div>
+
+            {/* ── Road trip ── */}
+            <div className="flex flex-col items-center text-center px-8 py-6">
+              <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mb-5 shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-quebec-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l5.447-2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m0 10V7" />
+                </svg>
+              </div>
+              <h3 className="font-display font-bold text-gray-900 uppercase text-sm tracking-wide leading-snug mb-3">
+                {lang === 'fr' ? 'Un estimateur de temps de trajet (road trip)'
+                  : lang === 'en' ? 'A road trip travel time estimator'
+                  : lang === 'es' ? 'Un estimador de tiempo de viaje (road trip)'
+                  : lang === 'de' ? 'Ein Reisezeitrechner für Ihren Road Trip'
+                  : lang === 'pt' ? 'Um estimador de tempo de viagem (road trip)'
+                  : 'Un estimateur de temps de trajet (road trip)'}
+              </h3>
+              <p className="text-sm text-gray-500 leading-relaxed mb-6">
+                {lang === 'fr' ? 'Pour construire votre itinéraire et déterminer les étapes de votre voyage.'
+                  : lang === 'en' ? 'Build your itinerary and plan the stages of your trip.'
+                  : lang === 'es' ? 'Para construir su itinerario y determinar las etapas de su viaje.'
+                  : lang === 'de' ? 'Erstellen Sie Ihre Route und planen Sie die Etappen Ihrer Reise.'
+                  : lang === 'pt' ? 'Para construir o seu itinerário e determinar as etapas da sua viagem.'
+                  : 'Pour construire votre itinéraire et déterminer les étapes de votre voyage.'}
+              </p>
+              <Link
+                href={`/${lang}/planifier`}
+                className="inline-block bg-quebec-blue text-white font-bold text-xs px-6 py-2.5 rounded-full hover:bg-blue-800 transition-colors"
+              >
+                {t.nav.roadtrip?.toUpperCase() ?? 'ROAD TRIP'}
+              </Link>
+            </div>
+
+            {/* ── Articles ── */}
+            <div className="flex flex-col items-center text-center px-8 py-6">
+              <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mb-5 shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-quebec-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+              </div>
+              <h3 className="font-display font-bold text-gray-900 uppercase text-sm tracking-wide leading-snug mb-3">
+                {lang === 'fr' ? 'Des articles aux thématiques variées'
+                  : lang === 'en' ? 'Articles on varied themes'
+                  : lang === 'es' ? 'Artículos sobre temas variados'
+                  : lang === 'de' ? 'Artikel zu verschiedenen Themen'
+                  : lang === 'pt' ? 'Artigos sobre temas variados'
+                  : 'Des articles aux thématiques variées'}
+              </h3>
+              <p className="text-sm text-gray-500 leading-relaxed mb-6">
+                {lang === 'fr' ? "Pour vous informer sur le Québec et être au courant des dernières actualités."
+                  : lang === 'en' ? 'Stay informed about Québec and keep up with the latest news.'
+                  : lang === 'es' ? 'Para informarse sobre Québec y estar al día de las últimas noticias.'
+                  : lang === 'de' ? 'Um sich über Québec zu informieren und auf dem Laufenden zu bleiben.'
+                  : lang === 'pt' ? 'Para se informar sobre o Québec e ficar a par das últimas notícias.'
+                  : "Pour vous informer sur le Québec et être au courant des dernières actualités."}
+              </p>
               <Link
                 href={`/${lang}/articles`}
-                className="text-sm font-semibold text-quebec-blue hover:text-blue-800 transition-colors whitespace-nowrap"
+                className="inline-block bg-quebec-blue text-white font-bold text-xs px-6 py-2.5 rounded-full hover:bg-blue-800 transition-colors"
               >
-                {t.home.articles_cta}
+                {t.nav.articles.toUpperCase()}
               </Link>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {recentArticles.map((a) => {
-                const content = a[lang] || a.en || a.fr
-                return (
-                  <Link
-                    key={a.slug}
-                    href={`/${lang}/articles/${a.slug}`}
-                    className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200"
-                  >
-                    <div className="relative h-44 overflow-hidden">
-                      {a.photo && (a.photo.startsWith('/') || a.photo.startsWith('http')) ? (
-                        <Image
-                          src={a.photo}
-                          alt={content.titre}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          sizes="(max-width: 640px) 100vw, 33vw"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-quebec-blue to-quebec-navy flex items-center justify-center">
-                          <span className="text-4xl">📰</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-4 flex flex-col gap-1 flex-1">
-                      {a.region && (
-                        <p className="text-xs font-medium text-quebec-blue">{a.region}</p>
-                      )}
-                      <h3 className="font-display font-bold text-base text-gray-900 group-hover:text-quebec-blue transition-colors leading-snug">
-                        {content.titre}
-                      </h3>
-                      <p className="text-sm text-gray-500 line-clamp-2">{content.resume}</p>
-                      <p className="mt-auto pt-2 text-sm font-bold text-quebec-blue group-hover:underline">
-                        {t.articles.read}
-                      </p>
-                    </div>
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-      )}
 
-      {/* ── ROAD TRIP ─────────────────────────────────────────────── */}
-      <section className="bg-gradient-to-r from-quebec-navy to-quebec-blue text-white py-14 px-4">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16">
-          <div className="flex-1 text-center md:text-left">
-            <p className="text-xs font-bold text-blue-300 uppercase tracking-widest mb-2">
-              {t.home.roadtrip_label}
-            </p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">
-              {t.home.roadtrip_title}
-            </h2>
-            <p className="text-blue-100 text-base mb-6 max-w-xl">
-              {t.home.roadtrip_desc}
-            </p>
-            <Link
-              href={`/${lang}/planifier`}
-              className="inline-block bg-white text-quebec-navy font-bold px-8 py-3.5 rounded-full hover:bg-blue-50 transition-colors shadow-lg text-sm"
-            >
-              {t.home.roadtrip_cta}
-            </Link>
-          </div>
-          <div className="hidden md:block text-right shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-28 h-28 text-blue-300 opacity-60" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
-            </svg>
           </div>
         </div>
       </section>
 
-      {/* ── LOCATION DE VOITURES ──────────────────────────────────── */}
-      <section className="bg-amber-50 border-t border-amber-100 py-14 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-xs font-bold text-amber-600 uppercase tracking-widest mb-2">
-            {t.home.voiture_label}
-          </p>
-          <h2 className="font-display text-3xl font-bold text-gray-900 mb-3">
-            {t.home.voiture_title}
-          </h2>
-          <p className="text-gray-600 text-base mb-7 max-w-xl mx-auto">
-            {t.home.voiture_desc}
-          </p>
-          <a
-            href={discovercarsUrl(null, lang)}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="inline-block bg-amber-500 text-white font-bold px-8 py-3.5 rounded-full hover:bg-amber-600 transition-colors shadow-lg text-sm"
-          >
-            {t.home.voiture_cta}
-          </a>
+      {/* ── CONTACT CTA ───────────────────────────────────────────── */}
+      <section className="relative bg-quebec-navy overflow-hidden py-16 px-4">
+        {/* Filigrane décoratif */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none opacity-5">
+          <span className="text-white font-bold" style={{ fontSize: '28rem', lineHeight: 1 }}>⚜</span>
         </div>
-      </section>
 
-      {/* ── HÉBERGEMENT ───────────────────────────────────────────── */}
-      <section className="bg-white border-t border-gray-100 py-14 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-xs font-bold text-quebec-gold uppercase tracking-widest mb-2">
-            {t.home.hebergement_label}
-          </p>
-          <h2 className="font-display text-3xl font-bold text-gray-900 mb-3">
-            {t.home.hebergement_title}
+        <div className="relative text-center max-w-2xl mx-auto">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-white uppercase tracking-wide mb-8">
+            {lang === 'fr' ? 'Une question ? Contactez-nous !'
+              : lang === 'en' ? 'A question? Contact us!'
+              : lang === 'es' ? '¿Una pregunta? ¡Contáctenos!'
+              : lang === 'de' ? 'Eine Frage? Kontaktieren Sie uns!'
+              : lang === 'pt' ? 'Uma pergunta? Contacte-nos!'
+              : 'Une question ? Contactez-nous !'}
           </h2>
-          <p className="text-gray-600 text-base mb-7 max-w-xl mx-auto">
-            {t.home.hebergement_desc}
-          </p>
-          <a
-            href={bookingRegionUrl(lang)}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="inline-block bg-[#003580] text-white font-bold px-8 py-3.5 rounded-full hover:bg-[#00224f] transition-colors shadow-lg text-sm"
+          <Link
+            href={`/${lang}/contact`}
+            className="inline-block bg-quebec-blue text-white font-bold px-10 py-4 rounded-full hover:bg-blue-700 transition-colors shadow-lg text-sm tracking-wide"
           >
-            {t.home.hebergement_cta}
-          </a>
+            {lang === 'fr' ? 'ACCÉDER AU FORMULAIRE DE CONTACT'
+              : lang === 'en' ? 'ACCESS THE CONTACT FORM'
+              : lang === 'es' ? 'ACCEDER AL FORMULARIO DE CONTACTO'
+              : lang === 'de' ? 'ZUM KONTAKTFORMULAR'
+              : lang === 'pt' ? 'ACEDER AO FORMULÁRIO DE CONTACTO'
+              : 'ACCÉDER AU FORMULAIRE DE CONTACT'}
+          </Link>
         </div>
       </section>
 

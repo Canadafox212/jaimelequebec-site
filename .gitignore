@@ -21,3 +21,5 @@ FICHIERS FOX/
 data/Images du referentiel placé dans import/
 desktop.ini
 scratchpad/
+
+.env*

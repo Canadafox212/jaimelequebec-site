@@ -58,6 +58,12 @@ const TEXTS = {
     later:   'बाद में',
     ios_hint:'शेयर बटन \u{1F4E4} दबाएं, फिर «होम स्क्रीन में जोड़ें» चुनें',
   },
+  it: {
+    cta:     "Aggiungi J'aime le Québec alla schermata home",
+    install: 'Installa',
+    later:   'Più tardi',
+    ios_hint:"Tocca il pulsante Condividi \u{1F4E4} poi «Aggiungi alla schermata Home»",
+  },
 }
 
 export default function InstallPrompt({ lang = 'fr' }) {

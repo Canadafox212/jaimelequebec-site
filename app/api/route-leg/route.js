@@ -1,3 +1,5 @@
+export const runtime = 'edge'
+
 export async function POST(request) {
   try {
     const { fromLat, fromLng, toLat, toLng } = await request.json()

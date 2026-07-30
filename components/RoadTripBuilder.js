@@ -5,6 +5,7 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { routeCacheGet, routeCacheSet } from '@/lib/routeCache'
 import { bookingSearchUrl } from '@/lib/affiliates'
+import { CITIES_QC } from '@/lib/citiesQC'
 
 const PlanifierMap = dynamic(() => import('./PlanifierMap'), { ssr: false })
 
@@ -27,7 +28,7 @@ function saveTrip(trip) {
 }
 
 function norm(s) {
-  return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+  return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/-/g, ' ')
 }
 
 function fmtTime(min) {
@@ -61,19 +62,69 @@ const FERRIES = [
     crossingMin: 65,
     note: 'La traversée la plus rapide du fleuve Saint-Laurent.',
   },
+  {
+    id: 'souris-capmaux',
+    name: 'Souris (Î.-P.-É.) ↔ Cap-aux-Meules (Îles-de-la-Madeleine)',
+    company: 'CTMA',
+    url: 'https://www.ctma.ca/fr/traversier',
+    south: 'Souris, Î.-P.-É.',   southLat: 46.3527, southLng: -62.2558,
+    northSide: 'Cap-aux-Meules', northLat: 47.3810, northLng: -61.8621,
+    crossingMin: 300,
+    mandatory: true,
+    note: 'Seul accès aux Îles-de-la-Madeleine par bateau. Réservation à l\'avance obligatoire — saison d\'été très chargée.',
+  },
 ]
 
-function getSuggestedFerries(fromLat, fromLng, toLat, toLng, distanceKm) {
-  if (!distanceKm || distanceKm < 300) return []
-  const inEstuary = (lat, lng) => lat > 46.5 && lat < 51 && lng > -73 && lng < -62
-  if (!inEstuary(fromLat, fromLng) || !inEstuary(toLat, toLng)) return []
-  const inEastern   = (lat, lng) => lat > 47 && lng > -68
-  const inWestNorth = (lat, lng) => lng < -68
-  if ((inEastern(fromLat, fromLng) && inWestNorth(toLat, toLng)) ||
-      (inEastern(toLat, toLng)     && inWestNorth(fromLat, fromLng))) {
-    return distanceKm > 300 ? [FERRIES[0], FERRIES[1]] : [FERRIES[0]]
+// ── Shore classification ──────────────────────────────────────────────────────
+// Gaspésie / sud-est : rive sud est de Matane, connectée par route 132 sans traverser
+const isGaspesie = (lat, lng) => lat > 47.5 && lng > -68.5
+// Îles-de-la-Madeleine : archipel isolé dans le golfe, aucun accès routier
+const isIlesMadeleine = (lat, lng) => lat > 47.0 && lat < 48.0 && lng > -62.5 && lng < -61.0
+
+// Rive nord : Charlevoix + Côte-Nord (accessible uniquement par traversier depuis la rive sud est)
+// La "ligne de rive sud" monte vers l'est : à lng=-70.5 lat~47.1, à lng=-69.5 lat~47.9
+const isNorthShore = (lat, lng) => {
+  // Côte-Nord (Baie-Comeau 49.22°N, Godbout 49.32°N, Sept-Îles 50.2°N)
+  // Seuil 49.2 pour ne pas classer Matane (48.85°N) ou Ste-Anne-des-Monts (49.12°N) comme rive nord
+  if (lat > 49.2 && lng > -72 && lng < -60) return true
+  // Charlevoix + Tadoussac : au-dessus de la ligne de rive sud (avec marge 0.1°)
+  if (lng > -71.5 && lng < -69.0) {
+    const southBankLat = 47.1 + 0.85 * (lng + 70.5)
+    return lat > southBankLat
   }
-  return []
+  return false
+}
+
+// Bas-Saint-Laurent rive sud (Rivière-du-Loup, Rimouski) : entre lng -70.5 et -68.5, pas rive nord
+const isBSL = (lat, lng) =>
+  lat > 47 && lat < 49 && lng > -70.5 && lng < -68.5 && !isNorthShore(lat, lng)
+
+function getSuggestedFerries(fromLat, fromLng, toLat, toLng, distanceKm) {
+  const ferries = []
+
+  // Îles-de-la-Madeleine : traversier obligatoire (aucun accès routier), avant le garde de distance
+  const fromIdlM = isIlesMadeleine(fromLat, fromLng)
+  const toIdlM   = isIlesMadeleine(toLat, toLng)
+  if (fromIdlM !== toIdlM) {
+    ferries.push(FERRIES[2])
+    return ferries
+  }
+
+  if (!distanceKm || distanceKm < 150) return ferries
+
+  // Matane ↔ Baie-Comeau : utile quand Gaspésie ↔ rive nord (Côte-Nord ou Charlevoix)
+  if ((isGaspesie(fromLat, fromLng) && isNorthShore(toLat, toLng)) ||
+      (isNorthShore(fromLat, fromLng) && isGaspesie(toLat, toLng))) {
+    ferries.push(FERRIES[0])
+  }
+
+  // Rivière-du-Loup ↔ Saint-Siméon : utile quand Bas-Saint-Laurent ↔ rive nord
+  if ((isBSL(fromLat, fromLng) && isNorthShore(toLat, toLng)) ||
+      (isNorthShore(fromLat, fromLng) && isBSL(toLat, toLng))) {
+    ferries.push(FERRIES[1])
+  }
+
+  return ferries
 }
 
 // ─── Popular cities (instant, no API) ────────────────────────────────────────
@@ -102,7 +153,7 @@ const QUICK_CITIES = [
   { label: 'Maniwaki, Québec',                     lat: 46.3833, lng: -75.9667 },
   { label: 'Wakefield, Québec',                    lat: 45.6417, lng: -75.9167 },
   // ── Capitale-Nationale ────────────────────────────────────────────
-  { label: 'Québec (ville)',                        lat: 46.8139, lng: -71.2082 },
+  { label: 'Québec, Québec',                         lat: 46.8139, lng: -71.2082 },
   { label: 'Lévis, Québec',                         lat: 46.7129, lng: -71.1740 },
   { label: 'Saint-Raymond, Québec',                lat: 46.8861, lng: -71.8331 },
   // ── Charlevoix ────────────────────────────────────────────────────
@@ -192,7 +243,7 @@ function DepartureInput({ value, onSelect, t }) {
   const debounce = useRef(null)
   const wrapRef  = useRef(null)
 
-  useEffect(() => { setQuery(value?.label ?? '') }, [value])
+  useEffect(() => { setQuery(value?.label?.split(',')[0] ?? '') }, [value])
 
   useEffect(() => {
     function handler(e) {
@@ -203,10 +254,18 @@ function DepartureInput({ value, onSelect, t }) {
   }, [])
 
   const q = norm(query.trim())
-  const quickMatches = q.length < 2 ? [] : QUICK_CITIES.filter(c => norm(c.label).includes(q)).slice(0, 5)
+  const quickMatches = q.length < 2 ? [] : QUICK_CITIES.filter(c => norm(c.label.split(',')[0]).includes(q)).slice(0, 4)
+  const cityMatches  = q.length < 2 ? [] : CITIES_QC
+    .filter(c => norm(c).includes(q) && !quickMatches.some(qc => norm(qc.label).startsWith(norm(c) + ',')))
+    .slice(0, 5)
+    .map(c => ({ label: `${c}, Québec`, _name: c }))
   const allResults = [
     ...quickMatches,
-    ...orsResults.filter(r => !quickMatches.some(qc => norm(qc.label) === norm(r.label))),
+    ...cityMatches,
+    ...orsResults.filter(r =>
+      !quickMatches.some(qc => norm(qc.label) === norm(r.label)) &&
+      !cityMatches.some(cm => norm(cm.label) === norm(r.label))
+    ),
   ].slice(0, 8)
 
   function handleChange(e) {
@@ -225,6 +284,20 @@ function DepartureInput({ value, onSelect, t }) {
       } catch { setOrs([]) }
       setLoading(false)
     }, 800)
+  }
+
+  async function selectQcCity(cityName) {
+    setQuery(cityName)
+    setOpen(false)
+    setOrs([])
+    setLoading(true)
+    try {
+      const res  = await fetch(`/api/geocode?q=${encodeURIComponent(cityName + ', Québec, Canada')}`)
+      const data = await res.json()
+      const first = data.results?.[0]
+      if (first) onSelect({ ...first, label: cityName })
+    } catch {}
+    setLoading(false)
   }
 
   return (
@@ -250,15 +323,21 @@ function DepartureInput({ value, onSelect, t }) {
         </div>
       )}
       {open && allResults.length > 0 && (
-        <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-30 overflow-hidden">
+        <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-[1100] overflow-hidden">
           {allResults.map((r, i) => (
             <button
               key={i}
-              onMouseDown={() => { onSelect(r); setQuery(r.label); setOpen(false); setOrs([]) }}
+              onMouseDown={() => {
+                if (r._name) {
+                  selectQcCity(r._name)
+                } else {
+                  onSelect(r); setQuery(r.label.split(',')[0]); setOpen(false); setOrs([])
+                }
+              }}
               className="w-full text-left px-4 py-2.5 text-sm hover:bg-blue-50 transition-colors flex items-center gap-2"
             >
-              <span className="text-gray-400">📍</span>
-              <span>{r.label}</span>
+              <span className="text-gray-400">{r._name ? '🏘️' : '📍'}</span>
+              <span>{r._name ? r._name : r.label.split(',')[0]}</span>
             </button>
           ))}
         </div>
@@ -273,6 +352,7 @@ function StopCard({ stop, index, lang, onRemove, removeLabel, onMoveUp, onMoveDo
   const isDep  = stop.isCustomDeparture
   const isOvn  = !!stop.overnight
   const isPort = !!stop.isPort
+  const isCity = !!stop.isCity
   const ferry  = isPort ? FERRIES.find(f => f.id === stop.ferryId) : null
 
   return (
@@ -303,9 +383,10 @@ function StopCard({ stop, index, lang, onRemove, removeLabel, onMoveUp, onMoveDo
         <p className="font-semibold text-quebec-navy text-sm truncate">{stop.title}</p>
         {isDep  && <p className="text-xs text-blue-500">{stop.subtitle ?? ''}</p>}
         {isPort && ferry && <p className="text-xs text-cyan-700">Traversée vers {ferry.northSide} : {fmtTime(ferry.crossingMin)}</p>}
-        {!isDep && !isPort && (
+        {!isDep && !isPort && !isCity && (
           <Link href={`/${lang}/sites/${stop.pageSlug || stop.slug}`} className="text-xs text-gray-400 hover:text-quebec-blue transition-colors">Voir la fiche →</Link>
         )}
+        {isCity && <p className="text-xs text-gray-400">📍 Étape ville</p>}
         {isOvn && <p className="text-xs text-purple-600 font-medium mt-0.5">Étape nuit</p>}
       </div>
 
@@ -399,7 +480,7 @@ function LegConnector({ leg, legIndex, legBase, legTotal, cumulKm, stopTypes, op
         <div className="bg-cyan-50 border border-cyan-200 rounded-lg overflow-hidden">
           <button onClick={() => setFerryOpen(v => !v)}
             className="w-full flex items-center justify-between px-3 py-2 text-sm text-cyan-800 font-medium hover:bg-cyan-100 transition-colors">
-            <span>🚢 Traversier disponible sur ce tronçon</span>
+            <span>🚢 {suggestedFerries.some(f => f.mandatory) ? 'Traversier obligatoire sur ce tronçon' : 'Traversier disponible sur ce tronçon'}</span>
             <span className="text-cyan-400 text-xs">{ferryOpen ? '▲' : '▼'}</span>
           </button>
           {ferryOpen && (
@@ -435,7 +516,7 @@ function OvernightPanel({ stop, attractions }) {
   const slug = stop.pageSlug || stop.slug
   const attr = attractions.find(a => a.slug === slug)
   const h = attr?.hebergement
-  const ville = attr?.ville || attr?.region || ''
+  const ville = (attr?.ville || attr?.region || stop.title || '').split(',')[0].trim()
 
   const bookingUrl = bookingSearchUrl(ville, 'fr')
 
@@ -451,7 +532,7 @@ function OvernightPanel({ stop, attractions }) {
         <p className="text-xs font-bold text-purple-800">🏨 Hébergements à proximité</p>
         <a href={bookingUrl} target="_blank" rel="noopener noreferrer"
           className="text-xs bg-blue-600 text-white px-2.5 py-0.5 rounded-full hover:bg-blue-700 transition-colors shrink-0">
-          Booking.com →
+          Voir les disponibilités →
         </a>
       </div>
       {tiers.length > 0 ? (
@@ -471,7 +552,7 @@ function OvernightPanel({ stop, attractions }) {
           )))}
         </div>
       ) : (
-        <p className="text-xs text-purple-600 italic">Rechercher sur Booking.com pour cette étape.</p>
+        <p className="text-xs text-purple-600 italic">Rechercher des hébergements pour cette étape.</p>
       )}
     </div>
   )
@@ -479,26 +560,54 @@ function OvernightPanel({ stop, attractions }) {
 
 // ─── AttractionDropdown ───────────────────────────────────────────────────────
 
-function AttractionDropdown({ filtered, onSelect, lang }) {
+function AttractionDropdown({ cities, filtered, onSelectCity, onSelect, lang }) {
   return (
-    <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-30 overflow-hidden max-h-72 overflow-y-auto">
-      {filtered.map((a) => {
-        const title = lang === 'fr' ? a.titleFr : (a.titleEn || a.titleFr)
-        return (
-          <button key={a.slug} onMouseDown={() => onSelect(a)} className="w-full text-left px-4 py-2.5 text-sm hover:bg-blue-50 transition-colors flex items-center gap-3">
-            {a.image && <Image src={a.image} alt={title} width={32} height={32} className="w-8 h-8 rounded-md object-cover shrink-0" />}
-            <div className="min-w-0">
-              <span className="text-gray-800 block truncate">{title}</span>
-              <span className="text-xs text-gray-400">{a.region}</span>
-            </div>
-          </button>
-        )
-      })}
+    <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-[1100] overflow-hidden max-h-72 overflow-y-auto">
+      {cities.length > 0 && (
+        <>
+          <div className="px-4 py-1.5 text-xs font-bold text-gray-400 uppercase tracking-wider bg-gray-50 border-b border-gray-100">Villes</div>
+          {cities.map((c, i) => (
+            <button key={i} onMouseDown={() => onSelectCity(c)} className="w-full text-left px-4 py-2.5 text-sm hover:bg-blue-50 transition-colors flex items-center gap-3">
+              <span className="text-gray-400 shrink-0">📍</span>
+              <span className="text-gray-800">{c.label.split(',')[0]}</span>
+            </button>
+          ))}
+        </>
+      )}
+      {filtered.length > 0 && (
+        <>
+          {cities.length > 0 && <div className="px-4 py-1.5 text-xs font-bold text-gray-400 uppercase tracking-wider bg-gray-50 border-t border-b border-gray-100">Sites touristiques</div>}
+          {filtered.map((a) => {
+            const title = lang === 'fr' ? a.titleFr : (a.titleEn || a.titleFr)
+            return (
+              <button key={a.slug} onMouseDown={() => onSelect(a)} className="w-full text-left px-4 py-2.5 text-sm hover:bg-blue-50 transition-colors flex items-center gap-3">
+                {a.image && <Image src={a.image} alt={title} width={32} height={32} className="w-8 h-8 rounded-md object-cover shrink-0" />}
+                <div className="min-w-0">
+                  <span className="text-gray-800 block truncate">{title}</span>
+                  <span className="text-xs text-gray-400">{a.region}</span>
+                </div>
+              </button>
+            )
+          })}
+        </>
+      )}
     </div>
   )
 }
 
 // ─── Main component ───────────────────────────────────────────────────────────
+
+function haversineKm(lat1, lng1, lat2, lng2) {
+  const R = 6371, toRad = d => d * Math.PI / 180
+  const dLat = toRad(lat2 - lat1), dLng = toRad(lng2 - lng1)
+  const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng/2)**2
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+}
+// Estimation routière instantanée (~40% de plus que la ligne droite, ~85 km/h moy.)
+function quickEstimate(fromStop, toStop) {
+  const km = Math.round(haversineKm(fromStop.lat, fromStop.lng, toStop.lat, toStop.lng) * 1.4)
+  return { distanceKm: km, durationMin: Math.round(km / 85 * 60), geometry: null, estimated: true }
+}
 
 export default function RoadTripBuilder({ lang, t, attractions }) {
   const [stops, setStops]         = useState([])
@@ -552,24 +661,28 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
     const missing = []
     for (let i = 0; i < dStops.length - 1; i++) {
       const from = dStops[i], to = dStops[i + 1]
-      if (!legs.some(l => l.fromSlug === from.slug && l.toSlug === to.slug && l.distanceKm !== null))
-        missing.push({ from, to })
+      // Relancer si absent OU si estimé sans géométrie (rechargement de page)
+      // Ne pas relancer les legs null intentionnels (traversier, îles) : estimated === undefined
+      const legOk = legs.some(l => l.fromSlug === from.slug && l.toSlug === to.slug && (!l.estimated || l.geometry))
+      if (!legOk) missing.push({ from, to })
     }
-    if (missing.length === 0) return
+    if (missing.length === 0) { autoComputeRef.current = false; return }
 
     setComputing(true)
-    Promise.all(missing.map(({ from, to }) => computeRoute(from, to))).then(routes => {
-      setLegs(prev => {
-        let next = [...prev]
-        routes.forEach((route, idx) => {
-          const { from, to } = missing[idx]
-          next = next.filter(l => !(l.fromSlug === from.slug && l.toSlug === to.slug))
-          if (route.distanceKm) next.push(mkLeg(from, to, route))
+    let done = 0
+    missing.forEach(({ from, to }) => {
+      computeRoute(from, to).then(route => {
+        done++
+        // Toujours stocker le leg (même distanceKm null) pour éviter les retentes infinies
+        setLegs(prev => {
+          const next = prev.filter(l => !(l.fromSlug === from.slug && l.toSlug === to.slug))
+          return [...next, mkLeg(from, to, route)]
         })
-        return next
+        if (done === missing.length) {
+          setComputing(false)
+          autoComputeRef.current = false
+        }
       })
-      setComputing(false)
-      autoComputeRef.current = false
     })
   }, [departure, stops, legs])
 
@@ -593,14 +706,22 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
     { key: 'ev',        label: t.stop_ev,        minutes: t.stop_ev_min },
   ]
 
-  // Accent-insensitive attraction search (min 3 chars) — duplicates allowed
+  // City search in stop dropdown — match only on city name (before the comma, not province)
+  const cityFiltered = query.trim().length < 2 ? [] :
+    QUICK_CITIES.filter(c => norm(c.label.split(',')[0]).includes(norm(query.trim()))).slice(0, 5)
+
+  // Accent-insensitive attraction search (min 3 chars)
   const filtered = query.trim().length < 3 ? [] : attractions.filter(a => {
     const title = lang === 'fr' ? a.titleFr : (a.titleEn || a.titleFr)
     return norm(title).includes(norm(query))
-  }).slice(0, 8)
+  }).slice(0, 6)
 
   // ── Route API with cache + geometry ─────────────────────────────────────────
   async function computeRoute(fromStop, toStop) {
+    // Îles-de-la-Madeleine : aucune route terrestre possible, ne pas appeler ORS
+    if (isIlesMadeleine(fromStop.lat, fromStop.lng) || isIlesMadeleine(toStop.lat, toStop.lng)) {
+      return { distanceKm: null, durationMin: null, geometry: null }
+    }
     const cached = routeCacheGet(fromStop.lat, fromStop.lng, toStop.lat, toStop.lng)
     if (cached) return cached
     try {
@@ -621,12 +742,30 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
   // ── Departure ───────────────────────────────────────────────────────────────
   async function handleDepartureSelect(city) {
     setDeparture(city)
-    if (stops.length > 0) {
-      setComputing(true)
-      const depStop = { slug: '__departure__', lat: city.lat, lng: city.lng }
-      const route = await computeRoute(depStop, stops[0])
-      setLegs(prev => [mkLeg(depStop, stops[0], route), ...prev.filter(l => l.fromSlug !== '__departure__')])
-      setComputing(false)
+    if (stops.length === 0) return
+    const depStop = { slug: '__departure__', lat: city.lat, lng: city.lng }
+    const currentStops = stops
+    const firstIsIdlM = isIlesMadeleine(currentStops[0].lat, currentStops[0].lng)
+    const sourisPresent = currentStops.some(s => s.ferryId === 'souris-capmaux')
+    if (firstIsIdlM && !sourisPresent) {
+      // Auto-insérer Souris entre le départ et les Îles
+      const f = FERRIES[2]
+      const portStop = { slug: '__port__souris-capmaux', title: 'Port de Souris, Î.-P.-É.', lat: f.southLat, lng: f.southLng, isPort: true, ferryId: f.id, ferryCrossingMin: f.crossingMin }
+      const idlMStop = currentStops[0]
+      setStops(prev => { const idx = prev.findIndex(s => isIlesMadeleine(s.lat, s.lng)); const next = [...prev]; if (idx !== -1) next.splice(idx, 0, portStop); return next })
+      setLegs(prev => [mkLeg(depStop, portStop, quickEstimate(depStop, portStop)), mkLeg(portStop, idlMStop, { distanceKm: null, durationMin: null, geometry: null }), ...prev.filter(l => l.fromSlug !== '__departure__')])
+      const route = await computeRoute(depStop, portStop)
+      if (route.distanceKm) {
+        setLegs(prev => { const next = prev.filter(l => !(l.fromSlug === depStop.slug && l.toSlug === portStop.slug && l.estimated)); return [mkLeg(depStop, portStop, route), ...next] })
+      }
+    } else {
+      const firstStop = currentStops[0]
+      const noRoad = isIlesMadeleine(firstStop.lat, firstStop.lng)
+      setLegs(prev => [mkLeg(depStop, firstStop, noRoad ? { distanceKm: null, durationMin: null, geometry: null } : quickEstimate(depStop, firstStop)), ...prev.filter(l => l.fromSlug !== '__departure__')])
+      if (!noRoad) {
+        const route = await computeRoute(depStop, firstStop)
+        if (route.distanceKm) setLegs(prev => [mkLeg(depStop, firstStop, route), ...prev.filter(l => l.fromSlug !== '__departure__')])
+      }
     }
   }
 
@@ -648,17 +787,47 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
       lng:   attraction.lng,
       image: attraction.image || null,
     }
-    setStops(prev => {
-      const fromPoint = prev.length > 0 ? prev[prev.length - 1] : departure ?? null
-      if (fromPoint) {
-        const fromStop = prev.length > 0 ? fromPoint : { slug: '__departure__', lat: fromPoint.lat, lng: fromPoint.lng }
-        setComputing(true)
-        computeRoute(fromStop, newStop).then(route => {
-          setLegs(ll => [...ll, mkLeg(fromStop, newStop, route)])
-          setComputing(false)
-        })
-      }
-      return [...prev, newStop]
+    addStopImpl(newStop)
+  }
+
+  // ── Shared stop-add logic (attraction + city) ───────────────────────────────
+  function addStopImpl(newStop) {
+    const currentStops = stops
+    const fromPoint = currentStops.length > 0 ? currentStops[currentStops.length - 1] : (departure ?? null)
+    if (!fromPoint) { setStops(prev => [...prev, newStop]); return }
+    const fromStop = currentStops.length > 0 ? fromPoint : { slug: '__departure__', lat: fromPoint.lat, lng: fromPoint.lng }
+    const isNewIdlM  = isIlesMadeleine(newStop.lat, newStop.lng)
+    const isFromIdlM = isIlesMadeleine(fromStop.lat, fromStop.lng)
+    const sourisPresent = currentStops.some(s => s.ferryId === 'souris-capmaux') || fromStop.ferryId === 'souris-capmaux'
+    if (isNewIdlM && !isFromIdlM && !sourisPresent) {
+      // Auto-insérer Souris comme port intermédiaire obligatoire
+      const f = FERRIES[2]
+      const portStop = { slug: '__port__souris-capmaux', title: 'Port de Souris, Î.-P.-É.', lat: f.southLat, lng: f.southLng, isPort: true, ferryId: f.id, ferryCrossingMin: f.crossingMin }
+      setLegs(ll => [...ll, mkLeg(fromStop, portStop, quickEstimate(fromStop, portStop)), mkLeg(portStop, newStop, { distanceKm: null, durationMin: null, geometry: null })])
+      computeRoute(fromStop, portStop).then(route => {
+        if (route.distanceKm) setLegs(ll => { const next = ll.filter(l => !(l.fromSlug === fromStop.slug && l.toSlug === portStop.slug && l.estimated)); return [...next, mkLeg(fromStop, portStop, route)] })
+      })
+      setStops(prev => [...prev, portStop, newStop])
+    } else {
+      const noRoad = isFromIdlM || isNewIdlM
+      setLegs(ll => [...ll, mkLeg(fromStop, newStop, noRoad ? { distanceKm: null, durationMin: null, geometry: null } : quickEstimate(fromStop, newStop))])
+      if (!noRoad) computeRoute(fromStop, newStop).then(route => {
+        if (route.distanceKm) setLegs(ll => { const next = ll.filter(l => !(l.fromSlug === fromStop.slug && l.toSlug === newStop.slug && l.estimated)); return [...next, mkLeg(fromStop, newStop, route)] })
+      })
+      setStops(prev => [...prev, newStop])
+    }
+  }
+
+  // ── Add city as intermediate stop ──────────────────────────────────────────
+  function addCityStop(city) {
+    setQuery('')
+    setDropdown(false)
+    addStopImpl({
+      slug:   `__city__${Date.now()}`,
+      title:  city.label.split(',')[0],
+      lat:    city.lat,
+      lng:    city.lng,
+      isCity: true,
     })
   }
 
@@ -674,7 +843,7 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
       ;[next[idx], next[ti]] = [next[ti], next[idx]]
       return next
     })
-    // Clear legs and let auto-recompute rebuild them (uses cache → fast)
+    // Vider tous les legs — l'auto-recompute les recalcule (depuis le cache = rapide)
     setLegs([])
     autoComputeRef.current = false
   }
@@ -694,11 +863,18 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
           ? fromStop
           : { slug: '__departure__', lat: departure?.lat, lng: departure?.lng }
         if (fromSt && toStop && fromSt.lat) {
-          setComputing(true)
-          computeRoute(fromSt, toStop).then(route => {
-            setLegs(ll => [...ll.filter(l => l.toSlug !== toStop.slug), mkLeg(fromSt, toStop, route)])
-            setComputing(false)
-          })
+          const noRoad = isIlesMadeleine(fromSt.lat, fromSt.lng) || isIlesMadeleine(toStop.lat, toStop.lng)
+          setLegs(ll => [...ll.filter(l => l.toSlug !== toStop.slug), mkLeg(fromSt, toStop, noRoad ? { distanceKm: null, durationMin: null, geometry: null } : quickEstimate(fromSt, toStop))])
+          if (!noRoad) {
+            computeRoute(fromSt, toStop).then(route => {
+              if (route.distanceKm) {
+                setLegs(ll => {
+                  const next = ll.filter(l => !(l.toSlug === toStop.slug && l.estimated))
+                  return [...next, mkLeg(fromSt, toStop, route)]
+                })
+              }
+            })
+          }
         }
         return newLegs
       })
@@ -774,7 +950,7 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
   const totalMin   = legs.reduce((s, l) => s + legTotalMin(l), 0) + ferryMin
 
   const displayStops = [
-    ...(departure ? [{ slug: '__departure__', title: departure.label, isCustomDeparture: true, lat: departure.lat, lng: departure.lng }] : []),
+    ...(departure ? [{ slug: '__departure__', title: departure.label.split(',')[0], isCustomDeparture: true, lat: departure.lat, lng: departure.lng }] : []),
     ...stops,
   ]
 
@@ -817,7 +993,7 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="relative z-[10] flex flex-col lg:flex-row gap-6">
 
         {/* Left */}
         <div className="flex-1 min-w-0 space-y-4">
@@ -894,8 +1070,16 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
               autoComplete="off"
               className="w-full border-2 border-dashed border-gray-300 hover:border-quebec-blue focus:border-quebec-blue rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors"
             />
-            {dropdownOpen && filtered.length > 0 && <AttractionDropdown filtered={filtered} onSelect={addStop} lang={lang} />}
-            {dropdownOpen && query.trim().length >= 3 && filtered.length === 0 && (
+            {dropdownOpen && (cityFiltered.length > 0 || filtered.length > 0) && (
+              <AttractionDropdown
+                cities={cityFiltered}
+                filtered={filtered}
+                onSelectCity={addCityStop}
+                onSelect={addStop}
+                lang={lang}
+              />
+            )}
+            {dropdownOpen && query.trim().length >= 3 && filtered.length === 0 && cityFiltered.length === 0 && (
               <p className="mt-2 text-sm text-gray-400 text-center">{t.no_results}</p>
             )}
           </div>
@@ -957,7 +1141,7 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
 
       {/* Map */}
       {displayStops.length >= 2 && (
-        <div className="mt-8">
+        <div className="relative z-[1] mt-8">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-semibold text-quebec-navy">🗺️ Carte de l'itinéraire</h2>
             <button onClick={() => setShowMap(v => !v)}
@@ -965,7 +1149,13 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
               {showMap ? 'Masquer' : 'Afficher la carte'}
             </button>
           </div>
-          {showMap && <PlanifierMap legs={legs} displayStops={displayStops} />}
+          {showMap && (
+            <PlanifierMap
+              key={JSON.stringify(legs.map(l => l.geometry))}
+              legs={legs}
+              displayStops={displayStops}
+            />
+          )}
         </div>
       )}
     </div>
