@@ -276,6 +276,8 @@ const zh = {
     ev_tip: '⚡ 路段 > 260 公里 — 如果驾驶电动车，请计划充电停留（约40分钟）。',
     departure_label: '🏁 出发地',
     departure_placeholder: '出发城市（蒙特利尔、魁北克市、加斯佩…）',
+    nav_open: '打开于…',
+    nav_waze_hint: '→ 最终目的地',
     departure_change: '更改',
     departure_hint: '请先输入您的出发城市。',
   },

@@ -276,6 +276,8 @@ const es = {
     ev_tip: '⚡ Tramo > 260 km — planifique una recarga (~40 min) si viaja en eléctrico.',
     departure_label: '🏁 Punto de partida',
     departure_placeholder: 'Ciudad de salida (Montreal, Québec, Gaspé…)',
+    nav_open: 'Abrir en…',
+    nav_waze_hint: '→ destino final',
     departure_change: 'Cambiar',
     departure_hint: 'Comience indicando su ciudad de salida.',
   },

@@ -286,6 +286,8 @@ const en = {
     ev_tip: '⚡ Leg > 260 km — plan an EV charging stop (~40 min) if you drive electric.',
     departure_label: '🏁 Starting point',
     departure_placeholder: 'Departure city (Montreal, Quebec City, Gaspé…)',
+    nav_open: 'Open in…',
+    nav_waze_hint: '→ final destination',
     departure_change: 'Change',
     departure_hint: 'Start by entering your departure city.',
   },

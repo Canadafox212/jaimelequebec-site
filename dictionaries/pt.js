@@ -276,6 +276,8 @@ const pt = {
     ev_tip: '⚡ Trecho > 260 km — pense em recarregar (~40 min) se viajar em elétrico.',
     departure_label: '🏁 Ponto de partida',
     departure_placeholder: 'Cidade de partida (Montreal, Québec, Gaspé…)',
+    nav_open: 'Abrir em…',
+    nav_waze_hint: '→ destino final',
     departure_change: 'Alterar',
     departure_hint: 'Comece por indicar a sua cidade de partida.',
   },

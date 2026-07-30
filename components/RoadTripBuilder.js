@@ -1133,6 +1133,48 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
                   )}
                   <p className="mt-3 text-xs text-gray-400 leading-relaxed">{t.tip}</p>
                 </div>
+
+                {/* ── Boutons navigation ── */}
+                {displayStops.length >= 2 && displayStops.every(s => s.lat && s.lng) && (
+                  <div className="border-t border-gray-100 pt-4 space-y-2">
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
+                      {t.nav_open ?? 'Ouvrir dans…'}
+                    </p>
+                    {/* Google Maps */}
+                    <a
+                      href={`https://www.google.com/maps/dir/${displayStops.map(s => `${s.lat},${s.lng}`).join('/')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 w-full px-4 py-2.5 rounded-xl border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors text-sm font-semibold text-gray-700"
+                    >
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0" fill="none">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#4285F4"/>
+                        <circle cx="12" cy="9" r="2.5" fill="white"/>
+                      </svg>
+                      Google Maps
+                    </a>
+                    {/* Waze — destination finale */}
+                    <a
+                      href={`https://www.waze.com/ul?ll=${displayStops[displayStops.length - 1].lat},${displayStops[displayStops.length - 1].lng}&navigate=yes`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 w-full px-4 py-2.5 rounded-xl border border-gray-200 hover:border-cyan-400 hover:bg-cyan-50 transition-colors text-sm font-semibold text-gray-700"
+                    >
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0" fill="none">
+                        <circle cx="12" cy="10" r="8" fill="#33CCFF"/>
+                        <circle cx="9.5" cy="9" r="1.2" fill="white"/>
+                        <circle cx="14.5" cy="9" r="1.2" fill="white"/>
+                        <path d="M9 13c.8 1.2 5.2 1.2 6 0" stroke="white" strokeWidth="1.2" strokeLinecap="round"/>
+                        <path d="M8 19l4-3 4 3" fill="#33CCFF" stroke="#33CCFF"/>
+                      </svg>
+                      Waze
+                      <span className="text-xs text-gray-400 font-normal ml-auto">
+                        {t.nav_waze_hint ?? '→ destination finale'}
+                      </span>
+                    </a>
+                  </div>
+                )}
+
               </div>
             </div>
           </div>

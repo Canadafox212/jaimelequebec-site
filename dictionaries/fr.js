@@ -289,6 +289,8 @@ const fr = {
     ev_tip: '⚡ Tronçon > 260 km — pensez à prévoir une recharge (~40 min) si vous roulez en électrique.',
     departure_label: '🏁 Point de départ',
     departure_placeholder: 'Ville de départ (Montréal, Québec, Gaspé…)',
+    nav_open: 'Ouvrir dans…',
+    nav_waze_hint: '→ destination finale',
     departure_change: 'Changer',
     departure_hint: 'Commencez par indiquer votre ville de départ.',
   },

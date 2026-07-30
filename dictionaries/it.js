@@ -289,6 +289,8 @@ const it = {
     ev_tip: '⚡ Tratta > 260 km — prevedete una ricarica (~40 min) se viaggiate in elettrico.',
     departure_label: '🏁 Punto di partenza',
     departure_placeholder: 'Città di partenza (Montréal, Québec, Gaspé…)',
+    nav_open: 'Apri in…',
+    nav_waze_hint: '→ destinazione finale',
     departure_change: 'Cambia',
     departure_hint: 'Inizia indicando la tua città di partenza.',
   },

@@ -276,6 +276,8 @@ const de = {
     ev_tip: '⚡ Abschnitt > 260 km — planen Sie eine Ladestation (~40 min) für Ihr Elektroauto ein.',
     departure_label: '🏁 Startpunkt',
     departure_placeholder: 'Abfahrtsstadt (Montreal, Québec, Gaspé…)',
+    nav_open: 'Öffnen in…',
+    nav_waze_hint: '→ Endziel',
     departure_change: 'Ändern',
     departure_hint: 'Geben Sie zunächst Ihre Abfahrtsstadt ein.',
   },
