@@ -418,12 +418,19 @@ function StopCard({ stop, index, lang, onRemove, removeLabel, onMoveUp, onMoveDo
               <button onClick={() => onSetNights(nights - 1)} title="Retirer une nuit"
                 className="w-5 h-7 flex items-center justify-center text-xs font-bold text-purple-400 hover:text-purple-700 hover:bg-purple-100 rounded transition-colors">−</button>
             )}
-            <button onClick={() => onSetNights(Math.min(14, nights + 1))}
-              title={isOvn ? `${nights} nuit${nights > 1 ? 's' : ''} — ajouter une nuit` : 'Dormir ici'}
-              className={`flex items-center gap-0.5 px-1.5 py-1 rounded-lg text-sm transition-colors ${isOvn ? 'text-purple-500 bg-purple-100 hover:bg-purple-200' : 'text-gray-300 hover:text-purple-400 hover:bg-purple-50'}`}>
-              <span>🌙</span>
-              {nights > 1 && <span className="text-xs font-bold leading-none">{nights}</span>}
-            </button>
+            <div className="relative group">
+              <button onClick={() => onSetNights(Math.min(14, nights + 1))}
+                className={`flex items-center gap-0.5 px-1.5 py-1 rounded-lg text-sm transition-colors ${isOvn ? 'text-purple-500 bg-purple-100 hover:bg-purple-200' : 'text-gray-300 hover:text-purple-400 hover:bg-purple-50'}`}>
+                <span>🌙</span>
+                {nights > 1 && <span className="text-xs font-bold leading-none">{nights}</span>}
+              </button>
+              <div className="absolute bottom-full right-0 mb-1.5 hidden group-hover:block z-20 pointer-events-none">
+                <div className="bg-gray-800 text-white text-xs rounded-lg px-2.5 py-1.5 whitespace-nowrap shadow-lg">
+                  {isOvn ? 'Cliquer pour ajouter une nuit de plus' : 'Cliquer pour dormir ici'}
+                  <div className="absolute top-full right-3 border-4 border-transparent border-t-gray-800" />
+                </div>
+              </div>
+            </div>
           </div>
         )}
         <button onClick={onRemove} title={removeLabel} className="text-gray-300 hover:text-red-400 transition-colors p-1">
