@@ -11,8 +11,15 @@
 /* ── STYLES IMPRESSION ROAD TRIP ─────────────────────────────────────────── */
 @media print {
   /* Masquer tout sauf le layout d'impression */
-  body > * { display: none !important; }
-  .print-layout { display: block !important; }
+  * { visibility: hidden; }
+  .print-layout, .print-layout * { visibility: visible; }
+
+  .print-layout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 
   /* Reset page */
   @page { margin: 1.5cm 2cm; size: A4; }
