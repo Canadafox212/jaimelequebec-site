@@ -112,9 +112,11 @@ function getSuggestedFerries(fromLat, fromLng, toLat, toLng, distanceKm) {
 
   if (!distanceKm || distanceKm < 150) return ferries
 
-  // Matane ↔ Baie-Comeau : utile quand Gaspésie ↔ rive nord (Côte-Nord ou Charlevoix)
-  if ((isGaspesie(fromLat, fromLng) && isNorthShore(toLat, toLng)) ||
-      (isNorthShore(fromLat, fromLng) && isGaspesie(toLat, toLng))) {
+  // Matane ↔ Baie-Comeau : utile uniquement Gaspésie ↔ vraie Côte-Nord (Baie-Comeau 49.22°N, Sept-Îles 50.2°N)
+  // NE PAS déclencher pour Québec, Charlevoix, Saguenay — accessibles par route sans traversier
+  const isCoteNord = (la, lo) => la > 49.0 && lo > -72 && lo < -60
+  if ((isGaspesie(fromLat, fromLng) && isCoteNord(toLat, toLng)) ||
+      (isCoteNord(fromLat, fromLng) && isGaspesie(toLat, toLng))) {
     ferries.push(FERRIES[0])
   }
 
