@@ -66,7 +66,7 @@ const FERRIES = [
     id: 'souris-capmaux',
     name: 'Souris (Î.-P.-É.) ↔ Cap-aux-Meules (Îles-de-la-Madeleine)',
     company: 'CTMA',
-    url: 'https://www.ctma.ca',
+    url: 'https://www.traversierctma.ca/fr/',
     south: 'Souris, Î.-P.-É.',   southLat: 46.3527, southLng: -62.2558,
     northSide: 'Cap-aux-Meules', northLat: 47.3810, northLng: -61.8621,
     crossingMin: 300,
