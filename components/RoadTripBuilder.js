@@ -350,9 +350,10 @@ function DepartureInput({ value, onSelect, t }) {
 
 // ─── StopCard ─────────────────────────────────────────────────────────────────
 
-function StopCard({ stop, index, lang, onRemove, removeLabel, onMoveUp, onMoveDown, canMoveUp, canMoveDown, onToggleOvernight }) {
+function StopCard({ stop, index, lang, onRemove, removeLabel, onMoveUp, onMoveDown, canMoveUp, canMoveDown, onSetNights }) {
   const isDep  = stop.isCustomDeparture
-  const isOvn  = !!stop.overnight
+  const nights = stop.nights ?? (stop.overnight ? 1 : 0)
+  const isOvn  = nights > 0
   const isPort = !!stop.isPort
   const isCity = !!stop.isCity
   const ferry  = isPort ? FERRIES.find(f => f.id === stop.ferryId) : null
@@ -389,14 +390,24 @@ function StopCard({ stop, index, lang, onRemove, removeLabel, onMoveUp, onMoveDo
           <Link href={`/${lang}/sites/${stop.pageSlug || stop.slug}`} className="text-xs text-gray-400 hover:text-quebec-blue transition-colors">Voir la fiche →</Link>
         )}
         {isCity && <p className="text-xs text-gray-400">📍 Étape ville</p>}
-        {isOvn && <p className="text-xs text-purple-600 font-medium mt-0.5">Étape nuit</p>}
+        {isOvn && <p className="text-xs text-purple-600 font-medium mt-0.5">{nights === 1 ? 'Étape nuit' : `${nights} nuits`}</p>}
       </div>
 
       {/* Actions */}
       <div className="flex items-center shrink-0 gap-0.5">
         {!isDep && !isPort && (
-          <button onClick={onToggleOvernight} title={isOvn ? 'Retirer étape nuit' : 'Dormir ici'}
-            className={`p-1.5 rounded-lg text-sm transition-colors ${isOvn ? 'text-purple-500 bg-purple-100 hover:bg-purple-200' : 'text-gray-300 hover:text-purple-400 hover:bg-purple-50'}`}>🌙</button>
+          <div className="flex items-center gap-0.5">
+            {isOvn && (
+              <button onClick={() => onSetNights(nights - 1)} title="Retirer une nuit"
+                className="w-5 h-7 flex items-center justify-center text-xs font-bold text-purple-400 hover:text-purple-700 hover:bg-purple-100 rounded transition-colors">−</button>
+            )}
+            <button onClick={() => onSetNights(Math.min(14, nights + 1))}
+              title={isOvn ? `${nights} nuit${nights > 1 ? 's' : ''} — ajouter une nuit` : 'Dormir ici'}
+              className={`flex items-center gap-0.5 px-1.5 py-1 rounded-lg text-sm transition-colors ${isOvn ? 'text-purple-500 bg-purple-100 hover:bg-purple-200' : 'text-gray-300 hover:text-purple-400 hover:bg-purple-50'}`}>
+              <span>🌙</span>
+              {nights > 1 && <span className="text-xs font-bold leading-none">{nights}</span>}
+            </button>
+          </div>
         )}
         <button onClick={onRemove} title={removeLabel} className="text-gray-300 hover:text-red-400 transition-colors p-1">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -637,7 +648,7 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
           departure: data.d ? { label: data.d.l, lat: data.d.la, lng: data.d.ln } : null,
           stops: (data.s || []).map(s => ({
             slug: s.sl, title: s.t, lat: s.la, lng: s.ln,
-            overnight: s.on || false, extra: s.ex || [],
+            nights: typeof s.on === 'number' ? s.on : (s.on ? 1 : 0), extra: s.ex || [],
           })),
           legs: [],
           season: data.se || 'summer',
@@ -901,9 +912,9 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
     })
   }
 
-  // ── Overnight toggle ────────────────────────────────────────────────────────
-  function toggleOvernight(slug) {
-    setStops(prev => prev.map(s => s.slug === slug ? { ...s, overnight: !s.overnight } : s))
+  // ── Nights counter ───────────────────────────────────────────────────────────
+  function setNights(slug, n) {
+    setStops(prev => prev.map(s => s.slug === slug ? { ...s, nights: Math.max(0, n) } : s))
   }
 
   // ── Add ferry port ────────────────────────────────────────────────────────────
@@ -992,7 +1003,7 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
   function buildShareUrl() {
     const data = {
       d: departure ? { l: departure.label, la: departure.lat, ln: departure.lng } : null,
-      s: stops.map(s => ({ sl: s.slug, t: s.title, la: s.lat, ln: s.lng, on: s.overnight || false, ex: s.extra || [] })),
+      s: stops.map(s => ({ sl: s.slug, t: s.title, la: s.lat, ln: s.lng, on: s.nights ?? (s.overnight ? 1 : 0), ex: s.extra || [] })),
       se: season,
     }
     const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))))
@@ -1085,9 +1096,9 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
                       onMoveDown={() => moveStop(stop.slug, 'down')}
                       canMoveUp={!stop.isCustomDeparture && stopIdx > 0}
                       canMoveDown={!stop.isCustomDeparture && stopIdx < stops.length - 1}
-                      onToggleOvernight={() => toggleOvernight(stop.slug)}
+                      onSetNights={(n) => setNights(stop.slug, n)}
                     />
-                    {stop.overnight && !stop.isCustomDeparture && !stop.isPort && (
+                    {(stop.nights ?? (stop.overnight ? 1 : 0)) > 0 && !stop.isCustomDeparture && !stop.isPort && (
                       <OvernightPanel stop={stop} attractions={attractions} />
                     )}
                     {i < displayStops.length - 1 && (() => {
@@ -1169,7 +1180,7 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
                         </div>
                         <div className="text-gray-400 text-xs mt-0.5 flex items-center gap-1">
                           <span>{toLabel}{leg.distanceKm ? ` · ${leg.distanceKm} km` : ''}</span>
-                          {toStop?.overnight && <span title="Étape nuit">🌙</span>}
+                          {(toStop?.nights ?? (toStop?.overnight ? 1 : 0)) > 0 && <span title="Étape nuit">🌙</span>}
                           {toStop?.isPort && <span title="Port traversier">🚢</span>}
                         </div>
                         {toStop?.isPort && <div className="text-xs text-cyan-600 mt-0.5">+ Traversée {fmtTime(toStop.ferryCrossingMin)}</div>}
@@ -1266,11 +1277,11 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
                 : null
               const cumul = legCumul[i]
               return (
-                <tr key={stop.slug} className={stop.overnight ? 'print-overnight' : ''}>
+                <tr key={stop.slug} className={((stop.nights ?? (stop.overnight ? 1 : 0)) > 0) ? 'print-overnight' : ''}>
                   <td className="print-num">{i + 1}</td>
                   <td className="print-stop">
                     <strong>{stop.isCustomDeparture ? `🏁 ${stop.title}` : stop.title}</strong>
-                    {stop.overnight && <span className="print-badge">🌙 Nuit</span>}
+                    {(() => { const n = stop.nights ?? (stop.overnight ? 1 : 0); return n > 0 ? <span className="print-badge">🌙 {n === 1 ? 'Nuit' : `${n} nuits`}</span> : null })()}
                     {stop.isPort && <span className="print-badge">🚢 Traversier</span>}
                     {stop.extra?.length > 0 && (
                       <div className="print-extras">{stop.extra.map(e => e.label).join(' · ')}</div>
