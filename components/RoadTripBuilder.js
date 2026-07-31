@@ -630,7 +630,7 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
     try {
       const param = new URLSearchParams(window.location.search).get('trip')
       if (param) {
-        const data = JSON.parse(atob(param))
+        const data = JSON.parse(decodeURIComponent(escape(atob(param))))
         trip = {
           departure: data.d ? { label: data.d.l, lat: data.d.la, lng: data.d.ln } : null,
           stops: (data.s || []).map(s => ({
