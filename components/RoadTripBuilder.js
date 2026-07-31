@@ -73,6 +73,16 @@ const FERRIES = [
     mandatory: true,
     note: 'Seul accès aux Îles-de-la-Madeleine par bateau. Réservation à l\'avance obligatoire — saison d\'été très chargée.',
   },
+  {
+    id: 'tp-escoumins',
+    name: 'Trois-Pistoles ↔ Les Escoumins',
+    company: 'Compagnie de navigation des Basques',
+    url: 'https://www.traversiertp.com',
+    south: 'Trois-Pistoles', southLat: 48.1192, southLng: -69.1788,
+    northSide: 'Les Escoumins', northLat: 48.3567, northLng: -69.5186,
+    crossingMin: 75,
+    note: 'Liaison saisonnière (mai–octobre). Réseau privé — réservation recommandée. Raccourci BSL ↔ Haute-Côte-Nord sans passer par Matane.',
+  },
 ]
 
 // ── Shore classification ──────────────────────────────────────────────────────
@@ -124,6 +134,13 @@ function getSuggestedFerries(fromLat, fromLng, toLat, toLng, distanceKm) {
   if ((isBSL(fromLat, fromLng) && isNorthShore(toLat, toLng)) ||
       (isNorthShore(fromLat, fromLng) && isBSL(toLat, toLng))) {
     ferries.push(FERRIES[1])
+  }
+
+  // Trois-Pistoles ↔ Les Escoumins : alternative privée BSL ↔ Haute-Côte-Nord (mai–oct)
+  // Utile sur les mêmes tronçons que RDL-StSimeon — l'utilisateur choisit
+  if ((isBSL(fromLat, fromLng) && isNorthShore(toLat, toLng)) ||
+      (isNorthShore(fromLat, fromLng) && isBSL(toLat, toLng))) {
+    ferries.push(FERRIES[3])
   }
 
   return ferries
