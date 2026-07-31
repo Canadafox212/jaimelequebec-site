@@ -10,6 +10,7 @@ import { dicts, LANGS, getAlternates } from '@/lib/i18n'
 import { bookingSearchUrl } from '@/lib/affiliates'
 import labelI18n from '@/data/activity-labels-i18n.json'
 import servicesData from '@/data/services.json'
+import animauxData from '@/data/animaux.json'
 
 export async function generateStaticParams() {
   const attractions = getAllAttractions()
@@ -67,6 +68,9 @@ export default async function AttractionPage({ params }) {
   const isFr = lang === 'fr'
   const { ete: activitesEte, hiver: activitesHiver } = getActivitesForPage(attraction)
   const imageSrc = getAttractionImageSrc(slug)
+
+  // Badge animaux — chercher si ce slug est dans l'inventaire
+  const animauxInfo = animauxData.find(a => a.slug_attraction === slug) ?? null
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -172,6 +176,33 @@ export default async function AttractionPage({ params }) {
               <h1 className="font-display text-3xl md:text-5xl font-bold text-gray-900 leading-tight">{title}</h1>
             </div>
           </>
+        )}
+
+        {/* Badge animaux */}
+        {animauxInfo && (
+          <Link
+            href={`/${lang}/animaux`}
+            className={`inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-sm font-semibold border transition-colors no-underline ${
+              animauxInfo.chiens === 'OUI'     ? 'bg-green-50 text-green-800 border-green-300 hover:bg-green-100' :
+              animauxInfo.chiens === 'PARTIEL' ? 'bg-amber-50 text-amber-800 border-amber-300 hover:bg-amber-100' :
+                                                 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100'
+            }`}
+          >
+            <span>{animauxInfo.chiens === 'OUI' ? '🐕' : animauxInfo.chiens === 'PARTIEL' ? '⚠️' : '🚫'}</span>
+            <span>
+              {lang === 'fr'
+                ? animauxInfo.chiens === 'OUI'     ? 'Chiens acceptés'
+                : animauxInfo.chiens === 'PARTIEL' ? 'Accès partiel — animaux'
+                :                                    'Chiens interdits'
+                : animauxInfo.chiens === 'OUI'     ? 'Dogs welcome'
+                : animauxInfo.chiens === 'PARTIEL' ? 'Partial pet access'
+                :                                    'Dogs forbidden'
+              }
+            </span>
+            {animauxInfo.laisse_m > 0 && (
+              <span className="opacity-70 font-normal">· laisse {animauxInfo.laisse_m} m max</span>
+            )}
+          </Link>
         )}
 
         {/* Résumé */}

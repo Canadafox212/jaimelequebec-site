@@ -7,6 +7,7 @@ const de = {
     articles: 'Über Québec informieren',
     roadtrip: 'Road trip planen',
     expressions: 'Québecer Wörter',
+    animaux: 'Mit dem Hund reisen',
     search_placeholder: 'Sehenswürdigkeit suchen…',
     search_label: 'Suchen',
   },

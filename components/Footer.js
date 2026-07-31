@@ -95,6 +95,11 @@ export default function Footer({ t, lang }) {
                   {t.nav.expressions ?? 'Expressions québécoises'}
                 </Link>
               </li>
+              <li>
+                <Link href={`/${lang}/animaux`} className="text-slate-400 hover:text-white transition-colors">
+                  🐕 {lang === 'fr' ? 'Voyager avec votre chien' : 'Travel with your dog'}
+                </Link>
+              </li>
             </ul>
           </div>
 

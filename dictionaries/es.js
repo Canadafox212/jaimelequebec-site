@@ -7,6 +7,7 @@ const es = {
     articles: 'Informarse sobre Québec',
     roadtrip: 'Planear road trip',
     expressions: 'Hablar québécois',
+    animaux: 'Viajar con su perro',
     search_placeholder: 'Buscar un sitio…',
     search_label: 'Buscar',
   },

@@ -7,6 +7,7 @@ const ru = {
     articles: 'О Квебеке',
     roadtrip: 'Маршрут',
     expressions: 'Слова Квебека',
+    animaux: 'Путешествие с собакой',
     search_placeholder: 'Поиск места…',
     search_label: 'Поиск',
   },

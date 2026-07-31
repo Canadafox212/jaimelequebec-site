@@ -52,6 +52,7 @@ export default function Header({ lang, t }) {
   const isArticles = pathname.startsWith(`/${lang}/articles`)
   const isPlan     = pathname.startsWith(`/${lang}/planifier`)
   const isExpr     = pathname.startsWith(`/${lang}/expressions`)
+  const isAnimaux  = pathname.startsWith(`/${lang}/animaux`)
 
   const navLinkClass = (active) =>
     `px-3 py-1.5 rounded-lg transition-colors text-xs font-semibold whitespace-nowrap ${
@@ -100,6 +101,9 @@ export default function Header({ lang, t }) {
           </Link>
           <Link href={`/${lang}/expressions`} className={navLinkClass(isExpr)}>
             {t.nav.expressions ?? 'Expressions'}
+          </Link>
+          <Link href={`/${lang}/animaux`} className={navLinkClass(isAnimaux)}>
+            🐕 {t.nav.animaux ?? 'Voyager avec son chien'}
           </Link>
         </nav>
 
@@ -211,8 +215,11 @@ export default function Header({ lang, t }) {
             <Link href={`/${lang}/articles`} onClick={() => setMenuOpen(false)} className={`py-3 px-2 border-b border-gray-100 text-sm font-semibold ${isArticles ? 'text-quebec-blue' : 'text-quebec-navy'}`}>
               {t.nav.articles}
             </Link>
-            <Link href={`/${lang}/expressions`} onClick={() => setMenuOpen(false)} className={`py-3 px-2 text-sm font-semibold ${isExpr ? 'text-quebec-blue' : 'text-quebec-navy'}`}>
+            <Link href={`/${lang}/expressions`} onClick={() => setMenuOpen(false)} className={`py-3 px-2 border-b border-gray-100 text-sm font-semibold ${isExpr ? 'text-quebec-blue' : 'text-quebec-navy'}`}>
               {t.nav.expressions ?? 'Expressions québécoises'}
+            </Link>
+            <Link href={`/${lang}/animaux`} onClick={() => setMenuOpen(false)} className={`py-3 px-2 text-sm font-semibold ${isAnimaux ? 'text-quebec-blue' : 'text-quebec-navy'}`}>
+              🐕 {t.nav.animaux ?? 'Voyager avec son chien'}
             </Link>
           </nav>
         </div>

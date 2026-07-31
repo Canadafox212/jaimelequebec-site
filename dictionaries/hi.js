@@ -7,6 +7,7 @@ const hi = {
     articles: 'क्यूबेक के बारे में',
     roadtrip: 'रोड ट्रिप',
     expressions: 'क्यूबेक शब्द',
+    animaux: 'कुत्ते के साथ यात्रा',
     search_placeholder: 'स्थल खोजें…',
     search_label: 'खोजें',
   },
