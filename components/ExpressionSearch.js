@@ -55,15 +55,19 @@ export default function ExpressionSearch({ expressions, lang, t }) {
     return Object.entries(counts).sort((a, b) => b[1] - a[1])
   }, [expressions])
 
+  const hasSearch = query.trim().length >= 2 || !!catFilter
+
   const results = useMemo(() => {
     const q = query.trim()
+    if (!hasSearch) return []
+
     let list = q.length >= 2
       ? fuse.search(normalizePhonetic(q)).map(r => r.item)
       : [...enriched].sort((a, b) => a.mot.localeCompare(b.mot, 'fr'))
 
     if (catFilter) list = list.filter(e => e.categorie === catFilter)
-    return list.slice(0, 60)
-  }, [query, catFilter, fuse, enriched])
+    return list.slice(0, 20)
+  }, [query, catFilter, fuse, enriched, hasSearch])
 
   const placeholder = lang === 'fr'
     ? 'Tapez un mot québécois ou son équivalent français…'
@@ -108,32 +112,40 @@ export default function ExpressionSearch({ expressions, lang, t }) {
             !catFilter ? 'bg-quebec-navy text-white border-quebec-navy' : 'bg-white text-gray-600 border-gray-200 hover:border-quebec-navy'
           }`}
         >
-          {lang === 'fr' ? 'Tout' : 'All'} <span className="opacity-70 ml-1">{expressions.length}</span>
+          {lang === 'fr' ? 'Tout' : 'All'}
         </button>
-        {categories.slice(0, 6).map(([cat, count]) => (
+        {categories.map(([cat]) => (
           <button key={cat}
             onClick={() => setCatFilter(cat === catFilter ? '' : cat)}
             className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors capitalize ${
               catFilter === cat ? 'bg-quebec-navy text-white border-quebec-navy' : 'bg-white text-gray-600 border-gray-200 hover:border-quebec-navy'
             }`}
           >
-            {cat} <span className="opacity-70 ml-1">{count}</span>
+            {cat}
           </button>
         ))}
       </div>
 
-      {/* Compteur */}
-      <p className="text-sm text-gray-500 mb-4">
-        {query.trim().length >= 2 || catFilter ? labelResults : labelTotal}
-        {results.length === 60 && (
-          <span className="ml-1 text-xs text-gray-400">
-            {lang === 'fr' ? '(affichage limité à 60 — affinez la recherche)' : '(limited to 60 — refine your search)'}
-          </span>
-        )}
-      </p>
+      {/* Compteur / invite */}
+      {hasSearch ? (
+        <p className="text-sm text-gray-500 mb-4">
+          {labelResults}
+          {results.length === 20 && (
+            <span className="ml-1 text-xs text-gray-400">
+              {lang === 'fr' ? '— affinez la recherche pour voir plus' : '— refine your search to see more'}
+            </span>
+          )}
+        </p>
+      ) : (
+        <p className="text-sm text-gray-400 mb-4 italic">
+          {lang === 'fr'
+            ? 'Tapez un mot ou sélectionnez une catégorie pour explorer le vocabulaire.'
+            : 'Type a word or select a category to explore the vocabulary.'}
+        </p>
+      )}
 
       {/* Grille résultats */}
-      {results.length === 0 ? (
+      {!hasSearch ? null : results.length === 0 ? (
         <p className="text-center text-gray-400 py-12">
           {lang === 'fr' ? 'Aucun résultat. Essayez une autre orthographe.' : 'No results. Try another spelling.'}
         </p>
