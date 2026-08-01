@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import AnimauxMap from './AnimauxMap'
 
 function bookingUrl(region) {
   const q = encodeURIComponent('Québec ' + region)
@@ -102,7 +103,7 @@ function SiteCard({ site, t, lang }) {
                 href={`/${lang}/sites/${site.slug_attraction}`}
                 className="inline-block text-xs bg-[#a02020] text-white px-3 py-1.5 rounded-lg font-medium hover:bg-[#7a1818] transition-colors"
               >
-                Voir la fiche →
+                {t.view_fiche}
               </Link>
             )}
             {site.site_web && (
@@ -219,6 +220,11 @@ export default function AnimauxClient({ animaux, t, lang }) {
 
           <span className="text-sm text-gray-400">{filtered.length} {t.count_sites}</span>
         </div>
+      </section>
+
+      {/* Carte */}
+      <section className="max-w-4xl mx-auto px-4 mt-6">
+        <AnimauxMap sites={filtered} lang={lang} t={t} />
       </section>
 
       {/* Liste des sites */}

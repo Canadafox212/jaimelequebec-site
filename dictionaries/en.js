@@ -327,6 +327,8 @@ const en = {
     back_top: "↑ Back to top",
     details_show: "▼ Details",
     details_hide: "▲ Collapse",
+    view_fiche: "View listing →",
+    map_title: "Site map",
   },
 }
 

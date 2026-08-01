@@ -282,6 +282,8 @@ const fr = {
     back_top: "↑ Retour en haut",
     details_show: "▼ Détails",
     details_hide: "▲ Réduire",
+    view_fiche: "Voir la fiche →",
+    map_title: "Carte des sites",
   },
   planifier: {
     nav_title: 'Road trip',
