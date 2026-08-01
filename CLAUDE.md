@@ -182,6 +182,20 @@ atteint à 100% — reprendre au point exact dans une nouvelle session.
       CoupsDeCoeurCarousel. Page /sources-comprendre-le-quebecois (livre KDP Philippe Goupil)
       + assets livres/ (couverture + registre PDF). lib/citiesQC.js : 399 villes QC pour
       l'autocomplétion road trip. Déployé : 2 151 pages statiques (+243 vs session 13).
+      Section expressions québécoises : data/expressions.json (1 985 entrées, CSV CP1252→JSON
+      UTF-8), recherche phonétique (lib/phonetic.js) + fuzzy Fuse.js (ExpressionSearch.js),
+      pages /[lang]/expressions + /[lang]/expressions/[slug], encart livre KDP sur chaque
+      fiche, champ exemple optionnel. Nav header + footer 9 langues. ~20 044 pages statiques.
+- [x] Session 15 (2026-07-31) — Road trip : impression PDF (@media print, visibility approach),
+      partage URL (encodage UTF-8 base64 corrigé), compteur nuits par étape (0–14, boutons +/−,
+      tooltip 🌙), traversier Trois-Pistoles↔Les Escoumins ajouté, correction faux positif
+      Québec→Matane (isCoteNord lat>49°), URL CTMA corrigée. Expressions : sous-titre
+      "3 000 mots", catégories sans compteur, résultats uniquement sur recherche active (anti-scraping),
+      max 20 résultats. Section animaux : data/animaux.json (35 sites pet-friendly), page
+      /[lang]/animaux (server component SSG 9 langues + generateMetadata), composant
+      AnimauxClient.js (filtres statut + région, cartes dépliables, alerte TRACES, Booking.com),
+      badge 🐕/⚠️/🚫 sur fiches /sites/[slug], lien header + footer 9 langues. 20 034 pages
+      statiques générées.
 
 ## Décisions techniques prises
 - Images toujours stockées localement dans le projet, jamais en lien
