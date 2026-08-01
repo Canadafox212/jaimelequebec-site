@@ -252,7 +252,7 @@ const fr = {
   },
   animaux: {
     meta_title: "Québec avec votre chien — Sites acceptant les animaux",
-    meta_desc: "35 parcs, sentiers et sites touristiques du Québec qui acceptent les chiens. Règles de laisse, zones autorisées, conditions d'accès et conseils pour voyageurs européens.",
+    meta_desc: "Guide complet : parcs, sentiers, villes et sites touristiques du Québec qui acceptent les chiens. Règles de laisse, zones autorisées, conditions d'accès et conseils pour voyageurs européens.",
     hero_title: "Voyager au Québec avec votre chien",
     hero_sub: "Parcs nationaux, sentiers, villes historiques, terrasses — guide pratique des sites qui acceptent les animaux de compagnie.",
     alert_traces: "🌍 Visiteurs européens : le certificat sanitaire TRACES est obligatoire pour entrer au Canada avec un animal. Prévoir au minimum 10 jours avant le départ.",

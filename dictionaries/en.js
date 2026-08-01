@@ -297,7 +297,7 @@ const en = {
   },
   animaux: {
     meta_title: "Québec with your dog — Pet-friendly sites",
-    meta_desc: "35 parks, trails and tourist sites in Québec that welcome dogs. Leash rules, authorized zones, access conditions and tips for European travellers.",
+    meta_desc: "Complete guide: parks, trails, cities and tourist sites in Québec that welcome dogs. Leash rules, authorized zones, access conditions and tips for European travellers.",
     hero_title: "Travelling in Québec with your dog",
     hero_sub: "National parks, trails, historic cities, restaurant terraces — a practical guide to pet-friendly sites in Québec.",
     alert_traces: "🌍 European visitors: the TRACES health certificate is mandatory to enter Canada with a pet. Allow at least 10 days before departure.",
