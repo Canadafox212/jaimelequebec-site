@@ -9,6 +9,13 @@ import { getTaxonomie, getRegionThemes } from '@/lib/activites'
 import { dicts, LANGS, getAlternates } from '@/lib/i18n'
 import { viatorUrl } from '@/lib/affiliates'
 import regionsDesc from '@/data/regions-descriptions.json'
+import animauxData from '@/data/animaux.json'
+import pmrData from '@/data/pmr.json'
+
+const petMap = Object.fromEntries(
+  animauxData.filter(a => a.slug_attraction).map(a => [a.slug_attraction, a.chiens])
+)
+const pmrMap = pmrData
 
 export async function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }))
@@ -37,6 +44,8 @@ export default async function AttractionsPage({ params, searchParams }) {
   const query       = sp?.q?.trim() ?? null
   const categorie   = sp?.categorie ?? null
   const initialView = sp?.view === 'map' ? 'map' : null
+  const chienOnly   = sp?.chien === '1'
+  const pmrOnly     = sp?.pmr   === '1'
 
   const tax = getTaxonomie()
   const regionDescText = regionNum
@@ -81,6 +90,8 @@ export default async function AttractionsPage({ params, searchParams }) {
       const ville  = norm(a.localisation?.ville)
       if (!titre.includes(q) && !resume.includes(q) && !region.includes(q) && !ville.includes(q)) return false
     }
+    if (chienOnly && !['OUI', 'PARTIEL'].includes(petMap[a.slug])) return false
+    if (pmrOnly   && !pmrMap[a.slug]) return false
     return true
   })
 
@@ -222,6 +233,63 @@ export default async function AttractionsPage({ params, searchParams }) {
         </div>
       )}
 
+      {/* Filtre chien */}
+      {(() => {
+        const params = new URLSearchParams()
+        if (sp?.region) params.set('region', sp.region)
+        if (sp?.theme)  params.set('theme',  sp.theme)
+        if (sp?.saison) params.set('saison', sp.saison)
+        if (sp?.q)      params.set('q',      sp.q)
+        if (sp?.view)   params.set('view',   sp.view)
+        if (!chienOnly) params.set('chien', '1')
+        const qs = params.toString()
+        const href = `/${lang}/sites${qs ? `?${qs}` : ''}`
+        return (
+          <div className="mb-4">
+            <Link
+              href={href}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${
+                chienOnly
+                  ? 'bg-green-600 text-white border-green-600 hover:bg-green-700'
+                  : 'bg-white text-gray-600 border-gray-300 hover:border-green-500 hover:text-green-700'
+              }`}
+            >
+              🐕 {lang === 'fr' ? 'Avec mon chien' : 'Dog-friendly only'}
+              {chienOnly && <span className="text-green-200 text-xs">✕</span>}
+            </Link>
+          </div>
+        )
+      })()}
+
+      {/* Filtre PMR */}
+      {(() => {
+        const params = new URLSearchParams()
+        if (sp?.region) params.set('region', sp.region)
+        if (sp?.theme)  params.set('theme',  sp.theme)
+        if (sp?.saison) params.set('saison', sp.saison)
+        if (sp?.q)      params.set('q',      sp.q)
+        if (sp?.chien)  params.set('chien',  sp.chien)
+        if (sp?.view)   params.set('view',   sp.view)
+        if (!pmrOnly)   params.set('pmr', '1')
+        const qs = params.toString()
+        const href = `/${lang}/sites${qs ? `?${qs}` : ''}`
+        return (
+          <div className="mb-4 -mt-2">
+            <Link
+              href={href}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${
+                pmrOnly
+                  ? 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700'
+                  : 'bg-white text-gray-600 border-gray-300 hover:border-blue-500 hover:text-blue-700'
+              }`}
+            >
+              ♿ {lang === 'fr' ? 'Accessibilité PMR (Kéroul)' : 'Wheelchair accessible (Kéroul)'}
+              {pmrOnly && <span className="text-blue-200 text-xs">✕</span>}
+            </Link>
+          </div>
+        )
+      })()}
+
       {query && (
         <p className="text-sm text-gray-600 mb-2">
           {t.list.results_for} « {query} »
@@ -270,6 +338,8 @@ export default async function AttractionsPage({ params, searchParams }) {
         lang={lang}
         t={t}
         initialView={initialView}
+        petMap={petMap}
+        pmrMap={pmrMap}
       />
     </div>
 

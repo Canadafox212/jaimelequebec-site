@@ -1,0 +1,374 @@
+{
+  "basilique-notre-dame-de-montreal": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4812-basilique-notre-dame-de-montreal"
+  },
+  "marche-bonsecours": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/5190-marche-bonsecours"
+  },
+  "pointe-a-calliere-cite-darcheologie-et-dhistoire-de-montreal": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/10052-pointe-a-calliere-cite-d-archeologie-et-d-histoire-de-montreal"
+  },
+  "chateau-ramezay-musee-et-site-historique-de-montreal": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4489-chateau-ramezay-musee-et-site-historique-de-montreal"
+  },
+  "parc-du-mont-royal": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/9934-parc-du-mont-royal"
+  },
+  "jardin-botanique-de-montreal": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4835-espace-pour-la-vie-jardin-botanique-de-montreal"
+  },
+  "biodome-de-montreal": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4674-espace-pour-la-vie-biodome-de-montreal"
+  },
+  "parc-jean-drapeau-ile-sainte-helene-et-ile-notre-dame": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/si-25489-parc-jean-drapeau-ile-sainte-helene-vespasiennes-le-petit-prince"
+  },
+  "musee-des-beaux-arts-de-montreal": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/10242-musee-des-beaux-arts-de-montreal-pavillon-claire-et-marc-bourgie"
+  },
+  "musee-dart-contemporain-de-montreal": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/22602-musee-d-art-contemporain-de-montreal"
+  },
+  "oratoire-saint-joseph-du-mont-royal": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4810-l-oratoire-saint-joseph-du-mont-royal"
+  },
+  "marche-jean-talon": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/6305-marche-jean-talon"
+  },
+  "citadelle-de-quebec": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/5151-citadelle-de-quebec-musee-du-royal-22e-regiment"
+  },
+  "parc-des-champs-de-bataille-plaines-dabraham": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/19406-parc-des-champs-de-bataille-plaines-d-abraham"
+  },
+  "parc-de-la-chute-montmorency": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/7670-parc-de-la-chute-montmorency-manoir-montmorency-et-sentiers"
+  },
+  "musee-de-la-civilisation": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4402-musee-de-la-civilisation"
+  },
+  "musee-national-des-beaux-arts-du-quebec": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/9960-musee-national-des-beaux-arts-du-quebec-mnbaq"
+  },
+  "village-vacances-valcartier": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/23509-village-vacances-valcartier-ete"
+  },
+  "aquarium-du-quebec": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4605-aquarium-du-quebec"
+  },
+  "observatoire-de-la-capitale": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4609-observatoire-de-la-capitale"
+  },
+  "hotel-de-glace": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/23121-hotel-de-glace"
+  },
+  "musee-dart-contemporain-de-baie-saint-paul": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4413-musee-d-art-contemporain-de-baie-saint-paul"
+  },
+  "le-massif-de-charlevoix": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/5207-le-massif-de-charlevoix"
+  },
+  "parc-national-des-grands-jardins": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/24656-parc-national-des-grands-jardins"
+  },
+  "parc-national-des-hautes-gorges-de-la-riviere-malbaie": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/24655-parc-national-des-hautes-gorges-de-la-riviere-malbaie"
+  },
+  "musee-de-charlevoix": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/22840-musee-de-charlevoix"
+  },
+  "casino-de-charlevoix": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/132-casino-de-charlevoix"
+  },
+  "parc-national-de-lile-bonaventure-et-du-rocher-perce": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/6881-parc-national-de-l-ile-bonaventure-et-du-rocher-perce"
+  },
+  "parc-national-forillon": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4942-parc-national-forillon"
+  },
+  "parc-national-de-la-gaspesie": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/7976-parc-national-de-la-gaspesie"
+  },
+  "bioparc-de-la-gaspesie": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4592-bioparc-de-la-gaspesie"
+  },
+  "parc-national-du-bic": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4948-parc-national-du-bic"
+  },
+  "site-historique-maritime-de-la-pointe-au-pere": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/7430-site-historique-maritime-de-la-pointe-au-pere-sous-marin-onondaga"
+  },
+  "parc-national-du-lac-temiscouata": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/8727-parc-national-du-lac-temiscouata"
+  },
+  "parc-national-du-fjord-du-saguenay": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4967-parc-national-du-fjord-du-saguenay-secteur-de-la-baie-eternite"
+  },
+  "village-historique-de-val-jalbert": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/5613-village-historique-de-val-jalbert"
+  },
+  "la-pulperie-de-chicoutimi-musee-regional": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4682-la-pulperie-de-chicoutimi"
+  },
+  "zoo-sauvage-de-saint-felicien": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/9843-zoo-sauvage-de-saint-felicien"
+  },
+  "musee-du-fjord": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4509-musee-du-fjord"
+  },
+  "musee-ilnu-de-mashteuiatsh": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4517-musee-ilnu-de-mashteuiatsh-kanuelihtamakanitshuap"
+  },
+  "sainte-rose-du-nord": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/22921-bureau-d-information-touristique-de-sainte-rose-du-nord"
+  },
+  "centre-dinterpretation-et-dobservation-de-cap-de-bon-desir": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4701-centre-d-interpretation-et-d-observation-de-cap-de-bon-desir"
+  },
+  "barrage-daniel-johnson-et-centrale-manic-5": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4698-barrage-daniel-johnson-et-centrale-manic-5-hydro-quebec"
+  },
+  "parc-national-du-mont-orford": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4951-parc-national-du-mont-orford"
+  },
+  "parc-national-de-la-yamaska": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/7770-parc-national-de-la-yamaska"
+  },
+  "bromont-montagne-dexperiences": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/19486-bromont-montagne-d-experiences"
+  },
+  "musee-de-la-nature-et-des-sciences-de-sherbrooke": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4450-musee-de-la-nature-et-des-sciences-de-sherbrooke"
+  },
+  "parc-de-la-gorge-de-coaticook-et-pont-suspendu": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/12723-camping-parc-de-la-gorge-de-coaticook"
+  },
+  "musee-canadien-de-lhistoire": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4499-musee-canadien-de-l-histoire"
+  },
+  "parc-de-la-gatineau": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4963-parc-de-la-gatineau"
+  },
+  "fairmont-le-chateau-montebello": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/3377-fairmont-le-chateau-montebello"
+  },
+  "parc-omega": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4855-parc-omega"
+  },
+  "lieu-historique-national-du-manoir-papineau": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/16134-lieu-historique-national-du-manoir-papineau"
+  },
+  "parc-national-de-la-mauricie": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4943-parc-national-de-la-mauricie"
+  },
+  "village-du-bucheron": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4625-village-du-bucheron"
+  },
+  "la-cite-de-lenergie": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4624-la-cite-de-l-energie"
+  },
+  "sanctuaire-notre-dame-du-cap": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4800-sanctuaire-notre-dame-du-cap"
+  },
+  "borealis-centre-dhistoire-de-lindustrie-papetiere": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4432-borealis-centre-d-histoire-de-l-industrie-papetiere"
+  },
+  "site-historique-de-lile-des-moulins": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/5183-site-historique-de-l-ile-des-moulins"
+  },
+  "musee-dart-de-joliette": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4469-musee-d-art-de-joliette"
+  },
+  "parc-des-chutes-dorwin": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/23522-parc-des-chutes-dorwin"
+  },
+  "musee-gilles-villeneuve": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4468-musee-gilles-villeneuve"
+  },
+  "parc-national-du-mont-tremblant": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4959-parc-national-du-mont-tremblant"
+  },
+  "parc-regional-de-la-riviere-du-nord": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/19411-parc-regional-de-la-riviere-du-nord"
+  },
+  "parc-national-doka": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4960-parc-national-d-oka"
+  },
+  "festival-des-couleurs-de-tremblant": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/24678-festival-des-couleurs-de-rigaud"
+  },
+  "sainte-agathe-des-monts-et-le-lac-des-sables": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/5318-camping-sainte-agathe-des-monts"
+  },
+  "lieu-historique-national-du-fort-chambly": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/22694-lieu-historique-national-du-canal-de-lachine"
+  },
+  "lieu-historique-national-du-canal-de-chambly": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/22694-lieu-historique-national-du-canal-de-lachine"
+  },
+  "maison-nationale-des-patriotes": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4656-maison-nationale-des-patriotes-site-patrimonial-de-la-maison-jean-baptiste-masse"
+  },
+  "parc-national-des-iles-de-boucherville": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4954-parc-national-des-iles-de-boucherville"
+  },
+  "zoo-de-granby": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4851-zoo-de-granby"
+  },
+  "traverse-quebec-levis": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/6354-traverse-quebec-levis-stq"
+  },
+  "parc-des-chutes-de-la-chaudiere": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/23507-parc-des-chutes-de-la-chaudiere"
+  },
+  "musee-de-la-sculpture-sur-bois": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/8183-atelier-pare-economusee-de-la-sculpture-sur-bois"
+  },
+  "lieu-historique-national-de-la-grosse-ile-et-le-memorial-des-irlandais": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/22671-lieu-historique-national-de-la-bataille-de-ristigouche"
+  },
+  "parc-regional-du-massif-du-sud": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/19422-parc-regional-du-massif-du-sud"
+  },
+  "parc-marie-victorin": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4937-parc-marie-victorin-de-kingsey-falls"
+  },
+  "centre-dinterpretation-de-la-canneberge": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4726-centre-d-interpretation-de-la-canneberge"
+  },
+  "parc-regional-des-grandes-coulees": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/19420-parc-regional-des-grandes-coulees-secteur-foret-ancienne"
+  },
+  "musee-de-la-mer-des-iles-de-la-madeleine": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/150-musee-de-la-mer"
+  },
+  "parc-de-gros-cap-et-ses-grottes-marines": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4938-parc-de-gros-cap-camping"
+  },
+  "reserve-nationale-de-faune-de-la-pointe-de-lest": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/6465-reserve-nationale-de-faune-du-cap-tourmente"
+  },
+  "parc-national-daiguebelle": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4965-parc-national-d-aiguebelle"
+  },
+  "lieu-historique-national-du-fort-temiscamingueobadjiwan": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/22694-lieu-historique-national-du-canal-de-lachine"
+  },
+  "amenagement-robert-bourassa": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/13819-amenagement-robert-bourassa-la-grande-2-hydro-quebec"
+  },
+  "parc-de-la-riviere-des-mille-iles": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/11630-parc-de-la-riviere-des-mille-iles"
+  },
+  "centre-de-la-nature-de-laval": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/22813-centre-de-la-nature-de-laval"
+  },
+  "ile-de-la-visitation": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4934-parc-nature-de-l-ile-de-la-visitation"
+  },
+  "fairmont-le-manoir-richelieu": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/3356-fairmont-le-manoir-richelieu"
+  },
+  "exporail-le-musee-ferroviaire-canadien": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/4463-exporail-le-musee-ferroviaire-canadien"
+  },
+  "casino-de-montreal": {
+    "cote": "Accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/133-casino-de-montreal"
+  },
+  "chemin-du-roy": {
+    "cote": "Partiellement accessible",
+    "url_keroul": "https://www.keroul.qc.ca/fr/voyage/etablissement/7434-centre-d-interpretation-du-chemin-du-roy"
+  }
+}

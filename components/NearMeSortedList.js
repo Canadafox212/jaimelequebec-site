@@ -50,7 +50,7 @@ function getCategoryEmoji(category) {
   return '📍'
 }
 
-function SiteCard({ attraction, lang, t, distanceKm }) {
+function SiteCard({ attraction, lang, t, distanceKm, petStatus, pmrInfo }) {
   const { title, summary, category } = resolveContent(attraction, lang)
   const imageSrc = attraction._imageSrc
 
@@ -82,6 +82,26 @@ function SiteCard({ attraction, lang, t, distanceKm }) {
             {getCategoryEmoji(category)}
           </div>
         )}
+        {(petStatus || pmrInfo) && (
+          <div className="absolute top-3 right-3 flex flex-col gap-1 items-end">
+            {petStatus && (
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                petStatus === 'OUI'     ? 'bg-green-500/90 text-white' :
+                petStatus === 'PARTIEL' ? 'bg-amber-500/90 text-white' :
+                                         'bg-red-500/90 text-white'
+              }`}>
+                {petStatus === 'OUI' ? '🐕' : petStatus === 'PARTIEL' ? '🐕⚠' : '🚫'}
+              </span>
+            )}
+            {pmrInfo && (
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                pmrInfo.cote === 'Accessible' ? 'bg-blue-600/90 text-white' : 'bg-sky-400/90 text-white'
+              }`}>
+                ♿
+              </span>
+            )}
+          </div>
+        )}
         {distanceKm != null && (
           <div className="absolute bottom-3 right-3">
             <span className="bg-black/70 text-white text-xs font-bold px-2.5 py-1 rounded-full">
@@ -110,7 +130,7 @@ function SiteCard({ attraction, lang, t, distanceKm }) {
   )
 }
 
-export default function NearMeSortedList({ attractions, lang, t, sorted = false, distances = {} }) {
+export default function NearMeSortedList({ attractions, lang, t, sorted = false, distances = {}, petMap = {}, pmrMap = {} }) {
   const displayed = sorted
     ? [...attractions].sort((a, b) => (distances[a.id] ?? Infinity) - (distances[b.id] ?? Infinity))
     : attractions
@@ -124,6 +144,8 @@ export default function NearMeSortedList({ attractions, lang, t, sorted = false,
           lang={lang}
           t={t}
           distanceKm={sorted ? (distances[a.id] ?? null) : null}
+          petStatus={petMap[a.slug]}
+          pmrInfo={pmrMap[a.slug] ?? null}
         />
       ))}
     </div>

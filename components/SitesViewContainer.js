@@ -19,7 +19,7 @@ function haversine(lat1, lon1, lat2, lon2) {
   return R * 2 * Math.asin(Math.sqrt(a))
 }
 
-export default function SitesViewContainer({ attractions, lang, t, initialView }) {
+export default function SitesViewContainer({ attractions, lang, t, initialView, petMap = {}, pmrMap = {} }) {
   const router = useRouter()
 
   // ── État vue ──────────────────────────────────────────────────────────
@@ -179,6 +179,8 @@ export default function SitesViewContainer({ attractions, lang, t, initialView }
             t={t}
             sorted={sorted}
             distances={distances}
+            petMap={petMap}
+            pmrMap={pmrMap}
           />
         )
       ) : (

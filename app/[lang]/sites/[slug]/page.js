@@ -11,6 +11,7 @@ import { bookingSearchUrl } from '@/lib/affiliates'
 import labelI18n from '@/data/activity-labels-i18n.json'
 import servicesData from '@/data/services.json'
 import animauxData from '@/data/animaux.json'
+import pmrData from '@/data/pmr.json'
 
 export async function generateStaticParams() {
   const attractions = getAllAttractions()
@@ -71,6 +72,8 @@ export default async function AttractionPage({ params }) {
 
   // Badge animaux — chercher si ce slug est dans l'inventaire
   const animauxInfo = animauxData.find(a => a.slug_attraction === slug) ?? null
+  // Badge PMR — cote d'accessibilité Kéroul
+  const pmrInfo = pmrData[slug] ?? null
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -203,6 +206,29 @@ export default async function AttractionPage({ params }) {
               <span className="opacity-70 font-normal">· laisse {animauxInfo.laisse_m} m max</span>
             )}
           </Link>
+        )}
+
+        {/* Badge PMR */}
+        {pmrInfo && (
+          <a
+            href={pmrInfo.url_keroul}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-sm font-semibold border transition-colors no-underline ${
+              pmrInfo.cote === 'Accessible'
+                ? 'bg-blue-50 text-blue-800 border-blue-300 hover:bg-blue-100'
+                : 'bg-sky-50 text-sky-800 border-sky-200 hover:bg-sky-100'
+            }`}
+          >
+            <span>♿</span>
+            <span>
+              {lang === 'fr'
+                ? pmrInfo.cote === 'Accessible' ? 'Accessible PMR (certifié Kéroul)' : 'Partiellement accessible (certifié Kéroul)'
+                : pmrInfo.cote === 'Accessible' ? 'Wheelchair accessible (Kéroul certified)' : 'Partially accessible (Kéroul certified)'
+              }
+            </span>
+            <span className="opacity-50 text-xs">↗</span>
+          </a>
         )}
 
         {/* Résumé */}

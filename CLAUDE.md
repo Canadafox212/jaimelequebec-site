@@ -196,6 +196,28 @@ atteint à 100% — reprendre au point exact dans une nouvelle session.
       AnimauxClient.js (filtres statut + région, cartes dépliables, alerte TRACES, Booking.com),
       badge 🐕/⚠️/🚫 sur fiches /sites/[slug], lien header + footer 9 langues. 20 034 pages
       statiques générées.
+- [x] Session 16 (2026-08-01) — Section animaux enrichie : animaux.json 35→86 entrées
+      (parcs, musées, stations de ski, spas, marchés, plages, refuges, zoos, archipels).
+      61/86 entrées liées à une fiche /sites/[slug] via slug_attraction. Badge 🐕 sur les
+      cartes de l'annuaire /sites (NearMeSortedList, top-right photo). Filtre serveur
+      "🐕 Avec mon chien" sur /sites (?chien=1, préserve autres filtres actifs). Correction
+      architecture animaux/page.js : server component + generateStaticParams (était 'use client').
+      Carte Leaflet dans AnimauxClient via AnimauxMap.js (marqueurs colorés OUI/PARTIEL/NON,
+      sync avec filtres). Scan systématique des 200 attractions pour mentions animaux/chiens :
+      13 nouvelles entrées issues du contenu textuel (Parc des Appalaches OUI explicite,
+      Refuge Pageau NON, Parc Safari NON, Fairmont Montebello OUI Fairmont for Pets, etc.).
+      Expressions : encart livre KDP retiré des fiches /expressions/[slug]. Sous-titre
+      "3 000 mots" → "Des centaines de mots". Recherche corrigée (faux positifs) : Fuse.js
+      limité aux champs mot+_phonetic (seuil 0.25, sans ignoreLocation), recherche 3 étapes
+      (préfixe exact → fuzzy phonétique → substring définition).
+- [x] Session 17 (2026-08-02) — Accessibilité PMR : API interne Kéroul découverte (endpoint
+      REST api.keroul.qc.ca, X-Api-Key dans bundle CDN script.2d9263f9b7.js), 3 996 établissements
+      extraits en un appel, UUIDs cotes décodés (Accessible/Partiellement/Non). Fichiers produits :
+      keroul_api_complete.json (3 996 entrées), keroul_accessibles_2775.csv (2 775 certifiés),
+      keroul_urls.txt (4 000 URLs sitemap), rapport_extraction_PMR.md mis à jour. data/pmr.json :
+      93 attractions matchées (29 Accessible + 64 Partiellement). Badge ♿ sur cartes annuaire
+      /sites (NearMeSortedList, top-right), filtre ?pmr=1, bandeau PMR sur fiches /sites/[slug]
+      (lien cliquable vers fiche Kéroul). Inventaire PMR CSV initial (30 fiches détaillées 42 cols).
 
 ## Décisions techniques prises
 - Images toujours stockées localement dans le projet, jamais en lien
