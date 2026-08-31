@@ -5,7 +5,8 @@ import ThemeCard from '@/components/ThemeCard'
 import QuebecRegionMap from '@/components/QuebecRegionMap'
 import RegionImageBanner from '@/components/RegionImageBanner'
 import { dicts, LANGS, getAlternates } from '@/lib/i18n'
-import animauxData from '@/data/animaux.json'
+import { readFileSync } from 'fs'
+import { join } from 'path'
 
 const REGION_IMAGES = {
   1:  '/images/REGIONS/montréal_.png',
@@ -55,6 +56,7 @@ export default async function RegionThemes({ params }) {
   const themes = getRegionThemeList(region)
   const regionImg = REGION_IMAGES[r.num] ?? null
   const nomFr = r.nom_fr
+  const animauxData = JSON.parse(readFileSync(join(process.cwd(), 'data', 'animaux.json'), 'utf8'))
   const sitesChien = animauxData.filter(a =>
     a.chiens === 'OUI' && (a.region.includes(nomFr) || nomFr.includes(a.region))
   ).slice(0, 4)
