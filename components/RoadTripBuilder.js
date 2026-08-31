@@ -810,7 +810,7 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
       setLegs(prev => [mkLeg(depStop, portStop, quickEstimate(depStop, portStop)), mkLeg(portStop, idlMStop, { distanceKm: null, durationMin: null, geometry: null }), ...prev.filter(l => l.fromSlug !== '__departure__')])
       const route = await computeRoute(depStop, portStop)
       if (route.distanceKm) {
-        setLegs(prev => { const next = prev.filter(l => !(l.fromSlug === depStop.slug && l.toSlug === portStop.slug && l.estimated)); return [mkLeg(depStop, portStop, route), ...next] })
+        setLegs(prev => { const next = prev.filter(l => !(l.fromSlug === depStop.slug && l.toSlug === portStop.slug)); return [mkLeg(depStop, portStop, route), ...next] })
       }
     } else {
       const firstStop = currentStops[0]
@@ -859,14 +859,14 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
       const portStop = { slug: '__port__souris-capmaux', title: 'Port de Souris, Î.-P.-É.', lat: f.southLat, lng: f.southLng, isPort: true, ferryId: f.id, ferryCrossingMin: f.crossingMin }
       setLegs(ll => [...ll, mkLeg(fromStop, portStop, quickEstimate(fromStop, portStop)), mkLeg(portStop, newStop, { distanceKm: null, durationMin: null, geometry: null })])
       computeRoute(fromStop, portStop).then(route => {
-        if (route.distanceKm) setLegs(ll => { const next = ll.filter(l => !(l.fromSlug === fromStop.slug && l.toSlug === portStop.slug && l.estimated)); return [...next, mkLeg(fromStop, portStop, route)] })
+        if (route.distanceKm) setLegs(ll => { const next = ll.filter(l => !(l.fromSlug === fromStop.slug && l.toSlug === portStop.slug)); return [...next, mkLeg(fromStop, portStop, route)] })
       })
       setStops(prev => [...prev, portStop, newStop])
     } else {
       const noRoad = isFromIdlM || isNewIdlM
       setLegs(ll => [...ll, mkLeg(fromStop, newStop, noRoad ? { distanceKm: null, durationMin: null, geometry: null } : quickEstimate(fromStop, newStop))])
       if (!noRoad) computeRoute(fromStop, newStop).then(route => {
-        if (route.distanceKm) setLegs(ll => { const next = ll.filter(l => !(l.fromSlug === fromStop.slug && l.toSlug === newStop.slug && l.estimated)); return [...next, mkLeg(fromStop, newStop, route)] })
+        if (route.distanceKm) setLegs(ll => { const next = ll.filter(l => !(l.fromSlug === fromStop.slug && l.toSlug === newStop.slug)); return [...next, mkLeg(fromStop, newStop, route)] })
       })
       setStops(prev => [...prev, newStop])
     }
@@ -1052,7 +1052,8 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
 
   // ── Render ──────────────────────────────────────────────────────────────────
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <>
+    <div className="max-w-6xl mx-auto px-4 py-8 print:hidden">
 
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
@@ -1190,24 +1191,27 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
               </div>
               <div className="px-5 py-4">
                 <div className="space-y-3 mb-4">
-                  {legs.map((leg) => {
-                    const fromLabel = leg.fromSlug === '__departure__'
+                  {displayStops.slice(0, -1).map((stop, i) => {
+                    const nextStop = displayStops[i + 1]
+                    const leg = getLeg(stop.slug, nextStop.slug)
+                    if (!leg) return null
+                    const fromLabel = stop.isCustomDeparture
                       ? departure?.label?.split(',')[0]
-                      : stops.find(s => s.slug === leg.fromSlug)?.title?.split(' ').slice(0, 2).join(' ')
-                    const toStop  = stops.find(s => s.slug === leg.toSlug)
-                    const toLabel = toStop?.title?.split(' ').slice(0, 2).join(' ')
+                      : stop.title?.split(' ').slice(0, 2).join(' ')
+                    const toLabel = nextStop.title?.split(' ').slice(0, 2).join(' ')
+                    const toNights = nextStop.nights ?? (nextStop.overnight ? 1 : 0)
                     return (
-                      <div key={leg.id} className="text-sm">
+                      <div key={`${stop.slug}->${nextStop.slug}`} className="text-sm">
                         <div className="flex justify-between text-gray-700 font-medium">
                           <span className="truncate mr-2">{fromLabel} →</span>
                           <span className="shrink-0 text-quebec-blue font-semibold">{fmtTime(legTotalMin(leg))}</span>
                         </div>
                         <div className="text-gray-400 text-xs mt-0.5 flex items-center gap-1">
                           <span>{toLabel}{leg.distanceKm ? ` · ${leg.distanceKm} km` : ''}</span>
-                          {(toStop?.nights ?? (toStop?.overnight ? 1 : 0)) > 0 && <span title="Étape nuit">🌙</span>}
-                          {toStop?.isPort && <span title="Port traversier">🚢</span>}
+                          {toNights > 0 && <span title="Étape nuit">🌙</span>}
+                          {nextStop.isPort && <span title="Port traversier">🚢</span>}
                         </div>
-                        {toStop?.isPort && <div className="text-xs text-cyan-600 mt-0.5">+ Traversée {fmtTime(toStop.ferryCrossingMin)}</div>}
+                        {nextStop.isPort && <div className="text-xs text-cyan-600 mt-0.5">+ Traversée {fmtTime(nextStop.ferryCrossingMin)}</div>}
                         {leg.extra.length > 0 && (
                           <div className="text-xs text-amber-600 mt-0.5">+ {leg.extra.map(e => e.label).join(', ')}</div>
                         )}
@@ -1277,69 +1281,6 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
         )}
       </div>
 
-      {/* ── LAYOUT IMPRESSION — caché à l'écran, visible uniquement à l'impression ── */}
-      <div className="hidden print:block print-layout">
-        <div className="print-header">
-          <div>
-            <div className="print-logo">J'AIME LE QUÉBEC</div>
-            <div className="print-sub">jaimelequebec.com · Votre guide touristique du Québec</div>
-          </div>
-          <div className="print-title-block">
-            <div className="print-title">{t.page_title}</div>
-            <div className="print-meta">
-              {season === 'summer' ? '☀️ Été' : '❄️ Hiver'} ·{' '}
-              {Math.round(totalKm * 10) / 10} km · {fmtTime(totalMin)}
-            </div>
-          </div>
-        </div>
-
-        <table className="print-table">
-          <tbody>
-            {displayStops.map((stop, i) => {
-              const leg = i < displayStops.length - 1
-                ? getLeg(stop.slug, displayStops[i + 1].slug)
-                : null
-              const cumul = legCumul[i]
-              return (
-                <tr key={stop.slug} className={((stop.nights ?? (stop.overnight ? 1 : 0)) > 0) ? 'print-overnight' : ''}>
-                  <td className="print-num">{i + 1}</td>
-                  <td className="print-stop">
-                    <strong>{stop.isCustomDeparture ? `🏁 ${stop.title}` : stop.title}</strong>
-                    {(() => { const n = stop.nights ?? (stop.overnight ? 1 : 0); return n > 0 ? <span className="print-badge">🌙 {n === 1 ? 'Nuit' : `${n} nuits`}</span> : null })()}
-                    {stop.isPort && <span className="print-badge">🚢 Traversier</span>}
-                    {stop.extra?.length > 0 && (
-                      <div className="print-extras">{stop.extra.map(e => e.label).join(' · ')}</div>
-                    )}
-                  </td>
-                  <td className="print-leg">
-                    {leg && leg.distanceKm ? `${leg.distanceKm} km` : ''}
-                  </td>
-                  <td className="print-time">
-                    {leg ? fmtTime(legTotalMin(leg)) : ''}
-                  </td>
-                  <td className="print-cumul">
-                    {cumul ? `${cumul.cumulKm} km` : ''}
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan={2} className="print-total-label">Total</td>
-              <td className="print-leg">{Math.round(totalKm * 10) / 10} km</td>
-              <td className="print-time print-bold">{fmtTime(totalMin)}</td>
-              <td></td>
-            </tr>
-          </tfoot>
-        </table>
-
-        <div className="print-footer">
-          Itinéraire généré sur <strong>jaimelequebec.com</strong> —
-          guide touristique indépendant du Québec depuis 2008
-        </div>
-      </div>
-
       {/* Map */}
       {displayStops.length >= 2 && (
         <div className="relative z-[1] mt-8">
@@ -1360,5 +1301,69 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
         </div>
       )}
     </div>
+
+    {/* ── LAYOUT IMPRESSION — hors du conteneur écran (print:hidden) pour éviter les pages vides ── */}
+    <div className="hidden print:block print-layout">
+      <div className="print-header">
+        <div>
+          <div className="print-logo">J'AIME LE QUÉBEC</div>
+          <div className="print-sub">jaimelequebec.com · Votre guide touristique du Québec</div>
+        </div>
+        <div className="print-title-block">
+          <div className="print-title">{t.page_title}</div>
+          <div className="print-meta">
+            {season === 'summer' ? '☀️ Été' : '❄️ Hiver'} ·{' '}
+            {Math.round(totalKm * 10) / 10} km · {fmtTime(totalMin)}
+          </div>
+        </div>
+      </div>
+
+      <table className="print-table">
+        <tbody>
+          {displayStops.map((stop, i) => {
+            const leg = i < displayStops.length - 1
+              ? getLeg(stop.slug, displayStops[i + 1].slug)
+              : null
+            const cumul = legCumul[i]
+            return (
+              <tr key={stop.slug} className={((stop.nights ?? (stop.overnight ? 1 : 0)) > 0) ? 'print-overnight' : ''}>
+                <td className="print-num">{i + 1}</td>
+                <td className="print-stop">
+                  <strong>{stop.isCustomDeparture ? `🏁 ${stop.title}` : stop.title}</strong>
+                  {(() => { const n = stop.nights ?? (stop.overnight ? 1 : 0); return n > 0 ? <span className="print-badge">🌙 {n === 1 ? 'Nuit' : `${n} nuits`}</span> : null })()}
+                  {stop.isPort && <span className="print-badge">🚢 Traversier</span>}
+                  {leg?.extra?.length > 0 && (
+                    <div className="print-extras">{leg.extra.map(e => e.label).join(' · ')}</div>
+                  )}
+                </td>
+                <td className="print-leg">
+                  {leg && leg.distanceKm ? `${leg.distanceKm} km` : ''}
+                </td>
+                <td className="print-time">
+                  {leg ? fmtTime(legTotalMin(leg)) : ''}
+                </td>
+                <td className="print-cumul">
+                  {cumul ? `${cumul.cumulKm} km` : ''}
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colSpan={2} className="print-total-label">Total</td>
+            <td className="print-leg">{Math.round(totalKm * 10) / 10} km</td>
+            <td className="print-time print-bold">{fmtTime(totalMin)}</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div className="print-footer">
+        Itinéraire généré sur <strong>jaimelequebec.com</strong> —
+        guide touristique indépendant du Québec depuis 2008
+      </div>
+    </div>
+    </>
   )
 }

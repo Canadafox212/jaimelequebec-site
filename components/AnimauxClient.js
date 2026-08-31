@@ -25,12 +25,75 @@ function ChienBadge({ statut, t }) {
 }
 
 function SiteCard({ site, t, lang }) {
-  const [open, setOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const nom        = lang === 'fr' ? site.nom_fr        : (site.nom_en        || site.nom_fr)
   const conditions = lang === 'fr' ? site.conditions_fr : (site.conditions_en || site.conditions_fr)
   const zonesOk    = lang === 'fr' ? site.zones_ok_fr   : (site.zones_ok_en  || site.zones_ok_fr)
   const zonesNok   = lang === 'fr' ? site.zones_nok_fr  : (site.zones_nok_en || site.zones_nok_fr)
   const noteEuro   = lang === 'fr' ? site.note_euro_fr  : (site.note_euro_en || site.note_euro_fr)
+
+  const hasDetails = zonesOk || zonesNok ||
+    (site.hebergement && site.hebergement !== 'Aucun hébergement' && site.hebergement !== 'Aucun hébergement sur site') ||
+    noteEuro
+
+  const details = (
+    <div className="border-t border-gray-100 bg-gray-50 p-4 space-y-3 text-sm">
+      {zonesOk && (
+        <div>
+          <span className="font-medium text-gray-700">{t.zones_ok} : </span>
+          <span className="text-gray-600">{zonesOk}</span>
+        </div>
+      )}
+      {zonesNok && (
+        <div>
+          <span className="font-medium text-gray-700">{t.zones_nok} : </span>
+          <span className="text-red-700">{zonesNok}</span>
+        </div>
+      )}
+      {site.hebergement &&
+        site.hebergement !== 'Aucun hébergement' &&
+        site.hebergement !== 'Aucun hébergement sur site' && (
+        <div>
+          <span className="font-medium text-gray-700">{t.hebergement} : </span>
+          <span className="text-gray-600">{site.hebergement}</span>
+        </div>
+      )}
+      {noteEuro && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+          <p className="text-xs font-semibold text-blue-800 mb-1">{t.note_euro}</p>
+          <p className="text-xs text-blue-700">{noteEuro}</p>
+        </div>
+      )}
+      <div className="flex flex-wrap gap-2 pt-1">
+        {site.slug_attraction && (
+          <Link
+            href={`/${lang}/sites/${site.slug_attraction}`}
+            className="inline-block text-xs bg-[#a02020] text-white px-3 py-1.5 rounded-lg font-medium hover:bg-[#7a1818] transition-colors"
+          >
+            {t.view_fiche}
+          </Link>
+        )}
+        {site.site_web && (
+          <a
+            href={site.site_web}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-xs border border-gray-300 text-gray-700 px-3 py-1.5 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+          >
+            {t.source} ↗
+          </a>
+        )}
+        <a
+          href={bookingUrl(site.region)}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="inline-block text-xs bg-blue-600 text-white px-3 py-1.5 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+        >
+          {t.booking_cta}
+        </a>
+      </div>
+    </div>
+  )
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
@@ -61,71 +124,23 @@ function SiteCard({ site, t, lang }) {
           </div>
         )}
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="mt-3 text-sm text-blue-600 hover:underline font-medium"
-        >
-          {open ? t.details_hide : t.details_show}
-        </button>
+        {/* Mobile only: toggle button */}
+        {hasDetails && (
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="mt-3 text-sm text-blue-600 hover:underline font-medium sm:hidden"
+          >
+            {mobileOpen ? t.details_hide : t.details_show}
+          </button>
+        )}
       </div>
 
-      {open && (
-        <div className="border-t border-gray-100 bg-gray-50 p-4 space-y-3 text-sm">
-          {zonesOk && (
-            <div>
-              <span className="font-medium text-gray-700">{t.zones_ok} : </span>
-              <span className="text-gray-600">{zonesOk}</span>
-            </div>
-          )}
-          {zonesNok && (
-            <div>
-              <span className="font-medium text-gray-700">{t.zones_nok} : </span>
-              <span className="text-red-700">{zonesNok}</span>
-            </div>
-          )}
-          {site.hebergement &&
-            site.hebergement !== 'Aucun hébergement' &&
-            site.hebergement !== 'Aucun hébergement sur site' && (
-            <div>
-              <span className="font-medium text-gray-700">{t.hebergement} : </span>
-              <span className="text-gray-600">{site.hebergement}</span>
-            </div>
-          )}
-          {noteEuro && (
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-              <p className="text-xs font-semibold text-blue-800 mb-1">{t.note_euro}</p>
-              <p className="text-xs text-blue-700">{noteEuro}</p>
-            </div>
-          )}
-          <div className="flex flex-wrap gap-2 pt-1">
-            {site.slug_attraction && (
-              <Link
-                href={`/${lang}/sites/${site.slug_attraction}`}
-                className="inline-block text-xs bg-[#a02020] text-white px-3 py-1.5 rounded-lg font-medium hover:bg-[#7a1818] transition-colors"
-              >
-                {t.view_fiche}
-              </Link>
-            )}
-            {site.site_web && (
-              <a
-                href={site.site_web}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-xs border border-gray-300 text-gray-700 px-3 py-1.5 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-              >
-                {t.source} ↗
-              </a>
-            )}
-            <a
-              href={bookingUrl(site.region)}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="inline-block text-xs bg-blue-600 text-white px-3 py-1.5 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-            >
-              {t.booking_cta}
-            </a>
-          </div>
-        </div>
+      {/* Desktop: always visible — Mobile: toggle */}
+      {hasDetails && (
+        <>
+          <div className="hidden sm:block">{details}</div>
+          {mobileOpen && <div className="sm:hidden">{details}</div>}
+        </>
       )}
     </div>
   )
@@ -174,13 +189,31 @@ export default function AnimauxClient({ animaux, t, lang }) {
       <section className="max-w-4xl mx-auto px-4 mt-6">
         <div className="bg-white rounded-xl border border-gray-200 p-5">
           <h2 className="font-bold text-gray-900 mb-3">{t.rules_title}</h2>
-          <ul className="space-y-2 text-sm text-gray-700">
+          <ul className="space-y-2 text-sm text-gray-700 mb-4">
             <li className="flex items-start gap-2"><span className="text-green-600 mt-0.5">•</span>{t.rule_sepaq}</li>
             <li className="flex items-start gap-2"><span className="text-green-600 mt-0.5">•</span>{t.rule_canada}</li>
             <li className="flex items-start gap-2"><span className="text-green-600 mt-0.5">•</span>{t.rule_villes}</li>
             <li className="flex items-start gap-2"><span className="text-green-600 mt-0.5">•</span>{t.rule_terrasses}</li>
             <li className="flex items-start gap-2"><span className="text-green-600 mt-0.5">•</span>{t.rule_dejections}</li>
           </ul>
+          <div className="flex flex-wrap gap-2">
+            <a
+              href="https://www.sepaq.com/pq/reglements-generaux.dot#animaux"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs border border-green-300 text-green-800 bg-green-50 px-3 py-1.5 rounded-lg font-medium hover:bg-green-100 transition-colors"
+            >
+              {t.btn_sepaq ?? 'En savoir + sur les parcs SÉPAQ'} ↗
+            </a>
+            <a
+              href="https://www.quebec.ca/agriculture-environnement-et-ressources-naturelles/animaux/animaux-compagnie/voyage-avec-animal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs border border-blue-300 text-blue-800 bg-blue-50 px-3 py-1.5 rounded-lg font-medium hover:bg-blue-100 transition-colors"
+            >
+              {t.btn_mapaq ?? 'En savoir + sur la règle MAPAQ'} ↗
+            </a>
+          </div>
         </div>
       </section>
 

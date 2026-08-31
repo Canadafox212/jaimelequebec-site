@@ -284,6 +284,8 @@ const fr = {
     details_hide: "▲ Réduire",
     view_fiche: "Voir la fiche →",
     map_title: "Carte des sites",
+    btn_sepaq: "En savoir + sur les parcs SÉPAQ",
+    btn_mapaq: "En savoir + sur la règle MAPAQ",
   },
   planifier: {
     nav_title: 'Road trip',

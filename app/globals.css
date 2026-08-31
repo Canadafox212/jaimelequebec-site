@@ -10,24 +10,15 @@
 
 /* ── STYLES IMPRESSION ROAD TRIP ─────────────────────────────────────────── */
 @media print {
-  /* Masquer tout sauf le layout d'impression */
-  * { visibility: hidden; }
-  .print-layout, .print-layout * { visibility: visible; }
-
-  .print-layout {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-
-  /* Reset page */
+  /* Le contenu écran est masqué via print:hidden (display:none) dans le JSX.
+     Le print-layout est un frère direct en dehors du conteneur écran. */
   @page { margin: 1.5cm 2cm; size: A4; }
 
   .print-layout {
     font-family: Georgia, serif;
     color: #111;
     font-size: 11pt;
+    width: 100%;
   }
 
   .print-header {
