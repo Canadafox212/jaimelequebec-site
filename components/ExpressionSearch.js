@@ -20,10 +20,8 @@ function niveauColor(niveau) {
 
 export default function ExpressionSearch({ expressions, lang, t }) {
   const [query, setQuery] = useState('')
-  const [catFilter, setCatFilter] = useState('')
   const inputRef = useRef(null)
 
-  // Enrichir les données avec formes phonétiques pour la recherche
   const enriched = useMemo(() =>
     expressions.map(e => ({
       ...e,
@@ -34,48 +32,51 @@ export default function ExpressionSearch({ expressions, lang, t }) {
 
   const fuse = useMemo(() => new Fuse(enriched, {
     keys: [
-      { name: 'mot',           weight: 3 },
-      { name: '_phonetic',     weight: 3 },
-      { name: 'equivalent_fr', weight: 2 },
-      { name: '_phonetic_equiv', weight: 2 },
-      { name: 'sens',          weight: 1 },
-      { name: '_phonetic_sens', weight: 1 },
-      { name: 'commentaire',   weight: 0.5 },
+      { name: 'mot',       weight: 3 },
+      { name: '_phonetic', weight: 3 },
     ],
-    threshold: 0.38,
+    threshold: 0.25,
     includeScore: true,
     minMatchCharLength: 2,
   }), [enriched])
 
-  const categories = useMemo(() => {
-    const counts = {}
-    for (const e of expressions) {
-      if (e.categorie) counts[e.categorie] = (counts[e.categorie] ?? 0) + 1
-    }
-    return Object.entries(counts).sort((a, b) => b[1] - a[1])
-  }, [expressions])
-
-  const hasSearch = query.trim().length >= 2 || !!catFilter
+  const hasSearch = query.trim().length >= 2
 
   const results = useMemo(() => {
     const q = query.trim()
     if (!hasSearch) return []
 
-    let list = q.length >= 2
-      ? fuse.search(normalizePhonetic(q)).map(r => r.item)
-      : [...enriched].sort((a, b) => a.mot.localeCompare(b.mot, 'fr'))
+    const norm = s => (s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    const qNorm = norm(q)
+    const qPhonetic = normalizePhonetic(q)
+    const seen = new Set()
 
-    if (catFilter) list = list.filter(e => e.categorie === catFilter)
-    return list.slice(0, 20)
-  }, [query, catFilter, fuse, enriched, hasSearch])
+    // 1. Correspondance exacte préfixe sur le mot (priorité max)
+    const prefixHits = enriched.filter(e => {
+      if (norm(e.mot).startsWith(qNorm)) { seen.add(e.slug); return true }
+      return false
+    })
+
+    // 2. Fuzzy phonétique sur le mot uniquement (Fuse strict)
+    const fuseHits = fuse.search(qPhonetic)
+      .filter(r => !seen.has(r.item.slug))
+      .map(r => { seen.add(r.item.slug); return r.item })
+
+    // 3. Substring exact dans la définition ou l'équivalent français
+    const contentHits = enriched.filter(e => {
+      if (seen.has(e.slug)) return false
+      const inSens  = norm(e.sens).includes(qNorm)
+      const inEquiv = norm(e.equivalent_fr).includes(qNorm)
+      if (inSens || inEquiv) { seen.add(e.slug); return true }
+      return false
+    })
+
+    return [...prefixHits, ...fuseHits, ...contentHits].slice(0, 20)
+  }, [query, fuse, enriched, hasSearch])
 
   const placeholder = lang === 'fr'
     ? 'Tapez un mot québécois ou son équivalent français…'
     : 'Search a Quebec word or its French equivalent…'
-
-  const labelTotal = lang === 'fr'
-    ? `${expressions.length} mots et expressions`
-    : `${expressions.length} words and expressions`
 
   const labelResults = lang === 'fr'
     ? `${results.length} résultat${results.length > 1 ? 's' : ''}`
@@ -84,7 +85,7 @@ export default function ExpressionSearch({ expressions, lang, t }) {
   return (
     <div>
       {/* Barre de recherche */}
-      <div className="relative mb-4">
+      <div className="relative mb-6">
         <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z" />
         </svg>
@@ -104,28 +105,6 @@ export default function ExpressionSearch({ expressions, lang, t }) {
         )}
       </div>
 
-      {/* Filtres catégorie */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        <button
-          onClick={() => setCatFilter('')}
-          className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
-            !catFilter ? 'bg-quebec-navy text-white border-quebec-navy' : 'bg-white text-gray-600 border-gray-200 hover:border-quebec-navy'
-          }`}
-        >
-          {lang === 'fr' ? 'Tout' : 'All'}
-        </button>
-        {categories.map(([cat]) => (
-          <button key={cat}
-            onClick={() => setCatFilter(cat === catFilter ? '' : cat)}
-            className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors capitalize ${
-              catFilter === cat ? 'bg-quebec-navy text-white border-quebec-navy' : 'bg-white text-gray-600 border-gray-200 hover:border-quebec-navy'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
       {/* Compteur / invite */}
       {hasSearch ? (
         <p className="text-sm text-gray-500 mb-4">
@@ -139,8 +118,8 @@ export default function ExpressionSearch({ expressions, lang, t }) {
       ) : (
         <p className="text-sm text-gray-400 mb-4 italic">
           {lang === 'fr'
-            ? 'Tapez un mot ou sélectionnez une catégorie pour explorer le vocabulaire.'
-            : 'Type a word or select a category to explore the vocabulary.'}
+            ? 'Tapez un mot pour explorer le vocabulaire québécois.'
+            : 'Type a word to explore Quebec vocabulary.'}
         </p>
       )}
 

@@ -15,8 +15,8 @@ export async function generateMetadata({ params }) {
       ? "Quebec French Dictionary — Words & Expressions | J'aime le Québec"
       : "Dictionnaire québécois — Mots et expressions | J'aime le Québec",
     description: isEn
-      ? '3,000 Quebec French words and expressions — with their meaning and French-France equivalent.'
-      : '3 000 mots et expressions du vocabulaire québécois — avec leur sens et leur équivalent en français de France.',
+      ? 'Hundreds of Quebec French words and expressions — with their meaning and French-France equivalent.'
+      : 'Des centaines de mots et expressions du vocabulaire québécois — avec leur sens, leur équivalent en français de France.',
     alternates: getAlternates('/expressions'),
   }
 }
@@ -41,8 +41,8 @@ export default async function ExpressionsPage({ params }) {
           </h1>
           <p className="text-blue-100 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
             {lang === 'fr'
-              ? '3 000 mots et expressions du vocabulaire québécois — avec leur sens, leur équivalent en français de France.'
-              : '3,000 Quebec French words and expressions — with their meaning and French-France equivalent.'}
+              ? 'Des centaines de mots et expressions du vocabulaire québécois — avec leur sens, leur équivalent en français de France.'
+              : 'Hundreds of Quebec French words and expressions — with their meaning and French-France equivalent.'}
           </p>
         </div>
       </div>

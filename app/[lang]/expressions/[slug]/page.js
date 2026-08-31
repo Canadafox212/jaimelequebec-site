@@ -155,25 +155,6 @@ export default async function ExpressionPage({ params }) {
             </div>
           )}
 
-          {/* Lien vers le livre */}
-          <div className="bg-quebec-navy text-white rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-5">
-            <div className="shrink-0">
-              <div className="w-16 h-24 rounded bg-white/10 flex items-center justify-center text-3xl">📖</div>
-            </div>
-            <div>
-              <p className="text-xs font-bold tracking-widest uppercase text-blue-300 mb-1">
-                {isEn ? 'The book' : 'Le livre'}
-              </p>
-              <p className="font-bold text-white text-base mb-1">Comprendre le québécois en voyage</p>
-              <p className="text-blue-200 text-sm leading-relaxed">
-                {isEn
-                  ? '300 Quebec expressions with etymologies, examples and humor — by Philippe Goupil.'
-                  : '300 expressions québécoises avec étymologies, exemples et humour — par Philippe Goupil.'}
-              </p>
-              {/* Lien Amazon à activer après publication du livre */}
-            </div>
-          </div>
-
           {/* Retour */}
           <div className="text-center pt-4">
             <Link href={`/${lang}/expressions`}
