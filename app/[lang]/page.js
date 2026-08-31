@@ -5,6 +5,7 @@ import { getAllAttractions, getAttractionImageSrc } from '@/lib/attractions'
 import { getCoupsDeCoeur } from '@/lib/activites'
 import { getDictionary, LANGS, getAlternates } from '@/lib/i18n'
 import { notFound } from 'next/navigation'
+import { bookingRegionUrl, discovercarsUrl, gygUrl, viatorUrl } from '@/lib/affiliates'
 
 export async function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }))
@@ -307,6 +308,50 @@ export default async function HomePage({ params }) {
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* ── PARTENAIRES VOYAGE ───────────────────────────────────── */}
+      <section className="bg-white border-t border-gray-100 py-8 px-4">
+        <div className="max-w-5xl mx-auto">
+          <details className="group">
+            <summary className="cursor-pointer list-none flex items-center justify-between py-2">
+              <span className="font-bold text-xs uppercase tracking-widest text-slate-400">
+                {lang === 'fr' ? 'Nos partenaires voyage' : lang === 'en' ? 'Our travel partners' : lang === 'es' ? 'Nuestros socios de viaje' : lang === 'de' ? 'Unsere Reisepartner' : lang === 'pt' ? 'Os nossos parceiros de viagem' : 'Nos partenaires voyage'}
+              </span>
+              <span className="w-8 h-8 rounded-full bg-slate-100 border border-gray-200 flex items-center justify-center text-slate-400 text-xl font-bold shadow-sm group-open:rotate-45 transition-transform duration-200 shrink-0">+</span>
+            </summary>
+            <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <a href={bookingRegionUrl(lang)} target="_blank" rel="noopener noreferrer sponsored"
+                className="flex flex-col items-center gap-2 bg-[#003580] text-white rounded-xl p-4 hover:bg-[#00245c] transition-colors text-center">
+                <span className="font-bold text-sm">Booking.com</span>
+                <span className="text-xs text-blue-200 leading-snug">
+                  {lang === 'fr' ? 'Hôtels & hébergements' : 'Hotels & accommodations'}
+                </span>
+              </a>
+              <a href={discovercarsUrl(null, lang)} target="_blank" rel="noopener noreferrer sponsored"
+                className="flex flex-col items-center gap-2 bg-slate-800 text-white rounded-xl p-4 hover:bg-slate-900 transition-colors text-center">
+                <span className="font-bold text-sm">DiscoverCars</span>
+                <span className="text-xs text-slate-300 leading-snug">
+                  {lang === 'fr' ? 'Location de voiture' : 'Car rental'}
+                </span>
+              </a>
+              <a href={gygUrl('province-de-quebec-l561', lang)} target="_blank" rel="noopener noreferrer sponsored"
+                className="flex flex-col items-center gap-2 bg-[#FF5533] text-white rounded-xl p-4 hover:bg-red-700 transition-colors text-center">
+                <span className="font-bold text-sm">GetYourGuide</span>
+                <span className="text-xs text-red-100 leading-snug">
+                  {lang === 'fr' ? 'Visites & activités' : 'Tours & activities'}
+                </span>
+              </a>
+              <a href={viatorUrl(lang)} target="_blank" rel="noopener noreferrer sponsored"
+                className="flex flex-col items-center gap-2 bg-[#1a1a2e] text-white rounded-xl p-4 hover:bg-[#0f0f1a] transition-colors text-center">
+                <span className="font-bold text-sm">Viator</span>
+                <span className="text-xs text-slate-300 leading-snug">
+                  {lang === 'fr' ? 'Excursions guidées' : 'Guided excursions'}
+                </span>
+              </a>
+            </div>
+          </details>
         </div>
       </section>
 

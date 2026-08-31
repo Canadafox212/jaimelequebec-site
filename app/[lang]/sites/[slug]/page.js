@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getAllAttractions, getAttractionBySlug, getNearbyAttractions, getActivitesForPage, getAttractionImageSrc, getActivityPhotoSrc } from '@/lib/attractions'
+import { getRegions } from '@/lib/activites'
 import AttractionCard from '@/components/AttractionCard'
 import MapModal from '@/components/MapModal'
 import ShareLieuButton from '@/components/ShareLieuButton'
@@ -68,6 +69,9 @@ export default async function AttractionPage({ params }) {
   const ville = loc.ville ?? loc.region_touristique ?? 'Québec'
   const isFr = lang === 'fr'
   const { ete: activitesEte, hiver: activitesHiver } = getActivitesForPage(attraction)
+  const regions = getRegions()
+  const regionNum = regions.find(r => r.nom_fr === loc.region_touristique)?.num ?? null
+  const regionUrl = regionNum ? `/${lang}/activites/${regionNum}` : `/${lang}/activites`
   const imageSrc = getAttractionImageSrc(slug)
 
   // Badge animaux — chercher si ce slug est dans l'inventaire
@@ -278,7 +282,9 @@ export default async function AttractionPage({ params }) {
             {contact?.telephone && (
               <div>
                 <p className="font-bold text-gray-400 text-xs uppercase tracking-wider mb-1">{t.detail.phone}</p>
-                <p className="text-gray-800">{contact.telephone}</p>
+                <a href={`tel:${contact.telephone}`} className="text-gray-800 hover:text-quebec-blue transition-colors font-medium">
+                  {contact.telephone}
+                </a>
               </div>
             )}
             {contact?.site_web && (
@@ -298,6 +304,31 @@ export default async function AttractionPage({ params }) {
         )}
 
 
+
+        {/* ── EN SAVOIR + SUR LA RÉGION ─────────────────────────────────── */}
+        {loc.region_touristique && loc.region_touristique !== 'Incontournables transversaux' && (
+          <details className="group mb-10">
+            <summary className="cursor-pointer list-none flex items-center justify-between bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 hover:bg-slate-100 transition-colors">
+              <span className="font-bold text-xs uppercase tracking-widest text-quebec-navy">
+                {isFr ? `En savoir + sur ${loc.region_touristique}` : `Learn more about ${loc.region_touristique}`}
+              </span>
+              <span className="w-7 h-7 rounded-full bg-white border border-slate-300 flex items-center justify-center text-slate-500 text-base font-bold shadow-sm shrink-0 group-open:rotate-45 transition-transform duration-200">+</span>
+            </summary>
+            <div className="mt-2 bg-slate-50 border border-slate-200 rounded-2xl px-5 py-5 text-sm text-gray-700">
+              <p className="mb-4 text-gray-600 leading-relaxed">
+                {isFr
+                  ? `Activités estivales et hivernales, attraits touristiques, restaurants et hébergements — explorez tout ce que ${loc.region_touristique} a à offrir.`
+                  : `Summer and winter activities, tourist attractions, restaurants and accommodations — explore all that ${loc.region_touristique} has to offer.`}
+              </p>
+              <Link
+                href={regionUrl}
+                className="inline-block bg-quebec-blue text-white font-bold text-xs px-5 py-2.5 rounded-full hover:bg-blue-800 transition-colors"
+              >
+                {isFr ? `Explorer la région →` : `Explore the region →`}
+              </Link>
+            </div>
+          </details>
+        )}
 
         {/* ── HÉBERGEMENTS À PROXIMITÉ ───────────────────────────────────── */}
         {attraction.hebergement && Object.values(attraction.hebergement).some(v => v?.length > 0) && (

@@ -5,6 +5,7 @@ import ThemeCard from '@/components/ThemeCard'
 import QuebecRegionMap from '@/components/QuebecRegionMap'
 import RegionImageBanner from '@/components/RegionImageBanner'
 import { dicts, LANGS, getAlternates } from '@/lib/i18n'
+import animauxData from '@/data/animaux.json'
 
 const REGION_IMAGES = {
   1:  '/images/REGIONS/montréal_.png',
@@ -53,6 +54,10 @@ export default async function RegionThemes({ params }) {
   const nom = r[`nom_${lang}`] ?? r.nom_en ?? r.nom_fr
   const themes = getRegionThemeList(region)
   const regionImg = REGION_IMAGES[r.num] ?? null
+  const nomFr = r.nom_fr
+  const sitesChien = animauxData.filter(a =>
+    a.chiens === 'OUI' && (a.region.includes(nomFr) || nomFr.includes(a.region))
+  ).slice(0, 4)
 
   return (
     <>
@@ -92,6 +97,48 @@ export default async function RegionThemes({ params }) {
             <ThemeCard key={theme.id} lang={lang} region={region} theme={theme} count={count} saison={theme.saison} sous={sous} />
           ))}
         </div>
+
+        {/* ── JAMAIS SANS VOTRE CHIEN ? ─────────────────────────────── */}
+        {sitesChien.length > 0 && (
+          <section className="mt-12 bg-green-50 border border-green-200 rounded-2xl px-6 py-7">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
+              <div>
+                <h2 className="font-display text-lg font-bold text-green-900 mb-1">
+                  🐕 {lang === 'fr' ? 'Jamais sans votre chien ?' : lang === 'en' ? 'Never without your dog?' : lang === 'de' ? 'Nie ohne Ihren Hund?' : lang === 'es' ? '¿Nunca sin su perro?' : lang === 'pt' ? 'Nunca sem o seu cão?' : 'Jamais sans votre chien ?'}
+                </h2>
+                <p className="text-sm text-green-800">
+                  {lang === 'fr'
+                    ? `${sitesChien.length} site${sitesChien.length > 1 ? 's' : ''} qui accueillent les chiens dans cette région.`
+                    : lang === 'en'
+                    ? `${sitesChien.length} dog-friendly site${sitesChien.length > 1 ? 's' : ''} in this region.`
+                    : `${sitesChien.length} site${sitesChien.length > 1 ? 's' : ''} acceptant les chiens.`}
+                </p>
+              </div>
+              <Link
+                href={`/${lang}/animaux`}
+                className="shrink-0 inline-block bg-green-700 text-white font-bold text-xs px-5 py-2.5 rounded-full hover:bg-green-800 transition-colors"
+              >
+                {lang === 'fr' ? 'Voir le guide complet →' : lang === 'en' ? 'View full guide →' : 'Voir le guide →'}
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {sitesChien.map((s) => (
+                <div key={s.id} className="bg-white rounded-xl border border-green-200 px-4 py-3 flex items-start gap-3">
+                  <span className="text-xl shrink-0 mt-0.5">🐕</span>
+                  <div>
+                    <p className="font-semibold text-sm text-gray-900 leading-snug">
+                      {lang === 'fr' ? s.nom_fr : s.nom_en ?? s.nom_fr}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-0.5">{s.categorie}</p>
+                    {s.laisse_m > 0 && (
+                      <p className="text-xs text-green-700 mt-1">Laisse max {s.laisse_m} m</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </>
   )
