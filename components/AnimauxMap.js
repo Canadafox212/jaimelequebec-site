@@ -42,9 +42,9 @@ export default function AnimauxMap({ sites, lang, t }) {
 
     if (!mapInstance.current) {
       mapInstance.current = L.map(mapRef.current, { zoomControl: true }).setView([47.2, -71.8], 6)
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/">CARTO</a>',
-        maxZoom: 18,
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19,
       }).addTo(mapInstance.current)
     }
 

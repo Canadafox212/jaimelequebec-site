@@ -52,10 +52,9 @@ export default function RegionMap({ lat, lng, zoom = 9, height = '420px' }) {
         { maxZoom: 19 }
       ).addTo(map)
 
-      // Couche labels (villes, routes, frontières) par-dessus le satellite
       L.tileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png',
-        { subdomains: 'abcd', maxZoom: 19, opacity: 0.9 }
+        'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+        { maxZoom: 19, opacity: 0.9 }
       ).addTo(map)
 
       mapRef.current = map

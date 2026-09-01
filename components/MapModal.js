@@ -57,8 +57,8 @@ function LeafletMap({ lat, lng, zoom }) {
       ).addTo(map)
 
       L.tileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png',
-        { subdomains: 'abcd', maxZoom: 19, opacity: 0.9 }
+        'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+        { maxZoom: 19, opacity: 0.9 }
       ).addTo(map)
 
       mapRef.current = map

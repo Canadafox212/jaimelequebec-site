@@ -5,17 +5,14 @@ import { createRoot } from 'react-dom/client'
 import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
-// CartoDB Voyager — tiles de rue légères, lisibles à tout zoom, pas de clé API
 const CARTO_TILES = [
-  'https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-  'https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-  'https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-  'https://d.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
+  'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png',
 ]
 
 const CARTO_ATTRIBUTION =
-  '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors ' +
-  '© <a href="https://carto.com/attributions">CARTO</a>'
+  '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
 // Vue initiale centrée sur la province
 const QC_CENTER = [-71.5, 52.5]
