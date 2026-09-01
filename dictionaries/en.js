@@ -330,7 +330,7 @@ const en = {
     view_fiche: "View listing →",
     map_title: "Site map",
     btn_sepaq: "Learn more about SÉPAQ parks",
-    btn_mapaq: "Learn more about MAPAQ rules",
+    btn_mapaq: "Rules by park — Parks Canada",
   },
 }
 

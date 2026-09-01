@@ -198,7 +198,7 @@ export default function AnimauxClient({ animaux, t, lang }) {
           </ul>
           <div className="flex flex-wrap gap-2">
             <a
-              href="https://www.sepaq.com/pq/reglements-generaux.dot#animaux"
+              href="https://www.sepaq.com/animaux/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-xs border border-green-300 text-green-800 bg-green-50 px-3 py-1.5 rounded-lg font-medium hover:bg-green-100 transition-colors"
@@ -206,7 +206,7 @@ export default function AnimauxClient({ animaux, t, lang }) {
               {t.btn_sepaq ?? 'En savoir + sur les parcs SÉPAQ'} ↗
             </a>
             <a
-              href="https://www.quebec.ca/agriculture-environnement-et-ressources-naturelles/animaux/animaux-compagnie/voyage-avec-animal"
+              href="https://www.canada.ca/fr/parcs-canada/rechercher.html?q=animaux+d+compagnie&st=s&num=10&langs=fr&st1rt=0&s5bm3ts21rch=x&wb-srch-sub="
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-xs border border-blue-300 text-blue-800 bg-blue-50 px-3 py-1.5 rounded-lg font-medium hover:bg-blue-100 transition-colors"
