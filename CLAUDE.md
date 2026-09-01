@@ -218,13 +218,15 @@ atteint à 100% — reprendre au point exact dans une nouvelle session.
       93 attractions matchées (29 Accessible + 64 Partiellement). Badge ♿ sur cartes annuaire
       /sites (NearMeSortedList, top-right), filtre ?pmr=1, bandeau PMR sur fiches /sites/[slug]
       (lien cliquable vers fiche Kéroul). Inventaire PMR CSV initial (30 fiches détaillées 42 cols).
-- [x] Session 18 (2026-08-31) — Retours Clémence (suite) : road trip bugs résolus (doublons tronçons,
-      PDF 4 pages vides, race condition addStopImpl). Animaux : détails toujours visibles desktop,
-      boutons SÉPAQ + MAPAQ. 4 améliorations "rapide" : téléphone cliquable (tel:) sur fiches,
-      accordéon "En savoir + sur [Région]" sur fiches → page activités, section partenaires
-      expandable (+) sur accueil (Booking/DiscoverCars/GYG/Viator), section "Jamais sans votre
-      chien ?" sur pages région /activites/[region]. Fix déploiement Vercel : VERCEL_SUPPORT_LARGE_FUNCTIONS=1
-      + readFileSync pour animaux.json (hors bundle serverless).
+- [x] Session 18 (2026-08-31/09-01) — Retours Clémence complets : road trip bugs (doublons tronçons,
+      PDF 4 pages vides, race condition addStopImpl). Animaux : détails desktop toujours visibles,
+      boutons SÉPAQ + MAPAQ, picto patte 🐾/🚫 sur marqueurs carte (divIcon Leaflet). Fiches /sites/[slug] :
+      téléphone cliquable (tel:), accordéon "En savoir + sur [Région]" → page activités, badge distance
+      repositionné, boutons CTA "Tous les lieux / par région" sous sites à proximité, bouton "EN SAVOIR +"
+      sur activités + boutons CTA "Toutes les activités / par région". Accueil : section partenaires
+      expandable (+) Booking/DiscoverCars/GYG/Viator. Pages région : section "Jamais sans votre chien ?".
+      Road trip : découpage JOUR 1/JOUR 2 automatique dans le récap (si étapes nuit activées).
+      Fix Vercel : VERCEL_SUPPORT_LARGE_FUNCTIONS=1 + readFileSync animaux.json.
 
 ## Décisions techniques prises
 - Images toujours stockées localement dans le projet, jamais en lien
