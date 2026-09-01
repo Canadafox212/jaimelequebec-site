@@ -1191,33 +1191,76 @@ export default function RoadTripBuilder({ lang, t, attractions }) {
               </div>
               <div className="px-5 py-4">
                 <div className="space-y-3 mb-4">
-                  {displayStops.slice(0, -1).map((stop, i) => {
-                    const nextStop = displayStops[i + 1]
-                    const leg = getLeg(stop.slug, nextStop.slug)
-                    if (!leg) return null
-                    const fromLabel = stop.isCustomDeparture
-                      ? departure?.label?.split(',')[0]
-                      : stop.title?.split(' ').slice(0, 2).join(' ')
-                    const toLabel = nextStop.title?.split(' ').slice(0, 2).join(' ')
-                    const toNights = nextStop.nights ?? (nextStop.overnight ? 1 : 0)
-                    return (
-                      <div key={`${stop.slug}->${nextStop.slug}`} className="text-sm">
-                        <div className="flex justify-between text-gray-700 font-medium">
-                          <span className="truncate mr-2">{fromLabel} →</span>
-                          <span className="shrink-0 text-quebec-blue font-semibold">{fmtTime(legTotalMin(leg))}</span>
+                  {(() => {
+                    const hasOvernights = displayStops.some(s => (s.nights ?? (s.overnight ? 1 : 0)) > 0)
+
+                    function renderLeg(stop, nextStop) {
+                      const leg = getLeg(stop.slug, nextStop.slug)
+                      if (!leg) return null
+                      const fromLabel = stop.isCustomDeparture
+                        ? departure?.label?.split(',')[0]
+                        : stop.title?.split(' ').slice(0, 2).join(' ')
+                      const toLabel = nextStop.title?.split(' ').slice(0, 2).join(' ')
+                      const toNights = nextStop.nights ?? (nextStop.overnight ? 1 : 0)
+                      return (
+                        <div key={`${stop.slug}->${nextStop.slug}`} className="text-sm">
+                          <div className="flex justify-between text-gray-700 font-medium">
+                            <span className="truncate mr-2">{fromLabel} →</span>
+                            <span className="shrink-0 text-quebec-blue font-semibold">{fmtTime(legTotalMin(leg))}</span>
+                          </div>
+                          <div className="text-gray-400 text-xs mt-0.5 flex items-center gap-1">
+                            <span>{toLabel}{leg.distanceKm ? ` · ${leg.distanceKm} km` : ''}</span>
+                            {toNights > 0 && <span title="Étape nuit">🌙</span>}
+                            {nextStop.isPort && <span title="Port traversier">🚢</span>}
+                          </div>
+                          {nextStop.isPort && <div className="text-xs text-cyan-600 mt-0.5">+ Traversée {fmtTime(nextStop.ferryCrossingMin)}</div>}
+                          {leg.extra.length > 0 && (
+                            <div className="text-xs text-amber-600 mt-0.5">+ {leg.extra.map(e => e.label).join(', ')}</div>
+                          )}
                         </div>
-                        <div className="text-gray-400 text-xs mt-0.5 flex items-center gap-1">
-                          <span>{toLabel}{leg.distanceKm ? ` · ${leg.distanceKm} km` : ''}</span>
-                          {toNights > 0 && <span title="Étape nuit">🌙</span>}
-                          {nextStop.isPort && <span title="Port traversier">🚢</span>}
+                      )
+                    }
+
+                    if (!hasOvernights) {
+                      return displayStops.slice(0, -1).map((stop, i) => renderLeg(stop, displayStops[i + 1]))
+                    }
+
+                    // Grouper les tronçons par jour (séparés par les étapes nuit)
+                    const dayGroups = []
+                    let dayStart = 0
+                    for (let i = 0; i < displayStops.length; i++) {
+                      const nights = displayStops[i].nights ?? (displayStops[i].overnight ? 1 : 0)
+                      if (nights > 0 && i < displayStops.length - 1) {
+                        dayGroups.push(displayStops.slice(dayStart, i + 1))
+                        dayStart = i
+                      }
+                    }
+                    if (dayStart < displayStops.length - 1) {
+                      dayGroups.push(displayStops.slice(dayStart))
+                    }
+
+                    const dayLabel = lang === 'en' ? 'Day' : 'Jour'
+
+                    return dayGroups.map((dayStops, dayIdx) => {
+                      const dayLegs = dayStops.slice(0, -1)
+                        .map((s, i) => getLeg(s.slug, dayStops[i + 1].slug))
+                        .filter(Boolean)
+                      const dayMin = dayLegs.reduce((s, l) => s + legTotalMin(l), 0)
+                      return (
+                        <div key={dayIdx} className={dayIdx > 0 ? 'pt-3 border-t border-gray-100' : ''}>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-xs font-bold uppercase tracking-widest text-quebec-navy">
+                              {dayLabel} {dayIdx + 1}
+                            </span>
+                            <span className="text-xs text-gray-400 font-medium">{fmtTime(dayMin)}</span>
+                          </div>
+                          <div className="space-y-2">
+                            {dayStops.slice(0, -1).map((stop, i) => renderLeg(stop, dayStops[i + 1]))}
+                          </div>
                         </div>
-                        {nextStop.isPort && <div className="text-xs text-cyan-600 mt-0.5">+ Traversée {fmtTime(nextStop.ferryCrossingMin)}</div>}
-                        {leg.extra.length > 0 && (
-                          <div className="text-xs text-amber-600 mt-0.5">+ {leg.extra.map(e => e.label).join(', ')}</div>
-                        )}
-                      </div>
-                    )
-                  })}
+                      )
+                    })
+                  })()}
                 </div>
                 <div className="border-t border-gray-200 pt-4">
                   <div className="flex justify-between items-baseline">
