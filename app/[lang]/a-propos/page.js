@@ -170,7 +170,7 @@ export default async function AProposPage({ params }) {
           <div className="shrink-0 relative">
             <div className="w-36 h-36 rounded-full bg-white border-2 border-gray-200 shadow-lg flex items-center justify-center overflow-hidden">
               <Image
-                src="/images/logo.png"
+                src="/images/logo.svg"
                 alt="J'aime le Québec"
                 width={110}
                 height={110}

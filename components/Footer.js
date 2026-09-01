@@ -16,11 +16,11 @@ export default function Footer({ t, lang }) {
           <div className="flex flex-col gap-3">
             <Link href={`/${lang}`} className="inline-block hover:opacity-80 transition-opacity">
               <Image
-                src="/images/logo.png"
+                src="/images/logo.svg"
                 alt="J'aime le Québec"
                 width={180}
                 height={54}
-                className="h-14 w-auto brightness-0 invert"
+                className="h-14 w-auto invert"
               />
             </Link>
             <p className="text-xs text-slate-400 leading-relaxed max-w-[200px]">
