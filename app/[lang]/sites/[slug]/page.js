@@ -422,7 +422,7 @@ export default async function AttractionPage({ params }) {
 
         {/* Activités hiver */}
         {activitesHiver.length > 0 && (
-          <section className="mb-12">
+          <section className="mb-6">
             <div className="flex items-center gap-3 mb-5 pb-3 border-b border-gray-100">
               <div className="bg-gradient-to-r from-indigo-500 to-blue-700 text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-sm">
                 ❄️ {t.detail.activities_winter}
@@ -435,6 +435,26 @@ export default async function AttractionPage({ params }) {
           </section>
         )}
 
+        {/* Boutons CTA activités */}
+        {(activitesEte.length > 0 || activitesHiver.length > 0) && (
+          <div className="mb-12 flex flex-wrap gap-3">
+            <Link
+              href={`/${lang}/activites`}
+              className="inline-block border-2 border-quebec-navy text-quebec-navy font-bold text-xs px-5 py-2.5 rounded-full hover:bg-quebec-navy hover:text-white transition-colors"
+            >
+              {isFr ? 'Toutes les activités →' : 'All activities →'}
+            </Link>
+            {regionNum && (
+              <Link
+                href={`/${lang}/activites/${regionNum}`}
+                className="inline-block bg-quebec-blue text-white font-bold text-xs px-5 py-2.5 rounded-full hover:bg-blue-800 transition-colors"
+              >
+                {isFr ? `Toutes les activités en ${loc.region_touristique} →` : `All activities in ${loc.region_touristique} →`}
+              </Link>
+            )}
+          </div>
+        )}
+
         {/* Attractions à proximité */}
         {nearby.length > 0 && (
           <section className="mb-10">
@@ -443,11 +463,27 @@ export default async function AttractionPage({ params }) {
               {nearby.map((a) => (
                 <div key={a.id} className="relative">
                   <AttractionCard attraction={a} lang={lang} t={t} />
-                  <span className="absolute top-14 right-3 bg-white/95 text-xs font-semibold text-slate-600 px-2 py-0.5 rounded-full shadow-sm">
+                  <span className="absolute top-3 right-3 bg-white/95 text-xs font-semibold text-slate-700 px-2.5 py-1 rounded-full shadow-sm">
                     {a.distanceKm} {t.detail.distance}
                   </span>
                 </div>
               ))}
+            </div>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link
+                href={`/${lang}/sites`}
+                className="inline-block border-2 border-quebec-navy text-quebec-navy font-bold text-xs px-5 py-2.5 rounded-full hover:bg-quebec-navy hover:text-white transition-colors"
+              >
+                {isFr ? 'Tous les lieux →' : 'All sites →'}
+              </Link>
+              {regionNum && (
+                <Link
+                  href={`/${lang}/sites?region=${regionNum}`}
+                  className="inline-block bg-quebec-blue text-white font-bold text-xs px-5 py-2.5 rounded-full hover:bg-blue-800 transition-colors"
+                >
+                  {isFr ? `Tous les lieux de ${loc.region_touristique} →` : `All sites in ${loc.region_touristique} →`}
+                </Link>
+              )}
             </div>
           </section>
         )}
@@ -608,8 +644,8 @@ function ActivityCard({ activity, season, lang, ville, t, siteWeb }) {
               🌐 {lang === 'fr' ? 'Site web' : 'Website'}
             </a>
           )}
-          <span className="flex items-center gap-1 text-xs font-bold text-quebec-blue group-hover:text-blue-800 transition-colors">
-            {lang === 'fr' ? 'Voir les activités →' : 'View activities →'}
+          <span className="inline-flex items-center gap-1 text-xs font-bold bg-quebec-blue text-white px-3 py-1.5 rounded-full group-hover:bg-quebec-navy transition-colors">
+            {lang === 'fr' ? 'EN SAVOIR +' : 'LEARN MORE'}
           </span>
         </div>
       </div>
