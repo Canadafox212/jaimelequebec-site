@@ -24,6 +24,15 @@ function ChienBadge({ statut, t }) {
   )
 }
 
+function withTracesLink(text) {
+  if (!text?.includes('TRACES')) return text
+  return text.split('TRACES').reduce((acc, part, i) =>
+    i === 0
+      ? [part]
+      : [...acc, <a key={i} href="#traces-alert" className="font-semibold underline decoration-dotted hover:no-underline">TRACES</a>, part]
+  , [])
+}
+
 function SiteCard({ site, t, lang }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const nom        = lang === 'fr' ? site.nom_fr        : (site.nom_en        || site.nom_fr)
@@ -61,7 +70,12 @@ function SiteCard({ site, t, lang }) {
       {noteEuro && (
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
           <p className="text-xs font-semibold text-blue-800 mb-1">{t.note_euro}</p>
-          <p className="text-xs text-blue-700">{noteEuro}</p>
+          <p className="text-xs text-blue-700">{withTracesLink(noteEuro)}</p>
+        </div>
+      )}
+      {t.verify_sectors && (
+        <div className="bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+          <p className="text-xs text-amber-800">{t.verify_sectors}</p>
         </div>
       )}
       <div className="flex flex-wrap gap-2 pt-1">
@@ -180,7 +194,7 @@ export default function AnimauxClient({ animaux, t, lang }) {
 
       {/* Alerte TRACES */}
       <div className="max-w-4xl mx-auto px-4 mt-6">
-        <div className="bg-amber-50 border border-amber-300 rounded-xl p-4 text-sm text-amber-900">
+        <div id="traces-alert" className="bg-amber-50 border border-amber-300 rounded-xl p-4 text-sm text-amber-900 scroll-mt-24">
           {t.alert_traces}
         </div>
       </div>
@@ -214,6 +228,38 @@ export default function AnimauxClient({ animaux, t, lang }) {
               {t.btn_mapaq ?? 'En savoir + sur la règle MAPAQ'} ↗
             </a>
           </div>
+
+          <details className="mt-3 border border-gray-200 rounded-lg overflow-hidden">
+            <summary className="cursor-pointer px-3 py-2 text-xs font-semibold text-gray-700 bg-gray-50 hover:bg-gray-100 transition-colors flex items-center justify-between select-none list-none [&::-webkit-details-marker]:hidden">
+              <span>📋 {t.art20_title ?? 'Espaces publics — Article 20 LBSA'}</span>
+              <span className="text-gray-400 ml-2">▾</span>
+            </summary>
+            <div className="px-4 py-3 text-xs text-gray-600 space-y-1.5 bg-white">
+              <p className="font-medium text-gray-700 mb-2">{t.art20_intro ?? "L'article 20 de la Loi sur le bien-être et la sécurité de l'animal impose notamment :"}</p>
+              <ul className="space-y-1.5">
+                {(t.art20_bullets ?? [
+                  'Le chien doit être sous le contrôle d\'une personne capable de le maîtriser',
+                  'Il doit être tenu en laisse',
+                  'La laisse ne peut dépasser 1,85 m',
+                  'Pour un chien de 20 kg ou plus : laisse attachée à un harnais ou licou',
+                  'La laisse n\'est pas obligatoire dans une aire d\'exercice canin, lors de la chasse, d\'une compétition ou d\'un cours de dressage',
+                ]).map((item, i) => (
+                  <li key={i} className="flex items-start gap-1.5">
+                    <span className="text-gray-400 mt-0.5 shrink-0">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="https://www.legisquebec.gouv.qc.ca/fr/document/rc/P-38.002%2C%20r.%201"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-2 text-gray-400 hover:text-gray-600 underline"
+              >
+                {t.art20_source ?? 'Source officielle — LégisQuébec'} ↗
+              </a>
+            </div>
+          </details>
         </div>
       </section>
 

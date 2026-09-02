@@ -286,6 +286,17 @@ const fr = {
     map_title: "Carte des sites",
     btn_sepaq: "En savoir + sur les parcs SÉPAQ",
     btn_mapaq: "Règles par parc — Parcs Canada",
+    art20_source: "Source officielle — LégisQuébec",
+    art20_title: "Espaces publics — Article 20 LBSA",
+    art20_intro: "L'article 20 de la Loi sur le bien-être et la sécurité de l'animal impose notamment :",
+    art20_bullets: [
+      "Le chien doit être sous le contrôle d'une personne capable de le maîtriser",
+      "Il doit être tenu en laisse",
+      "La laisse ne peut dépasser 1,85 m",
+      "Pour un chien de 20 kg ou plus : laisse attachée à un harnais ou licou",
+      "La laisse n'est pas obligatoire dans une aire d'exercice canin, lors de la chasse, d'une compétition ou d'un cours de dressage",
+    ],
+    verify_sectors: "⚠️ Les autorisations peuvent varier selon les secteurs et les saisons — vérifiez auprès du site avant votre visite.",
   },
   planifier: {
     nav_title: 'Road trip',

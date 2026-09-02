@@ -331,6 +331,17 @@ const en = {
     map_title: "Site map",
     btn_sepaq: "Learn more about SÉPAQ parks",
     btn_mapaq: "Rules by park — Parks Canada",
+    art20_source: "Official source — LégisQuébec",
+    art20_title: "Public spaces — Article 20 AWSA",
+    art20_intro: "Article 20 of the Animal Welfare and Safety Act requires in particular:",
+    art20_bullets: [
+      "The dog must be under the control of a person able to restrain it",
+      "It must be kept on a leash",
+      "The leash may not exceed 1.85 m",
+      "For a dog weighing 20 kg or more: the leash must be attached to a harness or halter",
+      "A leash is not required in a dog exercise area or during certain canine activities such as hunting, a competition or a training class",
+    ],
+    verify_sectors: "⚠️ Authorized areas may vary by sector and season — verify with the site before your visit.",
   },
 }
 
