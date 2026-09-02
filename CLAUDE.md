@@ -227,6 +227,12 @@ atteint à 100% — reprendre au point exact dans une nouvelle session.
       expandable (+) Booking/DiscoverCars/GYG/Viator. Pages région : section "Jamais sans votre chien ?".
       Road trip : découpage JOUR 1/JOUR 2 automatique dans le récap (si étapes nuit activées).
       Fix Vercel : VERCEL_SUPPORT_LARGE_FUNCTIONS=1 + readFileSync animaux.json.
+- [x] Session 19 (2026-09-02) — Animaux enrichi pour visiteurs européens : animaux.json 86 → 123
+      entrées (23 lieux historiques Parcs Canada, 2 parcs nationaux, Chute-Montmorency, 12 réserves
+      fauniques SÉPAQ). Corrections Laurentides + Matane OUI → PARTIEL (conditions réelles vérifiées).
+      AnimauxMap : marqueurs différenciés par réseau (cercle=SÉPAQ, carré=Parcs Canada, triangle=autres).
+      AnimauxClient : lien TRACES cliquable, banderole "vérifier par secteur", accordéon article 20 LBSA.
+      Dictionnaires 9 langues : art20_title, art20_intro, art20_bullets, verify_sectors. Déployé Vercel.
 
 ## Décisions techniques prises
 - Images toujours stockées localement dans le projet, jamais en lien
