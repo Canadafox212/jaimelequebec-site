@@ -7749,7 +7749,11 @@
           "ville": "Baie-Saint-Paul",
           "tel": "418 240-4100",
           "web": "https://www.germainhotels.com/fr/hotel-et-spa-le-germain/charlevoix",
-          "dist_km": 0.2
+          "dist_km": 0.2,
+          "affiliate_provider": "booking",
+          "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fla-ferme.fr.html",
+          "affiliate_button_label": "Voir les disponibilités",
+          "affiliate_status": "active"
         },
         {
           "nom": "HÔTEL-AUBERGE LA GRANDE MAISON ET SPA",
@@ -7993,7 +7997,11 @@
           "ville": "Baie-Saint-Paul",
           "tel": "418 240-4100",
           "web": "https://www.germainhotels.com/fr/hotel-et-spa-le-germain/charlevoix",
-          "dist_km": 0.2
+          "dist_km": 0.2,
+          "affiliate_provider": "booking",
+          "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fla-ferme.fr.html",
+          "affiliate_button_label": "Voir les disponibilités",
+          "affiliate_status": "active"
         },
         {
           "nom": "HÔTEL-AUBERGE LA GRANDE MAISON ET SPA",
@@ -8237,7 +8245,11 @@
           "ville": "Baie-Saint-Paul",
           "tel": "418 240-4100",
           "web": "https://www.germainhotels.com/fr/hotel-et-spa-le-germain/charlevoix",
-          "dist_km": 12.2
+          "dist_km": 12.2,
+          "affiliate_provider": "booking",
+          "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fla-ferme.fr.html",
+          "affiliate_button_label": "Voir les disponibilités",
+          "affiliate_status": "active"
         },
         {
           "nom": "DOMAINE BELLE PLAGE",
@@ -9902,7 +9914,11 @@
           "ville": "Baie-Saint-Paul",
           "tel": "418 240-4100",
           "web": "https://www.germainhotels.com/fr/hotel-et-spa-le-germain/charlevoix",
-          "dist_km": 0.2
+          "dist_km": 0.2,
+          "affiliate_provider": "booking",
+          "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fla-ferme.fr.html",
+          "affiliate_button_label": "Voir les disponibilités",
+          "affiliate_status": "active"
         },
         {
           "nom": "HÔTEL-AUBERGE LA GRANDE MAISON ET SPA",

@@ -373,6 +373,12 @@ export default async function AttractionPage({ params }) {
                             </a>
                           )}
                         </div>
+                        {h.affiliate_status === 'active' && h.affiliate_url && (
+                          <a href={h.affiliate_url} target="_blank" rel="sponsored nofollow noopener"
+                            className="ml-4 mt-1.5 inline-flex items-center justify-center gap-1.5 self-start bg-[#003580] hover:bg-[#002a66] text-white text-xs font-bold px-4 py-2 rounded-full transition-colors shadow-sm">
+                            {h.affiliate_button_label || (isFr ? 'Voir les disponibilités' : 'Check availability')}
+                          </a>
+                        )}
                       </div>
                     ))}
                   </div>
