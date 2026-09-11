@@ -288,3 +288,7 @@ atteint à 100% — reprendre au point exact dans une nouvelle session.
 - Régions triées alphabétiquement dans `/activites`
 - Pages nouvelles créées : `/nouvelles`, `/toutes-les-activites`, `/decouvrir`
 - Déploiement : `vercel deploy --prod` — 1847 pages statiques générées
+
+@PERSO.md
+@PROJET.md
+
