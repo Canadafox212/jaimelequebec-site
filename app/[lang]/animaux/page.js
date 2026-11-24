@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import animaux from '@/data/animaux.json'
 import { getDictionary, LANGS, getAlternates } from '@/lib/i18n'
 import AnimauxClient from '@/components/AnimauxClient'
@@ -9,6 +10,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { lang } = await params
   const dict = getDictionary(lang)
+  if (!dict) return {}
   const t = dict.animaux ?? getDictionary('fr').animaux
   return {
     title: t.meta_title,
@@ -20,6 +22,7 @@ export async function generateMetadata({ params }) {
 export default async function AnimauxPage({ params }) {
   const { lang } = await params
   const dict = getDictionary(lang)
+  if (!dict) notFound()
   const t = dict.animaux ?? getDictionary('fr').animaux
 
   return <AnimauxClient animaux={animaux} t={t} lang={lang} />

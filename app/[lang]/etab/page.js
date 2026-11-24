@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { getDictionary } from '@/lib/i18n'
 import { getActivityPhotoSrc } from '@/lib/attractions'
 import servicesData from '@/data/services.json'
@@ -19,6 +20,7 @@ export default async function EtabPage({ params, searchParams }) {
   const { lang } = await params
   const sp = await searchParams
   const t = getDictionary(lang)
+  if (!t) notFound()
 
   const nom = sp.nom ?? ''
   const place = sp.place ?? 'Québec'

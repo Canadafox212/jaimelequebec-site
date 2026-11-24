@@ -63,6 +63,7 @@ export default async function ExpressionPage({ params }) {
   if (!expr) notFound()
 
   const t = getDictionary(lang)
+  if (!t) notFound()
   const isEn = lang === 'en'
   const catLabel = CAT_LABEL[isEn ? 'en' : 'fr']?.[expr.categorie] ?? expr.categorie
 

@@ -8,6 +8,9 @@ import { LANGS, getDictionary } from '@/lib/i18n'
 // Manifest par langue — FR par défaut pour les autres langues
 const MANIFESTS = { fr: '/manifest.json', en: '/manifest-en.json' }
 
+// Toute langue absente de generateStaticParams() renvoie un 404 (toutes les pages [lang]).
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }))
 }
