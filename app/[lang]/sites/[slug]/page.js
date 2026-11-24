@@ -8,7 +8,7 @@ import MapModal from '@/components/MapModal'
 import ShareLieuButton from '@/components/ShareLieuButton'
 import AddToRoadTripButton from '@/components/AddToRoadTripButton'
 import { dicts, LANGS, getAlternates } from '@/lib/i18n'
-import { bookingSearchUrl } from '@/lib/affiliates'
+import { bookingSearchUrl, getHotelAffiliation } from '@/lib/affiliates'
 import labelI18n from '@/data/activity-labels-i18n.json'
 import servicesData from '@/data/services.json'
 import animauxData from '@/data/animaux.json'
@@ -353,7 +353,9 @@ export default async function AttractionPage({ params }) {
                     <span className={`text-xs font-bold px-3 py-1 rounded-full self-start ${c.badge}`}>
                       {isFr ? label_fr : label_en}
                     </span>
-                    {list.map((h, i) => (
+                    {list.map((h, i) => {
+                      const affiliation = getHotelAffiliation(h.hebergement_id)
+                      return (
                       <div key={i} className="flex flex-col gap-0.5">
                         <div className="flex items-start gap-2">
                           <span className={`mt-1.5 flex-shrink-0 w-2 h-2 rounded-full ${c.dot}`} />
@@ -373,14 +375,15 @@ export default async function AttractionPage({ params }) {
                             </a>
                           )}
                         </div>
-                        {h.affiliate_status === 'active' && h.affiliate_url && (
-                          <a href={h.affiliate_url} target="_blank" rel="sponsored nofollow noopener"
+                        {affiliation && (
+                          <a href={affiliation.affiliate_url} target="_blank" rel="sponsored nofollow noopener"
                             className="ml-4 mt-1.5 inline-flex items-center justify-center gap-1.5 self-start bg-[#003580] hover:bg-[#002a66] text-white text-xs font-bold px-4 py-2 rounded-full transition-colors shadow-sm">
-                            {h.affiliate_button_label || (isFr ? 'Voir les disponibilités' : 'Check availability')}
+                            {affiliation.button_label || (isFr ? 'Voir les disponibilités' : 'Check availability')}
                           </a>
                         )}
                       </div>
-                    ))}
+                      )
+                    })}
                   </div>
                 )
               })}

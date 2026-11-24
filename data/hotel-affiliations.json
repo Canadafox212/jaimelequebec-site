@@ -1,0 +1,912 @@
+{
+  "hotel-le-germain-charlevoix": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/la-ferme.fr.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fla-ferme.fr.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Établissement anciennement nommé \"Hôtel La Ferme\" (slug Booking.com hérité du nom d'origine), rebaptisé \"Hôtel & Spa Le Germain Charlevoix\" par Groupe Germain Hotels. Correspondance confirmée par : nom (historique de rebranding), ville (Baie-Saint-Paul), adresse (50 Rue de la Ferme, cohérente avec le slug). Page Booking.com elle-même non lisible directement (protection anti-bot), validation faite via recherches croisées + confirmation manuelle de Philippe.",
+    "last_verified": "2026-09-11"
+  },
+  "hotel-pur-quebec": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/pur.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fpur.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Québec) et site officiel (marriott.com/.../yqbpu-hotel-pur-quebec) concordent avec le listing Booking.com \"Hotel PUR, Quebec, a Tribute Portfolio Hotel\".",
+    "last_verified": "2026-09-12"
+  },
+  "gite-chez-jean": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-chez-jean.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-chez-jean.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Téléphone (514 843-8279) et site officiel (aubergechezjean.com) identiques au listing Booking.com \"Auberge Chez Jean\", Montréal.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-cottage-au-pied-du-mont-royal": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/cottage-au-pied-du-mont-royal.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fcottage-au-pied-du-mont-royal.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (Montréal) identiques, slug Booking.com correspond exactement au nom de l'établissement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-hotel-10": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/hotel-ten-montreal.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fhotel-ten-montreal.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Adresse (10 Sherbrooke Ouest) confirmée, correspond au site officiel hotel10montreal.com.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-sonder-le-guerin": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/sonder-guerin-lofts-montreal.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fsonder-guerin-lofts-montreal.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Marque (Sonder) confirmée via site officiel sonder.com, ville Montréal, nom correspondant.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-best-western-plus-centre-ville": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/bw-city-centre.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fbw-city-centre.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Site officiel hotelquebec.com confirmé. ATTENTION : l'hôtel a été rebaptisé \"Le Saint-Édouard\" (WorldHotels Distinctive) le 2026-05-01 — nom obsolète dans nos données, à mettre à jour.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-le-ricochet-urbain": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-allego.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-allego.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Téléphone (418 576-2302) et adresse (275 St-Anselme, Québec) identiques. Slug Booking.com hérité de l'ancien nom \"Auberge Allego\" (même schéma que Le Germain/La Ferme).",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-royal-william": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/royal-william-quebec.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Froyal-william-quebec.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville et site officiel (royalwilliam.com) concordent.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-terminus-hotel": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/terminus.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fterminus.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville et site officiel (terminushotel.ca) concordent.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-fleurs-de-lune": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-fleurs-de-lune.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-fleurs-de-lune.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Téléphone (418 665-1090) et site officiel (fleursdelune.com) identiques.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-delta-trois-rivieres-hotel-et-centre-des-congres": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/delta-trois-riveieres.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fdelta-trois-riveieres.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Marque Marriott/Delta confirmée (code hôtel \"yrqdr\" partagé avec marriott.fr/yrqdr), ville Trois-Rivières.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-hilton-montreal-laval": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/hilton-montreal-laval.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fhilton-montreal-laval.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Adresse et restaurant (Le Quartz) confirmés identiques. ATTENTION : rebaptisé \"Ômage Hotel, Montreal Laval, a Tribute Portfolio Hotel\" — nom obsolète dans nos données, à mettre à jour (slug Booking.com encore basé sur l'ancien nom Hilton).",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-sheraton-laval": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/sheraton-laval.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fsheraton-laval.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Marque Marriott/Sheraton confirmée (code hôtel \"yulls\" partagé avec marriott.fr), ville Laval.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-le-st-martin-hotel-et-suites": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/le-st-martin-suites.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fle-st-martin-suites.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (Laval) concordent, site officiel proche (lestmartinlaval.com vs lestmartin.com dans nos données).",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-otl-gouverneur-saguenay": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/hotels-gouverneur-saguenay.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fhotels-gouverneur-saguenay.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et site officiel (otlhotelsaguenay.ca) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-centre-de-congres-et-hotel-la-sagueneenne": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/centre-de-congres-et-la-sagueneenne-chicoutimi-qua-c-bec.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fcentre-de-congres-et-la-sagueneenne-chicoutimi-qua-c-bec.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et site officiel (lasagueneenne.com) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-fairmont-le-chateau-montebello": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/fairmont-le-chateau-montebello.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Ffairmont-le-chateau-montebello.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville et marque Fairmont (fairmont.fr/montebello) concordent exactement, slug Booking.com identique au nom.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-imperia-hotel-suites-terrebonne": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/imperia-ha-tel-et-suites-terrebonne.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fimperia-ha-tel-et-suites-terrebonne.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Terrebonne) et site officiel (imperiahotel.com) concordent exactement — confirme aussi la fusion Terrebonne/Boucherville décidée par Philippe (l'établissement Booking.com référence bien Terrebonne).",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-hotel-chateau-madelinot": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Identité confirmée par téléphone (418 986-3695, Fatima/Cap-aux-Meules) mais aucune URL Booking.com directe trouvée malgré plusieurs recherches ciblées — seule une page de ville Booking.com est ressortie.",
+    "last_verified": "2026-09-12"
+  },
+  "gite-le-balconville": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Téléphone confirmé (514 793-8609) mais établissement introuvable sur Booking.com — probablement listé uniquement sur Airbnb.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-chambres-et-petit-dejeuner-bienvenue": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Aucune trace sur Booking.com — seule une fiche Bonjour Québec trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-st-dominique": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "ANOMALIE À VÉRIFIER : le téléphone (514 993-5960) correspond à \"Providence Saint-Dominique\", une résidence pour personnes âgées (RPA) à Montréal, PAS un hébergement touristique. Possible erreur dans la donnée source attractions.json (nom \"RÉSIDENCE ST-DOMINIQUE\") — à vérifier avant toute recherche Booking future sur cet identifiant.",
+    "last_verified": "2026-09-12"
+  },
+  "camping-baie-du-bonheur": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Camping — aucune présence trouvée sur Booking.com, réservation via campingquebec.com/Bonjour Québec uniquement.",
+    "last_verified": "2026-09-12"
+  },
+  "gite-le-253-de-la-reine": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Téléphone confirmé (418 647-0590) mais aucune URL Booking.com trouvée — établissement présent sur Kayak/Bonjour Québec seulement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-le-saint-vallier": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "ambiguous",
+    "match_evidence": "Nom générique, aucun téléphone/site dans nos données pour distinguer. La recherche a surtout remonté des résultats pour la municipalité de Saint-Vallier (Chaudière-Appalaches), sans rapport avec l'établissement du Vieux-Québec recherché. Ne pas deviner — nécessite une donnée source supplémentaire (adresse ou téléphone) pour identifier l'établissement avec certitude.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-sainte-helene": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Une source indique que cet établissement (145 rue de Sainte-Hélène, Québec, tél. 418 262-0724) serait fermé. À vérifier avant toute recherche future — aucune URL Booking.com trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-du-port": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Téléphone confirmé (418 986-4477) et site officiel (aubergeduport.ca) trouvés, mais aucune URL Booking.com directe identifiée.",
+    "last_verified": "2026-09-12"
+  },
+  "gite-la-maison-d-octave": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Établissement confirmé (téléphone 418 986-3788) mais séjour minimum de 4 nuits et pas de présence Booking.com trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "gite-maison-chez-jeannine-bourque": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Établissement confirmé (téléphone 418 986-2626) mais aucune présence Booking.com trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "camping-parc-de-gros-cap": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Camping avec système de réservation propre (parcdegroscap.ca) — pas de présence Booking.com trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "camping-domes-rocher-perce-au-domaine-renard": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/domes-rocher-perce-at-domaine-renard.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fdomes-rocher-perce-at-domaine-renard.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Téléphone identique (418 782-4560), nom et ville (Percé) concordent exactement avec le listing Booking.com.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-oui-go": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/oui-go.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Foui-go.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Trois-Rivières) et site officiel (hotelouigo.com) concordent.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-quality-inn-suites-gatineau": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/clarion-gatineau.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fclarion-gatineau.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "ATTENTION rebranding : slug Booking.com hérité de \"Clarion\" (marque Choice Hotels précédente). Nom, ville (Gatineau) et enseigne Choice Hotels concordent.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-hotels-gouverneur-trois-rivieres": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/gouverneur-trois-rivieres.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fgouverneur-trois-rivieres.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville et site officiel (trois-rivieres.gouverneur.com) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-la-grande-maison-et-spa": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-la-grande-maison.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-la-grande-maison.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Baie-Saint-Paul, rue Saint-Jean-Baptiste) concordent avec le listing Booking.com.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-travelodge-trois-rivieres": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/travelodge-by-wyndham-trois-rivieres.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Ftravelodge-by-wyndham-trois-rivieres.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Marque et ville concordent. Nom actuel \"Travelodge by Wyndham\" (évolution de marque depuis le rachat par Wyndham).",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-l-oasis-des-nomades": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/oasis-des-nomades.fr.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Foasis-des-nomades.fr.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (Trois-Rivières) concordent, adresse 439 Rue Niverville cohérente avec le secteur des fiches source.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-adam": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/adam-motel.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fadam-motel.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom (Motel Adam) et ville (Gatineau, centre-ville) concordent.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-bellefeuille": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/motel-bellefeuille.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fmotel-bellefeuille.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (Trois-Rivières) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-du-chevalier": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/motel-du-chevalier.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fmotel-du-chevalier.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Gatineau) et site officiel (motelduchevalier.com) concordent.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-riotel-matane": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/riotel-matane.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Friotel-matane.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Matane) et site officiel (riotel.com) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-grand-hotel-times-laval": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/grand-times-laval-centropolis.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fgrand-times-laval-centropolis.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom (ordre des mots inversé dans nos données : \"Grand Hotel Times\" vs \"Grand Times Hotel\"), ville (Laval) et site officiel (grandtimeshotel.com) concordent.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-best-western-laval-montreal": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/chateauneuf-laval.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fchateauneuf-laval.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "ATTENTION rebranding : slug Booking.com hérité de l'ancien nom \"Chateauneuf\". Adresse (3655 Autoroute des Laurentides) et site officiel (bwlaval.com) confirmés identiques.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-holiday-inn-laval-montreal": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/holiday-inn-laval.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fholiday-inn-laval.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Laval) et enseigne IHG concordent.",
+    "last_verified": "2026-09-12"
+  },
+  "camping-abenaki-aventure": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/chalet-abenaki-aventure.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fchalet-abenaki-aventure.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Téléphone identique (450 954-3461), nom et ville (Odanak) concordent. Note : le listing Booking.com couvre spécifiquement les chalets du camping, pas les emplacements de camping classiques.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-alt-hotel-quartier-dix30": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/alt-quartier-dix30.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Falt-quartier-dix30.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Brossard) et site officiel (germainhotels.com/fr/hotel-alt/quartier-dix30) concordent.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-centre-ville": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-centre-ville.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-centre-ville.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Saguenay) et site officiel (aubergecentreville.com) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-de-la-montagne-coupee": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-de-la-montagne-coupee.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-de-la-montagne-coupee.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (Saint-Jean-de-Matha) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-des-nuages": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-des-nuage.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-des-nuage.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Téléphone (418 559-8989) confirmé appartenir à \"Auberge des Nuages\", 381 Rue St-Raphaël, La Malbaie (recherche croisée). Établissement anciennement nommé \"Auberge des Peupliers\" (domaine hérité aubergedespeupliers.com dans nos données) — même schéma de rebranding que Le Germain/La Ferme. Nom, ville et téléphone concordent avec le listing Booking.com.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-la-rocaille": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-la-rocaille.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-la-rocaille.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Téléphone identique (819 538-8683), nom et ville (Shawinigan) concordent.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-sauvignon": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-sauvignon.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-sauvignon.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Téléphone identique (819 425-5466), nom et ville (Mont-Tremblant) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "gite-a-la-chouenne": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/la-chouenne.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fla-chouenne.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (La Malbaie) concordent, nom distinctif peu susceptible d'homonymie.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-c3-hotel-art-de-vivre": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-du-quartier.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-du-quartier.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "ATTENTION rebranding : slug Booking.com hérité de l'ancien nom \"Auberge du Quartier\". Site officiel (lec3hotel.com) et nom actuel confirmés par plusieurs sources tierces (Tripadvisor, Tourisme Québec).",
+    "last_verified": "2026-09-12"
+  },
+  "pourvoirie-domaine-du-lac-st-pierre": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Identité confirmée (adresse, téléphone, site officiel domainelacstpierre.com) via Bonjour Québec/TripAdvisor, mais aucune page Booking.com trouvée pour cet établissement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-aux-petits-oiseaux": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Identité confirmée (téléphone 418 760-8288) via Kayak/Bonjour Québec, mais aucune page Booking.com directe trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-motel-t-cote": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Identité confirmée (adresse 80 rue Fraser, site hotelmoteltcote.ca) via plusieurs agrégateurs, mais aucune page Booking.com trouvée malgré plusieurs recherches ciblées. Existence d'un établissement voisin homonyme possible (\"Motel Côté\") à ne pas confondre.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-maison-jacynthe": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Établissement lié à la marque de cosmétiques Maison Jacynthe (hébergement associé à une boutique/spa) — téléphone identique confirmé, mais aucune page Booking.com trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "gite-manoir-de-blois": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Identité confirmée (adresse 197 rue Bonaventure, téléphone 819 373-1090, site manoirdeblois.com), mais réservation uniquement directe — aucune page Booking.com trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-kuujjuaq-inn": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Identité confirmée (téléphone 819 964-2903, site kuujjuaqinn.com), réservation via système Hotello propre — aucune page Booking.com trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-centre-de-vie": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Centre de ressourcement/retraite (pas un hôtel classique) — identité confirmée (téléphone 819 428-2215, site centredevie.ca), réservation directe uniquement, aucune page Booking.com trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "gite-chateau-murdock-gite": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/chateau-murdock-gite.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fchateau-murdock-gite.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Saguenay) et site officiel (chateaumurdock.com) concordent exactement avec le listing Booking.com.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-holiday-inn": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/gouverneur-quebec1.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fgouverneur-quebec1.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Titre du listing Booking.com \"Holiday Inn St-Jean-sur-Richelieu Congrès by IHG\" correspond au site officiel IHG (ihg.com, propriété yuljs). Slug hérité de l'ancienne marque \"Gouverneur\".",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-albert-par-g5": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/best-western-albert-rouyn-noranda.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fbest-western-albert-rouyn-noranda.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom \"Hôtel Albert par G5\" et ville (Rouyn-Noranda) confirmés, site officiel hotelalbert.ca concorde.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-chicoutimi": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/chicoutimi.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fchicoutimi.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Saguenay/Chicoutimi) et site officiel (hotelchicoutimi.qc.ca) concordent.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-chateau-cran-chaud": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/chateau-cran-chaud.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fchateau-cran-chaud.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Téléphone (418 544-8234) et site officiel (chateaucranchaud.com) identiques à nos données — correspondance exacte.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-comfort-inn-suites-st-jerome": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/comfort-inn-st-jerome.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fcomfort-inn-st-jerome.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville et site officiel (comfortinnstjerome.com) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-comfort-inn-chicoutimi": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/comfort-inn-chicoutimi.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fcomfort-inn-chicoutimi.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville confirmés ; adresse (1595 Boul Talbot, Chicoutimi) retrouvée de façon cohérente sur plusieurs sources tierces.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-delta-sherbrooke-par-marriott-centre-de-congres": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/delta-sherbrooke.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fdelta-sherbrooke.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Code hôtel Marriott \"yscdr\" identique à notre site_officiel (marriott.fr/.../yscdr-delta-hotels-sherbrooke-conference-centre), ville confirmée.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-l-express": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/l-express.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fl-express.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (Longueuil) concordent, présence d'un casino sur place cohérente avec le positionnement de l'établissement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-l-oiseliere": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/l-oiseliere-montmagny.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fl-oiseliere-montmagny.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville et site officiel (oiseliere.com) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-le-mirage-2": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/le-mirage.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fle-mirage.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Ville (Saint-Basile-le-Grand) confirmée avec présence d'un casino sur place — bien l'établissement de Montérégie, distinct de l'homonyme de Percé (hotel-le-mirage).",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-quality-inn-suites-matane": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/quality-inn-and-suites-matane.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fquality-inn-and-suites-matane.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (Matane) concordent exactement avec le listing Booking.com.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-welcominns": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/welcominns-montreal-quebec.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fwelcominns-montreal-quebec.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Adresse (1195 rue Ampère, Boucherville) et site officiel (hotelwelcominns.com) identiques à nos données.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-l-auberge-du-lac-st-pierre": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-du-lac-st-pierre.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-du-lac-st-pierre.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (Trois-Rivières) concordent, confirmé aussi comme partenaire hôtelier officiel de Tourisme Trois-Rivières.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-la-galouine-auberge": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/la-galouine-auberge-et-restaurant.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fla-galouine-auberge-et-restaurant.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Tadoussac) et site officiel (lagalouine.com) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-le-grand-lodge-mont-tremblant": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/le-grand-lodge-mont-tremblant.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fle-grand-lodge-mont-tremblant.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (Mont-Tremblant) concordent exactement avec le listing Booking.com.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-le-manoir-du-lac-delage": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/manoir-du-lac-de-lage-lac-delage-quebec.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fmanoir-du-lac-de-lage-lac-delage-quebec.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Téléphone (418 848-2551) identique à nos données, site officiel (lacdelage.com) confirmé — correspondance forte malgré la ville \"Stoneham\" utilisée par erreur dans les métadonnées Booking (le lieu-dit Lac-Delage est administrativement rattaché à ce secteur).",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-le-noranda-hotel-spa": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/gouverneur-le-noranda.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fgouverneur-le-noranda.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Téléphone (819 762-2341) identique à nos données, site officiel (lenoranda.com) confirmé. Slug hérité de l'ancienne marque \"Gouverneur\".",
+    "last_verified": "2026-09-12"
+  },
+  "gite-le-petit-chateau": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/auberge-le-petit-chateau.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fauberge-le-petit-chateau.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (Montebello) concordent, confirmé également via Sortir au Québec.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-le-saint-christophe-hotel-boutique-et-spa": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/hotel-denison-east-granby.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fhotel-denison-east-granby.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Titre du listing Booking.com \"St Christophe Hotel & Spa, an Ascend Collection Hotel, Granby\" et site officiel (hotelstchristophe.com) concordent. Slug hérité d'une ancienne dénomination (\"Denison\").",
+    "last_verified": "2026-09-12"
+  },
+  "gite-maison-des-lilas": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/maison-des-lilas.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fmaison-des-lilas.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom et ville (La Malbaie) concordent, adresse trouvée (615 St-Raphaël) cohérente avec la localisation.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-manoir-chamberland": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/manoir-chamberland.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fmanoir-chamberland.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville (Montebello) et site officiel (manoirchamberland.com) concordent. ATTENTION : le numéro de réservation trouvé en ligne (819-661-8045) diffère du téléphone dans nos données (613 302-6306) — probable numéro secondaire/ancien, à vérifier si possible.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-chateau-joliette": {
+    "provider": "booking",
+    "booking_url": "https://www.booking.com/hotel/ca/chateau-joliette.html",
+    "affiliate_url": "https://www.dpbolvw.net/click-101829987-17288959?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fca%2Fchateau-joliette.html",
+    "button_label": "Voir les disponibilités",
+    "status": "verified",
+    "booking_match_status": "verified",
+    "match_evidence": "Nom, ville et adresse (450 rue St-Thomas, Joliette) concordent exactement.",
+    "last_verified": "2026-09-12"
+  },
+  "gite-chez-m-luc": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Identité confirmée (adresse, téléphone) via Bonjour Québec, mais aucune page Booking.com trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-floriel": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Identité confirmée (téléphone exact) via Bonjour Québec/TripAdvisor, mais aucune page Booking.com trouvée — réservation via site officiel/CloudBeds uniquement.",
+    "last_verified": "2026-09-12"
+  },
+  "pourvoirie-la-cache-outfitters": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Pourvoirie de chasse — réservation directe uniquement, pas de présence Booking.com (normal pour ce type d'établissement).",
+    "last_verified": "2026-09-12"
+  },
+  "pourvoirie-la-pourvoirie-caribou-de-kuujjuaq": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Pourvoirie isolée (Nunavik) — pas de présence Booking.com (normal pour ce type d'établissement/région).",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-de-la-cooperative-de-kuujjuaq": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Établissement nordique isolé (Nunavik) — pas de présence Booking.com (normal pour cette région).",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-les-suites-de-la-lanterne-et-spa": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "not_found",
+    "match_evidence": "Identité confirmée (adresse, téléphone) via Bonjour Québec, mais aucune page Booking.com trouvée.",
+    "last_verified": "2026-09-12"
+  },
+  "hotel-valcartier": {
+    "provider": "booking",
+    "booking_url": null,
+    "affiliate_url": null,
+    "button_label": "Voir les disponibilités",
+    "status": "pending_review",
+    "booking_match_status": "ambiguous",
+    "match_evidence": "Plusieurs établissements distincts coexistent au Village Vacances Valcartier (Hôtel Valcartier, Auberge Valcartier, Hôtel de Glace, Auberge La Seigneurie) avec des noms proches — risque de confusion. Une source Booking.com indique explicitement que la réservation n'est \"actuellement pas possible\" pour l'Hôtel Valcartier. Ne pas deviner : nécessite une vérification manuelle du bon établissement et de la disponibilité réelle du listing.",
+    "last_verified": "2026-09-12"
+  }
+}
