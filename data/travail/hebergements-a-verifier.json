@@ -1,0 +1,41 @@
+[
+  {
+    "ids_en_conflit": [
+      "hotel-trois-pistoles",
+      "hotel-trois-pistoles-2"
+    ],
+    "decision": "fusionne",
+    "id_final": "hotel-trois-pistoles",
+    "id_obsolete": "hotel-trois-pistoles-2",
+    "confirme_par": "Philippe"
+  },
+  {
+    "ids_en_conflit": [
+      "hotel-imperia-hotel-et-suites",
+      "hotel-imperia-hotel-suites-terrebonne"
+    ],
+    "decision": "fusionne",
+    "id_final": "hotel-imperia-hotel-suites-terrebonne",
+    "id_obsolete": "hotel-imperia-hotel-et-suites",
+    "confirme_par": "Philippe"
+  },
+  {
+    "ids_en_conflit": [
+      "camping-de-la-1re-est",
+      "camping-green"
+    ],
+    "decision": "fusionne",
+    "id_final": "camping-de-la-1re-est",
+    "id_obsolete": "camping-green",
+    "confirme_par": "Philippe"
+  },
+  {
+    "ids_en_conflit": [
+      "camping-coolbox-canne-de-bois",
+      "camping-coolbox-valcartier"
+    ],
+    "decision": "conserve_distinct",
+    "raison": "coolbox.ca est une plateforme commune ; les entrées sont des sites distincts qu'elle héberge",
+    "confirme_par": "Philippe"
+  }
+]
