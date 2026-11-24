@@ -26,6 +26,8 @@ const zh = {
     editors_picks: "编辑精选",
     see_all: "查看全部200 →",
     explore_all: "探索200个景点",
+    explore_activities: "发现活动",
+    see_all_annuaire: "查看完整目录 →",
     welcome_title: "亲爱的旅行者，欢迎！",
     welcome_text_pre: "J'aime le Québec 首先是一个",
     welcome_facebook_label: "拥有55,000名热情成员的Facebook社区",
@@ -227,6 +229,14 @@ const zh = {
     form_error: '发生错误，请重试。',
     form_professional_subject: '合作 — J\'aime le Québec',
   },
+  etab: {
+    official_site: "官方网站 ↗",
+    maps: "位置",
+    activities_title: "信息",
+    other_activities: "其他活动",
+    no_photos: "该场所暂无活动照片。",
+    back: "← 返回",
+  },
   footer: {
     tagline: "您的魁北克旅游指南",
     copyright: "© 2026 J'aime le Québec. 保留所有权利。",
@@ -236,6 +246,9 @@ const zh = {
     nav_label: "导航",
     partners_label: "合作伙伴",
     contact_label: "联系",
+    about_label: "关于我们",
+    legal_notice_label: "法律声明和隐私政策",
+    rights: "保留所有权利",
   },
   animaux: {
     meta_title: "带您的狗游魁北克 — 欢迎动物的景点",

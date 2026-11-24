@@ -26,6 +26,8 @@ const ru = {
     editors_picks: "Избранное редакции",
     see_all: "Смотреть все 200 →",
     explore_all: "Исследовать 200 мест",
+    explore_activities: "Активности",
+    see_all_annuaire: "Смотреть весь справочник →",
     welcome_title: "ДОРОГИЕ ПУТЕШЕСТВЕННИКИ, ДОБРО ПОЖАЛОВАТЬ!",
     welcome_text_pre: "J'aime le Québec — это прежде всего ",
     welcome_facebook_label: "сообщество Facebook из 55 000 увлечённых участников",
@@ -227,6 +229,14 @@ const ru = {
     form_error: 'Произошла ошибка. Пожалуйста, попробуйте ещё раз.',
     form_professional_subject: 'Партнёрство — J\'aime le Québec',
   },
+  etab: {
+    official_site: "Официальный сайт ↗",
+    maps: "Расположение",
+    activities_title: "Информация",
+    other_activities: "Другие активности",
+    no_photos: "Для этого заведения нет фотографий активностей.",
+    back: "← Назад",
+  },
   footer: {
     tagline: "Ваш путеводитель по Квебеку",
     copyright: "© 2026 J'aime le Québec. Все права защищены.",
@@ -236,6 +246,9 @@ const ru = {
     nav_label: "Навигация",
     partners_label: "Партнёры",
     contact_label: "Контакты",
+    about_label: "О нас",
+    legal_notice_label: "Правовая информация и политика конфиденциальности",
+    rights: "Все права защищены",
   },
   animaux: {
     meta_title: "Квебек с вашей собакой — Места, принимающие животных",

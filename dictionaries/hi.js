@@ -26,6 +26,8 @@ const hi = {
     editors_picks: "संपादक की पसंद",
     see_all: "सभी 200 देखें →",
     explore_all: "200 स्थलों का अन्वेषण करें",
+    explore_activities: "गतिविधियाँ देखें",
+    see_all_annuaire: "पूरी निर्देशिका देखें →",
     welcome_title: "प्रिय यात्रियों, स्वागत है!",
     welcome_text_pre: "J'aime le Québec सबसे पहले ",
     welcome_facebook_label: "55,000 उत्साही सदस्यों का एक Facebook समुदाय",
@@ -227,6 +229,14 @@ const hi = {
     form_error: 'एक त्रुटि हुई। कृपया पुनः प्रयास करें।',
     form_professional_subject: 'साझेदारी — J\'aime le Québec',
   },
+  etab: {
+    official_site: "आधिकारिक वेबसाइट ↗",
+    maps: "स्थान",
+    activities_title: "जानकारी",
+    other_activities: "अन्य गतिविधियाँ",
+    no_photos: "इस प्रतिष्ठान के लिए गतिविधि की कोई फ़ोटो उपलब्ध नहीं है।",
+    back: "← वापस",
+  },
   footer: {
     tagline: "क्यूबेक के लिए आपका यात्रा गाइड",
     copyright: "© 2026 J'aime le Québec. सर्वाधिकार सुरक्षित।",
@@ -236,6 +246,9 @@ const hi = {
     nav_label: "नेविगेशन",
     partners_label: "भागीदार",
     contact_label: "संपर्क",
+    about_label: "हमारे बारे में",
+    legal_notice_label: "कानूनी सूचना और गोपनीयता नीति",
+    rights: "सर्वाधिकार सुरक्षित",
   },
   animaux: {
     meta_title: "अपने कुत्ते के साथ क्यूबेक — पालतू-अनुकूल स्थान",

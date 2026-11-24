@@ -26,6 +26,8 @@ const pt = {
     editors_picks: "Seleção do editor",
     see_all: "Ver os 200 →",
     explore_all: "Explorar todos os 200 locais",
+    explore_activities: "Descobrir atividades",
+    see_all_annuaire: "Consultar todo o diretório →",
     welcome_title: "CAROS VIAJANTES, BEM-VINDOS!",
     welcome_text_pre: "J'aime le Québec é, acima de tudo, uma ",
     welcome_facebook_label: "comunidade do Facebook com 55 000 membros apaixonados",
@@ -227,6 +229,14 @@ const pt = {
     form_error: 'Ocorreu um erro. Por favor, tente novamente.',
     form_professional_subject: 'Parceria — J\'aime le Québec',
   },
+  etab: {
+    official_site: "Site oficial ↗",
+    maps: "Localização",
+    activities_title: "Informações",
+    other_activities: "Outras atividades",
+    no_photos: "Nenhuma foto de atividade disponível para este estabelecimento.",
+    back: "← Voltar",
+  },
   footer: {
     tagline: "O seu guia de viagem pelo Québec",
     copyright: "© 2026 J'aime le Québec. Todos os direitos reservados.",
@@ -236,6 +246,9 @@ const pt = {
     nav_label: "Navegação",
     partners_label: "Parceiros",
     contact_label: "Contato",
+    about_label: "Sobre nós",
+    legal_notice_label: "Avisos legais e política de privacidade",
+    rights: "Todos os direitos reservados",
   },
   animaux: {
     meta_title: "Québec com o seu cão — Locais que aceitam animais",

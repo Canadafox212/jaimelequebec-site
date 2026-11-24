@@ -246,6 +246,9 @@ const en = {
     nav_label: "Navigation",
     partners_label: "Partners",
     contact_label: "Contact",
+    about_label: "About us",
+    legal_notice_label: "Legal notice and privacy policy",
+    rights: "All rights reserved",
   },
   planifier: {
     nav_title: 'Road trip',
